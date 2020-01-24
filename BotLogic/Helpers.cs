@@ -222,6 +222,7 @@ namespace VFatumbot.BotLogic
                    && turnContext.Activity.Conversation.IsGroup == true
                    && (
                        "RANDONAUTS (LOBBY)".Equals(turnContext.Activity.Conversation.Name) ||
+                       "randonauts dev room".Equals(turnContext.Activity.Conversation.Name) ||
                        "botwars".Equals(turnContext.Activity.Conversation.Name) ||
                        "Im All Kinds Of Steve".Equals(turnContext.Activity.Conversation.Name) ||
                        "Technoshamans22".Equals(turnContext.Activity.Conversation.Name)
