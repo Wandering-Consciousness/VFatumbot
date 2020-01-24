@@ -16,7 +16,9 @@ namespace VFatumbot.BotLogic
             line,
             discord,
             slack,
-            skype
+            skype,
+            randonautica_android,
+            randonautica_ios,
         }
 
         public enum WebSrc
