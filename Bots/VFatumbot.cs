@@ -224,6 +224,11 @@ namespace VFatumbot
 
                 return;
             }
+            else if (Helpers.IsRandoLobby(turnContext))
+            {
+                // Prevent dialog convos in the lobby
+                return;
+            }
 
             await base.OnTurnAsync(turnContext, cancellationToken);
 
