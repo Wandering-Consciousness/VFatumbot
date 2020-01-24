@@ -16,6 +16,7 @@ using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.Enums;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
+using Reddit.Controllers;
 
 namespace VFatumbot
 {
@@ -567,7 +568,7 @@ namespace VFatumbot
                 message = message.Substring(0, message.IndexOf("Bearing:", StringComparison.InvariantCulture)) + message.Substring(message.IndexOf("°", StringComparison.InvariantCulture) + 1).Replace("\n", "");
             }
 
-            await PostTripReportToRedditAsync("Randonaut Trip Report"
+            var redditPost = await PostTripReportToRedditAsync("Randonaut Trip Report"
                 + ((callbackOptions.NearestPlaces != null && callbackOptions.NearestPlaces.Length >= 1) ? (" from " + callbackOptions.NearestPlaces[answers.PointNumberVisited]) : " from somewhere in the multiverse"), // TODO fuck I should stop trying to condense so much into one line in C#. I'm just drunk and lazy ATM.
                 message.Replace("\n\n", "  \n") + "\n\n" +
                 "Report: " + answers.Report + "\n   \n" +
@@ -590,6 +591,8 @@ namespace VFatumbot
                 answers.PhotoURLs
                 );
 
+            var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220, answers.Report.Length)));
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[Tweet your report!](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports)"), cancellationToken);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!"), cancellationToken);
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
@@ -598,9 +601,9 @@ namespace VFatumbot
 
         // Post a trip report to the /r/randonauts subreddit
         // Reddit API used: https://github.com/sirkris/Reddit.NET/
-        protected async Task PostTripReportToRedditAsync(string title, string text, string[] photoURLs)
+        protected async Task<SelfPost> PostTripReportToRedditAsync(string title, string text, string[] photoURLs)
         {
-            // all posts are done under the user "thereal***REMOVED***"
+            // all posts are done under the user "therealfatumbot"
             var redditApi = new RedditAPI(appId: Consts.REDDIT_APP_ID,
                                           appSecret: Consts.REDDIT_APP_SECRET,
                                           refreshToken: Consts.REDDIT_REFRESH_TOKEN,
@@ -631,7 +634,7 @@ namespace VFatumbot
             //    text += "\n\n" + photos;
             //}
 
-            await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
+            return await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
         }
 
         private async Task StoreReportInDB(ITurnContext context, CallbackOptions options, ReportAnswers answers)
