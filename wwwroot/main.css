@@ -2,20 +2,22 @@
 
 /*margin: top, right, bottom, left*/
 body, button, input, textarea, .css-mfy564 {
-	font-family:	"Helvetica Neue", Verdana, "Trebuchet MS", "Tahoma", sans-serif;
+	font-family:    "pacifica-w00-condensed", "fantasy";
 	font-weight:	300;
 	line-height: 	1.4em;
 	border-width:	0px;
 
 	color:			#f1f1f1;
-	background: 	#414040;
+	background: 	#18191D;
 	text-rendering: optimizeLegibility;
 }
 
+/*
+RIP STEVEs BACKGROUND!
 .css-mfy564 {
-	background-image: url("stevescoolbg.jpg");
+	background-image: url("stevescoolbg.jpg");   
 }
-
+*/
 
 
 .webchat__bubble__content {
@@ -38,15 +40,15 @@ div.markdown p, div.markdown h1, div.markdown h2, div.markdown h3, div.markdown 
 	padding-right: 1em;
 }
 
-div.main, div.main input, .css-a4zgb2, .css-1wegtiu {
-	padding:			0.88em;
-	padding-top:		0px;
+div.main, div.main input, .css-a4zgb2, .css-1wegtiu, .css-1l9a57c div {
 	color:				#f4f4f4;
 	border-color:		black;
 	border-width:		2px;
-	padding:			0px 0px 0px 0px;
 	text-shadow:		0px -1px 1px black;
 	line-height:		1.4em;
+}
+div.main, .css-a4zgb2, .css-1wegtiu, .css-1l9a57c div {
+	padding:			0px 0px 0px 0px;
 }
 div.main {
 	border-color:		black !important;
@@ -70,7 +72,7 @@ div.bubble {
 	background:		rgba(0,0,0,0)       !important;
 }
 
-div.main, .css-a4zgb2 {
+div.main, .css-a4zgb2, .css-1l9a57c {
 	background: -moz-linear-gradient(top,  #201917 0%, #333131 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#201917), color-stop(100%,#333131));
 	background: -webkit-linear-gradient(top,  #201917 0%,#333131 100%);
@@ -85,7 +87,7 @@ div.css-1hgv39r button {
 	min-width:			8em;
 	text-align:			center;
 	background:			#282725 !important;
-	border-color:		rgba(0,0,255, 1.0) !important;
+	border-color:		rgba(52, 66, 83, 1) !important;
 }
 
 button nobr {
@@ -107,13 +109,11 @@ div.css-1hgv39r button:active {
 }
 
 div.main input {
+	padding:	   1px 6px 6px 6px;
 	border-radius: 0.2em;
 }
 div.main input, .css-1wegtiu {
-	background: -moz-linear-gradient(top,  #333131 0%, #282725 100%) !important;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333131), color-stop(100%,#232220))  !important;
-	background: -webkit-linear-gradient(top,  #333131 0%,#282725 100%)  !important;
-	background: -o-linear-gradient(top,  #333131 0%, #282725 100%)  !important;
+	background: #282E33;
 }
 
 .css-o3xlyv {
@@ -174,7 +174,7 @@ input {
 
 
 table.portfolio {
-	background:		#414040;
+	background:		#18191D;
 	background:		linear-gradient(45deg,  rgba(206,220,231,0.2) 0%,rgba(89,106,114,0.3) 100%);
 	margin-left:	0px;
 	margin-right:	0px;
@@ -219,7 +219,6 @@ code {
 
 table, thead, tbody, tr, td, th {
 	font-size:		inherit; /* web browsers too stupid otherwise! */
-	font-family:	inherit;
 	line-height:	inherit;
 	font-weight:	inherit;
 	letter-spacing:	inherit;
@@ -255,8 +254,8 @@ span.red, span.unc, span.comment {
 }
 
 span.db {
-	background: 		#414040;
-	background-color: 	#414040;
+	background: 		#18191D;
+	background-color: 	#18191D;
 }
 
 
@@ -295,7 +294,7 @@ body.dark *.gradient {
 }
 
 body.dark table.list, body.dark blockquote {
-	background: #414040;
+	background: #18191D;
 	background: linear-gradient(45deg,  rgba(206,220,231,0.1) 0%,rgba(89,106,114,0.1) 100%);
 }
 
