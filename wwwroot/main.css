@@ -14,10 +14,12 @@ body, button, input, textarea, .css-mfy564 {
 
 /*
 RIP STEVEs BACKGROUND!
-.css-mfy564 {
-	background-image: url("stevescoolbg.jpg");   
-}
+    background-image: url("stevescoolbg.jpg");
+    ↪️He lives again as black and white!
 */
+.css-mfy564 {
+	background-image: url("stevescoolbg2.jpg");
+}
 
 
 .webchat__bubble__content {
