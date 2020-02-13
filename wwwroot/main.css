@@ -81,7 +81,7 @@ div.main, .css-a4zgb2, .css-1l9a57c {
 	background: -o-linear-gradient(top,  #201917 0%,#333131 100%);
 }
 
-div.css-1hgv39r button {
+div.css-1hgv39r button, *.ac-pushButton {
 	color:				#f4f4f4   !important;
 	border-radius:		0.294em;
 	border:				1.5px solid !important;
@@ -92,18 +92,24 @@ div.css-1hgv39r button {
 	border-color:		rgba(52, 66, 83, 1) !important;
 }
 
+*.ac-pushButton div {
+    overflow:           visible !important;
+    text-overflow:      initial !important;
+    white-space:        nowrap !important;
+}
+
 button nobr {
 	margin: 0 auto;
 }
 
-div.css-1hgv39r button:hover {
+div.css-1hgv39r button:hover, *.ac-pushButton:hover {
 	text-shadow:
 		-5px 0px 6px white,
 		0px 0px 6px white,
 		5px 0px 6px white !important;
 }
 
-div.css-1hgv39r button:active {
+div.css-1hgv39r button:active, *.ac-pushButton:active {
 	text-shadow:
 		-5px 0px 6px red,
 		0px 0px 6px red,
@@ -740,3 +746,4 @@ body.light hr {
 	background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 75%);
 	background: radial-gradient(center, ellipse cover,  rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 75%);
 }
+
