@@ -64,18 +64,18 @@ namespace VFatumbot
                     }
                     else if (userProfileTemporary.IsLocationSet)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Fatumbot!"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Don't forget to send your current location."), cancellationToken);
                         await _mainDialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                     }
                     else if (userProfilePersistent.HasSetLocationOnce)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Fatumbot!"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text(Consts.NO_LOCATION_SET_MSG), cancellationToken);
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to Fatumbot. This is a tool to experiment with the ideas that the mind and matter are connected in more ways than currently understood, and that by visiting random (in the true sense of the word) places one can find 'blind spots' to journey outside of their normal probability paths."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to the original Randonautica bot brought to you in partnership with The Fatum Project. Randonautica helps you explore the world you never knew existed by quantumly generating a point for you to journey to.  The results have shown that mind and matter may interact in more ways than currently understood. Welcome to the global phenomena of The Randonauts."), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("For newcomers, read our Beginners Guide @ https://medium.com/@TheAndromedus/a-beginners-guide-to-randonauting-1dd505c3c5a9"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Join the Telegram community chatroom lobby @ https://t.me/randonauts"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Read and share experiences on our subreddit @ https://www.reddit.com/r/randonauts/"), cancellationToken);

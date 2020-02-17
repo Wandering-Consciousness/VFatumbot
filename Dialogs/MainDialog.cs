@@ -250,7 +250,7 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Up to how many IDAs (anomalies) to look for? (or enter a number up to 20):"),
+                Prompt = MessageFactory.Text("How many intention driven quantum points would you like to look for?"),
                 RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 20."),
                 Choices = new List<Choice>()
                                 {
@@ -283,7 +283,7 @@ namespace VFatumbot
             {
                 var options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Chose your entropy source for the quantum random number generator (choose ANU if unsure):"),
+                    Prompt = MessageFactory.Text("Choose your entropy source for the quantum random number generator (choose Australian National University - ANU if unsure):"),
                     RetryPrompt = MessageFactory.Text("That is not a valid QRNG source."),
                     Choices = new List<Choice>()
                                 {
@@ -300,7 +300,7 @@ namespace VFatumbot
             {
                 var options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Chose your entropy source for the quantum random number generator (choose ANU if unsure):"),
+                    Prompt = MessageFactory.Text("Choose your entropy source for the quantum random number generator (choose Australian National University - ANU if unsure):"),
                     RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
                     Choices = new List<Choice>()
                                 {

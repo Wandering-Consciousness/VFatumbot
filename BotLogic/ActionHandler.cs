@@ -406,7 +406,7 @@ namespace VFatumbot.BotLogic
             else if (command.Equals("/test"))
             {
                 await turnContext.SendActivityAsync(MessageFactory.Text(
-                    $"Fatumbot {Consts.APP_VERSION} is alive.{Helpers.GetNewLine(turnContext)}" +
+                    $"Randonautica {Consts.APP_VERSION} is alive.{Helpers.GetNewLine(turnContext)}" +
                     $"Entangled waypoint coordinate calculations being done with the hyper quantum flux capacitor libAttract v{getVersionMajor()}.{getVersionMinor()}.{getVersionPatch()}.{Helpers.GetNewLine(turnContext)}" +
                     "Checking QRNG source too..."),
                     cancellationToken);
@@ -546,7 +546,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No Anomalies found at the moment. Try again later.";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
@@ -665,7 +665,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No Anomalies found at the moment. Try again later.";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
@@ -798,7 +798,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No Anomalies found at the moment. Try again later.";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
@@ -1116,7 +1116,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No Anomalies found at the moment. Try again later.";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }

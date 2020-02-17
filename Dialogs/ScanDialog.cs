@@ -155,7 +155,7 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Up to how many IDAs (anomalies) to scan look for? (or enter a number up to 20):"),
+                Prompt = MessageFactory.Text("How many intention driven quantum points would you like to look for?"),
                 RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 20."),
                 Choices = new List<Choice>()
                                 {

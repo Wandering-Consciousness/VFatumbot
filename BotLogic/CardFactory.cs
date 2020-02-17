@@ -145,9 +145,11 @@ namespace VFatumbot
                 images.Add(new CardImage(CreateGoogleMapsStaticThumbnail(incoords, forRemoteViewing)));
             }
 
+            var w3wAction = new CardAction(ActionTypes.OpenUrl, "What 3 Words?", (forRemoteViewing ? $"{w3wResult.words} - {w3wResult?.nearestPlace}{Helpers.GetCountryFromW3W(w3wResult)}" : w3wResult.words));
             var cardAction = new CardAction(ActionTypes.OpenUrl, showStreetAndEarthThumbnails ? "Open" : "Maps", value: CreateGoogleMapsUrl(incoords));
 
             var buttons = new List<CardAction> {
+                w3wAction,
                 cardAction,
             };
 
@@ -160,7 +162,6 @@ namespace VFatumbot
             var heroCard = new HeroCard
             {
                 Title = !showStreetAndEarthThumbnails ? "View with Google:" : "Google Maps",
-                Text = (forRemoteViewing ? $"{w3wResult.words} - {w3wResult?.nearestPlace}{Helpers.GetCountryFromW3W(w3wResult)}" : w3wResult.words),
                 Images = images,
                 Buttons = buttons,
                 Tap = cardAction
