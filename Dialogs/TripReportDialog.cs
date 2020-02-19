@@ -564,8 +564,11 @@ namespace VFatumbot
             {
                 message = callbackOptions.Messages[answers.PointNumberVisited];
 
-                // Remove bearing info from reports
-                message = message.Substring(0, message.IndexOf("Bearing:", StringComparison.InvariantCulture)) + message.Substring(message.IndexOf("°", StringComparison.InvariantCulture) + 1).Replace("\n", "");
+                if (message != null && message.Contains("Bearing:"))
+                {
+                    // Remove bearing info from reports
+                    message = message.Substring(0, message.IndexOf("Bearing:", StringComparison.InvariantCulture)) + message.Substring(message.IndexOf("°", StringComparison.InvariantCulture) + 1).Replace("\n", "");
+                }
             }
 
             var redditPost = await PostTripReportToRedditAsync("Randonaut Trip Report"
@@ -587,7 +590,7 @@ namespace VFatumbot
                 "Strangeness: " + answers.Rating_Strangeness + "  \n" +
                 "Synchronicity: " + answers.Rating_Synchronicty + "  \n" +
                  "\n\n" +
-                userProfileTemporary.UserId + " " + callbackOptions.ShortCodes[answers.PointNumberVisited] + " " + callbackOptions.ShaGids[answers.PointNumberVisited],
+                userProfileTemporary.UserId + " " + callbackOptions.ShortCodes[answers.PointNumberVisited] + " " + callbackOptions.ShaGids?[answers.PointNumberVisited],
                 answers.PhotoURLs
                 );
 
