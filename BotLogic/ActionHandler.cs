@@ -546,7 +546,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
@@ -665,7 +665,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
@@ -798,7 +798,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
@@ -1116,7 +1116,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple tries. Go again!";
+                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
