@@ -255,5 +255,25 @@ namespace VFatumbot
         {
             return "https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + "&zoom=18&size=" + Consts.THUMBNAIL_SIZE + "&maptype=satellite&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
+
+        public static IMessageActivity CreateAppStoreDownloadCard()
+        {
+            var buttons = new List<CardAction> {
+                new CardAction(ActionTypes.OpenUrl, "Androd Google Play", value: "https://play.google.com/store/apps/details?id=com.randonautica.app"),
+                new CardAction(ActionTypes.OpenUrl, "iOS AppStore", value: "https://apps.apple.com/us/app/randonautica/id1493743521")
+            };
+
+
+            var heroCard = new HeroCard
+            {
+                Title = "Download the official Randonautica app!",
+                Buttons = buttons,
+            };
+
+
+            var attachments = new List<Attachment>();
+            attachments.Add(heroCard.ToAttachment());
+            return MessageFactory.Attachment(attachments);
+        }
     }
 }

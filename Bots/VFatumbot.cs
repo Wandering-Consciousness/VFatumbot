@@ -41,6 +41,10 @@ namespace VFatumbot
                     var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(turnContext, () => new UserProfilePersistent());
                     var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(turnContext, () => new UserProfileTemporary());
 
+                    var botSrc = WebSrc.nonweb;
+                    InterceptWebBotSource(turnContext, out botSrc);
+                    var isWebBot = botSrc == WebSrc.web;
+
                     if (Helpers.IsRandoLobby(turnContext))
                     {
                         // If Randonauts Telegram lobby then keep the welcome short
@@ -65,12 +69,20 @@ namespace VFatumbot
                     else if (userProfileTemporary.IsLocationSet)
                     {
                         await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
+                        if (isWebBot)
+                        {
+                            await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+                        }
                         await turnContext.SendActivityAsync(MessageFactory.Text("Don't forget to send your current location."), cancellationToken);
                         await _mainDialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                     }
                     else if (userProfilePersistent.HasSetLocationOnce)
                     {
                         await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
+                        if (isWebBot)
+                        {
+                            await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+                        }
                         await turnContext.SendActivityAsync(MessageFactory.Text(Consts.NO_LOCATION_SET_MSG), cancellationToken);
                     }
                     else
@@ -79,6 +91,10 @@ namespace VFatumbot
                         await turnContext.SendActivityAsync(MessageFactory.Text("For newcomers, read our Beginners Guide @ https://medium.com/@TheAndromedus/a-beginners-guide-to-randonauting-1dd505c3c5a9"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Join the Telegram community chatroom lobby @ https://t.me/randonauts"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Read and share experiences on our subreddit @ https://www.reddit.com/r/randonauts/"), cancellationToken);
+                        if (isWebBot)
+                        {
+                            await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+                        }
                         await turnContext.SendActivityAsync(MessageFactory.Text("Start off by sending your location from the app (hint: you can do so by tapping the 🌍/::/＋/📎 icon), or type \"search <address/place name>\", or send a Google Maps URL. Don't forget you can type \"help\" for more info."), cancellationToken);
                     }
 
