@@ -42,8 +42,7 @@ namespace VFatumbot
                     var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(turnContext, () => new UserProfileTemporary());
 
                     var botSrc = WebSrc.nonweb;
-                    InterceptWebBotSource(turnContext, out botSrc);
-                    var isWebBot = botSrc == WebSrc.web;
+                    var isWebBot = (!InterceptWebBotSource(turnContext, out botSrc) || botSrc == WebSrc.web);
 
                     if (Helpers.IsRandoLobby(turnContext))
                     {
