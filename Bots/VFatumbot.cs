@@ -41,8 +41,7 @@ namespace VFatumbot
                     var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(turnContext, () => new UserProfilePersistent());
                     var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(turnContext, () => new UserProfileTemporary());
 
-                    var botSrc = WebSrc.nonweb;
-                    var isWebBot = (!InterceptWebBotSource(turnContext, out botSrc) || botSrc == WebSrc.web);
+                    var isNonApp = userProfileTemporary.BotSrc != WebSrc.android && userProfileTemporary.BotSrc != WebSrc.ios;
 
                     if (Helpers.IsRandoLobby(turnContext))
                     {
@@ -68,7 +67,7 @@ namespace VFatumbot
                     else if (userProfileTemporary.IsLocationSet)
                     {
                         await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
-                        if (isWebBot)
+                        if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
@@ -78,7 +77,7 @@ namespace VFatumbot
                     else if (userProfilePersistent.HasSetLocationOnce)
                     {
                         await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
-                        if (isWebBot)
+                        if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
@@ -90,7 +89,7 @@ namespace VFatumbot
                         await turnContext.SendActivityAsync(MessageFactory.Text("For newcomers, read our Beginners Guide @ https://medium.com/@TheAndromedus/a-beginners-guide-to-randonauting-1dd505c3c5a9"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Join the Telegram community chatroom lobby @ https://t.me/randonauts"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Read and share experiences on our subreddit @ https://www.reddit.com/r/randonauts/"), cancellationToken);
-                        if (isWebBot)
+                        if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
