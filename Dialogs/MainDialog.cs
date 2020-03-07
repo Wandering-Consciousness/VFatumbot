@@ -289,6 +289,7 @@ namespace VFatumbot
                                 {
                                     new Choice() { Value = "Camera" },
                                     new Choice() { Value = "ANU" },
+                                    new Choice() { Value = "Temporal" },
                                     new Choice() { Value = "ANU Leftovers" },
                                     new Choice() { Value = "GCP Retro" },
                                 }
@@ -306,6 +307,7 @@ namespace VFatumbot
                                 {
                                     //new Choice() { Value = "Camera" },
                                     new Choice() { Value = "ANU" },
+                                    new Choice() { Value = "Temporal" },
                                     new Choice() { Value = "ANU Leftovers" },
                                     new Choice() { Value = "GCP Retro" },
                                 }
@@ -345,6 +347,11 @@ namespace VFatumbot
 
                     return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", promptOptions, cancellationToken);
 
+                case "Temporal":
+                    stepContext.Values["qrng_source"] = "Temporal";
+                    stepContext.Values["qrng_source_query_str"] = $"temporal=true&size={bytesSize * 2}";
+                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+
                 case "ANU Leftovers":
                     stepContext.Values["qrng_source"] = "Pool";
 
@@ -378,6 +385,7 @@ namespace VFatumbot
 
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
 
+
                 default:
                 case "ANU":
                     stepContext.Values["qrng_source"] = "ANU";
@@ -402,7 +410,7 @@ namespace VFatumbot
             }
             else if (stepContext.Values != null && stepContext.Values.ContainsKey("qrng_source_query_str"))
             {
-                // GCP Retro / ANU Leftovers (pool)
+                // Temporal / GCP Retro / ANU Leftovers (pool)
                 entropyQueryString = stepContext.Values["qrng_source_query_str"].ToString();
             }
             else
