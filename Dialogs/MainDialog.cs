@@ -349,7 +349,7 @@ namespace VFatumbot
 
                 case "Temporal":
                     stepContext.Values["qrng_source"] = "Temporal";
-                    stepContext.Values["qrng_source_query_str"] = $"temporal=true&size={bytesSize * 2}";
+                    stepContext.Values["qrng_source_query_str"] = $"raw=true&temporal=true&size={bytesSize * 2}";
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
 
                 case "ANU Leftovers":
@@ -374,7 +374,7 @@ namespace VFatumbot
 
                 case "GCP Retro":
                     stepContext.Values["qrng_source"] = "GCPRetro";
-                    stepContext.Values["qrng_source_query_str"] = $"gcp=true&size={bytesSize * 2}";
+                    stepContext.Values["qrng_source_query_str"] = $"raw=true&gcp=true&size={bytesSize * 2}";
 
                     // Until the libwrapper supports proper paging spanning over multiple days restrict the amount of entropy we ask for to within 5km
                     if (userProfileTemporary.Radius > 5000)

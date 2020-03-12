@@ -133,7 +133,7 @@ namespace VFatumbot
             if (meta == 0)
             {
                 // switching to David's libwrapper API
-                var queryStr = $"size={len * 2}";
+                var queryStr = $"raw=true&size={len * 2}";
                 if (!string.IsNullOrEmpty(EntropySrcQueryString))
                 {
                     queryStr = EntropySrcQueryString;
