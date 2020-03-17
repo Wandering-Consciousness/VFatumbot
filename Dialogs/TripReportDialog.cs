@@ -591,7 +591,8 @@ namespace VFatumbot
                 "Synchronicity: " + answers.Rating_Synchronicty + "  \n" +
                  "\n\n" +
                 userProfileTemporary.UserId + " " + callbackOptions.ShortCodes[answers.PointNumberVisited] + " " + callbackOptions.ShaGids?[answers.PointNumberVisited],
-                answers.PhotoURLs
+                answers.PhotoURLs,
+                answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos) // also post to /r/randonauts if we deem it interesting
                 );
 
             var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220, answers.Report.Length)));
@@ -604,7 +605,7 @@ namespace VFatumbot
 
         // Post a trip report to the /r/randonauts subreddit
         // Reddit API used: https://github.com/sirkris/Reddit.NET/
-        protected async Task<SelfPost> PostTripReportToRedditAsync(string title, string text, string[] photoURLs)
+        protected async Task<SelfPost> PostTripReportToRedditAsync(string title, string text, string[] photoURLs, bool postToRandonautsRedditToo)
         {
             // all posts are done under the user "therealfatumbot"
             var redditApi = new RedditAPI(appId: Consts.REDDIT_APP_ID,
@@ -636,6 +637,16 @@ namespace VFatumbot
 
             //    text += "\n\n" + photos;
             //}
+
+            if (postToRandonautsRedditToo)
+            {
+#if RELEASE_PROD
+                var subreddit2 = redditApi.Subreddit("randonauts");
+#else
+                var subreddit2 = redditApi.Subreddit("soliaxplayground");
+                await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
+#endif
+            }
 
             return await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
         }
