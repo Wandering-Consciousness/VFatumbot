@@ -646,8 +646,8 @@ namespace VFatumbot
                 var subreddit2 = redditApi.Subreddit("randonauts");
 #else
                 var subreddit2 = redditApi.Subreddit("soliaxplayground");
-                await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
 #endif
+                await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
             }
 
             return await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
