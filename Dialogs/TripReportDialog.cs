@@ -595,8 +595,10 @@ namespace VFatumbot
                 answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos) // also post to /r/randonauts if we deem it interesting
                 );
 
-            var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220, answers.Report.Length)));
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[Tweet your report!](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports)"), cancellationToken);
+            var w3wHashes = $" #{callbackOptions.What3Words[answers.PointNumberVisited].Replace(".", " #")}";
+
+            var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220 - w3wHashes.Length, answers.Report.Length)));
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[Tweet your report!](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!"), cancellationToken);
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
