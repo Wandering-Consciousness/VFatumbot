@@ -357,10 +357,11 @@ namespace VFatumbot
 
                     // Chose a random entropy GID from the list of GIDs in the pool (pseudo randomly selecting quantum randomness?! there's a joke in there somewhere :)
 #if RELEASE_PROD
-                    var jsonStr = new WebClient().DownloadString($"https://api.randonauts.com/getpools");
+                    var connStr = $"https://api.randonauts.com/getpools";
 #else
-                    var jsonStr = new WebClient().DownloadString($"https://devapi.randonauts.com/getpools");
+                    var connStr = $"https://devapi.randonauts.com/getpools";
 #endif
+                    var jsonStr = new WebClient().DownloadString(connStr);
                     var pools = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonStr);
                     var r = new Random();
                     var idx = r.Next(pools.Count);

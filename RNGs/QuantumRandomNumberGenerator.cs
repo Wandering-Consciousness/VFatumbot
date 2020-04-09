@@ -139,10 +139,11 @@ namespace VFatumbot
                     queryStr = EntropySrcQueryString;
                 }
 #if RELEASE_PROD
-                var jsonStr = Client.DownloadString($"https://api.randonauts.com/entropy?{queryStr}");
+                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
 #else
-                var jsonStr = Client.DownloadString($"https://devapi.randonauts.com/entropy?{queryStr}");
+                var connStr = $"https://devapi.randonauts.com/entropy?{queryStr}";
 #endif
+                var jsonStr = Client.DownloadString(connStr);
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonStr);
                 var hex = response.Entropy?.ToString();
 
