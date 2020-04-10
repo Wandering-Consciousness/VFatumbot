@@ -289,7 +289,8 @@ namespace VFatumbot
                                 {
                                     new Choice() { Value = "Camera" },
                                     new Choice() { Value = "ANU" },
-                                    new Choice() { Value = "Temporal" },
+                                    new Choice() { Value = "Temporal (Local)" },
+                                    new Choice() { Value = "Temporal (Server)" },
                                     new Choice() { Value = "ANU Leftovers" },
                                     new Choice() { Value = "GCP Retro" },
                                 }
@@ -308,6 +309,8 @@ namespace VFatumbot
                                     //new Choice() { Value = "Camera" },
                                     new Choice() { Value = "ANU" },
                                     new Choice() { Value = "Temporal" },
+                                    //new Choice() { Value = "Temporal (Local)" },
+                                    //new Choice() { Value = "Temporal (Server)" },
                                     new Choice() { Value = "ANU Leftovers" },
                                     new Choice() { Value = "GCP Retro" },
                                 }
@@ -347,7 +350,26 @@ namespace VFatumbot
 
                     return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", promptOptions, cancellationToken);
 
+                case "Temporal (Local)":
+                    stepContext.Values["qrng_source"] = "Camera";
+                    stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
+
+                    var stevePromptOptions = new PromptOptions
+                    {
+                        Prompt = MessageFactory.Text("Your smartphone's CPU clock will now load to generate some local entropy to send to me."),
+                        RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
+                    };
+
+                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                    // and then pass onto the app layer to load the camera
+                    var requestSteveEntropyActivity = Activity.CreateEventActivity();
+                    requestSteveEntropyActivity.ChannelData = $"temporal,{bytesSize}";
+                    await stepContext.Context.SendActivityAsync(requestSteveEntropyActivity);
+
+                    return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", stevePromptOptions, cancellationToken);
+
                 case "Temporal":
+                case "Temporal (Server)":
                     stepContext.Values["qrng_source"] = "Temporal";
                     stepContext.Values["qrng_source_query_str"] = $"raw=true&temporal=true&size={bytesSize * 2}";
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);

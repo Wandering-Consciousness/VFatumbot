@@ -167,6 +167,11 @@
                         //if (flutterChannel_loadCamRNGWithBytesNeeded !=== 'undefined') {
                             flutterChannel_loadCamRNGWithBytesNeeded.postMessage(splitted[1]);
                         //}
+                    } else if (data.channelData.startsWith("temporal")) {
+                        var splitted = data.channelData.split(',');
+                        //if (flutterChannel_loadTemporalWithBytesNeeded !=== 'undefined') {
+                            flutterChannel_loadTemporalWithBytesNeeded.postMessage(splitted[1]);
+                        //}
                     }
                 }
             });
