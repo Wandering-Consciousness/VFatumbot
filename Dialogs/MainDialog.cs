@@ -360,6 +360,7 @@ namespace VFatumbot
                     var connStr = $"https://api.randonauts.com/getpools";
 #else
                     var connStr = $"https://devapi.randonauts.com/getpools";
+                    //var connStr = $"http://127.0.0.1:3000/getpools";
 #endif
                     var jsonStr = new WebClient().DownloadString(connStr);
                     var pools = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonStr);

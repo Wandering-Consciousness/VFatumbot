@@ -28,9 +28,10 @@ namespace VFatumbot.BotLogic
         public extern static int getVersionPatch();
 
 #if RELEASE_PROD
-        static string API_SERVER = $"https://api.randonauts.com/";
+        static string API_SERVER = $"https://api.randonauts.com";
 #else
-        static string API_SERVER = $"https://devapi.randonauts.com/";
+        static string API_SERVER = $"https://devapi.randonauts.com";
+        //static string API_SERVER = $"http://127.0.0.1:3000";
 #endif
 
         public void DispatchWorkerThread(DoWorkEventHandler handler)

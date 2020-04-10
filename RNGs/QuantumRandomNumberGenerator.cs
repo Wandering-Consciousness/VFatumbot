@@ -142,6 +142,7 @@ namespace VFatumbot
                 var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
 #else
                 var connStr = $"https://devapi.randonauts.com/entropy?{queryStr}";
+                //var connStr = $"http://127.0.0.1:3000/entropy?{queryStr}";
 #endif
                 var jsonStr = Client.DownloadString(connStr);
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonStr);
