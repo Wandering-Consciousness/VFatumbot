@@ -27,6 +27,12 @@ namespace VFatumbot.BotLogic
         [DllImport("libAttract", CallingConvention = CallingConvention.Cdecl)]
         public extern static int getVersionPatch();
 
+#if RELEASE_PROD
+        static string API_SERVER = $"https://api.randonauts.com/";
+#else
+        static string API_SERVER = $"https://devapi.randonauts.com/";
+#endif
+
         public void DispatchWorkerThread(DoWorkEventHandler handler)
         {
             var backgroundWorker = new BackgroundWorker();
@@ -469,6 +475,7 @@ namespace VFatumbot.BotLogic
                     redo:
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
+                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "attractor", idacou);
                         if (ida.Length > 0)
                         {
@@ -588,6 +595,7 @@ namespace VFatumbot.BotLogic
                     redo:
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
+                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "void", idacou);
                         if (ida.Length > 0)
                         {
@@ -721,6 +729,7 @@ namespace VFatumbot.BotLogic
                     redo:
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
+                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "any", idacou);
                         if (ida.Length > 0)
                         {
@@ -1019,6 +1028,7 @@ namespace VFatumbot.BotLogic
 
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
+                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         FinalAttractor[] att = SortIDA(ida, "attractor", idacou);
                         FinalAttractor[] voi = SortIDA(ida, "void", idacou);
                         if (att.Count() > voi.Count())
@@ -1170,6 +1180,7 @@ namespace VFatumbot.BotLogic
                         redo:
                             string shaGid;
                             var idas = GetIDA(centerLocation, userProfileTemporary.Radius, 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token), out shaGid);
+                            await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                             idas = SortIDA(idas, idaType, 1);
 
                             if (idas.Count() == 0)
@@ -1273,7 +1284,7 @@ namespace VFatumbot.BotLogic
                     redoIDA:
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token), out shaGid);
-
+                        await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         FinalAttractor[] att = SortIDA(ida, "attractor", 1);
                         if (att.Length > 0 && !userProfileTemporary.IsIncludeWaterPoints)
                         {
