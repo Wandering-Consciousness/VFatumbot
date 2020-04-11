@@ -356,7 +356,7 @@ namespace VFatumbot
 
                     var stevePromptOptions = new PromptOptions
                     {
-                        Prompt = MessageFactory.Text("Your smartphone's CPU clock will now load to generate some local entropy to send to me."),
+                        Prompt = MessageFactory.Text("Collecting magical temporal randomness from the heart of your phone..."),
                         RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
                     };
 
