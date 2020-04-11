@@ -371,7 +371,7 @@ namespace VFatumbot
                 case "Temporal":
                 case "Temporal (Server)":
                     stepContext.Values["qrng_source"] = "Temporal";
-                    stepContext.Values["qrng_source_query_str"] = $"raw=true&temporal=true&size={bytesSize * 2}";
+                    stepContext.Values["qrng_source_query_str"] = $"raw=true&temporal=true&size={bytesSize}";
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
 
                 case "ANU Leftovers":
