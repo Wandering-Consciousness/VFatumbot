@@ -592,8 +592,30 @@ namespace VFatumbot
                  "\n\n" +
                 userProfileTemporary.UserId + " " + callbackOptions.ShortCodes[answers.PointNumberVisited] + " " + callbackOptions.ShaGids?[answers.PointNumberVisited],
                 answers.PhotoURLs,
-                answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos) // also post to /r/randonauts if we deem it interesting
+                "randonaut_reports"
                 );
+
+            if (answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos)) // also post a short version to /r/randonauts if we deem it interesting)
+            {
+                var oldLines = message.Split("\n");
+                var newLines = oldLines.Where(line => !line.Contains("Intention Driven Anomaly found"));
+                newLines = newLines.Where(line => !line.Contains("(")); // A-8FF89AC5 (43.105433 -76.121310)
+                newLines = newLines.Where(line => !line.Contains("Radius")); // Radius
+                var shortMessage = string.Join("\n", newLines);
+                shortMessage = shortMessage.Replace("\n\n\n", "\n\n");
+
+                await PostTripReportToRedditAsync(
+                    (!string.IsNullOrEmpty(answers.Intent) ? answers.Intent + " @" : "Trip report @") 
+                        + ((callbackOptions.NearestPlaces != null && callbackOptions.NearestPlaces.Length >= 1) ? (" " + callbackOptions.NearestPlaces[answers.PointNumberVisited]).Substring(0, callbackOptions.NearestPlaces[answers.PointNumberVisited].LastIndexOf("(")) : " somewhere"),
+                    answers.Report + "\n   \n" +
+                    (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
+                    shortMessage.Replace("\n\n", "  \n") + "\n\n" +
+                    "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
+                    $"[Full Report](https://redd.it/{redditPost.Id})\n\n",
+                    answers.PhotoURLs,
+                    "randonauts"
+                );
+            }
 
             var w3wHashes = $" #{callbackOptions.What3Words[answers.PointNumberVisited].Replace(".", " #")}";
 
@@ -607,7 +629,7 @@ namespace VFatumbot
 
         // Post a trip report to the /r/randonauts subreddit
         // Reddit API used: https://github.com/sirkris/Reddit.NET/
-        protected async Task<SelfPost> PostTripReportToRedditAsync(string title, string text, string[] photoURLs, bool postToRandonautsRedditToo)
+        protected async Task<SelfPost> PostTripReportToRedditAsync(string title, string text, string[] photoURLs, string subredditPage)
         {
             // all posts are done under the user "therealfatumbot"
             var redditApi = new RedditAPI(appId: Consts.REDDIT_APP_ID,
@@ -616,7 +638,7 @@ namespace VFatumbot
                                           accessToken: Consts.REDDIT_ACCESS_TOKEN);
 
 #if RELEASE_PROD
-            var subreddit = redditApi.Subreddit("randonaut_reports");
+            var subreddit = redditApi.Subreddit(subredditPage);
 #else
             var subreddit = redditApi.Subreddit("soliaxplayground");
 #endif
@@ -639,16 +661,6 @@ namespace VFatumbot
 
             //    text += "\n\n" + photos;
             //}
-
-            if (postToRandonautsRedditToo)
-            {
-#if RELEASE_PROD
-                var subreddit2 = redditApi.Subreddit("randonauts");
-#else
-                var subreddit2 = redditApi.Subreddit("soliaxplayground");
-#endif
-                await subreddit2.SelfPost(title: title, selfText: text).SubmitAsync();
-            }
 
             return await subreddit.SelfPost(title: title, selfText: text).SubmitAsync();
         }
