@@ -164,9 +164,10 @@
                 if (data.type == "event" && data.channelData) {
                     if (data.channelData.startsWith("camrng")) {
                         var splitted = data.channelData.split(',');
-                        //if (flutterChannel_loadCamRNGWithBytesNeeded !=== 'undefined') {
-                            flutterChannel_loadCamRNGWithBytesNeeded.postMessage(splitted[1]);
-                        //}
+                        flutterChannel_loadCamRNGWithBytesNeeded.postMessage(splitted[1]);
+                    } else if (data.channelData.startsWith("temporal")) {
+                        var splitted = data.channelData.split(',');
+                        flutterChannel_loadTemporalWithBytesNeeded.postMessage(splitted[1]);
                     }
                 }
             });
