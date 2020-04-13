@@ -89,10 +89,6 @@ namespace VFatumbot
                         await turnContext.SendActivityAsync(MessageFactory.Text("For newcomers, read our Beginners Guide @ https://medium.com/@TheAndromedus/a-beginners-guide-to-randonauting-1dd505c3c5a9"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Join the Telegram community chatroom lobby @ https://t.me/randonauts"), cancellationToken);
                         await turnContext.SendActivityAsync(MessageFactory.Text("Read and share experiences on our subreddit @ https://www.reddit.com/r/randonauts/"), cancellationToken);
-                        if (isNonApp)
-                        {
-                            await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
-                        }
                         await turnContext.SendActivityAsync(MessageFactory.Text("Start off by sending your location from the app (hint: you can do so by tapping the 🌍/::/＋/📎 icon), or type \"search <address/place name>\", or send a Google Maps URL. Don't forget you can type \"help\" for more info."), cancellationToken);
                     }
 
