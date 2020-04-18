@@ -476,7 +476,7 @@ namespace VFatumbot.BotLogic
                     redo:
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "attractor", idacou);
                         if (ida.Length > 0)
                         {
@@ -596,7 +596,7 @@ namespace VFatumbot.BotLogic
                     redo:
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "void", idacou);
                         if (ida.Length > 0)
                         {
@@ -730,7 +730,7 @@ namespace VFatumbot.BotLogic
                     redo:
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "any", idacou);
                         if (ida.Length > 0)
                         {
@@ -1029,7 +1029,7 @@ namespace VFatumbot.BotLogic
 
                         string shaGid;
                         FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         FinalAttractor[] att = SortIDA(ida, "attractor", idacou);
                         FinalAttractor[] voi = SortIDA(ida, "void", idacou);
                         if (att.Count() > voi.Count())
