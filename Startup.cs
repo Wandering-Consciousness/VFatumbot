@@ -32,24 +32,6 @@ namespace VFatumbot
             // Create the credential provider to be used with the Bot Framework Adapter.
             services.AddSingleton<ICredentialProvider, ConfigurationCredentialProvider>();
 
-            // Add Application Insights services into service collection
-            services.AddApplicationInsightsTelemetry();
-
-            // Create the telemetry client.
-            services.AddSingleton<IBotTelemetryClient, BotTelemetryClient>();
-
-            // Add telemetry initializer that will set the correlation context for all telemetry items.
-            services.AddSingleton<ITelemetryInitializer, OperationCorrelationTelemetryInitializer>();
-
-            // Add telemetry initializer that sets the user ID and session ID (in addition to other bot-specific properties such as activity ID)
-            services.AddSingleton<ITelemetryInitializer, TelemetryBotIdInitializer>();
-
-            // Create the telemetry middleware to initialize telemetry gathering
-            services.AddSingleton<IMiddleware, TelemetryInitializerMiddleware>();
-
-            // Create the telemetry middleware (used by the telemetry initializer) to track conversation events
-            services.AddSingleton<TelemetryLoggerMiddleware>();
-
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 

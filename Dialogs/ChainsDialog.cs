@@ -15,21 +15,17 @@ namespace VFatumbot
         protected readonly IStatePropertyAccessor<UserProfileTemporary> _userProfileTemporaryAccessor;
         protected readonly MainDialog _mainDialog;
 
-        public ChainsDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger, IBotTelemetryClient telemetryClient) : base(nameof(ChainsDialog))
+        public ChainsDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger) : base(nameof(ChainsDialog))
         {
             _logger = logger;
             _userProfileTemporaryAccessor = userProfileTemporaryAccessor;
             _mainDialog = mainDialog;
 
-            TelemetryClient = telemetryClient;
-
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new NumberPrompt<int>(nameof(NumberPrompt<int>), DistanceValidatorAsync)
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -39,7 +35,6 @@ namespace VFatumbot
                 StartChainingStepAsync
             })
             {
-                TelemetryClient = telemetryClient,
             });
 
             InitialDialogId = nameof(WaterfallDialog);

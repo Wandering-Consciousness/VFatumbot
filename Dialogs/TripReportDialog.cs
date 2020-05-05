@@ -50,17 +50,14 @@ namespace VFatumbot
             public string Report { get; set; }
         }
 
-        public TripReportDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger, IBotTelemetryClient telemetryClient) : base(nameof(TripReportDialog))
+        public TripReportDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger) : base(nameof(TripReportDialog))
         {
             _logger = logger;
             _userProfileTemporaryAccessor = userProfileTemporaryAccessor;
             _mainDialog = mainDialog;
 
-            TelemetryClient = telemetryClient;
-
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new ChoicePrompt("AllowFreetextTooChoicePrompt",
                 (PromptValidatorContext<FoundChoice> promptContext, CancellationToken cancellationToken) =>
@@ -69,15 +66,12 @@ namespace VFatumbot
                         return Task.FromResult(true);
                     })
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new TextPrompt(nameof(TextPrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new AttachmentPrompt(nameof(AttachmentPrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -98,7 +92,6 @@ namespace VFatumbot
                 FinishStepAsync
             })
             {
-                TelemetryClient = telemetryClient,
             });
 
             InitialDialogId = nameof(WaterfallDialog);

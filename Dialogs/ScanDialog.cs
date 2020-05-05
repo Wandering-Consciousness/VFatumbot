@@ -15,17 +15,14 @@ namespace VFatumbot
         protected readonly IStatePropertyAccessor<UserProfileTemporary> _userProfileTemporaryAccessor;
         protected readonly MainDialog _mainDialog;
 
-        public ScanDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger, IBotTelemetryClient telemetryClient) : base(nameof(ScanDialog))
+        public ScanDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger) : base(nameof(ScanDialog))
         {
             _logger = logger;
             _userProfileTemporaryAccessor = userProfileTemporaryAccessor;
             _mainDialog = mainDialog;
 
-            TelemetryClient = telemetryClient;
-
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new ChoicePrompt("AskHowManyScanIDAsChoicePrompt",
                (PromptValidatorContext<FoundChoice> promptContext, CancellationToken cancellationToken) =>
@@ -45,7 +42,6 @@ namespace VFatumbot
                    return Task.FromResult(false);
                })
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -55,7 +51,6 @@ namespace VFatumbot
                 GetHowManyScanIDAsStepAsync,
             })
             {
-                TelemetryClient = telemetryClient,
             });
 
             InitialDialogId = nameof(WaterfallDialog);

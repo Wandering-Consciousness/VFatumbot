@@ -67,7 +67,6 @@ namespace VFatumbot
             {
                 var conversationStateAccesor = _conversationState.CreateProperty<DialogState>(nameof(DialogState));
                 var dialogSet = new DialogSet(conversationStateAccesor);
-                dialogSet.TelemetryClient = dialog.TelemetryClient;
                 dialogSet.Add(dialog);
                 var dialogContext = await dialogSet.CreateContextAsync(turnContext, cancellationToken);
                 await dialogContext.ReplaceDialogAsync(nameof(MainDialog), callbackOptions, cancellationToken);

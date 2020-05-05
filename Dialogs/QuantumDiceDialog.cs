@@ -16,21 +16,17 @@ namespace VFatumbot
         protected readonly IStatePropertyAccessor<UserProfileTemporary> _userProfileTemporaryAccessor;
         protected readonly MainDialog _mainDialog;
 
-        public QuantumDiceDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger, IBotTelemetryClient telemetryClient) : base(nameof(QuantumDiceDialog))
+        public QuantumDiceDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger) : base(nameof(QuantumDiceDialog))
         {
             _logger = logger;
             _userProfileTemporaryAccessor = userProfileTemporaryAccessor;
             _mainDialog = mainDialog;
 
-            TelemetryClient = telemetryClient;
-
             AddDialog(new NumberPrompt<int>("MinNumberPrompt", DiceMinValidatorAsync)
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new NumberPrompt<int>("MaxNumberPrompt", DiceMaxValidatorAsync)
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -40,7 +36,6 @@ namespace VFatumbot
                 RollAgainStepAsync
             })
             {
-                TelemetryClient = telemetryClient,
             });
 
             InitialDialogId = nameof(WaterfallDialog);
