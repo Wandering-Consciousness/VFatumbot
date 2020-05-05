@@ -1,0 +1,3 @@
+[submodule "newtonlib"]
+	path = newtonlib
+	url = https://github.com/Randonauts/newtonlib
