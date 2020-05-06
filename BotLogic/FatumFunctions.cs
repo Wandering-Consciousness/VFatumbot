@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
+using Newtonsoft.Json;
 
 namespace VFatumbot.BotLogic
 {
@@ -237,6 +242,35 @@ namespace VFatumbot.BotLogic
                 resp += "Suggested time: " + ((int)rnd.Next(23)).ToString("#0") + ":" + ((int)rnd.Next(59)).ToString("00") + "\n\n";
             }
             return resp;
+        }
+
+        public class AzureFunctionResponse
+        {
+            public FinalAttr[] points;
+        }
+
+        public static async Task<Tuple<FinalAttractor[], string>> GetIDAFromAzureFunction(LatLng startcoord, double radius, int meta, QuantumRandomNumberGeneratorWrapper rnd)
+        {
+            int No = getOptimizedDots(radius);
+            int bytesSize = requiredEnthropyBytes(No);
+            string shaGid;
+            byte[] byteinput = rnd.NextHexBytes((int)bytesSize, meta, out shaGid);
+
+            var content = new ByteArrayContent(byteinput);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            var response = await new HttpClient().PostAsync($"https://newtonlib.azurewebsites.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
+
+            var jsonContent = response.Content.ReadAsStringAsync().Result;
+            var result = JsonConvert.DeserializeObject<AzureFunctionResponse>(jsonContent);
+            if (result.points == null) throw new WebException(jsonContent);
+
+            var fas = new FinalAttractor[result.points.Length];
+            for (int i = 0; i < result.points.Length; i++)
+            {
+                fas[i] = new FinalAttractor();
+                fas[i].X = result.points[i];
+            }
+            return new Tuple<FinalAttractor[], string>(fas, shaGid);
         }
 
         public static FinalAttractor[] GetIDA(LatLng startcoord, double radius, int meta, QuantumRandomNumberGeneratorWrapper rnd, out string shaGid)
