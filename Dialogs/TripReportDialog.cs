@@ -696,6 +696,7 @@ namespace VFatumbot
                         isb.Append("platform,");
                         isb.Append("datetime,");
                         isb.Append("visited,");
+                        isb.Append("rng_type,");
                         isb.Append("point_type,");
                         if (!string.IsNullOrEmpty(answers.Intent))
                         {
@@ -758,6 +759,7 @@ namespace VFatumbot
                         isb.Append($"'{(int)Enum.Parse(typeof(Enums.ChannelPlatform), context.Activity.ChannelId)}',");
                         isb.Append($"'{context.Activity.Timestamp}',"); // datetime
                         isb.Append($"'{(answers.WasPointVisited ? 1 : 0)}',"); // point visited or not?
+                        isb.Append($"'{userProfileTemporary.LastRNGType}',"); // RNG type used
                         isb.Append($"'{options.PointTypes[i].ToString()}',"); // point type enum as a string
                         if (!string.IsNullOrEmpty(answers.Intent))
                         {
