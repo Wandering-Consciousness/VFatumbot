@@ -556,9 +556,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
@@ -677,9 +678,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
@@ -812,9 +814,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
@@ -1132,9 +1135,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
