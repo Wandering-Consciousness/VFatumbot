@@ -7,21 +7,17 @@
     <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/4.6.0/webchat.js"></script>
     <script src="jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>var OneSignal = window.OneSignal || [];
-        OneSignal.push(function () {
-            OneSignal.init({
-                appId: "***REMOVED***",
-            });
-        });</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!--<script async src="https://www.googletagmanager.com/gtag/js?id=***REMOVED***"></script>
+    <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150961256-1"></script>
     <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', '***REMOVED***');</script>-->
+        gtag('config', 'UA-150961256-1');</script>-->
     <style>
-    	@import "main.css";
+
+        @import "main.css";
+
         html,
         body {
             height: 100%;
@@ -203,7 +199,7 @@
             let directLine = window.WebChat.createDirectLine({
                 token: '',
                 secret: '',
-                domain: 'https://devbot.randonauts.com/directline',
+                domain: 'http://localhost:3000/directline',
                 webSocket: false // defaults to true
             });
 
