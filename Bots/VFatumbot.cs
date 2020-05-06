@@ -85,11 +85,17 @@ namespace VFatumbot
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to the original Randonautica bot brought to you in partnership with The Fatum Project. Randonautica helps you explore the world you never knew existed by quantumly generating a point for you to journey to.  The results have shown that mind and matter may interact in more ways than currently understood. Welcome to the global phenomena of The Randonauts."), cancellationToken);
-                        await turnContext.SendActivityAsync(MessageFactory.Text("For newcomers, read our Beginners Guide @ https://medium.com/@TheAndromedus/a-beginners-guide-to-randonauting-1dd505c3c5a9"), cancellationToken);
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Join the Telegram community chatroom lobby @ https://t.me/randonauts"), cancellationToken);
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Read and share experiences on our subreddit @ https://www.reddit.com/r/randonauts/"), cancellationToken);
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Start off by sending your location from the app (hint: you can do so by tapping the 🌍/::/＋/📎 icon), or type \"search <address/place name>\", or send a Google Maps URL. Don't forget you can type \"help\" for more info."), cancellationToken);
+                        var welcome = "#### Welcome to Randonautica!\n" +
+                            "##### where you venture to random locations and seek the unknown and surprising.  \n" +
+                            "Start with the [beginner's guide](https://medium.com/@TheAndromedus/a-beginners-guide-to-randonauting-1dd505c3c5a9) if you're new " +
+                            "and then [join the](https://t.me/randonauts) Telegram lobby chatroom.  \n" +
+                            "Experiences, questions and trip reports are also shared on [Reddit](https://www.reddit.com/r/randonauts/).";
+                        await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
+                        if (isNonApp)
+                        {
+                            await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+                        }
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or \"search <place>\"!"), cancellationToken);
                     }
 
                     // Hack coz Facebook Messenge stopped showing "Send Location" button
