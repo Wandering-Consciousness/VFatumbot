@@ -201,8 +201,10 @@
             }
 
             let directLine = window.WebChat.createDirectLine({
-                // TODO: get this dynamically?
-                token: '***REMOVED***' 
+                secret: '',
+                token: '',
+                domain: 'https://devapi.randonauts.com/directline',
+                webSocket: false // defaults to true
             });
 
             window.WebChat.renderWebChat(
