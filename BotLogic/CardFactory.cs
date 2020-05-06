@@ -259,14 +259,14 @@ namespace VFatumbot
         public static IMessageActivity CreateAppStoreDownloadCard()
         {
             var buttons = new List<CardAction> {
-                new CardAction(ActionTypes.OpenUrl, "Android Google Play", value: "https://play.google.com/store/apps/details?id=com.randonautica.app"),
-                new CardAction(ActionTypes.OpenUrl, "iOS AppStore", value: "https://apps.apple.com/us/app/randonautica/id1493743521")
+                new CardAction(ActionTypes.OpenUrl, "Android", value: "https://play.google.com/store/apps/details?id=com.randonautica.app"),
+                new CardAction(ActionTypes.OpenUrl, "iOS", value: "https://apps.apple.com/us/app/randonautica/id1493743521")
             };
 
 
             var heroCard = new HeroCard
             {
-                Title = "Download the official app!",
+                Title = "Download the app",
                 Buttons = buttons,
             };
 
