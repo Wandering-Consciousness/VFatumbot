@@ -474,9 +474,11 @@ namespace VFatumbot.BotLogic
                         int numWaterPointsSkipped = 0;
 
                     redo:
-                        string shaGid;
-                        FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        
+                        var idatup = await GetIDAFromAzureFunction(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString));
+                        var ida = idatup.Item1;
+                        var shaGid = idatup.Item2;
+                        if (string.IsNullOrEmpty(entropyQueryString) || !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "attractor", idacou);
                         if (ida.Length > 0)
                         {
@@ -554,9 +556,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
@@ -594,9 +597,10 @@ namespace VFatumbot.BotLogic
                         int numWaterPointsSkipped = 0;
 
                     redo:
-                        string shaGid;
-                        FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        var idatup = await GetIDAFromAzureFunction(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString));
+                        var ida = idatup.Item1;
+                        var shaGid = idatup.Item2;
+                        if (string.IsNullOrEmpty(entropyQueryString) || !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "void", idacou);
                         if (ida.Length > 0)
                         {
@@ -674,9 +678,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
@@ -728,9 +733,10 @@ namespace VFatumbot.BotLogic
                         int numWaterPointsSkipped = 0;
 
                     redo:
-                        string shaGid;
-                        FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        var idatup = await GetIDAFromAzureFunction(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString));
+                        var ida = idatup.Item1;
+                        var shaGid = idatup.Item2;
+                        if (string.IsNullOrEmpty(entropyQueryString) || !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         ida = SortIDA(ida, "any", idacou);
                         if (ida.Length > 0)
                         {
@@ -808,9 +814,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
@@ -1027,9 +1034,10 @@ namespace VFatumbot.BotLogic
                         int numVoiWaterPointsSkipped = 0;
                         string mesg = "";
 
-                        string shaGid;
-                        FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString), out shaGid);
-                        if (!string.IsNullOrEmpty(entropyQueryString) && !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
+                        var idatup = await GetIDAFromAzureFunction(userProfileTemporary.Location, userProfileTemporary.Radius, doScan ? 1 : 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token, entropyQueryString: entropyQueryString));
+                        var ida = idatup.Item1;
+                        var shaGid = idatup.Item2;
+                        if (string.IsNullOrEmpty(entropyQueryString) || !entropyQueryString.Contains("pool=true")) await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         FinalAttractor[] att = SortIDA(ida, "attractor", idacou);
                         FinalAttractor[] voi = SortIDA(ida, "void", idacou);
                         if (att.Count() > voi.Count())
@@ -1127,9 +1135,10 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "Oops! No clear quantum points derived. Sometimes quantum generation takes a couple of tries. Go again!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                         }
                     }, cancellationToken);
             });
@@ -1179,8 +1188,9 @@ namespace VFatumbot.BotLogic
                             }
 
                         redo:
-                            string shaGid;
-                            var idas = GetIDA(centerLocation, userProfileTemporary.Radius, 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token), out shaGid);
+                            var idatup = await GetIDAFromAzureFunction(centerLocation, userProfileTemporary.Radius, 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token));
+                            var idas = idatup.Item1;
+                            var shaGid = idatup.Item2;
                             await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                             idas = SortIDA(idas, idaType, 1);
 
@@ -1283,8 +1293,9 @@ namespace VFatumbot.BotLogic
                         int numWaterPointsSkipped = 0;
 
                     redoIDA:
-                        string shaGid;
-                        FinalAttractor[] ida = GetIDA(userProfileTemporary.Location, userProfileTemporary.Radius, 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token), out shaGid);
+                        var idatup = await GetIDAFromAzureFunction(userProfileTemporary.Location, userProfileTemporary.Radius, 0, new QuantumRandomNumberGeneratorWrapper(context, mainDialog, token));
+                        var ida = idatup.Item1;
+                        var shaGid = idatup.Item2;
                         await turnContext.SendActivityAsync(MessageFactory.Text($"[Visualize your entropy in an image!]({API_SERVER}/visualizeEntropy?gid={shaGid})"), cancellationToken);
                         FinalAttractor[] att = SortIDA(ida, "attractor", 1);
                         if (att.Length > 0 && !userProfileTemporary.IsIncludeWaterPoints)

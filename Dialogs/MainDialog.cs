@@ -159,6 +159,9 @@ namespace VFatumbot
                 }
             }
 
+            // Reset last used RNG type
+            userProfileTemporary.LastRNGType = "";
+
             // Make sure the persistent settings are in synch with the temporary ones
             bool doSync = false;
             if (userProfileTemporary.IsIncludeWaterPoints != userProfilePersistent.IsIncludeWaterPoints)
@@ -325,6 +328,9 @@ namespace VFatumbot
             //_logger.LogInformation($"MainDialog.GetQRNGSourceStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
+
+            // Referenced by Trip Reports
+            userProfileTemporary.LastRNGType = ((FoundChoice)stepContext.Result)?.Value.ToString();
 
             // Get the number of bytes we need from the camera's entropy
             int numDots = getOptimizedDots(userProfileTemporary.Radius);
