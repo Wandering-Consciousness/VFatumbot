@@ -556,7 +556,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
@@ -678,7 +678,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
@@ -814,7 +814,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
@@ -1135,7 +1135,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No quantum anomalies detected at the moment (this is happens sometimes and is not a problem) but a quantum blind spot was found to explore! For anomalies try again soon!";
+                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                             await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                             await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
