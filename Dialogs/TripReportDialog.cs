@@ -92,8 +92,8 @@ namespace VFatumbot
                 RateImportanceStepAsync,
                 RateStrangenessStepAsync,
                 RateSynchronictyStepAsync,
-                UploadPhotosYesOrNoStepAsync,
-                GetPhotoAttachmentsStepAsync,
+                //UploadPhotosYesOrNoStepAsync,
+                //GetPhotoAttachmentsStepAsync,
                 WriteReportStepAsync,
                 FinishStepAsync
             })
@@ -505,7 +505,7 @@ namespace VFatumbot
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Sorry, there was an error uploading your photo. ({e.GetType().Name}: {e.Message})"));
             }
 
-            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Lastly, write up your report. Typing up your report is limited to being sent in one message.") };
+            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Photo uploads are temporarily disabled while we change some things sorry! Lastly, write up your report. Typing up your report is limited to being sent in one message.") };
             return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
         }
 
