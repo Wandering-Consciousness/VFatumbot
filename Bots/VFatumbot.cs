@@ -86,7 +86,6 @@ namespace VFatumbot
                     else
                     {
                         var welcome = "#### Welcome to Randonautica!\n" +
-                            "##### where you venture to random locations and seek the unknown and surprising.  \n" +
                             "Beginners: Watch this How-to Video before your first trip.  \n\n\n" +
                             "Once you've completed a trip, share in the discussion with the Randonauts on [Reddit](https://www.reddit.com/r/randonauts/), [Twitter](https://twitter.com/TheRandonauts) and [Telegram](https://t.me/randonauts).  \n\n\n" +
                             "Happy Randonauting!";
