@@ -275,5 +275,43 @@ namespace VFatumbot
             attachments.Add(heroCard.ToAttachment());
             return MessageFactory.Attachment(attachments);
         }
+
+        public static IMessageActivity GetVideoCard()
+        {
+            var videoCard = new VideoCard
+            {
+                Title = "Big Buck Bunny",
+                Subtitle = "by the Blender Institute",
+                Text = "Big Buck Bunny (code-named Peach) is a short computer-animated comedy film by the Blender Institute," +
+                       " part of the Blender Foundation. Like the foundation's previous film Elephants Dream," +
+                       " the film was made using Blender, a free software application for animation made by the same foundation." +
+                       " It was released as an open-source film under Creative Commons License Attribution 3.0.",
+                Image = new ThumbnailUrl
+                {
+                    Url = "https://www.youtube.com/xEbbsG2U26k",
+                },
+                Media = new List<MediaUrl>
+                {
+                    new MediaUrl()
+                    {
+                        Url = "https://www.youtube.com/xEbbsG2U26k",
+                    },
+                },
+                Buttons = new List<CardAction>
+                {
+                    new CardAction()
+                    {
+                        Title = "Learn More",
+                        Type = ActionTypes.OpenUrl,
+                        Value = "https://peach.blender.org/",
+                    },
+                },
+            };
+
+            var attachments = new List<Attachment>();
+            attachments.Add(videoCard.ToAttachment());
+            return MessageFactory.Attachment(attachments);
+        }
+
     }
 }

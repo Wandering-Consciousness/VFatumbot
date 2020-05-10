@@ -94,6 +94,7 @@ namespace VFatumbot
                         if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+                            await turnContext.SendActivityAsync(CardFactory.GetVideoCard());
                         }
                         await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or \"search <place>\"!"), cancellationToken);
                     }
