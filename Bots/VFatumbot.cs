@@ -87,16 +87,16 @@ namespace VFatumbot
                     {
                         var welcome = "#### Welcome to Randonautica!\n" +
                             "##### where you venture to random locations and seek the unknown and surprising.  \n" +
-                            "Start with the [beginner's guide](https://medium.com/@TheAndromedus/a-beginners-guide-to-randonauting-1dd505c3c5a9) if you're new " +
-                            "and then [join the](https://t.me/randonauts) Telegram lobby chatroom.  \n" +
-                            "Experiences, questions and trip reports are also shared on [Reddit](https://www.reddit.com/r/randonauts/).";
+                            "Beginners: Watch this How-to Video before your first trip.  \n\n\n" +
+                            "Once you've completed a trip, share in the discussion with the Randonauts on [Reddit](https://www.reddit.com/r/randonauts/), [Twitter](https://twitter.com/TheRandonauts) and [Telegram](https://t.me/randonauts).  \n\n\n" +
+                            "Happy Randonauting!";
                         await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
-                        if (isNonApp)
-                        {
-                            await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
-                            await turnContext.SendActivityAsync(CardFactory.GetVideoCard());
-                        }
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or \"search <place>\"!"), cancellationToken);
+                        await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
+                        //if (isNonApp) // disable for now coz it was clogging the welcome screen and we lost the ability to detect isNonApp properly
+                        //{
+                        //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+                        //}
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
                     }
 
                     // Hack coz Facebook Messenge stopped showing "Send Location" button
