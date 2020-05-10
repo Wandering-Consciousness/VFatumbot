@@ -288,13 +288,13 @@ namespace VFatumbot
                        " It was released as an open-source film under Creative Commons License Attribution 3.0.",
                 Image = new ThumbnailUrl
                 {
-                    Url = "https://www.youtube.com/xEbbsG2U26k",
+                    Url = "https://youtube.com/watch?v=xEbbsG2U26k",
                 },
                 Media = new List<MediaUrl>
                 {
                     new MediaUrl()
                     {
-                        Url = "https://www.youtube.com/xEbbsG2U26k",
+                        Url = "https://youtube.com/watch?v=xEbbsG2U26k",
                     },
                 },
                 Buttons = new List<CardAction>
