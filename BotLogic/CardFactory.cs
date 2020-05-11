@@ -218,7 +218,7 @@ namespace VFatumbot
 
         public static string CreateGoogleMapsStaticThumbnail(double[] incoords, bool forRemoteViewing = false)
         {
-            return "https://bot.randonauts.com/bit.png";// https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + $"&zoom={(forRemoteViewing ? 4 : 15)}&size=" + Consts.THUMBNAIL_SIZE + "&maptype=roadmap&key=" + Consts.GOOGLE_MAPS_API_KEY;
+            return "";// https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + $"&zoom={(forRemoteViewing ? 4 : 15)}&size=" + Consts.THUMBNAIL_SIZE + "&maptype=roadmap&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
 
         public static string CreateGoogleMapsUrl(double[] incoords)
@@ -248,12 +248,12 @@ namespace VFatumbot
 
         public static string CreateGoogleStreetViewThumbnailUrl(double[] incoords)
         {
-            return "https://bot.randonauts.com/bit.png";// https://maps.googleapis.com/maps/api/streetview?size=" + Consts.THUMBNAIL_SIZE + "&location=" + incoords[0] + "," + incoords[1] + "&fov=90&heading=235&pitch=10&key=" + Consts.GOOGLE_MAPS_API_KEY;
+            return "";// https://maps.googleapis.com/maps/api/streetview?size=" + Consts.THUMBNAIL_SIZE + "&location=" + incoords[0] + "," + incoords[1] + "&fov=90&heading=235&pitch=10&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
 
         public static string CreateGoogleEarthThumbnailUrl(double[] incoords)
         {
-            return "https://bot.randonauts.com/bit.png";// https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + "&zoom=18&size=" + Consts.THUMBNAIL_SIZE + "&maptype=satellite&key=" + Consts.GOOGLE_MAPS_API_KEY;
+            return "";// https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + "&zoom=18&size=" + Consts.THUMBNAIL_SIZE + "&maptype=satellite&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
 
         public static IMessageActivity CreateAppStoreDownloadCard()
