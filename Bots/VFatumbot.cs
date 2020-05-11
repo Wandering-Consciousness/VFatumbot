@@ -86,11 +86,11 @@ namespace VFatumbot
                     else
                     {
                         var welcome = "#### Welcome to Randonautica!\n" +
-                            "Beginners: Watch this How-to Video before your first trip.  \n\n\n" +
+                            "Beginners: Watch this [How-to Video](https://youtube.com/watch?v=xEbbsG2U26k) before your first trip.  \n\n\n" +
                             "Once you've completed a trip, share in the discussion with the Randonauts on [Reddit](https://www.reddit.com/r/randonauts/) and [Twitter](https://twitter.com/TheRandonauts).  \n\n\n" +
                             "Happy Randonauting!";
                         await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
-                        await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
+                        //await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
                         //if (isNonApp) // disable for now coz it was clogging the welcome screen and we lost the ability to detect isNonApp properly
                         //{
                         //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
