@@ -302,7 +302,15 @@ namespace VFatumbot.BotLogic
             };
             options.Headings.Add(LanguageCodes.English, title);
             options.Contents.Add(LanguageCodes.English, body.Replace("<br>", "\n").Replace("\n\n", "\n"));
-            return await client.Notifications.CreateAsync(options);
+            try
+            {
+                return await client.Notifications.CreateAsync(options);
+            }
+            catch (Exception e)
+            {
+                // TikTok influx: was getting invalid Player IDs sometimes when sending push notifications after points generated
+                return new NotificationCreateResult();
+            }
         }
 
         // https://www.c-sharpcorner.com/article/compute-sha256-hash-in-c-sharp/
