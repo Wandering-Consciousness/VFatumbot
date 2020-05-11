@@ -572,6 +572,8 @@ namespace VFatumbot.BotLogic
                             }
                             else
                             {
+                                mesg = "No anomalies currently detected in the area.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
                         }
@@ -700,6 +702,8 @@ namespace VFatumbot.BotLogic
                             }
                             else
                             {
+                                mesg = "No anomalies currently detected in the area.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
                         }
@@ -842,6 +846,8 @@ namespace VFatumbot.BotLogic
                             }
                             else
                             {
+                                mesg = "No anomalies currently detected in the area.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
                         }
@@ -1169,6 +1175,8 @@ namespace VFatumbot.BotLogic
                             }
                             else
                             {
+                                mesg = "No anomalies currently detected in the area.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
                         }
