@@ -36,6 +36,11 @@ namespace VFatumbot
                     logging.AddDebug();
                     logging.AddConsole();
                 })
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+#if RELEASE_PROD
+                .UseUrls("http://localhost:8500");
+#else
+                ;
+#endif
     }
 }
