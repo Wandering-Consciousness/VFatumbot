@@ -232,20 +232,6 @@ namespace VFatumbot
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && turnContext.Activity.Text.StartsWith("/", StringComparison.InvariantCulture))
             {
-                // 2020-05-11 hack: avoid lobby spam
-                var command = turnContext.Activity.Text.ToLower();
-                if (Helpers.IsRandoLobby(turnContext) &&
-                    !string.IsNullOrEmpty(command) &&
-                    !command.Equals("/ongshat") &&
-                    !command.Equals("/steve") &&
-                    !command.Equals("/test") &&
-                    !command.Equals("/help") &&
-                    !command.Equals("/morehelp") &&
-                    !command.Equals("/closemenu"))
-                {
-                    return;
-                }
-
                 await new ActionHandler().ParseSlashCommands(turnContext, userProfileTemporary, cancellationToken, _mainDialog);
 
                 await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
