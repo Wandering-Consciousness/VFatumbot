@@ -23,6 +23,7 @@ namespace VFatumbot
 
         public bool IsIncludeWaterPoints { get; set; } = true;
         public bool IsDisplayGoogleThumbnails { get; set; } = false;
+        public bool IsUseClassicMode { get; set; } = false;
 
         // OneSignal Player/User ID for push notifications
         public string PushUserId { get; set; }

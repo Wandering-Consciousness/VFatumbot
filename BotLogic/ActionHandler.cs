@@ -312,6 +312,14 @@ namespace VFatumbot.BotLogic
                 await turnContext.SendActivityAsync(MessageFactory.Text($"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}"), cancellationToken);
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
             }
+            else if (command.StartsWith("/toggleclassic", StringComparison.InvariantCulture))
+            {
+                userProfileTemporary.IsUseClassicMode = !userProfileTemporary.IsUseClassicMode;
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Classic mode is now {(userProfileTemporary.IsUseClassicMode ? "enabled" : "disabled")}"), cancellationToken);
+                CallbackOptions callbackOptions = new CallbackOptions();
+                callbackOptions.UpdateSettings = true;
+                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken, callbackOptions);
+            }
             else if (command.StartsWith("/help", StringComparison.InvariantCulture) ||
                      command.StartsWith("/morehelp", StringComparison.InvariantCulture))
             {
@@ -556,10 +564,16 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
-                            await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
-                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            if (!userProfileTemporary.IsUseClassicMode)
+                            {
+                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
+                                await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            }
+                            else
+                            {
+                                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            }
                         }
                     }, cancellationToken);
             });
@@ -678,10 +692,16 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
-                            await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
-                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            if (!userProfileTemporary.IsUseClassicMode)
+                            {
+                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
+                                await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            }
+                            else
+                            {
+                                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            }
                         }
                     }, cancellationToken);
             });
@@ -814,10 +834,16 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
-                            await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
-                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            if (!userProfileTemporary.IsUseClassicMode)
+                            {
+                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
+                                await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            }
+                            else
+                            {
+                                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            }
                         }
                     }, cancellationToken);
             });
@@ -1135,10 +1161,16 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
-                            await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
-                            await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
-                            //await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            if (!userProfileTemporary.IsUseClassicMode)
+                            {
+                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
+                                await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
+                            }
+                            else
+                            {
+                                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
+                            }
                         }
                     }, cancellationToken);
             });

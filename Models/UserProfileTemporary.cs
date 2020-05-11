@@ -32,6 +32,7 @@ namespace VFatumbot
         public bool IsDisplayGoogleThumbnails { get; set; } = false;
         public WebSrc BotSrc { get; set; } = WebSrc.nonweb;
         public string LastRNGType { get; set; } = "";
+        public bool IsUseClassicMode { get; set; } = false;
 
 #if EMULATORDEBUG
         // Fukuoka, Japan

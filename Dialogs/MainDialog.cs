@@ -153,6 +153,7 @@ namespace VFatumbot
                 if (callbackOptions.UpdateSettings)
                 {
                     userProfilePersistent.IsIncludeWaterPoints = userProfileTemporary.IsIncludeWaterPoints;
+                    userProfilePersistent.IsUseClassicMode = userProfileTemporary.IsUseClassicMode;
                     userProfilePersistent.IsDisplayGoogleThumbnails = userProfileTemporary.IsDisplayGoogleThumbnails;
                     await _userProfilePersistentAccessor.SetAsync(stepContext.Context, userProfilePersistent, cancellationToken);
                     await _userPersistentState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
@@ -172,6 +173,11 @@ namespace VFatumbot
             if (userProfileTemporary.IsDisplayGoogleThumbnails != userProfilePersistent.IsDisplayGoogleThumbnails)
             {
                 userProfileTemporary.IsDisplayGoogleThumbnails = userProfilePersistent.IsDisplayGoogleThumbnails;
+                doSync = true;
+            }
+            if (userProfileTemporary.IsUseClassicMode != userProfilePersistent.IsUseClassicMode)
+            {
+                userProfileTemporary.IsUseClassicMode = userProfilePersistent.IsUseClassicMode;
                 doSync = true;
             }
             if (doSync)
