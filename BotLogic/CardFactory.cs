@@ -291,7 +291,6 @@ namespace VFatumbot
                         Url = "https://youtube.com/watch?v=xEbbsG2U26k",
                     },
                 },
-                Text = "[Read more](https://www.reddit.com/r/randonauts/wiki/index)"
             };
 
             var attachments = new List<Attachment>();
