@@ -95,7 +95,7 @@ namespace VFatumbot
                         //{
                         //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         //}
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Send your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
                     }
 
                     // Hack coz Facebook Messenge stopped showing "Send Location" button
