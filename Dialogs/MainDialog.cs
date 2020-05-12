@@ -237,6 +237,12 @@ namespace VFatumbot
                     repromptThisRound = true;
                     await actionHandler.LocationActionAsync(stepContext.Context, userProfileTemporary, cancellationToken);
                     break;
+                case "Donate":
+                    repromptThisRound = true;
+                    await stepContext.Context.SendActivityAsync($"Enjoying Randonauting?");
+                    await stepContext.Context.SendActivityAsync($"The Randonauts are 100% volunteer based and could use your support to improve features and cover server costs.");
+                    await stepContext.Context.SendActivityAsync($"[Donate now](https://www.paypal.me/therandonauts)");
+                    break;
                 case "Settings":
                     await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                     return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
@@ -553,6 +559,13 @@ namespace VFatumbot
                                         "My location",
                                         "my location",
                                         "location",
+                                    }
+                },
+                new Choice() {
+                    Value = "Donate",
+                    Synonyms = new List<string>()
+                                    {
+                                        "donate",
                                     }
                 },
                  new Choice() {
