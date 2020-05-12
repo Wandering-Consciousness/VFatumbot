@@ -10,7 +10,9 @@ Use common sense, do not put yourself or others in harm's way. Don't trespass.
   
 Don't steal, don't damage property, don't litter, don't do anything illegal nor anything that would otherwise cause danger to yourself or others.  
   
-All your data is anonymized. However, we don't have control of what goes through Telegram and any other social media platforms.  
+All your data is anonymized.  
+  
+Nothing is shared with any third party services, period.  
   
 Any location data that you send is automatically deleted after 24 hours.  Anonymized data of points generated are stored.  
   
