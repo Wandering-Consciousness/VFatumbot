@@ -1,7 +1,5 @@
 #### PRIVACY POLICY AND TERMS OF USE  
   
-##### Brief  
-  
 By using Randonautica you agree to the Terms of Use and Privacy Policy.  
   
 Randonautica uses truly randomized coordinates. It is the user’s responsibility and wholly at their own risk should they decide to physically travel to coordinates in the real world.  
@@ -18,6 +16,4 @@ Any location data that you send is automatically deleted after 24 hours.  Anonym
   
 If you chose to write up a trip report, the report will be posted anonymously on the /r/randonaut_reports subreddit. Don't worry, we will never post your location, just the point generated.
   
-##### Full  
-  
-Read them [here](https://bot.randonauts.com/privacy-and-terms.html) before proceeding.
+Read the [full terms here](https://bot.randonauts.com/privacy-and-terms.html) before accepting.
