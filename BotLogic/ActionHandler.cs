@@ -264,21 +264,21 @@ namespace VFatumbot.BotLogic
                     if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
                     {
                         bool validCoords = true;
-                        if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
-                        {
-                            // Do a geocode query lookup against the address the user sent
-                            var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("/setlocation", ""));
-                            if (result != null)
-                            {
-                                lat = result.Item1;
-                                lon = result.Item2;
-                            }
-                            else
-                            {
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
-                                validCoords = false;
-                            }
-                        }
+                        //if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
+                        //{
+                        //    // Do a geocode query lookup against the address the user sent
+                        //    var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("/setlocation", ""));
+                        //    if (result != null)
+                        //    {
+                        //        lat = result.Item1;
+                        //        lon = result.Item2;
+                        //    }
+                        //    else
+                        //    {
+                        //        await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
+                        //        validCoords = false;
+                        //    }
+                        //}
 
                         if (validCoords)
                         {

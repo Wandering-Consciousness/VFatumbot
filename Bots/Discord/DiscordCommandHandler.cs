@@ -295,7 +295,7 @@ namespace VFatumbot.Discord
         }
 
         [Command("setlocation"), Description("Set location")]
-        public async Task SetLocation(CommandContext ctx, [Description("Address/place name or a Google Maps URL")] params string[] location)
+        public async Task SetLocation(CommandContext ctx, [Description("Google Maps URL")] params string[] location)
         {
             var userProfileTemporary = await GetUserProfileTemporaryAsync(ctx);
             var handler = new ActionHandler();

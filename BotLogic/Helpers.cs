@@ -102,14 +102,14 @@ namespace VFatumbot.BotLogic
             }
 
             // Thirdly, geocode the address the user sent
-            if (!isFound && !string.IsNullOrEmpty(activity.Text)
-                && (activity.Text.ToLower().StartsWith("search", StringComparison.InvariantCulture) ||
-                    activity.Text.ToLower().StartsWith("/setlocation", StringComparison.InvariantCulture)))
-            {
-                // dirty hack: get the calling method which is already async to do the Google Geocode async API call
-                lat = lon = Consts.INVALID_COORD;
-                isFound = true;
-            }
+            //if (!isFound && !string.IsNullOrEmpty(activity.Text)
+            //    && (activity.Text.ToLower().StartsWith("search", StringComparison.InvariantCulture) ||
+            //        activity.Text.ToLower().StartsWith("/setlocation", StringComparison.InvariantCulture)))
+            //{
+            //    // dirty hack: get the calling method which is already async to do the Google Geocode async API call
+            //    lat = lon = Consts.INVALID_COORD;
+            //    isFound = true;
+            //}
 
             // Fourthly, sometime around late October 2019, about two months after I started coding this bot, Facebook
             // for whatever reason decided to stop displaying the "Location" button that allowed users to easily send
