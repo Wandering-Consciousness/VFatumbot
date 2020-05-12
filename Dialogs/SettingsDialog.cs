@@ -121,7 +121,7 @@ namespace VFatumbot
             userProfileTemporary.Radius = inputtedRadius;
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points?"), cancellationToken);
+            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points (feature currently disabled) ?"), cancellationToken);
         }
 
         private async Task<DialogTurnResult> UpdateWaterPointsYesOrNoStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
