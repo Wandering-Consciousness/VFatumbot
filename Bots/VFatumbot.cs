@@ -95,7 +95,8 @@ namespace VFatumbot
                         //{
                         //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         //}
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
+                        //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL."), cancellationToken);
                     }
 
                     // Hack coz Facebook Messenge stopped showing "Send Location" button
@@ -160,21 +161,21 @@ namespace VFatumbot
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
             {
                 bool validCoords = true;
-                if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
-                {
-                    // Do a geocode query lookup against the address the user sent
-                    var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("search", ""));
-                    if (result != null)
-                    {
-                        lat = result.Item1;
-                        lon = result.Item2;
-                    }
-                    else
-                    {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
-                        validCoords = false;
-                    }
-                }
+                //if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
+                //{
+                //    // Do a geocode query lookup against the address the user sent
+                //    var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("search", ""));
+                //    if (result != null)
+                //    {
+                //        lat = result.Item1;
+                //        lon = result.Item2;
+                //    }
+                //    else
+                //    {
+                //        await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
+                //        validCoords = false;
+                //    }
+                //}
 
                 if (validCoords)
                 {
