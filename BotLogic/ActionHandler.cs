@@ -564,7 +564,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            if (!userProfileTemporary.IsUseClassicMode)
+                            if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
                                 mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
@@ -694,7 +694,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            if (!userProfileTemporary.IsUseClassicMode)
+                            if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
                                 mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
@@ -838,7 +838,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            if (!userProfileTemporary.IsUseClassicMode)
+                            if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
                                 mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
@@ -1167,7 +1167,7 @@ namespace VFatumbot.BotLogic
                         }
                         else
                         {
-                            if (!userProfileTemporary.IsUseClassicMode)
+                            if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
                                 mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
