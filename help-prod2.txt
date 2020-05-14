@@ -12,6 +12,8 @@ Don't steal, don't damage property, don't litter, don't do anything illegal nor 
   
 All your data is anonymized.  
   
+Nothing is shared with any third party services, period.  
+  
 Any location data that you send is automatically deleted after 24 hours.  Anonymized data of points generated are stored.  
   
 If you chose to write up a trip report, the report will be posted anonymously on the /r/randonaut_reports subreddit. Don't worry, we will never post your location, just the point generated.
