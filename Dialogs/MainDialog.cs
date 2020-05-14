@@ -561,13 +561,13 @@ namespace VFatumbot
                                         "location",
                                     }
                 },
-                new Choice() {
-                    Value = "Donate",
-                    Synonyms = new List<string>()
-                                    {
-                                        "donate",
-                                    }
-                },
+                //new Choice() {
+                //    Value = "Donate",
+                //    Synonyms = new List<string>()
+                //                    {
+                //                        "donate",
+                //                    }
+                //},
                  new Choice() {
                     Value = "Settings",
                     Synonyms = new List<string>()
