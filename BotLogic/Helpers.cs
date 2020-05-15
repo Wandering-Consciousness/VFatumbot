@@ -88,7 +88,7 @@ namespace VFatumbot.BotLogic
             }
 
             // Secondly is if there is a Google Map URL
-            if (!isFound && activity.Text != null && (activity.Text.Contains("google.com/maps/") || activity.Text.Contains("Sending location @")))
+            if (!isFound && activity.Text != null && (activity.Text.Contains("/maps/") || activity.Text.Contains("Sending location @")))
             {
                 string[] seps0 = { "@" };
                 string[] entry0 = turnContext.Activity.Text.Split(seps0, StringSplitOptions.RemoveEmptyEntries);
