@@ -185,31 +185,31 @@ namespace VFatumbot.BotLogic
             {
                 await MysteryPointActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
             }
-            else if (command.StartsWith("/myrandotrips", StringComparison.InvariantCulture))
-            {
-                await RandotripsActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog, "my");
-            }
-            else if (command.StartsWith("/randotrips", StringComparison.InvariantCulture))
-            {
-                var date = DateTime.UtcNow.ToString("yyyy-MM-dd");
-                if (command.Contains(" "))
-                {
-                    string arg = command.Replace(command.Substring(0, command.IndexOf(" ", StringComparison.InvariantCulture)), "");
-                    arg = arg.Trim();
-                    if (!"all".Equals(arg))
-                    {
-                        DateTime parsedDateTime;
-                        if (DateTime.TryParse(arg, out parsedDateTime))
-                            date = parsedDateTime.ToString("yyyy-MM-dd");
-                    }
-                    else
-                    {
-                        date = arg; // all
-                    }
-                }
+            //else if (command.StartsWith("/myrandotrips", StringComparison.InvariantCulture))
+            //{
+            //    await RandotripsActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog, "my");
+            //}
+            //else if (command.StartsWith("/randotrips", StringComparison.InvariantCulture))
+            //{
+            //    var date = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            //    if (command.Contains(" "))
+            //    {
+            //        string arg = command.Replace(command.Substring(0, command.IndexOf(" ", StringComparison.InvariantCulture)), "");
+            //        arg = arg.Trim();
+            //        if (!"all".Equals(arg))
+            //        {
+            //            DateTime parsedDateTime;
+            //            if (DateTime.TryParse(arg, out parsedDateTime))
+            //                date = parsedDateTime.ToString("yyyy-MM-dd");
+            //        }
+            //        else
+            //        {
+            //            date = arg; // all
+            //        }
+            //    }
 
-                await RandotripsActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog, date);
-            }
+            //    await RandotripsActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog, date);
+            //}
             else if (command.StartsWith("/setradius", StringComparison.InvariantCulture))
             {
                 if (command.Contains(" "))

@@ -151,26 +151,26 @@ namespace VFatumbot
                                         "dice",
                                     }
                 },
-                new Choice() {
-                    Value = "My Randotrips",
-                    Synonyms = new List<string>()
-                                    {
-                                        "My randotrips",
-                                        "my randotrips",
-                                        "myrandotrips",
-                                    }
-                },
-                new Choice() {
-                    Value = "Today's Randotrips",
-                    Synonyms = new List<string>()
-                                    {
-                                        "Today's randotrips",
-                                        "Todays randotrips",
-                                        "today's randotrips",
-                                        "todays randotrips",
-                                        "randotrips",
-                                    }
-                },
+                //new Choice() {
+                //    Value = "My Randotrips",
+                //    Synonyms = new List<string>()
+                //                    {
+                //                        "My randotrips",
+                //                        "my randotrips",
+                //                        "myrandotrips",
+                //                    }
+                //},
+                //new Choice() {
+                //    Value = "Today's Randotrips",
+                //    Synonyms = new List<string>()
+                //                    {
+                //                        "Today's randotrips",
+                //                        "Todays randotrips",
+                //                        "today's randotrips",
+                //                        "todays randotrips",
+                //                        "randotrips",
+                //                    }
+                //},
                 new Choice() {
                     Value = "< Back",
                     Synonyms = new List<string>()
