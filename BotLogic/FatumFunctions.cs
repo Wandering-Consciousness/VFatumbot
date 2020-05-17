@@ -258,7 +258,7 @@ namespace VFatumbot.BotLogic
 
             var content = new ByteArrayContent(byteinput);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            var response = await new HttpClient().PostAsync($"https://newtonlib.azurewebsites.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
+            var response = await new HttpClient().PostAsync($"https://gonewtonlib.azurewebsites.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
 
             var jsonContent = response.Content.ReadAsStringAsync().Result;
             var result = JsonConvert.DeserializeObject<AzureFunctionResponse>(jsonContent);

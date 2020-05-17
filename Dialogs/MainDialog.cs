@@ -397,7 +397,7 @@ namespace VFatumbot
 
                     // Chose a random entropy GID from the list of GIDs in the pool (pseudo randomly selecting quantum randomness?! there's a joke in there somewhere :)
 #if RELEASE_PROD
-                    var connStr = $"https://api.randonauts.com/getpools";
+                    var connStr = $"https://randonaut-api.azurewebsites.net/getPools?code=7hU5D3Qg5JnNO2uix5cCsrPlJmQ6LRXDhKivZr4Raawnww9hJYcc7w==&bot=true";
 #else
                     var connStr = $"https://devapi.randonauts.com/getpools";
                     //var connStr = $"http://127.0.0.1:3000/getpools";
