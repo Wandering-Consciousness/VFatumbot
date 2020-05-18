@@ -399,7 +399,7 @@ namespace VFatumbot
 #if RELEASE_PROD
                     var connStr = $"https://randonaut-api.azurewebsites.net/getPools?code=7hU5D3Qg5JnNO2uix5cCsrPlJmQ6LRXDhKivZr4Raawnww9hJYcc7w==&bot=true";
 #else
-                    var connStr = $"https://devapi.randonauts.com/getpools";
+                    var connStr = $"https://randonaut-api-dev.azurewebsites.net/api/getpools";
                     //var connStr = $"http://127.0.0.1:3000/getpools";
 #endif
                     var jsonStr = new WebClient().DownloadString(connStr);

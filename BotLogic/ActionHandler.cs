@@ -30,7 +30,7 @@ namespace VFatumbot.BotLogic
 #if RELEASE_PROD
         static string API_SERVER = $"https://randonaut-api.azurewebsites.net/api";
 #else
-        static string API_SERVER = $"https://devapi.randonauts.com";
+        static string API_SERVER = $"https://randonaut-api-dev.azurewebsites.net/api";
         //static string API_SERVER = $"http://127.0.0.1:3000";
 #endif
 
