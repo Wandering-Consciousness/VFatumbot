@@ -215,11 +215,11 @@ namespace VFatumbot.BotLogic
                 if (command.Contains(" "))
                 {
                     bool noLimit = false; // archon mode
-                    if (command.Contains(" nolimit")
+                    if (command.Contains(" limitless")
                         || userProfileTemporary.UserId.Equals("16716e1a5797c6285a0d6d84c3520ec20f962b1e54be46f631b62ea3bc70488d")) // for Patrick who helped raise the importance of ToS and lives on a ridge the Jungle somewhere and anything >1km is inaccessible
                     {
                         noLimit = true;
-                        command = command.Replace(" nolimit", "");
+                        command = command.Replace(" limitless", "");
                     }
                     string newRadiusStr = command.Replace(command.Substring(0, command.IndexOf(" ", StringComparison.InvariantCulture)), "");
                     int oldRadius = userProfileTemporary.Radius, inputtedRadius;
@@ -325,7 +325,7 @@ namespace VFatumbot.BotLogic
             {
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, mainDialog, cancellationToken);
             }
-            else if (command.Equals("/kpi"))
+            else if (command.Equals("/db"))
             {
                 // Quick hack to see KPIs
 
