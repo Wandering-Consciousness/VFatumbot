@@ -130,7 +130,9 @@ namespace VFatumbot
 
         public override byte[] NextHexBytes(int len, int meta, out string shaGid)
         {
-            if (meta == 0)
+            if (meta == 0
+                && !string.IsNullOrEmpty(EntropySrcQueryString) // quick revert back to directly calling ANU as libwrapper Azure Functions are timing out
+                )
             {
                 // switching to David's libwrapper API
                 var queryStr = $"raw=true&size={len * 2}";
