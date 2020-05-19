@@ -470,7 +470,7 @@ namespace VFatumbot.BotLogic
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Wait a minute. It will take a while."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -601,7 +601,7 @@ namespace VFatumbot.BotLogic
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Wait a minute. It will take a while."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -745,7 +745,7 @@ namespace VFatumbot.BotLogic
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Wait a minute. It will take a while."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -1054,7 +1054,7 @@ namespace VFatumbot.BotLogic
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Wait a minute. It will take a while."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -1321,7 +1321,7 @@ namespace VFatumbot.BotLogic
 
         public async Task MysteryPointActionAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, CancellationToken cancellationToken, MainDialog mainDialog)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Text("Wait a minute. It will take a while."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
             {
