@@ -6,7 +6,7 @@ First up you need to send a location which will be the center to generate points
   
 * Attractor (/getattractor) - generate an Attractor point  
 * Void (/getvoid) - generate a Void point  
-* Settings & Help - set the search radius (/setradius 3000), displaying in-app map previews and enabling skipping water points and view this help  
+* Options/Help - set the search radius (/setradius 3000), displaying in-app map previews and enabling skipping water points and view this help  
 * Blind Spots & More submenu - see below  
 * My Location - show your currently set location  
   

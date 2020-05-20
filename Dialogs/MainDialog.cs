@@ -230,7 +230,7 @@ namespace VFatumbot
                 case "Void":
                     stepContext.Values["PointType"] = "Void";
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                case "Settings & Help":
+                case "Options/Help":
                     await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                     return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
                 case "Blind Spots & More":
@@ -501,9 +501,11 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Settings & Help",
+                    Value = "Options/Help",
                     Synonyms = new List<string>()
                                     {
+                                        "options",
+                                        "options/help",
                                         "settings",
                                         "settings/help",
                                     }

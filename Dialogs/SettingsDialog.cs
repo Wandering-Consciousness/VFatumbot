@@ -198,8 +198,8 @@ namespace VFatumbot
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(
                 $"Your anonymized ID is {userProfileTemporary.UserId}.{Helpers.GetNewLine(stepContext.Context)}" +
-                $"You can buy Skip Water pack.{Helpers.GetNewLine(stepContext.Context)}" +
-                $"You can buy Show Thumbnails pack.{Helpers.GetNewLine(stepContext.Context)}" +
+                //$"You can buy Skip Water pack.{Helpers.GetNewLine(stepContext.Context)}" +
+                //$"You can buy Show Thumbnails pack.{Helpers.GetNewLine(stepContext.Context)}" +
                 //$"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.{Helpers.GetNewLine(stepContext.Context)}" +
                 //$"Street View and Earth thumbnails will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.{Helpers.GetNewLine(stepContext.Context)}" +
                 $"Current location is {userProfileTemporary.Latitude},{userProfileTemporary.Longitude}.{Helpers.GetNewLine(stepContext.Context)}" +
@@ -228,9 +228,9 @@ namespace VFatumbot
                                                             "no",
                                                         }
                                     },
-                                    new Choice() {
-                                        Value = "Add-ons",
-                                    },
+                                    //new Choice() {
+                                    //    Value = "Add-ons",
+                                    //},
                                     new Choice() {
                                         Value = "Help",
                                     },
