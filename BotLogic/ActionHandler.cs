@@ -325,7 +325,7 @@ namespace VFatumbot.BotLogic
             {
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, mainDialog, cancellationToken);
             }
-            else if (command.Equals("/db"))
+            else if (command.Equals("/stats"))
             {
                 // Quick hack to see KPIs
 
@@ -387,7 +387,7 @@ namespace VFatumbot.BotLogic
 
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
             }
-            else if (command.Equals("/dumpjson"))
+            else if (command.Equals("/jsondump"))
             {
                 await turnContext.SendActivityAsync(MessageFactory.Text(JsonConvert.SerializeObject(turnContext.Activity)), cancellationToken);
 
