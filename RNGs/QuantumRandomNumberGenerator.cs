@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace VFatumbot
 {
@@ -147,7 +148,15 @@ namespace VFatumbot
                 //var connStr = $"http://127.0.0.1:3000/entropy?{queryStr}";
 #endif
                 var jsonStr = Client.DownloadString(connStr);
-                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonStr);
+                dynamic response = null;
+                try
+                {
+                    response = JsonConvert.DeserializeObject<dynamic>(jsonStr);
+                }
+                catch (JsonReaderException jre)
+                {
+                    throw new JsonReaderException("Bug #2 caught! Please post a screenshot of this onto reddit.com/r/randonauts: " + jsonStr);
+                }
                 var hex = response.Entropy?.ToString();
 
                 // convert to bytes

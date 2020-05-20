@@ -261,7 +261,16 @@ namespace VFatumbot.BotLogic
             var response = await new HttpClient().PostAsync($"https://gonewtonlib.azurewebsites.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
 
             var jsonContent = response.Content.ReadAsStringAsync().Result;
-            var result = JsonConvert.DeserializeObject<AzureFunctionResponse>(jsonContent);
+            AzureFunctionResponse result = null;
+            try
+            {
+                result = JsonConvert.DeserializeObject<AzureFunctionResponse>(jsonContent);
+            }
+            catch(JsonReaderException jre)
+            {
+                throw new JsonReaderException("Bug #1 caught! Please post a screenshot of this onto reddit.com/r/randonauts: " + jsonContent);
+            }
+
             if (result.points == null) throw new WebException(jsonContent);
 
             var fas = new FinalAttractor[result.points.Length];
