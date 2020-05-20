@@ -41,11 +41,7 @@ namespace VFatumbot
         {
             //_logger.LogInformation("PrivacyAndTermsDialog.MustAgreeStepAsync");
 
-#if RELEASE_PROD
-            var help2 = System.IO.File.ReadAllText("help-prod2.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-#else
-            var help2 = System.IO.File.ReadAllText("help-dev2.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-#endif
+            var help2 = System.IO.File.ReadAllText("help2.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(help2), cancellationToken);
 
             return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Do you agree to the terms of use and privacy policy, and to be a well behaved Randonaut?"), cancellationToken);

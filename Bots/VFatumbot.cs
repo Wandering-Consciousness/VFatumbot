@@ -161,21 +161,23 @@ namespace VFatumbot
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
             {
                 bool validCoords = true;
-                //if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
-                //{
-                //    // Do a geocode query lookup against the address the user sent
-                //    var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("search", ""));
-                //    if (result != null)
-                //    {
-                //        lat = result.Item1;
-                //        lon = result.Item2;
-                //    }
-                //    else
-                //    {
-                //        await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
-                //        validCoords = false;
-                //    }
-                //}
+#if !RELEASE_PROD
+                if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
+                {
+                    // Do a geocode query lookup against the address the user sent
+                    var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("search", ""));
+                    if (result != null)
+                    {
+                        lat = result.Item1;
+                        lon = result.Item2;
+                    }
+                    else
+                    {
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
+                        validCoords = false;
+                    }
+                }
+#endif
 
                 if (validCoords)
                 {
@@ -183,7 +185,7 @@ namespace VFatumbot
                     userProfileTemporary.Latitude = lat;
                     userProfileTemporary.Longitude = lon;
 
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"New location confirmed @ {lat},{lon}"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Your current location is set to {lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.  \nThis will be the center for searches."), cancellationToken);
 
                     var incoords = new double[] { lat, lon };
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
@@ -201,7 +203,9 @@ namespace VFatumbot
                     return;
                 }
             }
-            else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && turnContext.Activity.Text.EndsWith("help", StringComparison.InvariantCultureIgnoreCase))
+            else if (!string.IsNullOrEmpty(turnContext.Activity.Text) &&
+                     turnContext.Activity.Text.EndsWith("help", StringComparison.InvariantCultureIgnoreCase) &&
+                     !turnContext.Activity.Text.Contains("settings", StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Settings & Help" so avoid be caught here
             {
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, _mainDialog, cancellationToken);
             }

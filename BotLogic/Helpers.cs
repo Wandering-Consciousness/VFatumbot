@@ -27,20 +27,16 @@ namespace VFatumbot.BotLogic
     {
         public async static Task HelpAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, MainDialog mainDialog, CancellationToken cancellationToken)
         {
-#if RELEASE_PROD
-            var help1 = System.IO.File.ReadAllText("help-prod1.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-            var help2 = System.IO.File.ReadAllText("help-prod2.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-            var help3 = System.IO.File.ReadAllText("help-prod3.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-            var help4 = System.IO.File.ReadAllText("help-prod4.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-#else
-            var help1 = System.IO.File.ReadAllText("help-dev1.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-            var help2 = System.IO.File.ReadAllText("help-dev2.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-            var help3 = System.IO.File.ReadAllText("help-dev3.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-            var help4 = System.IO.File.ReadAllText("help-dev4.txt").Replace("APP_VERSION", Consts.APP_VERSION);
-#endif
+            var help1 = System.IO.File.ReadAllText("help1.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help1), cancellationToken);
+
+            var help2 = System.IO.File.ReadAllText("help2.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help2), cancellationToken);
+
+            var help3 = System.IO.File.ReadAllText("help3.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help3), cancellationToken);
+
+            var help4 = System.IO.File.ReadAllText("help4.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help4), cancellationToken);
 
             if (!string.IsNullOrEmpty(turnContext.Activity.Text) && !userProfileTemporary.IsLocationSet)
@@ -102,14 +98,16 @@ namespace VFatumbot.BotLogic
             }
 
             // Thirdly, geocode the address the user sent
-            //if (!isFound && !string.IsNullOrEmpty(activity.Text)
-            //    && (activity.Text.ToLower().StartsWith("search", StringComparison.InvariantCulture) ||
-            //        activity.Text.ToLower().StartsWith("/setlocation", StringComparison.InvariantCulture)))
-            //{
-            //    // dirty hack: get the calling method which is already async to do the Google Geocode async API call
-            //    lat = lon = Consts.INVALID_COORD;
-            //    isFound = true;
-            //}
+#if !RELEASE_PROD
+            if (!isFound && !string.IsNullOrEmpty(activity.Text)
+                && (activity.Text.ToLower().StartsWith("search", StringComparison.InvariantCulture) ||
+                    activity.Text.ToLower().StartsWith("/setlocation", StringComparison.InvariantCulture)))
+            {
+                // dirty hack: get the calling method which is already async to do the Google Geocode async API call
+                lat = lon = Consts.INVALID_COORD;
+                isFound = true;
+            }
+#endif
 
             // Fourthly, sometime around late October 2019, about two months after I started coding this bot, Facebook
             // for whatever reason decided to stop displaying the "Location" button that allowed users to easily send

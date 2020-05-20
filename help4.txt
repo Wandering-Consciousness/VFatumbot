@@ -1,0 +1,28 @@
+#### INSTRUCTIONS  
+  
+First up you need to send a location which will be the center to generate points from.  
+  
+##### MAIN MENU  
+  
+* Attractor (/getattractor) - generate an Attractor point  
+* Void (/getvoid) - generate a Void point  
+* Settings & Help - set the search radius (/setradius 3000), displaying in-app map previews and enabling skipping water points and view this help  
+* Blind Spots & More submenu - see below  
+* My Location - show your currently set location  
+  
+You can enter [1]-[10] after the commands to search for up to that number of points; e.g. /getattractor[3]  
+  
+##### BLIND SPOTS & MORE  
+  
+* Quantum (/getquantum) - get a single quantumly generated point (Blind Spot)  
+* Intent Suggestions (/getintents) - get some quantumly random generated word suggestions for an intent to set  
+* Mystery Point (/getpoint) - generate a random type of point (for blind-experiments)  
+* Anomaly (/getanomaly, /getida) - get the strongest Attractor or Void point  
+* Pair (/getpair) - get a pair of Attractor and Void points  
+* Quantum Time (/getqtime) - same as above but with a suggested time to visit  
+* Pseudo (/getpseudo) - generate a single pseudo-random point  
+* Scan submenu - spend longer looking for Attractors, Voids, Anomalies and Pairs  
+* Chains - chain points together  
+* Quantum Dice -  do a quantum random coin toss or number generation up to 255  
+  
+[Detailed description of the commands and stats](https://bot.randonauts.com/bot_instructions.html)  

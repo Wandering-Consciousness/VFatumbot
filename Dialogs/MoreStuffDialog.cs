@@ -48,7 +48,7 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Choose the action:"),
+                Prompt = MessageFactory.Text("What would you like to get?  \nQuantum points are single random ones (potential Blind Spots).  Mystery Points are a random type of point.  \nAnomalies are the strongest out of Attractor and Void.\n"),
                 RetryPrompt = MessageFactory.Text("That is not valid action."),
                 Choices = GetActionChoices(),
             };
@@ -63,30 +63,50 @@ namespace VFatumbot
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
             var actionHandler = new ActionHandler();
 
+            CallbackOptions callbackOptions = new CallbackOptions(); // for contiuing Anomalies and Pairs on the MainDialog
+
             switch (((FoundChoice)stepContext.Result)?.Value)
             {
                 case "Quantum":
                     await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
                     break;
+                case "Intent Suggestions":
+                    await actionHandler.IntentSuggestionActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
+                    break;
+                case "Mystery Point":
+                    await actionHandler.MysteryPointActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
+                    break;
+
+                // Anomalies and Pairs were originally in the MainDialog so we fudge a way to here to go back to the MainDialog and skip to the GetNumIdas prompt
+                // to avoid having to copy/paste half the MainDialog's code here (too lazy for proper refactoring)
+                case "Anomaly":
+                    callbackOptions.JumpToAskHowManyIDAs = "Anomaly";
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken, options: callbackOptions);
+                case "Pair":
+                    callbackOptions.JumpToAskHowManyIDAs = "Pair";
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken, options: callbackOptions);
+
                 case "Quantum Time":
                     await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, true);
                     break;
                 case "Pseudo":
                     await actionHandler.PseudoActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
                     break;
-                case "Mystery Point":
-                    await actionHandler.MysteryPointActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
-                    break;
+                case "Scan":
+                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                    return await stepContext.BeginDialogAsync(nameof(ScanDialog), this, cancellationToken);
                 case "Chains":
                     return await stepContext.BeginDialogAsync(nameof(ChainsDialog), this, cancellationToken);
                 case "Quantum Dice":
                     return await stepContext.BeginDialogAsync(nameof(QuantumDiceDialog), this, cancellationToken);
-                case "My Randotrips":
-                    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, "my");
-                    break;
-                case "Today's Randotrips":
-                    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, DateTime.UtcNow.ToString("yyyy-MM-dd"));
-                    break;
+
+                //case "My Randotrips":
+                //    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, "my");
+                //    break;
+                //case "Today's Randotrips":
+                //    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, DateTime.UtcNow.ToString("yyyy-MM-dd"));
+                //    break;
+
                 case "< Back":
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
@@ -108,6 +128,41 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
+                    Value = "Intent Suggestions",
+                    Synonyms = new List<string>()
+                                    {
+                                    }
+                },
+                new Choice() {
+                    Value = "Mystery Point",
+                    Synonyms = new List<string>()
+                                    {
+                                        "Mystery point",
+                                        "mystery point",
+                                        "Point",
+                                        "point",
+                                        "getpoint",
+                                    }
+                },
+                new Choice() {
+                    Value = "Anomaly",
+                    Synonyms = new List<string>()
+                                    {
+                                        "anomaly",
+                                        "getanomaly",
+                                        "ida",
+                                        "getida",
+                                    }
+                },
+                new Choice() {
+                    Value = "Pair",
+                    Synonyms = new List<string>()
+                                    {
+                                        "pair",
+                                        "getpair",
+                                    }
+                },
+                new Choice() {
                     Value = "Quantum Time",
                     Synonyms = new List<string>()
                                     {
@@ -125,14 +180,10 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Mystery Point",
+                    Value = "Scan",
                     Synonyms = new List<string>()
                                     {
-                                        "Mystery point",
-                                        "mystery point",
-                                        "Point",
-                                        "point",
-                                        "getpoint",
+                                        "scan",
                                     }
                 },
                 new Choice() {

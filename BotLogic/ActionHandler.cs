@@ -286,7 +286,7 @@ namespace VFatumbot.BotLogic
                             userProfileTemporary.Latitude = lat;
                             userProfileTemporary.Longitude = lon;
 
-                            await turnContext.SendActivityAsync(MessageFactory.Text($"New location confirmed @ {lat},{lon}"), cancellationToken);
+                            await turnContext.SendActivityAsync(MessageFactory.Text($"Your current location is set to {lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.  \nThis will be the center for searches."), cancellationToken);
 
                             var incoords = new double[] { lat, lon };
                             var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
@@ -718,7 +718,7 @@ namespace VFatumbot.BotLogic
             dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
             await turnContext.SendActivityAsync(MessageFactory.Text($"Your current radius is {userProfileTemporary.Radius}m.\n\n" +
-                                                                    $"Your current location is {userProfileTemporary.Latitude},{userProfileTemporary.Longitude}.\n\n" +
+                                                                    $"Your current location is {userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.\n\n" +
                                                                     (w3wResult != null ? $"What 3 Words address: {w3wResult?.words}" : "")
                                                                     ), cancellationToken);
 

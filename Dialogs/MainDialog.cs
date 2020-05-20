@@ -158,6 +158,12 @@ namespace VFatumbot
                     await _userProfilePersistentAccessor.SetAsync(stepContext.Context, userProfilePersistent, cancellationToken);
                     await _userPersistentState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
                 }
+
+                if (!string.IsNullOrEmpty(callbackOptions.JumpToAskHowManyIDAs))
+                {
+                    stepContext.Values["PointType"] = callbackOptions.JumpToAskHowManyIDAs;
+                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                }
             }
 
             // Reset last used RNG type
@@ -189,7 +195,7 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("What would you like to get?"),
+                Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite."),
                 RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
                 Choices = GetActionChoices(stepContext.Context),
             };
@@ -200,6 +206,12 @@ namespace VFatumbot
         private async Task<DialogTurnResult> PerformActionStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             //_logger.LogInformation($"MainDialog.PerformActionStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
+
+            if (stepContext.Values != null && stepContext.Values.ContainsKey("PointType") && !string.IsNullOrEmpty((string)stepContext.Values["PointType"]))
+            {
+                // Came from Blind Spots & More -> Anomaly or Pair
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            }
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
             var actionHandler = new ActionHandler();
@@ -218,21 +230,12 @@ namespace VFatumbot
                 case "Void":
                     stepContext.Values["PointType"] = "Void";
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                case "Anomaly":
-                    stepContext.Values["PointType"] = "Anomaly";
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                case "Intent Suggestions":
-                    await actionHandler.IntentSuggestionActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, this);
-                    break;
-                case "Pair":
-                    stepContext.Values["PointType"] = "Pair";
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                case "Settings & Help":
+                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                    return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
                 case "Blind Spots & More":
                     await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                     return await stepContext.BeginDialogAsync(nameof(MoreStuffDialog), this, cancellationToken);
-                case "Scan":
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(ScanDialog), this, cancellationToken);
                 case "My Location":
                     repromptThisRound = true;
                     await actionHandler.LocationActionAsync(stepContext.Context, userProfileTemporary, cancellationToken);
@@ -243,9 +246,6 @@ namespace VFatumbot
                     await stepContext.Context.SendActivityAsync($"The Randonauts are 100% volunteer based and could use your support to improve features and cover server costs.");
                     await stepContext.Context.SendActivityAsync($"[Donate now](https://www.paypal.me/therandonauts)");
                     break;
-                case "Settings":
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
             }
 
             if (repromptThisRound)
@@ -304,10 +304,10 @@ namespace VFatumbot
                                 {
                                     new Choice() { Value = "Camera" },
                                     new Choice() { Value = "ANU" },
-                                    new Choice() { Value = "Temporal (Local)" },
+                                    new Choice() { Value = "Temporal (Phone)" },
                                     new Choice() { Value = "Temporal (Server)" },
-                                    new Choice() { Value = "ANU Leftovers" },
-                                    new Choice() { Value = "GCP Retro" },
+                                    //new Choice() { Value = "ANU Leftovers" },
+                                    //new Choice() { Value = "GCP Retro" },
                                 }
                 };
 
@@ -321,13 +321,10 @@ namespace VFatumbot
                     RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
                     Choices = new List<Choice>()
                                 {
-                                    //new Choice() { Value = "Camera" },
                                     new Choice() { Value = "ANU" },
                                     new Choice() { Value = "Temporal" },
-                                    //new Choice() { Value = "Temporal (Local)" },
-                                    //new Choice() { Value = "Temporal (Server)" },
-                                    new Choice() { Value = "ANU Leftovers" },
-                                    new Choice() { Value = "GCP Retro" },
+                                    //new Choice() { Value = "ANU Leftovers" },
+                                    //new Choice() { Value = "GCP Retro" },
                                 }
                 };
 
@@ -356,7 +353,7 @@ namespace VFatumbot
 
                     var promptOptions = new PromptOptions
                     {
-                        Prompt = MessageFactory.Text("Your smartphone's camera will now load to generate some local entropy to send to me."),
+                        Prompt = MessageFactory.Text("Collecting randomness from your phone's camera (no photos are taken)..."),
                         RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
                     };
 
@@ -368,13 +365,13 @@ namespace VFatumbot
 
                     return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", promptOptions, cancellationToken);
 
-                case "Temporal (Local)":
-                    stepContext.Values["qrng_source"] = "Camera";
+                case "Temporal (Phone)":
+                    stepContext.Values["qrng_source"] = "TemporalPhone";
                     stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
 
                     var stevePromptOptions = new PromptOptions
                     {
-                        Prompt = MessageFactory.Text("Collecting magical temporal randomness from the heart of your phone..."),
+                        Prompt = MessageFactory.Text("Collecting temporal randomness from your phone's CPU..."),
                         RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
                     };
 
@@ -504,27 +501,11 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Anomaly",
+                    Value = "Settings & Help",
                     Synonyms = new List<string>()
                                     {
-                                        "anomaly",
-                                        "getanomaly",
-                                        "ida",
-                                        "getida",
-                                    }
-                },
-                new Choice() {
-                    Value = "Intent Suggestions",
-                    Synonyms = new List<string>()
-                                    {
-                                    }
-                },
-                new Choice() {
-                    Value = "Pair",
-                    Synonyms = new List<string>()
-                                    {
-                                        "pair",
-                                        "getpair",
+                                        "settings",
+                                        "settings/help",
                                     }
                 },
                 new Choice() {
@@ -545,13 +526,6 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Scan",
-                    Synonyms = new List<string>()
-                                    {
-                                        "scan",
-                                    }
-                },
-                new Choice() {
                     Value = "My Location",
                     Synonyms = new List<string>()
                                     {
@@ -568,13 +542,6 @@ namespace VFatumbot
                 //                        "donate",
                 //                    }
                 //},
-                 new Choice() {
-                    Value = "Settings",
-                    Synonyms = new List<string>()
-                                    {
-                                        "settings",
-                                    }
-                },
             };
 
             // Hack coz Facebook Messenge stopped showing "Send Location" button

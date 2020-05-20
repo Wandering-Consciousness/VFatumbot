@@ -22,5 +22,7 @@ namespace VFatumbot.BotLogic
         public string TimeIntentSuggestionsSet { get; set; }
 
         public bool UpdateSettings { get; set; }
+
+        public string JumpToAskHowManyIDAs { get; set; }
     }
 }

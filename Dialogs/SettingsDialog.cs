@@ -40,9 +40,9 @@ namespace VFatumbot
                 UpdateSettingsYesOrNoStepAsync,
                 RadiusStepAsync,
                 WaterPointsStepAsync,
-                UpdateWaterPointsYesOrNoStepAsync,
-                GoogleThumbnailsDisplayToggleStepAsync,
-                FinishSettingsStepAsync
+                //UpdateWaterPointsYesOrNoStepAsync,
+                //GoogleThumbnailsDisplayToggleStepAsync,
+                //FinishSettingsStepAsync
             })
             {
                 TelemetryClient = telemetryClient,
@@ -121,7 +121,14 @@ namespace VFatumbot
             userProfileTemporary.Radius = inputtedRadius;
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points (feature currently disabled) ?"), cancellationToken);
+            await ShowCurrentSettingsAsync(stepContext, cancellationToken);
+            await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+            var callbackOptions = new CallbackOptions();
+            callbackOptions.UpdateSettings = true;
+
+            return await stepContext.ReplaceDialogAsync(nameof(MainDialog), callbackOptions, cancellationToken);
+            // TODO: resurrect and uncomment above when do IAP changes
+            //return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points (feature currently disabled) ?"), cancellationToken);
         }
 
         private async Task<DialogTurnResult> UpdateWaterPointsYesOrNoStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -191,8 +198,10 @@ namespace VFatumbot
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(
                 $"Your anonymized ID is {userProfileTemporary.UserId}.{Helpers.GetNewLine(stepContext.Context)}" +
-                $"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.{Helpers.GetNewLine(stepContext.Context)}" +
-                $"Street View and Earth thumbnails will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.{Helpers.GetNewLine(stepContext.Context)}" +
+                $"You can buy Skip Water pack.{Helpers.GetNewLine(stepContext.Context)}" +
+                $"You can buy Show Thumbnails pack.{Helpers.GetNewLine(stepContext.Context)}" +
+                //$"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.{Helpers.GetNewLine(stepContext.Context)}" +
+                //$"Street View and Earth thumbnails will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.{Helpers.GetNewLine(stepContext.Context)}" +
                 $"Current location is {userProfileTemporary.Latitude},{userProfileTemporary.Longitude}.{Helpers.GetNewLine(stepContext.Context)}" +
                 $"Current radius is {userProfileTemporary.Radius}m.{Helpers.GetNewLine(stepContext.Context)}"));
         }
@@ -218,6 +227,12 @@ namespace VFatumbot
                                                         {
                                                             "no",
                                                         }
+                                    },
+                                    new Choice() {
+                                        Value = "Add-ons",
+                                    },
+                                    new Choice() {
+                                        Value = "Help",
                                     },
                                 }
             };
