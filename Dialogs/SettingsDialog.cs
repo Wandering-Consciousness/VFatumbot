@@ -83,6 +83,7 @@ namespace VFatumbot
                     var requestEntropyActivity = Activity.CreateEventActivity();
                     requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
                     await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Opening the add-ons screen..."), cancellationToken);
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
 
                 // case "Help" is picked up elsewhere
