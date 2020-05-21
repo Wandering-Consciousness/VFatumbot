@@ -32,5 +32,10 @@ namespace VFatumbot
         public bool HasSetLocationOnce { get; set; } = false;
 
         public bool HasAgreedToToS { get; set; } = false;
+
+        // IAP
+        public bool HasMapsPack { get; set; } = true;
+        public bool HasSkipWaterPoints { get; set; } = false;
+        public bool HasLocationSearch { get; set; } = false;
     }
 }

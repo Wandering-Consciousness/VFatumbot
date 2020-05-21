@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using VFatumbot.BotLogic;
 
@@ -40,9 +41,9 @@ namespace VFatumbot
                 UpdateSettingsYesOrNoStepAsync,
                 RadiusStepAsync,
                 WaterPointsStepAsync,
-                //UpdateWaterPointsYesOrNoStepAsync,
-                //GoogleThumbnailsDisplayToggleStepAsync,
-                //FinishSettingsStepAsync
+                UpdateWaterPointsYesOrNoStepAsync,
+                GoogleThumbnailsDisplayToggleStepAsync,
+                FinishSettingsStepAsync
             })
             {
                 TelemetryClient = telemetryClient,
@@ -64,16 +65,28 @@ namespace VFatumbot
         {
             //_logger.LogInformation($"SettingsDialog.UpdateSettingsYesOrNoStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
+            var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
+
             switch (((FoundChoice)stepContext.Result)?.Value)
             {
                 case "Yes":
                     // TODO: a quick hack to reset IsScanning in case it gets stuck in that state
-                    var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
                     userProfileTemporary.IsScanning = false;
                     await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
                     // << EOF TODO. Will figure out whether this needs handling properly later on.
 
                     return await stepContext.NextAsync();
+
+                case "Add-ons":
+                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                    // and then pass onto the app layer to load the native add-ons shop screen
+                    var requestEntropyActivity = Activity.CreateEventActivity();
+                    requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
+                    await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+
+                // case "Help" is picked up elsewhere
+
                 case "No":
                 default:
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
@@ -121,14 +134,10 @@ namespace VFatumbot
             userProfileTemporary.Radius = inputtedRadius;
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
-            await ShowCurrentSettingsAsync(stepContext, cancellationToken);
-            await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-            var callbackOptions = new CallbackOptions();
-            callbackOptions.UpdateSettings = true;
+            if (userProfileTemporary.HasSkipWaterPoints)
+                return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points?"), cancellationToken);
 
-            return await stepContext.ReplaceDialogAsync(nameof(MainDialog), callbackOptions, cancellationToken);
-            // TODO: resurrect and uncomment above when do IAP changes
-            //return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points (feature currently disabled) ?"), cancellationToken);
+            return await stepContext.NextAsync();
         }
 
         private async Task<DialogTurnResult> UpdateWaterPointsYesOrNoStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -137,6 +146,9 @@ namespace VFatumbot
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
+
+            if (!userProfileTemporary.HasMapsPack)
+                return await stepContext.NextAsync();
 
             switch (((FoundChoice)stepContext.Result)?.Value)
             {
@@ -151,7 +163,7 @@ namespace VFatumbot
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Also display Google Street View and Earth thumbnails?"), cancellationToken);
+            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Also display Google Street View and Earth previews?"), cancellationToken);
         }
 
         private async Task<DialogTurnResult> GoogleThumbnailsDisplayToggleStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -161,6 +173,9 @@ namespace VFatumbot
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
+            if (!userProfileTemporary.HasMapsPack)
+                return await stepContext.NextAsync();
+
             switch (((FoundChoice)stepContext.Result)?.Value)
             {
                 case "Yes":
@@ -169,7 +184,7 @@ namespace VFatumbot
                 case "No":
                 default:
                     userProfileTemporary.IsDisplayGoogleThumbnails = false;
-                    break;
+                    break; ;
             }
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
@@ -198,11 +213,9 @@ namespace VFatumbot
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(
                 $"Your anonymized ID is {userProfileTemporary.UserId}.{Helpers.GetNewLine(stepContext.Context)}" +
-                //$"You can buy Skip Water pack.{Helpers.GetNewLine(stepContext.Context)}" +
-                //$"You can buy Show Thumbnails pack.{Helpers.GetNewLine(stepContext.Context)}" +
-                //$"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.{Helpers.GetNewLine(stepContext.Context)}" +
-                //$"Street View and Earth thumbnails will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.{Helpers.GetNewLine(stepContext.Context)}" +
-                $"Current location is {userProfileTemporary.Latitude},{userProfileTemporary.Longitude}.{Helpers.GetNewLine(stepContext.Context)}" +
+                (!userProfileTemporary.HasSkipWaterPoints ? "You don't have the Skip Water Points Pack Add-on to ignore points generated in oceans/rivers/lakes." : $"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.") + Helpers.GetNewLine(stepContext.Context) +
+                (!userProfileTemporary.HasMapsPack ? "You don't have the Maps Pack Add-on for in-app map and street previews." : $"Street View and Earth thumbnails will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.") + Helpers.GetNewLine(stepContext.Context) +
+                $"Current location is {userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.{Helpers.GetNewLine(stepContext.Context)}" +
                 $"Current radius is {userProfileTemporary.Radius}m.{Helpers.GetNewLine(stepContext.Context)}"));
         }
 
@@ -228,9 +241,15 @@ namespace VFatumbot
                                                             "no",
                                                         }
                                     },
-                                    //new Choice() {
-                                    //    Value = "Add-ons",
-                                    //},
+                                    new Choice() {
+                                        Value = "Add-ons",
+                                          Synonyms = new List<string>()
+                                                        {
+                                                            "Addons",
+                                                            "add-ons",
+                                                            "addons"
+                                                        }
+                                    },
                                     new Choice() {
                                         Value = "Help",
                                     },

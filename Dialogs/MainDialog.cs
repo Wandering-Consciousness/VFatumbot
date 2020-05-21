@@ -186,6 +186,21 @@ namespace VFatumbot
                 userProfileTemporary.IsUseClassicMode = userProfilePersistent.IsUseClassicMode;
                 doSync = true;
             }
+            if (userProfileTemporary.HasMapsPack != userProfilePersistent.HasMapsPack)
+            {
+                userProfileTemporary.HasMapsPack = userProfilePersistent.HasMapsPack;
+                doSync = true;
+            }
+            if (userProfileTemporary.HasLocationSearch != userProfilePersistent.HasLocationSearch)
+            {
+                userProfileTemporary.HasLocationSearch = userProfilePersistent.HasLocationSearch;
+                doSync = true;
+            }
+            if (userProfileTemporary.HasSkipWaterPoints != userProfilePersistent.HasSkipWaterPoints)
+            {
+                userProfileTemporary.HasSkipWaterPoints = userProfilePersistent.HasSkipWaterPoints;
+                doSync = true;
+            }
             if (doSync)
             {
                 await _userTemporaryState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
@@ -376,7 +391,7 @@ namespace VFatumbot
                     };
 
                     // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                    // and then pass onto the app layer to load the camera
+                    // and then pass onto the app layer to load the temporal (SteveLib) generator
                     var requestSteveEntropyActivity = Activity.CreateEventActivity();
                     requestSteveEntropyActivity.ChannelData = $"temporal,{bytesSize}";
                     await stepContext.Context.SendActivityAsync(requestSteveEntropyActivity);
