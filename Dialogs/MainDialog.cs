@@ -470,7 +470,7 @@ namespace VFatumbot
             }
             else if ("Cancel".Equals(entropyQueryString))
             {
-                return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
             else if (stepContext.Values != null && stepContext.Values.ContainsKey("qrng_source_query_str"))
             {
