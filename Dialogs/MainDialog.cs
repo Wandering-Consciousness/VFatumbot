@@ -74,6 +74,12 @@ namespace VFatumbot
             AddDialog(new TextPrompt("GetQRNGSourceChoicePrompt",
                 (PromptValidatorContext<string> promptContext, CancellationToken cancellationToken) =>
                 {
+                    // add X close button to window
+                    if ("Cancel".Equals(promptContext.Context.Activity.Text))
+                    {
+                        return Task.FromResult(true);
+                    }
+
                     // verify it's a 64 char hex string (sha256 of the entropy generated)
                     if (promptContext.Context.Activity.Text.Length != 64)
                     {
@@ -461,6 +467,10 @@ namespace VFatumbot
             {
                 // Assume 64 chars exactly is entropy GID direct from camera or copy/pasted shared
                 entropyQueryString = $"gid={entropyQueryString}&raw=true";
+            }
+            else if ("Cancel".Equals(entropyQueryString))
+            {
+                return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
             }
             else if (stepContext.Values != null && stepContext.Values.ContainsKey("qrng_source_query_str"))
             {
