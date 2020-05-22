@@ -456,9 +456,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
@@ -587,9 +587,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
@@ -731,9 +731,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
@@ -1040,9 +1040,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
