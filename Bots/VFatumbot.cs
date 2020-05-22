@@ -158,6 +158,10 @@ namespace VFatumbot
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                 }
             }
+            else if (InterceptInappPurchase(turnContext, userProfilePersistent))
+            {
+
+            }
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
             {
                 bool validCoords = true;
@@ -265,6 +269,27 @@ namespace VFatumbot
 
             // Run the MainDialog with the new message Activity
             await _mainDialog.Run(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+        }
+
+        protected bool InterceptInappPurchase(ITurnContext turnContext, UserProfilePersistent userProfilePersistent)
+        {
+            string iapData = null;
+
+            var activity = turnContext.Activity;
+
+            if (activity.Properties != null)
+            {
+                var iapDataFromClient = (string)activity.Properties.GetValue("iapData");
+                if (!string.IsNullOrEmpty(iapDataFromClient))
+                {
+                    userProfilePersistent.HasMapsPack = true;
+                    turnContext.SendActivityAsync($"Thanks for the purchase!! {MessageFactory.Text(iapDataFromClient)}");
+                    iapData = iapDataFromClient;
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         protected bool InterceptPushNotificationSubscription(ITurnContext turnContext, out string pushUserId)

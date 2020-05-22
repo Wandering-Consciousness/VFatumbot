@@ -137,6 +137,7 @@ var OneSignal = window.OneSignal || [];
     <script>
         var sendGidToBot;
         var sendPushIdToBot;
+        var sendIAPToBot;
         (async function () {
             showSnackbar("Connecting to bot...");
 
@@ -201,6 +202,20 @@ var OneSignal = window.OneSignal || [];
                     },
                     type: 'event',
                     pushUserId: id
+                };
+                directLine.postActivity(activity).subscribe(function (id) {
+                });
+            }
+
+            // Callback from Flutter->Javascript to send the Flutter-side IAP details to the bot
+            sendIAPToBot = function (data) {
+                showSnackbar("Verifying your purchase...");
+                var activity = {
+                    from: {
+                        id: userId,
+                    },
+                    type: 'event',
+                    iapData: data
                 };
                 directLine.postActivity(activity).subscribe(function (id) {
                 });
