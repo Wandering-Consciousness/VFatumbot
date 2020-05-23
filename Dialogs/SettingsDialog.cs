@@ -97,7 +97,24 @@ namespace VFatumbot
         {
             //_logger.LogInformation("SettingsDialog.RadiusStepAsync");
 
-            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Enter desired radius in meters:") };
+            var promptOptions = new PromptOptions {
+                Prompt = MessageFactory.Text("Enter desired radius in meters:"),
+                Choices = new List<Choice>()
+                    {
+                        new Choice() {
+                            Value = "1000",
+                        },
+                        new Choice() {
+                            Value = "3000",
+                        },
+                        new Choice() {
+                            Value = "5000",
+                        },
+                        new Choice() {
+                            Value = "1000",
+                        },
+                    }
+            };
             return await stepContext.PromptAsync(nameof(NumberPrompt<int>), promptOptions, cancellationToken);
         }
 
