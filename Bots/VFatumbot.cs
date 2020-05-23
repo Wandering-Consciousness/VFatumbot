@@ -195,7 +195,7 @@ namespace VFatumbot
 
                     var incoords = new double[] { lat, lon };
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
-                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
 
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                     await _userTemporaryState.SaveChangesAsync(turnContext, false, cancellationToken);
@@ -317,6 +317,16 @@ namespace VFatumbot
 
                     return true;
                 }
+            }
+            else if (activity.Text.StartsWith("/unseenlings"))
+            {
+                userProfilePersistent.HasMapsPack = true;
+                userProfilePersistent.IsDisplayGoogleThumbnails = false;
+
+                userProfilePersistent.HasLocationSearch = true;
+                userProfilePersistent.HasSkipWaterPoints = true;
+                userProfilePersistent.IsIncludeWaterPoints = false;
+                turnContext.SendActivityAsync(MessageFactory.Text("Steve. Steve. Steve!"));
             }
 
             return false;
