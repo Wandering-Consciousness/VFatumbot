@@ -171,6 +171,15 @@ namespace VFatumbot
                 case "Yes":
                     userProfileTemporary.IsIncludeWaterPoints = true;
                     break;
+
+                case "Add-ons":
+                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                    // and then pass onto the app layer to load the native add-ons shop screen
+                    var requestEntropyActivity = Activity.CreateEventActivity();
+                    requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
+                    await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                    break;
+
                 case "No":
                 default:
                     userProfileTemporary.IsIncludeWaterPoints = false;
@@ -197,6 +206,15 @@ namespace VFatumbot
                 case "Yes":
                     userProfileTemporary.IsDisplayGoogleThumbnails = true;
                     break;
+
+                case "Add-ons":
+                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                    // and then pass onto the app layer to load the native add-ons shop screen
+                    var requestEntropyActivity = Activity.CreateEventActivity();
+                    requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
+                    await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                    break;
+
                 case "No":
                 default:
                     userProfileTemporary.IsDisplayGoogleThumbnails = false;
