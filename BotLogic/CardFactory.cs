@@ -144,7 +144,7 @@ namespace VFatumbot
             var images = new List<CardImage>();
             if (showMapsThumbnail)
             {
-                images.Add(new CardImage((paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords, forRemoteViewing))));
+                images.Add(new CardImage((!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords, forRemoteViewing))));
             }
 
             var w3wAction = new CardAction(ActionTypes.OpenUrl, (forRemoteViewing ? $"{w3wResult.words} - {w3wResult?.nearestPlace}{Helpers.GetCountryFromW3W(w3wResult)}" : "What 3 Words"), value: $"https://what3words.com/{w3wResult.words}");
