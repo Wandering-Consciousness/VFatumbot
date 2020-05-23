@@ -26,7 +26,30 @@ namespace VFatumbot
             {
                 TelemetryClient = telemetryClient,
             });
-            AddDialog(new NumberPrompt<int>(nameof(NumberPrompt<int>), RadiusValidatorAsync)
+            AddDialog(new ChoicePrompt("RadiusChoicePrompt",
+              async (PromptValidatorContext<FoundChoice> promptContext, CancellationToken cancellationToken) =>
+              {
+                  int inputtedRadius;
+                  if (!int.TryParse(promptContext.Context.Activity.Text, out inputtedRadius))
+                  {
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Invalid radius. Choose desired radius:"), cancellationToken);
+                      return false;
+                  }
+
+                  if (inputtedRadius < Consts.RADIUS_MIN)
+                  {
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be more than or equal to {Consts.RADIUS_MIN}m. Choose desired radius:"), cancellationToken);
+                      return false;
+                  }
+
+                  if (inputtedRadius > Consts.RADIUS_MAX)
+                  {
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be less than or equal to {Consts.RADIUS_MAX}m. Choose desired radius:"), cancellationToken);
+                      return false;
+                  }
+
+                  return true;
+              })
             {
                 TelemetryClient = telemetryClient,
             });
@@ -98,7 +121,7 @@ namespace VFatumbot
             //_logger.LogInformation("SettingsDialog.RadiusStepAsync");
 
             var promptOptions = new PromptOptions {
-                Prompt = MessageFactory.Text("Enter desired radius in meters:"),
+                Prompt = MessageFactory.Text("Choose desired radius in meters:"),
                 Choices = new List<Choice>()
                     {
                         new Choice() {
@@ -111,42 +134,18 @@ namespace VFatumbot
                             Value = "5000",
                         },
                         new Choice() {
-                            Value = "1000",
+                            Value = "10000",
                         },
                     }
             };
-            return await stepContext.PromptAsync(nameof(NumberPrompt<int>), promptOptions, cancellationToken);
-        }
-
-        private async Task<bool> RadiusValidatorAsync(PromptValidatorContext<int> promptContext, CancellationToken cancellationToken)
-        {
-            int inputtedRadius;
-            if (!int.TryParse(promptContext.Context.Activity.Text, out inputtedRadius))
-            {
-                await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Invalid radius. Enter desired radius:"), cancellationToken);
-                return false;
-            }
-
-            if (inputtedRadius < Consts.RADIUS_MIN)
-            {
-                await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be more than or equal to {Consts.RADIUS_MIN}m. Enter desired radius:"), cancellationToken);
-                return false;
-            }
-
-            if (inputtedRadius > Consts.RADIUS_MAX)
-            {
-                await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be less than or equal to {Consts.RADIUS_MAX}m. Enter desired radius:"), cancellationToken);
-                return false;
-            }
-
-            return true;
+            return await stepContext.PromptAsync("RadiusChoicePrompt", promptOptions, cancellationToken);
         }
 
         private async Task<DialogTurnResult> WaterPointsStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             //_logger.LogInformation($"SettingsDialog.WaterPointsStepAsync");
 
-            var inputtedRadius = (int)stepContext.Result;
+            var inputtedRadius = int.Parse(stepContext.Context.Activity.Text);
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
             userProfileTemporary.Radius = inputtedRadius;
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
