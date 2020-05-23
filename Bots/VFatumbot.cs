@@ -168,7 +168,7 @@ namespace VFatumbot
             {
                 bool validCoords = true;
 #if !RELEASE_PROD
-                if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
+                if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && userProfileTemporary.HasLocationSearch)
                 {
                     // Do a geocode query lookup against the address the user sent
                     var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("search", ""));
