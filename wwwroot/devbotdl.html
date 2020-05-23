@@ -209,7 +209,6 @@ var OneSignal = window.OneSignal || [];
 
             // Callback from Flutter->Javascript to send the Flutter-side IAP details to the bot
             sendIAPToBot = function (data) {
-                showSnackbar("Verifying your purchase...");
                 var activity = {
                     from: {
                         id: userId,
@@ -217,7 +216,7 @@ var OneSignal = window.OneSignal || [];
                     type: 'event',
                     iapData: data
                 };
-                directLine.postActivity(activity).subscribe(function (id) {
+                directLine.postActivity(activity).subscribe(function (data) {
                 });
             }
 

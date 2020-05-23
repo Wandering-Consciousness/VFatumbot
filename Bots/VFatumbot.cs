@@ -6,6 +6,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.Enums;
 
@@ -273,18 +274,15 @@ namespace VFatumbot
 
         protected bool InterceptInappPurchase(ITurnContext turnContext, UserProfilePersistent userProfilePersistent)
         {
-            string iapData = null;
-
             var activity = turnContext.Activity;
 
             if (activity.Properties != null)
             {
-                var iapDataFromClient = (string)activity.Properties.GetValue("iapData");
-                if (!string.IsNullOrEmpty(iapDataFromClient))
+                var iapData = (string)activity.Properties.GetValue("iapData");
+                if (!string.IsNullOrEmpty(iapData))
                 {
                     userProfilePersistent.HasMapsPack = true;
-                    turnContext.SendActivityAsync($"Thanks for the purchase!! {MessageFactory.Text(iapDataFromClient)}");
-                    iapData = iapDataFromClient;
+                    turnContext.SendActivityAsync($"1:{iapData} 2:{JsonConvert.SerializeObject(iapData)}");
                     return true;
                 }
             }
