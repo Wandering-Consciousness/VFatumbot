@@ -317,6 +317,12 @@ namespace VFatumbot
                         turnContext.SendActivityAsync(MessageFactory.Text("All add-ons disabled."));
                     }
 
+                    if (userProfilePersistent.IAPData == null)
+                    {
+                        userProfilePersistent.IAPData = new Dictionary<string, dynamic>();
+                    }
+                    userProfilePersistent.IAPData.Add(iapData.productID, iapData);
+
                     return true;
                 }
             }

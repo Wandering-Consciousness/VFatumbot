@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Bot.Builder;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.FatumFunctions;
@@ -37,5 +38,6 @@ namespace VFatumbot
         public bool HasMapsPack { get; set; } = false;
         public bool HasSkipWaterPoints { get; set; } = false;
         public bool HasLocationSearch { get; set; } = false;
+        public Dictionary<string, dynamic> IAPData;
     }
 }
