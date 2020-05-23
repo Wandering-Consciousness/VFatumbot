@@ -138,6 +138,7 @@ window.dataLayer = window.dataLayer || [];
     <script>
         var sendGidToBot;
         var sendPushIdToBot;
+        var sendIAPToBot;
         (async function () {
             showSnackbar("Connecting to bot...");
 
@@ -199,6 +200,19 @@ window.dataLayer = window.dataLayer || [];
                     },
                     type: 'event',
                     pushUserId: id
+                };
+                directLine.postActivity(activity).subscribe(function (id) {
+                });
+            }
+
+            // Callback from Flutter->Javascript to send the Flutter-side IAP details to the bot
+            sendIAPToBot = function (iapData) {
+                var activity = {
+                    from: {
+                        id: userId,
+                    },
+                    type: 'event',
+                    iapData: iapData
                 };
                 directLine.postActivity(activity).subscribe(function (id) {
                 });
