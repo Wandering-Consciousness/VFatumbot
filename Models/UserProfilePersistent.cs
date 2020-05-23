@@ -34,7 +34,7 @@ namespace VFatumbot
         public bool HasAgreedToToS { get; set; } = false;
 
         // IAP
-        public bool HasMapsPack { get; set; } = true;
+        public bool HasMapsPack { get; set; } = false;
         public bool HasSkipWaterPoints { get; set; } = false;
         public bool HasLocationSearch { get; set; } = false;
     }
