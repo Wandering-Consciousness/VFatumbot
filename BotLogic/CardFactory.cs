@@ -133,7 +133,7 @@ namespace VFatumbot
             if (showStreetAndEarthThumbnails && paying)
             {
                 attachmentReply.Attachments.Add(CreateGoogleStreetViewCard(incoords, paying));
-                attachmentReply.Attachments.Add(CreateGoogleEarthCard(incoords));
+                attachmentReply.Attachments.Add(CreateGoogleEarthCard(incoords, paying));
             }
 
             return replies;
