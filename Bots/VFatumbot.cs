@@ -167,7 +167,7 @@ namespace VFatumbot
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
             {
                 bool validCoords = true;
-#if !RELEASE_PROD
+
                 if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && userProfileTemporary.HasLocationSearch)
                 {
                     // Do a geocode query lookup against the address the user sent
@@ -183,7 +183,10 @@ namespace VFatumbot
                         validCoords = false;
                     }
                 }
-#endif
+                else if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && !userProfileTemporary.HasLocationSearch)
+                {
+                    validCoords = false;
+                }
 
                 if (validCoords)
                 {
