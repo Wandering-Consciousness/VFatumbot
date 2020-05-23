@@ -279,6 +279,11 @@ namespace VFatumbot.BotLogic
                                 validCoords = false;
                             }
                         }
+                        else if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && !userProfileTemporary.HasLocationSearch)
+                        {
+                            validCoords = false;
+                        }
+
 
                         if (validCoords)
                         {
