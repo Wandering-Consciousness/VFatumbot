@@ -229,8 +229,8 @@ namespace VFatumbot
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(
                 $"Your anonymized ID is {userProfileTemporary.UserId}.{Helpers.GetNewLine(stepContext.Context)}" +
-                (!userProfileTemporary.HasSkipWaterPoints ? "You don't have the Skip Water Points Pack Add-on to ignore points generated in oceans/rivers/lakes." : $"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.") + Helpers.GetNewLine(stepContext.Context) +
-                (!userProfileTemporary.HasMapsPack ? "You don't have the Maps Pack Add-on for in-app map and street previews." : $"Street View and Earth thumbnails will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.") + Helpers.GetNewLine(stepContext.Context) +
+                (!userProfileTemporary.HasSkipWaterPoints ? "You don't have the Skip Water Points Pack add-on to skip points generated in oceans/rivers/lakes." : $"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.") + Helpers.GetNewLine(stepContext.Context) +
+                (!userProfileTemporary.HasMapsPack ? "You don't have the Maps Pack add-on for in-app map and street previews." : $"Street View and Earth thumbnails will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.") + Helpers.GetNewLine(stepContext.Context) +
                 $"Current location is {userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.{Helpers.GetNewLine(stepContext.Context)}" +
                 $"Current radius is {userProfileTemporary.Radius}m.{Helpers.GetNewLine(stepContext.Context)}"));
         }
