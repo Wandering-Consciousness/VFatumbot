@@ -214,7 +214,7 @@ var OneSignal = window.OneSignal || [];
                         id: userId,
                     },
                     type: 'event',
-                    iapData: JSON.parse(iapData)
+                    iapData: iapData
                 };
                 directLine.postActivity(activity).subscribe(function (id) {
                 });
