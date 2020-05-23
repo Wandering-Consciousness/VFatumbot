@@ -58,7 +58,7 @@ namespace VFatumbot
                     int idacou;
                     if (int.TryParse(promptContext.Context.Activity.Text, out idacou))
                     {
-                        if (idacou < 1 || idacou > 20)
+                        if (idacou < 1 || idacou > 10)
                         {
                             return Task.FromResult(false);
                         }
