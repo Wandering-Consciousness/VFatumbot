@@ -278,11 +278,42 @@ namespace VFatumbot
 
             if (activity.Properties != null)
             {
-                var iapData = (string)activity.Properties.GetValue("iapData");
-                if (!string.IsNullOrEmpty(iapData))
+                var iapDataStr = (string)activity.Properties.GetValue("iapData");
+                if (!string.IsNullOrEmpty(iapDataStr))
                 {
-                    userProfilePersistent.HasMapsPack = true;
-                    turnContext.SendActivityAsync($"1:{iapData} 2:{JsonConvert.SerializeObject(iapData)}");
+                    dynamic iapData = JsonConvert.DeserializeObject<dynamic>(iapDataStr);
+
+                    if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
+                    {
+                        userProfilePersistent.HasMapsPack = true;
+                        userProfilePersistent.IsDisplayGoogleThumbnails = false;
+                        turnContext.SendActivityAsync(MessageFactory.Text("Maps Pack add-on enabled."));
+                    }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+                    {
+                        userProfilePersistent.HasLocationSearch = true;
+                        userProfilePersistent.HasSkipWaterPoints = true;
+                        userProfilePersistent.IsIncludeWaterPoints = false;
+                        turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled."));
+                    }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
+                    {
+                        userProfilePersistent.HasMapsPack = true;
+                        userProfilePersistent.IsDisplayGoogleThumbnails = false;
+
+                        userProfilePersistent.HasLocationSearch = true;
+                        userProfilePersistent.HasSkipWaterPoints = true;
+                        userProfilePersistent.IsIncludeWaterPoints = false;
+                        turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled."));
+                    }
+                    else
+                    {
+                        userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
+                        userProfilePersistent.IsDisplayGoogleThumbnails = false;
+                        userProfilePersistent.IsIncludeWaterPoints = true;
+                        turnContext.SendActivityAsync(MessageFactory.Text("All add-ons disabled."));
+                    }
+
                     return true;
                 }
             }
