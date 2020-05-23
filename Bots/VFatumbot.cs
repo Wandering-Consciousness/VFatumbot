@@ -162,7 +162,6 @@ namespace VFatumbot
             else if (InterceptInappPurchase(turnContext, userProfilePersistent))
             {
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, _mainDialog, cancellationToken);
-                return;
             }
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
             {
