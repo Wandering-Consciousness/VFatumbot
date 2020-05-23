@@ -91,8 +91,8 @@ namespace VFatumbot
                 embed.Url = CreateGoogleMapsUrl(incoords);
 
                 embed.Description = $"Street View:\n{CreateGoogleStreetViewUrl(incoords)}\n\nGoogle Earth:\n{CreateGoogleEarthUrl(incoords)}";
-                embed.ImageUrl = (paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords));
-                embed.ThumbnailUrl = (paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords));
+                embed.ImageUrl = (!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords));
+                embed.ThumbnailUrl = (!paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords));
 
                 embed.Build();
 
@@ -128,11 +128,11 @@ namespace VFatumbot
             replies[0] = attachmentReply;
 
             attachmentReply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            attachmentReply.Attachments.Add(CreateGoogleMapCard(incoords, !useNativeLocationWidget || showStreetAndEarthThumbnails, showStreetAndEarthThumbnails, w3wResult, forRemoteViewing: forRemoteViewing));
+            attachmentReply.Attachments.Add(CreateGoogleMapCard(incoords, !useNativeLocationWidget || showStreetAndEarthThumbnails, showStreetAndEarthThumbnails, w3wResult, forRemoteViewing: forRemoteViewing, paying: paying));
 
-            if (showStreetAndEarthThumbnails)
+            if (showStreetAndEarthThumbnails && paying)
             {
-                attachmentReply.Attachments.Add(CreateGoogleStreetViewCard(incoords));
+                attachmentReply.Attachments.Add(CreateGoogleStreetViewCard(incoords, paying));
                 attachmentReply.Attachments.Add(CreateGoogleEarthCard(incoords));
             }
 
@@ -142,7 +142,7 @@ namespace VFatumbot
         public static Attachment CreateGoogleMapCard(double[] incoords, bool showMapsThumbnail, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false, bool paying = false)
         {
             var images = new List<CardImage>();
-            if (showMapsThumbnail)
+            if (showMapsThumbnail && paying)
             {
                 images.Add(new CardImage((!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords, forRemoteViewing))));
             }
@@ -175,7 +175,7 @@ namespace VFatumbot
         public static Attachment CreateGoogleStreetViewCard(double[] incoords, bool paying = false)
         {
             var images = new List<CardImage> {
-                new CardImage((paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords))),
+                new CardImage((!paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords))),
             };
 
             var cardAction = new CardAction(ActionTypes.OpenUrl, "Open", value: CreateGoogleStreetViewUrl(incoords));
@@ -198,7 +198,7 @@ namespace VFatumbot
         public static Attachment CreateGoogleEarthCard(double[] incoords, bool paying = false)
         {
             var images = new List<CardImage> {
-                new CardImage((paying ? BIT_PNG : CreateGoogleEarthThumbnailUrl(incoords))),
+                new CardImage((!paying ? BIT_PNG : CreateGoogleEarthThumbnailUrl(incoords))),
             };
 
             var cardAction = new CardAction(ActionTypes.OpenUrl, "Open", value: CreateGoogleEarthUrl(incoords));
