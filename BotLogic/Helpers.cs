@@ -241,8 +241,6 @@ namespace VFatumbot.BotLogic
 
         public static async Task<bool> IsWaterCoordinatesAsync(double[] incoords)
         {
-            return false; // TODO: temporary until we can find an offline solution to this function
-
             // Get a static map with no frills, and make the water green to compare
             var url = "http://maps.googleapis.com/maps/api/staticmap?scale=2" +
                         "&zoom=13&size=1x1&sensor=false&visual_refresh=true" +
