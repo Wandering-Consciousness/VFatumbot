@@ -256,30 +256,38 @@ namespace VFatumbot.BotLogic
             string shaGid;
             byte[] byteinput = rnd.NextHexBytes((int)bytesSize, meta, out shaGid);
 
-            var content = new ByteArrayContent(byteinput);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            var response = await new HttpClient().PostAsync($"https://gonewtonlib.azurewebsites.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
+            int retries = 0;
+            redo:
+                var content = new ByteArrayContent(byteinput);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                var response = await new HttpClient().PostAsync($"https://gonewtonlib.azurewebsites.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
 
-            var jsonContent = response.Content.ReadAsStringAsync().Result;
-            AzureFunctionResponse result = null;
-            try
-            {
-                result = JsonConvert.DeserializeObject<AzureFunctionResponse>(jsonContent);
-            }
-            catch(JsonReaderException jre)
-            {
-                throw new JsonReaderException("Bug #1 caught! Please post a screenshot of this onto reddit.com/r/randonauts: " + jsonContent);
-            }
+                var jsonContent = response.Content.ReadAsStringAsync().Result;
+                AzureFunctionResponse result = null;
+                try
+                {
+                    result = JsonConvert.DeserializeObject<AzureFunctionResponse>(jsonContent);
+                }
+                catch(JsonReaderException jre)
+                {
+                    // was sometimes getting a 404 not found from azure
+                    retries++;
+                    if (retries > 5)
+                    {
+                        throw jre;
+                    }
+                    goto redo;
+                }
 
-            if (result.points == null) throw new WebException(jsonContent);
+                if (result.points == null) throw new WebException(jsonContent);
 
-            var fas = new FinalAttractor[result.points.Length];
-            for (int i = 0; i < result.points.Length; i++)
-            {
-                fas[i] = new FinalAttractor();
-                fas[i].X = result.points[i];
-            }
-            return new Tuple<FinalAttractor[], string>(fas, shaGid);
+                var fas = new FinalAttractor[result.points.Length];
+                for (int i = 0; i < result.points.Length; i++)
+                {
+                    fas[i] = new FinalAttractor();
+                    fas[i].X = result.points[i];
+                }
+                return new Tuple<FinalAttractor[], string>(fas, shaGid);
         }
 
         public static FinalAttractor[] GetIDA(LatLng startcoord, double radius, int meta, QuantumRandomNumberGeneratorWrapper rnd, out string shaGid)
