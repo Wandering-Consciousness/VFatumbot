@@ -173,7 +173,7 @@ namespace VFatumbot.Discord
 
     public static class Config
     {
-        public static string Token = "***REMOVED***";
+        public static string Token = "NjQ4MTkzMzg5NDg5MTYwMjI1.XiBZNA.RRdrVPGXimHjHRWJJDWOHUaJYvI";
         public static string CommandPrefix = "/";
     }
 }

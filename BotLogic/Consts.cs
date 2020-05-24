@@ -3,22 +3,22 @@
     public class Consts
     {
 #if RELEASE_PROD
-        public const string APP_VERSION = "4.3.0";
+        public const string APP_VERSION = "4.6.1;
 #else
-        public const string APP_VERSION = "4.4.0β";
+        public const string APP_VERSION = "4.7.0";
 #endif
 
         // Azure App ID
 #if RELEASE_PROD
-        public const string APP_ID = "***REMOVED***";
+        public const string APP_ID = "a7c83890-eec2-44cb-b953-0205cbfa9029";
 #else
-        public const string APP_ID = "***REMOVED***";
+        public const string APP_ID = "a4784186-b7ab-4723-b76e-21188f986f96";
 #endif
 
         // Azure Cosmos DB credentials
-        public const string COSMOS_DB_NAME = "***REMOVED***";
-        public const string COSMOS_DB_URI = "***REMOVED***";
-        public const string COSMOS_DB_KEY = "***REMOVED***";
+        public const string COSMOS_DB_NAME = "fatumbot";
+        public const string COSMOS_DB_URI = "https://ratumbott.documents.azure.com:443/";
+        public const string COSMOS_DB_KEY = "rLLUR12cJq1SCxeeQ6Zs6TRrXCM3yMaSifodWDgSYPfMtYM9os9JGgym0N8FA2nTf3s0c9k6KbeMisHndmKv5w==";
 #if RELEASE_PROD
         public const string COSMOS_CONTAINER_NAME_PERSISTENT = "prod_persistent";
         public const string COSMOS_CONTAINER_NAME_TEMPORARY = "prod_temporary";
@@ -28,42 +28,42 @@
 #endif
 
         // Google Maps API key
-        public const string GOOGLE_MAPS_API_KEY = "***REMOVED***";
+        public const string GOOGLE_MAPS_API_KEY = "AIzaSyDzY1YQO5Kdl5N_kD-p1_zKEW3_EnqJAZQ";
 
         // OneSignal for Push Notifications
 #if RELEASE_PROD
-        public const string ONE_SIGNAL_APP_ID = "***REMOVED***";
-        public const string ONE_SIGNAL_API_KEY = "***REMOVED***";
+        public const string ONE_SIGNAL_APP_ID = "da21a078-babf-4e22-a032-0ea22de561a7";
+        public const string ONE_SIGNAL_API_KEY = "NGIyYTZjZmEtM2QxZS00Yjc0LWIxYmMtNDIyZGJlNzUyYTJi";
 #else
-        public const string ONE_SIGNAL_APP_ID = "***REMOVED***";
-        public const string ONE_SIGNAL_API_KEY = "***REMOVED***";
+        public const string ONE_SIGNAL_APP_ID = "19b7d4eb-ea96-45ce-b5e5-ce24a1b142f2";
+        public const string ONE_SIGNAL_API_KEY = "NDg1YWFhNjAtM2I5ZS00ZTg2LWJjNTQtZWYxN2ZhYTI4NWQx";
 #endif
 
         // Reddit API for posting trip reports
-        public const string REDDIT_APP_ID = "***REMOVED***";
-        public const string REDDIT_APP_SECRET = "***REMOVED***";
-        public const string REDDIT_REFRESH_TOKEN = "***REMOVED***";
-        public const string REDDIT_ACCESS_TOKEN = "***REMOVED***";
+        public const string REDDIT_APP_ID = "nM7FBUmE8LexWA";
+        public const string REDDIT_APP_SECRET = "hwI08Qui3KQixDT9RWiN1Yjn-5A";
+        public const string REDDIT_REFRESH_TOKEN = "382783126207-AbUlBTuHkaYNrea1DyV29ppkoG4";
+        public const string REDDIT_ACCESS_TOKEN = "382783126207-XgtjL7R5qY-lsw_sCXS4Ix0xklw";
 
         // SQL server for posting trip reports/generated points
-        public const string DB_SERVER = "***REMOVED***";
-        public const string DB_USER = "***REMOVED***";
-        public const string DB_PASSWORD = "***REMOVED***";
-        public const string DB_NAME = "***REMOVED***";
+        public const string DB_SERVER = "ratumbot.database.windows.net";
+        public const string DB_USER = "fatumbot";
+        public const string DB_PASSWORD = "AehGSRvJ#DeBs!02Fun12";
+        public const string DB_NAME = "ratumbot";
 
         // https://what3words.com API key
-        public const string W3W_API_KEY = "***REMOVED***";
+        public const string W3W_API_KEY = "Y8GUOC45";
 
         // For uploading user trip report photos
-        public const string IMGUR_API_CLIENT_ID = "***REMOVED***";
-        public const string IMGUR_API_CLIENT_SECRET = "***REMOVED***";
+        public const string IMGUR_API_CLIENT_ID = "a79960f801d5020";
+        public const string IMGUR_API_CLIENT_SECRET = "7a4a22f9f5f6eb1138ca647c2815347d49f5d18b";
 
 #if RELEASE_PROD
-        //public const string PROXY = "***REMOVED***";
-        //public const string PROXY = "***REMOVED***";
+        //public const string PROXY = "123.243.160.27:80";
+        //public const string PROXY = "proxy.randonauts.com:6333";
 #else
-        //public const string PROXY = "***REMOVED***";
-        //public const string PROXY = "***REMOVED***";
+        //public const string PROXY = "123.243.160.27:80";
+        //public const string PROXY = "proxy.randonauts.com:6333";
 #endif
 
         // Google Maps etc thumbnail sizes to use in reply cards
@@ -91,6 +91,6 @@
         public const int WATER_POINTS_SEARCH_MAX = 10;
 
         // TODO: move later when localization is implemented
-        public const string NO_LOCATION_SET_MSG = "You haven't set a location, or it was reset. Send your location from the app (hint: you can do so by tapping the 🌍/::/＋/📎 icon), or type \"search <address/place name>\", or send a Google Maps URL. Don't forget you can type \"help\" for more info.";
+        public const string NO_LOCATION_SET_MSG = "You haven't set a location, or it was reset. Send it by tapping 🌍/📎 or sending a Google Maps URL. You can also type \"help\" anytime.";
     }
 }
