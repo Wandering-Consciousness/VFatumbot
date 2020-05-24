@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Bot.Builder.ApplicationInsights", "Microsoft.Bot.Builder.ApplicationInsights\Microsoft.Bot.Builder.ApplicationInsights.csproj", "{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VFatumbot", "VFatumbot.csproj", "{5D032803-7524-4B40-A91C-7663321546FB}"
 EndProject
 Global
@@ -15,14 +13,6 @@ Global
 		ReleaseProd|Any CPU = ReleaseProd|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.Release|Any CPU.Build.0 = Release|Any CPU
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.EmulatorDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.EmulatorDebug|Any CPU.Build.0 = Debug|Any CPU
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.ReleaseProd|Any CPU.ActiveCfg = Release|Any CPU
-		{513FD6F7-D089-4991-AE2B-3C4D4ADB6D12}.ReleaseProd|Any CPU.Build.0 = Release|Any CPU
 		{5D032803-7524-4B40-A91C-7663321546FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D032803-7524-4B40-A91C-7663321546FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D032803-7524-4B40-A91C-7663321546FB}.Release|Any CPU.ActiveCfg = Release|Any CPU

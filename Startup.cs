@@ -110,19 +110,18 @@ namespace VFatumbot
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                // for serving KML randotrip files
-                ServeUnknownFileTypes = true,
-            });
-
-            app.UseMvc();
+            app.UseDefaultFiles()
+                .UseStaticFiles(new StaticFileOptions
+                {
+                    // for serving KML randotrip files
+                    ServeUnknownFileTypes = true,
+                })
+                .UseRouting()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
         }
     }
 
