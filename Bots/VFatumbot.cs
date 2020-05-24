@@ -335,6 +335,8 @@ namespace VFatumbot
                 userProfilePersistent.HasSkipWaterPoints = true;
                 userProfilePersistent.IsIncludeWaterPoints = false;
                 turnContext.SendActivityAsync(MessageFactory.Text("Steve. Steve. Steve!"));
+
+                return true;
             }
 
             return false;
