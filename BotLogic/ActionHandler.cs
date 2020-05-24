@@ -264,21 +264,26 @@ namespace VFatumbot.BotLogic
                     if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
                     {
                         bool validCoords = true;
-                        //if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
-                        //{
-                        //    // Do a geocode query lookup against the address the user sent
-                        //    var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("/setlocation", ""));
-                        //    if (result != null)
-                        //    {
-                        //        lat = result.Item1;
-                        //        lon = result.Item2;
-                        //    }
-                        //    else
-                        //    {
-                        //        await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
-                        //        validCoords = false;
-                        //    }
-                        //}
+                        if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && userProfileTemporary.HasLocationSearch)
+                        {
+                            // Do a geocode query lookup against the address the user sent
+                            var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("/setlocation", ""));
+                            if (result != null)
+                            {
+                                lat = result.Item1;
+                                lon = result.Item2;
+                            }
+                            else
+                            {
+                                await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
+                                validCoords = false;
+                            }
+                        }
+                        else if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && !userProfileTemporary.HasLocationSearch)
+                        {
+                            validCoords = false;
+                        }
+
 
                         if (validCoords)
                         {
@@ -290,7 +295,7 @@ namespace VFatumbot.BotLogic
 
                             var incoords = new double[] { lat, lon };
                             var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
-                            await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                            await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
 
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
 
@@ -456,9 +461,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
@@ -543,7 +548,7 @@ namespace VFatumbot.BotLogic
                                 what3WordsArray[i] = ""+w3wResult?.words;
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
-                                await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                                await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
                                 await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
                             }
 
@@ -587,9 +592,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
@@ -673,7 +678,7 @@ namespace VFatumbot.BotLogic
                                 what3WordsArray[i] = "" + w3wResult?.words;
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
-                                await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                                await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
                                 await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
                             }
 
@@ -722,7 +727,7 @@ namespace VFatumbot.BotLogic
                                                                     (w3wResult != null ? $"What 3 Words address: {w3wResult?.words}" : "")
                                                                     ), cancellationToken);
 
-            await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+            await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
         }
 
         public async Task AnomalyActionAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, CancellationToken cancellationToken, MainDialog mainDialog, bool doScan = false, int idacou = 1, string entropyQueryString = null)
@@ -731,9 +736,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
@@ -817,7 +822,7 @@ namespace VFatumbot.BotLogic
                                 what3WordsArray[i] = "" + w3wResult?.words;
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
-                                await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                                await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
                                 await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
                             }
 
@@ -935,7 +940,7 @@ namespace VFatumbot.BotLogic
                             await Task.Delay(15000);
                         }
 
-                        await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult, forRemoteViewing: forRemoteViewing), cancellationToken);
+                        await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, forRemoteViewing: forRemoteViewing), cancellationToken);
                         if (!string.IsNullOrEmpty(mesg)) await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
@@ -1003,7 +1008,7 @@ namespace VFatumbot.BotLogic
 
                         dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
-                        await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                        await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
                         await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
@@ -1040,9 +1045,9 @@ namespace VFatumbot.BotLogic
             {
                 string[] buf = turnContext.Activity.Text.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 Int32.TryParse(buf[1], out idacou);
-                if (idacou < 1 || idacou > 20)
+                if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 20."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
                     return;
                 }
             }
@@ -1112,7 +1117,7 @@ namespace VFatumbot.BotLogic
                                     mesg = Tolog(turnContext, "attractor", att[i], attShortCodesArray[i]);
                                     await turnContext.SendActivityAsync(MessageFactory.Text((idacou > 1 ? ("#" + (i + 1) + " ") : "") + Helpers.DirectLineNewLineFix(turnContext, mesg)), cancellationToken);
                                     dynamic w3wResult1 = await Helpers.GetWhat3WordsAddressAsync(incoords);
-                                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult1), cancellationToken);
+                                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult1, paying: userProfileTemporary.HasMapsPack), cancellationToken);
 
                                     attMessagesArray[i] = mesg;
                                     attPointTypesArray[i] = PointTypes.PairAttractor;
@@ -1133,7 +1138,7 @@ namespace VFatumbot.BotLogic
                                     mesg = Tolog(turnContext, "void", voi[i], voiShortCodesArray[i]);
                                     await turnContext.SendActivityAsync(MessageFactory.Text((idacou > 1 ? ("#" + (i + 1) + " ") : "") + Helpers.DirectLineNewLineFix(turnContext, mesg)), cancellationToken);
                                     dynamic w3wResult2 = await Helpers.GetWhat3WordsAddressAsync(incoords);
-                                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult2), cancellationToken);
+                                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult2, paying: userProfileTemporary.HasMapsPack), cancellationToken);
 
                                     voiMessagesArray[i] = mesg;
                                     voiPointTypesArray[i] = PointTypes.PairVoid;
@@ -1281,7 +1286,7 @@ namespace VFatumbot.BotLogic
                             what3WordsArray[j] = "" + w3wResult?.words;
                             nearestPlacesArray[j] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
-                            await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                            await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
                         }
 
                         var origin = new FinalAttractor[] {
@@ -1485,7 +1490,7 @@ namespace VFatumbot.BotLogic
 
                         dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
-                        await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                        await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
                         await Helpers.SendPushNotification(userProfileTemporary, "Mystery Point Generated", mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()

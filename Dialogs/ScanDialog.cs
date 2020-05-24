@@ -34,7 +34,7 @@ namespace VFatumbot
                     int idacou;
                    if (int.TryParse(promptContext.Context.Activity.Text, out idacou))
                    {
-                       if (idacou < 1 || idacou > 20)
+                       if (idacou < 1 || idacou > 10)
                        {
                            return Task.FromResult(false);
                        }
@@ -156,7 +156,7 @@ namespace VFatumbot
             var options = new PromptOptions()
             {
                 Prompt = MessageFactory.Text("How many intention driven quantum points would you like to look for?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 20."),
+                RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 10."),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() { Value = "1" },

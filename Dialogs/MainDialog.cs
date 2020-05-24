@@ -58,7 +58,7 @@ namespace VFatumbot
                     int idacou;
                     if (int.TryParse(promptContext.Context.Activity.Text, out idacou))
                     {
-                        if (idacou < 1 || idacou > 20)
+                        if (idacou < 1 || idacou > 10)
                         {
                             return Task.FromResult(false);
                         }
@@ -74,6 +74,12 @@ namespace VFatumbot
             AddDialog(new TextPrompt("GetQRNGSourceChoicePrompt",
                 (PromptValidatorContext<string> promptContext, CancellationToken cancellationToken) =>
                 {
+                    // add X close button to window
+                    if ("Cancel".Equals(promptContext.Context.Activity.Text))
+                    {
+                        return Task.FromResult(true);
+                    }
+
                     // verify it's a 64 char hex string (sha256 of the entropy generated)
                     if (promptContext.Context.Activity.Text.Length != 64)
                     {
@@ -186,6 +192,21 @@ namespace VFatumbot
                 userProfileTemporary.IsUseClassicMode = userProfilePersistent.IsUseClassicMode;
                 doSync = true;
             }
+            if (userProfileTemporary.HasMapsPack != userProfilePersistent.HasMapsPack)
+            {
+                userProfileTemporary.HasMapsPack = userProfilePersistent.HasMapsPack;
+                doSync = true;
+            }
+            if (userProfileTemporary.HasLocationSearch != userProfilePersistent.HasLocationSearch)
+            {
+                userProfileTemporary.HasLocationSearch = userProfilePersistent.HasLocationSearch;
+                doSync = true;
+            }
+            if (userProfileTemporary.HasSkipWaterPoints != userProfilePersistent.HasSkipWaterPoints)
+            {
+                userProfileTemporary.HasSkipWaterPoints = userProfilePersistent.HasSkipWaterPoints;
+                doSync = true;
+            }
             if (doSync)
             {
                 await _userTemporaryState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
@@ -266,7 +287,7 @@ namespace VFatumbot
             var options = new PromptOptions()
             {
                 Prompt = MessageFactory.Text("How many intention driven quantum points would you like to look for?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 20."),
+                RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 10."),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() { Value = "1" },
@@ -376,7 +397,7 @@ namespace VFatumbot
                     };
 
                     // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                    // and then pass onto the app layer to load the camera
+                    // and then pass onto the app layer to load the temporal (SteveLib) generator
                     var requestSteveEntropyActivity = Activity.CreateEventActivity();
                     requestSteveEntropyActivity.ChannelData = $"temporal,{bytesSize}";
                     await stepContext.Context.SendActivityAsync(requestSteveEntropyActivity);
@@ -446,6 +467,10 @@ namespace VFatumbot
             {
                 // Assume 64 chars exactly is entropy GID direct from camera or copy/pasted shared
                 entropyQueryString = $"gid={entropyQueryString}&raw=true";
+            }
+            else if ("Cancel".Equals(entropyQueryString))
+            {
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
             else if (stepContext.Values != null && stepContext.Values.ContainsKey("qrng_source_query_str"))
             {

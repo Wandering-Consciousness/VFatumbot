@@ -11,6 +11,8 @@ namespace VFatumbot
 {
     public static class CardFactory
     {
+        public const string BIT_PNG = "https://bot.randonauts.com/bit.png"; // blank replacement for Google thumbnail images
+
         public static IMessageActivity CreateGetLocationFromGoogleMapsReply()
         {
             var attachments = new List<Attachment>();
@@ -75,7 +77,7 @@ namespace VFatumbot
             return replies;
         }
 
-        public static IMessageActivity[] CreateLocationCardsReply(ChannelPlatform platform, double[] incoords, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false)
+        public static IMessageActivity[] CreateLocationCardsReply(ChannelPlatform platform, double[] incoords, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false, bool paying = false)
         {
             if (platform == ChannelPlatform.discord)
             {
@@ -89,8 +91,8 @@ namespace VFatumbot
                 embed.Url = CreateGoogleMapsUrl(incoords);
 
                 embed.Description = $"Street View:\n{CreateGoogleStreetViewUrl(incoords)}\n\nGoogle Earth:\n{CreateGoogleEarthUrl(incoords)}";
-                embed.ImageUrl = CreateGoogleMapsStaticThumbnail(incoords);
-                embed.ThumbnailUrl = CreateGoogleStreetViewThumbnailUrl(incoords);
+                embed.ImageUrl = (!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords));
+                embed.ThumbnailUrl = (!paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords));
 
                 embed.Build();
 
@@ -126,23 +128,23 @@ namespace VFatumbot
             replies[0] = attachmentReply;
 
             attachmentReply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            attachmentReply.Attachments.Add(CreateGoogleMapCard(incoords, !useNativeLocationWidget || showStreetAndEarthThumbnails, showStreetAndEarthThumbnails, w3wResult, forRemoteViewing: forRemoteViewing));
+            attachmentReply.Attachments.Add(CreateGoogleMapCard(incoords, !useNativeLocationWidget || showStreetAndEarthThumbnails, showStreetAndEarthThumbnails, w3wResult, forRemoteViewing: forRemoteViewing, paying: paying));
 
-            if (showStreetAndEarthThumbnails)
+            if (showStreetAndEarthThumbnails && paying)
             {
-                attachmentReply.Attachments.Add(CreateGoogleStreetViewCard(incoords));
-                attachmentReply.Attachments.Add(CreateGoogleEarthCard(incoords));
+                attachmentReply.Attachments.Add(CreateGoogleStreetViewCard(incoords, paying));
+                attachmentReply.Attachments.Add(CreateGoogleEarthCard(incoords, paying));
             }
 
             return replies;
         }
 
-        public static Attachment CreateGoogleMapCard(double[] incoords, bool showMapsThumbnail, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false)
+        public static Attachment CreateGoogleMapCard(double[] incoords, bool showMapsThumbnail, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false, bool paying = false)
         {
             var images = new List<CardImage>();
-            if (showMapsThumbnail)
+            if (showMapsThumbnail && paying)
             {
-                images.Add(new CardImage(CreateGoogleMapsStaticThumbnail(incoords, forRemoteViewing)));
+                images.Add(new CardImage((!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords, forRemoteViewing))));
             }
 
             var w3wAction = new CardAction(ActionTypes.OpenUrl, (forRemoteViewing ? $"{w3wResult.words} - {w3wResult?.nearestPlace}{Helpers.GetCountryFromW3W(w3wResult)}" : "What 3 Words"), value: $"https://what3words.com/{w3wResult.words}");
@@ -170,10 +172,10 @@ namespace VFatumbot
             return heroCard.ToAttachment();
         }
 
-        public static Attachment CreateGoogleStreetViewCard(double[] incoords)
+        public static Attachment CreateGoogleStreetViewCard(double[] incoords, bool paying = false)
         {
             var images = new List<CardImage> {
-                new CardImage(CreateGoogleStreetViewThumbnailUrl(incoords)),
+                new CardImage((!paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords))),
             };
 
             var cardAction = new CardAction(ActionTypes.OpenUrl, "Open", value: CreateGoogleStreetViewUrl(incoords));
@@ -193,10 +195,10 @@ namespace VFatumbot
             return heroCard.ToAttachment();
         }
 
-        public static Attachment CreateGoogleEarthCard(double[] incoords)
+        public static Attachment CreateGoogleEarthCard(double[] incoords, bool paying = false)
         {
             var images = new List<CardImage> {
-                new CardImage(CreateGoogleEarthThumbnailUrl(incoords)),
+                new CardImage((!paying ? BIT_PNG : CreateGoogleEarthThumbnailUrl(incoords))),
             };
 
             var cardAction = new CardAction(ActionTypes.OpenUrl, "Open", value: CreateGoogleEarthUrl(incoords));
@@ -218,7 +220,7 @@ namespace VFatumbot
 
         public static string CreateGoogleMapsStaticThumbnail(double[] incoords, bool forRemoteViewing = false)
         {
-            return "";// https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + $"&zoom={(forRemoteViewing ? 4 : 15)}&size=" + Consts.THUMBNAIL_SIZE + "&maptype=roadmap&key=" + Consts.GOOGLE_MAPS_API_KEY;
+            return "https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + $"&zoom={(forRemoteViewing ? 4 : 15)}&size=" + Consts.THUMBNAIL_SIZE + "&maptype=roadmap&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
 
         public static string CreateGoogleMapsUrl(double[] incoords)
@@ -248,12 +250,12 @@ namespace VFatumbot
 
         public static string CreateGoogleStreetViewThumbnailUrl(double[] incoords)
         {
-            return "";// https://maps.googleapis.com/maps/api/streetview?size=" + Consts.THUMBNAIL_SIZE + "&location=" + incoords[0] + "," + incoords[1] + "&fov=90&heading=235&pitch=10&key=" + Consts.GOOGLE_MAPS_API_KEY;
+            return "https://maps.googleapis.com/maps/api/streetview?size=" + Consts.THUMBNAIL_SIZE + "&location=" + incoords[0] + "," + incoords[1] + "&fov=90&heading=235&pitch=10&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
 
         public static string CreateGoogleEarthThumbnailUrl(double[] incoords)
         {
-            return "";// https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + "&zoom=18&size=" + Consts.THUMBNAIL_SIZE + "&maptype=satellite&key=" + Consts.GOOGLE_MAPS_API_KEY;
+            return "https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + "&zoom=18&size=" + Consts.THUMBNAIL_SIZE + "&maptype=satellite&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
 
         public static IMessageActivity CreateAppStoreDownloadCard()

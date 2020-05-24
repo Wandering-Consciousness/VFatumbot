@@ -74,5 +74,10 @@ namespace VFatumbot
 
         public string[] IntentSuggestions { get; set; }
         public string TimeIntentSuggestionsSet { get; set; }
+
+        // IAP
+        public bool HasMapsPack { get; set; } = false;
+        public bool HasLocationSearch { get; set; } = false;
+        public bool HasSkipWaterPoints { get; set; } = false;
     }
 }

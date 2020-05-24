@@ -98,7 +98,6 @@ namespace VFatumbot.BotLogic
             }
 
             // Thirdly, geocode the address the user sent
-#if !RELEASE_PROD
             if (!isFound && !string.IsNullOrEmpty(activity.Text)
                 && (activity.Text.ToLower().StartsWith("search", StringComparison.InvariantCulture) ||
                     activity.Text.ToLower().StartsWith("/setlocation", StringComparison.InvariantCulture)))
@@ -107,7 +106,6 @@ namespace VFatumbot.BotLogic
                 lat = lon = Consts.INVALID_COORD;
                 isFound = true;
             }
-#endif
 
             // Fourthly, sometime around late October 2019, about two months after I started coding this bot, Facebook
             // for whatever reason decided to stop displaying the "Location" button that allowed users to easily send
@@ -241,8 +239,6 @@ namespace VFatumbot.BotLogic
 
         public static async Task<bool> IsWaterCoordinatesAsync(double[] incoords)
         {
-            return false; // TODO: temporary until we can find an offline solution to this function
-
             // Get a static map with no frills, and make the water green to compare
             var url = "http://maps.googleapis.com/maps/api/staticmap?scale=2" +
                         "&zoom=13&size=1x1&sensor=false&visual_refresh=true" +

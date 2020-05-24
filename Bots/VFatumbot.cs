@@ -6,6 +6,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.Enums;
 
@@ -158,11 +159,15 @@ namespace VFatumbot
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                 }
             }
+            else if (InterceptInappPurchase(turnContext, userProfilePersistent))
+            {
+                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, _mainDialog, cancellationToken);
+            }
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
             {
                 bool validCoords = true;
-#if !RELEASE_PROD
-                if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD)
+
+                if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && userProfileTemporary.HasLocationSearch)
                 {
                     // Do a geocode query lookup against the address the user sent
                     var result = await Helpers.GeocodeAddressAsync(turnContext.Activity.Text.ToLower().Replace("search", ""));
@@ -177,7 +182,10 @@ namespace VFatumbot
                         validCoords = false;
                     }
                 }
-#endif
+                else if (lat == Consts.INVALID_COORD && lon == Consts.INVALID_COORD && !userProfileTemporary.HasLocationSearch)
+                {
+                    validCoords = false;
+                }
 
                 if (validCoords)
                 {
@@ -189,7 +197,7 @@ namespace VFatumbot
 
                     var incoords = new double[] { lat, lon };
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
-                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult), cancellationToken);
+                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
 
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                     await _userTemporaryState.SaveChangesAsync(turnContext, false, cancellationToken);
@@ -265,6 +273,71 @@ namespace VFatumbot
 
             // Run the MainDialog with the new message Activity
             await _mainDialog.Run(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+        }
+
+        protected bool InterceptInappPurchase(ITurnContext turnContext, UserProfilePersistent userProfilePersistent)
+        {
+            var activity = turnContext.Activity;
+
+            if (activity.Properties != null)
+            {
+                var iapDataStr = (string)activity.Properties.GetValue("iapData");
+                if (!string.IsNullOrEmpty(iapDataStr))
+                {
+                    dynamic iapData = JsonConvert.DeserializeObject<dynamic>(iapDataStr);
+
+                    if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
+                    {
+                        userProfilePersistent.HasMapsPack = true;
+                        userProfilePersistent.IsDisplayGoogleThumbnails = false;
+                        turnContext.SendActivityAsync(MessageFactory.Text("Maps Pack add-on enabled."));
+                    }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+                    {
+                        userProfilePersistent.HasLocationSearch = true;
+                        userProfilePersistent.HasSkipWaterPoints = true;
+                        userProfilePersistent.IsIncludeWaterPoints = false;
+                        turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled."));
+                    }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
+                    {
+                        userProfilePersistent.HasMapsPack = true;
+                        userProfilePersistent.IsDisplayGoogleThumbnails = false;
+
+                        userProfilePersistent.HasLocationSearch = true;
+                        userProfilePersistent.HasSkipWaterPoints = true;
+                        userProfilePersistent.IsIncludeWaterPoints = false;
+                        turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled."));
+                    }
+                    else
+                    {
+                        userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
+                        userProfilePersistent.IsDisplayGoogleThumbnails = false;
+                        userProfilePersistent.IsIncludeWaterPoints = true;
+                        turnContext.SendActivityAsync(MessageFactory.Text("All add-ons disabled."));
+                    }
+
+                    if (userProfilePersistent.IAPData == null)
+                    {
+                        userProfilePersistent.IAPData = new Dictionary<string, dynamic>();
+                    }
+                    userProfilePersistent.IAPData.Add(iapData.productID, iapData);
+
+                    return true;
+                }
+            }
+            else if (activity.Text.StartsWith("/unseenlings"))
+            {
+                userProfilePersistent.HasMapsPack = true;
+                userProfilePersistent.IsDisplayGoogleThumbnails = false;
+
+                userProfilePersistent.HasLocationSearch = true;
+                userProfilePersistent.HasSkipWaterPoints = true;
+                userProfilePersistent.IsIncludeWaterPoints = false;
+                turnContext.SendActivityAsync(MessageFactory.Text("Steve. Steve. Steve!"));
+            }
+
+            return false;
         }
 
         protected bool InterceptPushNotificationSubscription(ITurnContext turnContext, out string pushUserId)
