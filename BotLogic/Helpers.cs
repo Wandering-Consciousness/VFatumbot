@@ -20,6 +20,7 @@ using static VFatumbot.BotLogic.Enums;
 using Newtonsoft.Json.Linq;
 using CoordinateSharp; //See CoordinateSharp EULA. (Must be removed if used outside EULA terms).
 using System.Threading;
+using System.Net.Http.Headers;
 
 namespace VFatumbot.BotLogic
 {
@@ -333,6 +334,21 @@ namespace VFatumbot.BotLogic
             Crc32Algorithm hasher = new Crc32Algorithm();
             var ret = string.Format("{0:X8}", BitConverter.ToUInt32(hasher.ComputeHash(Encoding.UTF8.GetBytes(rawData)).Reverse().ToArray()));
             return ret;
+        }
+
+        public static async Task<int> VerifyAppleIAPReceptAsync(string receipt, bool useSandbox = false)
+        {
+            string body = "{";
+            body += "\"receipt-data\":\"" + receipt + "\",";
+            body += "\"password\":\"" + Consts.ITUNES_VERIFY_RECEIPTS_PASSWORD + "\"";
+            body += "}";
+            var content = new StringContent(body);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await new HttpClient().PostAsync($"https://{(useSandbox ? "sandbox" : "buy")}.itunes.apple.com/verifyReceipt", content);
+            var jsonContent = response.Content.ReadAsStringAsync().Result;
+            var result = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+
+            return result.status;
         }
     }
 }

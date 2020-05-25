@@ -3,7 +3,7 @@
     public class Consts
     {
 #if RELEASE_PROD
-        public const string APP_VERSION = "4.6.2";
+        public const string APP_VERSION = "4.6.20";
 #else
         public const string APP_VERSION = "4.7.0";
 #endif
@@ -28,7 +28,7 @@
 #endif
 
         // Google Maps API key
-        public const string GOOGLE_MAPS_API_KEY = "AIzaSyDzY1YQO5Kdl5N_kD-p1_zKEW3_EnqJAZQ";
+        public const string GOOGLE_MAPS_API_KEY = "AIzaSyBNNMGaGj9FRBfIInN8CGbCJYyw9_OsexI";
 
         // OneSignal for Push Notifications
 #if RELEASE_PROD
@@ -58,13 +58,8 @@
         public const string IMGUR_API_CLIENT_ID = "a79960f801d5020";
         public const string IMGUR_API_CLIENT_SECRET = "7a4a22f9f5f6eb1138ca647c2815347d49f5d18b";
 
-#if RELEASE_PROD
-        //public const string PROXY = "123.243.160.27:80";
-        //public const string PROXY = "proxy.randonauts.com:6333";
-#else
-        //public const string PROXY = "123.243.160.27:80";
-        //public const string PROXY = "proxy.randonauts.com:6333";
-#endif
+        // For verifying iOS in-app purchase receipts with Apple iTunes
+        public const string ITUNES_VERIFY_RECEIPTS_PASSWORD = "e31a4b5a6bcd4c8d86db53f9fae7333c";
 
         // Google Maps etc thumbnail sizes to use in reply cards
         public const string THUMBNAIL_SIZE = "320x320";
