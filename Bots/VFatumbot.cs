@@ -148,7 +148,6 @@ namespace VFatumbot
 
             double lat = 0, lon = 0;
             string pushUserId = null;
-            string iapResult = "";
             userProfileTemporary.PushUserId = userProfilePersistent.PushUserId;
 
             if (InterceptPushNotificationSubscription(turnContext, out pushUserId))
@@ -160,9 +159,8 @@ namespace VFatumbot
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                 }
             }
-            else if (InterceptInappPurchase(turnContext, userProfilePersistent, out iapResult))
+            else if (await InterceptInappPurchaseAsync(turnContext, userProfilePersistent, cancellationToken))
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text(iapResult), cancellationToken);
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, _mainDialog, cancellationToken);
             }
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
@@ -277,30 +275,36 @@ namespace VFatumbot
             await _mainDialog.Run(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
-        protected bool InterceptInappPurchase(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, out string text)
+        protected async Task<bool> InterceptInappPurchaseAsync(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, CancellationToken cancellationToken)
         {
             var activity = turnContext.Activity;
-            text = "";
 
             if (activity.Properties != null)
             {
                 var iapDataStr = (string)activity.Properties.GetValue("iapData");
                 if (!string.IsNullOrEmpty(iapDataStr))
                 {
-                    dynamic iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
+                    var iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
+                    if (!await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData))
+                    {
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Invalid purchase receipt. You will be reported."), cancellationToken);
+                        return true;
+                    }
 
                     if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
                     {
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
-                        text = "Maps Pack add-on enabled.";
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Maps Pack add-on enabled."), cancellationToken);
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
                     {
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        text = "Place Search and Skip Water Points Pack add-on enabled.";
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled."), cancellationToken);
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
                     {
@@ -310,14 +314,14 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        text = "The Everything Pack add-on enabled.";
+                        await turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled."), cancellationToken);
                     }
                     else
                     {
                         userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
                         userProfilePersistent.IsIncludeWaterPoints = true;
-                        text = "All add-ons disabled.";
+                        await turnContext.SendActivityAsync(MessageFactory.Text("All add-ons disabled."), cancellationToken);
                     }
 
                     if (userProfilePersistent.Purchases == null)
@@ -342,7 +346,7 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        text = "Steve. Steve. Steve!";
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Steve.Steve.Steve!"), cancellationToken);
 
                         return true;
                     }
@@ -350,11 +354,11 @@ namespace VFatumbot
                     {
                         if (userProfilePersistent.Purchases == null || userProfilePersistent.Purchases.Count == 0)
                         {
-                            text = "You have no purchase history.";
+                            await turnContext.SendActivityAsync(MessageFactory.Text("You have no purchase history."), cancellationToken);
                         }
                         else
                         {
-                            text = JsonConvert.SerializeObject(userProfilePersistent.Purchases);
+                            await turnContext.SendActivityAsync(MessageFactory.Text(JsonConvert.SerializeObject(userProfilePersistent.Purchases)), cancellationToken);
                         }
 
                         return true;
