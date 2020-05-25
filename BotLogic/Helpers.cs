@@ -336,7 +336,7 @@ namespace VFatumbot.BotLogic
             return ret;
         }
 
-        public static async Task<bool> VerifyAppleIAPReceptAsync(string receipt, bool useSandbox = false)
+        public static async Task<int> VerifyAppleIAPReceptAsync(string receipt, bool useSandbox = false)
         {
             string body = "{";
             body += "\"receipt-data\":\"" + receipt + "\",";
@@ -348,12 +348,7 @@ namespace VFatumbot.BotLogic
             var jsonContent = response.Content.ReadAsStringAsync().Result;
             var result = JsonConvert.DeserializeObject<dynamic>(jsonContent);
 
-            if (result.status == 0)
-                return true;
-            else if (result.status = 21007)
-                return await VerifyAppleIAPReceptAsync(receipt, true);
-
-            return false;
+            return result.status;
         }
     }
 }

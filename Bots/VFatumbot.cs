@@ -284,10 +284,17 @@ namespace VFatumbot
                 var iapDataStr = (string)activity.Properties.GetValue("iapData");
                 if (!string.IsNullOrEmpty(iapDataStr))
                 {
+                    // Do server verification with Apple on the receipt before enabling paid features
                     var iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
-                    if (!await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData))
+                    var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
+                    if (verify == 21007)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Invalid purchase receipt. You will be reported."), cancellationToken);
+                        // Retry on the sandbox environment
+                        verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData, true);
+                    }
+                    if (verify != 0)
+                    {
+                        await turnContext.SendActivityAsync(MessageFactory.Text($"Invalid purchase receipt: {verify}. You will be reported."), cancellationToken);
                         return true;
                     }
 
