@@ -174,10 +174,7 @@ namespace VFatumbot
 
         protected WebClient Client
         {
-            get { return _client ?? (_client = new WebClient() {
-                                                    //Proxy = new WebProxy(Consts.PROXY)
-                                                });
-            }
+            get { return _client ?? (_client = new WebClient() {}); }
             set { _client = value; }
         }
         private WebClient _client;

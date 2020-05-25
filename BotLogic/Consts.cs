@@ -58,14 +58,6 @@
         public const string IMGUR_API_CLIENT_ID = "a79960f801d5020";
         public const string IMGUR_API_CLIENT_SECRET = "7a4a22f9f5f6eb1138ca647c2815347d49f5d18b";
 
-#if RELEASE_PROD
-        //public const string PROXY = "123.243.160.27:80";
-        //public const string PROXY = "proxy.randonauts.com:6333";
-#else
-        //public const string PROXY = "123.243.160.27:80";
-        //public const string PROXY = "proxy.randonauts.com:6333";
-#endif
-
         // Google Maps etc thumbnail sizes to use in reply cards
         public const string THUMBNAIL_SIZE = "320x320";
 
