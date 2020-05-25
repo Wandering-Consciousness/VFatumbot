@@ -7,6 +7,7 @@ using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using VFatumbot.BotLogic;
+using static VFatumbot.BotLogic.Enums;
 
 namespace VFatumbot
 {
@@ -38,13 +39,13 @@ namespace VFatumbot
 
                   if (inputtedRadius < Consts.RADIUS_MIN)
                   {
-                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be more than or equal to {Consts.RADIUS_MIN}m. Choose desired radius:"), cancellationToken);
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be more than or equal to {Consts.RADIUS_MIN}m. Enter desired radius:"), cancellationToken);
                       return false;
                   }
 
                   if (inputtedRadius > Consts.RADIUS_MAX)
                   {
-                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be less than or equal to {Consts.RADIUS_MAX}m. Choose desired radius:"), cancellationToken);
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be less than or equal to {Consts.RADIUS_MAX}m. Enter desired radius:"), cancellationToken);
                       return false;
                   }
 
@@ -79,9 +80,11 @@ namespace VFatumbot
         {
             //_logger.LogInformation("SettingsDialog.CurrentSettingsStepAsync");
 
+            var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
+
             await ShowCurrentSettingsAsync(stepContext, cancellationToken);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Update your settings?"), cancellationToken);
+            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Update your settings?", userProfileTemporary.BotSrc), cancellationToken);
         }
 
         private async Task<DialogTurnResult> UpdateSettingsYesOrNoStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -121,7 +124,7 @@ namespace VFatumbot
             //_logger.LogInformation("SettingsDialog.RadiusStepAsync");
 
             var promptOptions = new PromptOptions {
-                Prompt = MessageFactory.Text("Choose desired radius in meters:"),
+                Prompt = MessageFactory.Text("Select your radius in meters, or enter the numbers directly:"),
                 Choices = new List<Choice>()
                     {
                         new Choice() {
@@ -151,7 +154,7 @@ namespace VFatumbot
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
             if (userProfileTemporary.HasSkipWaterPoints)
-                return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points?"), cancellationToken);
+                return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points?", userProfileTemporary.BotSrc), cancellationToken);
 
             return await stepContext.NextAsync();
         }
@@ -188,7 +191,7 @@ namespace VFatumbot
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Also display Google Street View and Earth previews?"), cancellationToken);
+            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Also display Google Street View and Earth previews?", userProfileTemporary.BotSrc), cancellationToken);
         }
 
         private async Task<DialogTurnResult> GoogleThumbnailsDisplayToggleStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -253,13 +256,15 @@ namespace VFatumbot
                 $"Current radius is {userProfileTemporary.Radius}m.{Helpers.GetNewLine(stepContext.Context)}"));
         }
 
-        private PromptOptions GetPromptOptions(string prompt)
+        private PromptOptions GetPromptOptions(string prompt, WebSrc botSrc)
         {
-            return new PromptOptions()
+            if (botSrc == WebSrc.ios || botSrc == WebSrc.android)
             {
-                Prompt = MessageFactory.Text(prompt),
-                RetryPrompt = MessageFactory.Text($"That is not a valid answer. {prompt}"),
-                Choices = new List<Choice>()
+                return new PromptOptions()
+                {
+                    Prompt = MessageFactory.Text(prompt),
+                    RetryPrompt = MessageFactory.Text($"That is not a valid answer. {prompt}"),
+                    Choices = new List<Choice>()
                                 {
                                     new Choice() {
                                         Value = "Yes",
@@ -288,7 +293,36 @@ namespace VFatumbot
                                         Value = "Help",
                                     },
                                 }
-            };
+                };
+            }
+            else
+            {
+                return new PromptOptions()
+                {
+                    Prompt = MessageFactory.Text(prompt),
+                    RetryPrompt = MessageFactory.Text($"That is not a valid answer. {prompt}"),
+                    Choices = new List<Choice>()
+                                {
+                                    new Choice() {
+                                        Value = "Yes",
+                                        Synonyms = new List<string>()
+                                                        {
+                                                            "yes",
+                                                        }
+                                    },
+                                    new Choice() {
+                                        Value = "No",
+                                        Synonyms = new List<string>()
+                                                        {
+                                                            "no",
+                                                        }
+                                    },
+                                    new Choice() {
+                                        Value = "Help",
+                                    },
+                                }
+                };
+            }
         }
     }
 }
