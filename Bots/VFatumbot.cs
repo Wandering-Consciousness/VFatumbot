@@ -148,6 +148,7 @@ namespace VFatumbot
 
             double lat = 0, lon = 0;
             string pushUserId = null;
+            string iapResult = "";
             userProfileTemporary.PushUserId = userProfilePersistent.PushUserId;
 
             if (InterceptPushNotificationSubscription(turnContext, out pushUserId))
@@ -159,8 +160,9 @@ namespace VFatumbot
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                 }
             }
-            else if (InterceptInappPurchase(turnContext, userProfilePersistent))
+            else if (InterceptInappPurchase(turnContext, userProfilePersistent, out iapResult))
             {
+                await turnContext.SendActivityAsync(MessageFactory.Text(iapResult), cancellationToken);
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, _mainDialog, cancellationToken);
             }
             else if (Helpers.InterceptLocation(turnContext, out lat, out lon)) // Intercept any locations the user sends us, no matter where in the conversation they are
@@ -275,29 +277,30 @@ namespace VFatumbot
             await _mainDialog.Run(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
-        protected bool InterceptInappPurchase(ITurnContext turnContext, UserProfilePersistent userProfilePersistent)
+        protected bool InterceptInappPurchase(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, out string text)
         {
             var activity = turnContext.Activity;
+            text = "";
 
             if (activity.Properties != null)
             {
                 var iapDataStr = (string)activity.Properties.GetValue("iapData");
                 if (!string.IsNullOrEmpty(iapDataStr))
                 {
-                    dynamic iapData = JsonConvert.DeserializeObject<dynamic>(iapDataStr);
+                    dynamic iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
 
                     if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
                     {
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
-                        turnContext.SendActivityAsync(MessageFactory.Text("Maps Pack add-on enabled."));
+                        text = "Maps Pack add-on enabled.";
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
                     {
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled."));
+                        text = "Place Search and Skip Water Points Pack add-on enabled.";
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
                     {
@@ -307,36 +310,56 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled."));
+                        text = "The Everything Pack add-on enabled.";
                     }
                     else
                     {
                         userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
                         userProfilePersistent.IsIncludeWaterPoints = true;
-                        turnContext.SendActivityAsync(MessageFactory.Text("All add-ons disabled."));
+                        text = "All add-ons disabled.";
                     }
 
-                    if (userProfilePersistent.IAPData == null)
+                    if (userProfilePersistent.Purchases == null)
                     {
-                        userProfilePersistent.IAPData = new Dictionary<string, dynamic>();
+                        userProfilePersistent.Purchases = new Dictionary<string, Purchases>();
+                        userProfilePersistent.Purchases.Add(iapData.productID, iapData);
                     }
-                    userProfilePersistent.IAPData.Add(iapData.productID, iapData);
+                    else
+                    {
+                        userProfilePersistent.Purchases[iapData.productID] = iapData;
+                    }
 
                     return true;
                 }
-            }
-            else if (activity.Text.StartsWith("/unseenlings"))
-            {
-                userProfilePersistent.HasMapsPack = true;
-                userProfilePersistent.IsDisplayGoogleThumbnails = false;
+                else if (activity != null && activity.Text != null)
+                {
+                    if (activity.Text.StartsWith("/unseenlings"))
+                    {
+                        userProfilePersistent.HasMapsPack = true;
+                        userProfilePersistent.IsDisplayGoogleThumbnails = false;
 
-                userProfilePersistent.HasLocationSearch = true;
-                userProfilePersistent.HasSkipWaterPoints = true;
-                userProfilePersistent.IsIncludeWaterPoints = false;
-                turnContext.SendActivityAsync(MessageFactory.Text("Steve. Steve. Steve!"));
+                        userProfilePersistent.HasLocationSearch = true;
+                        userProfilePersistent.HasSkipWaterPoints = true;
+                        userProfilePersistent.IsIncludeWaterPoints = false;
+                        text = "Steve. Steve. Steve!";
 
-                return true;
+                        return true;
+                    }
+                    else if (activity.Text.StartsWith("/mypurchases"))
+                    {
+                        if (userProfilePersistent.Purchases == null || userProfilePersistent.Purchases.Count == 0)
+                        {
+                            text = "You have no purchase history.";
+                        }
+                        else
+                        {
+                            text = JsonConvert.SerializeObject(userProfilePersistent.Purchases);
+                        }
+
+                        return true;
+                    }
+                }
             }
 
             return false;
