@@ -28,7 +28,7 @@
 #endif
 
         // Google Maps API key
-        public const string GOOGLE_MAPS_API_KEY = "AIzaSyDzY1YQO5Kdl5N_kD-p1_zKEW3_EnqJAZQ";
+        public const string GOOGLE_MAPS_API_KEY = "AIzaSyBNNMGaGj9FRBfIInN8CGbCJYyw9_OsexI";
 
         // OneSignal for Push Notifications
 #if RELEASE_PROD
