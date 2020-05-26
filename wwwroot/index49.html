@@ -4,7 +4,7 @@
     <title>Randonautica</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0" />
     <link rel="stylesheet" href="main.css">
-    <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/4.6.0/webchat.js"></script>
+    <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/4.9.0/webchat.js"></script>
     <script src="jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>var OneSignal = window.OneSignal || [];
@@ -286,11 +286,11 @@
             }
 
             let directLine = window.WebChat.createDirectLine({
-                secret: '',
-                token: '',
-                //token: 'cP4LEl-TeNM.nm_VgyZm2X357_YpJKo88uqF29sa0Fniu_FDjmxEe-k'
-                domain: 'https://bot.randonauts.com/directline',
-                webSocket: false // defaults to true
+                //secret: '',
+                //token: '',
+                token: 'cP4LEl-TeNM.nm_VgyZm2X357_YpJKo88uqF29sa0Fniu_FDjmxEe-k'
+                //domain: 'https://bot.randonauts.com/directline',
+                //webSocket: false // defaults to true
             });
 
             window.WebChat.renderWebChat(
