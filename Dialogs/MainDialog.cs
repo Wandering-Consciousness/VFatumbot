@@ -214,12 +214,27 @@ namespace VFatumbot
 
             //_logger.LogInformation("MainDialog.ChoiceActionStepAsync");
 
-            var options = new PromptOptions()
+            PromptOptions options;
+
+            if (userProfileTemporary.BotSrc == Enums.WebSrc.ios)
             {
-                Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite."),
-                RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
-                Choices = GetActionChoices(stepContext.Context),
-            };
+                options = new PromptOptions()
+                {
+                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \n\n\nNEW features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons"),
+                    RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
+                    Choices = GetActionChoices(stepContext.Context),
+                };
+            }
+            else
+            {
+                options = new PromptOptions()
+                {
+                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite."),
+                    RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
+                    Choices = GetActionChoices(stepContext.Context),
+                };
+            }
+            
 
             return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
         }
