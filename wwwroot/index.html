@@ -12,14 +12,16 @@
             OneSignal.init({
                 appId: "da21a078-babf-4e22-a032-0ea22de561a7",
             });
-        });</script>
+        });
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150961256-1"></script>
     <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'UA-150961256-1');</script>
+        gtag('config', 'UA-150961256-1');
+    </script>
     <script type="text/javascript">(function (e, t) {
         var n = e.amplitude || { _q: [], _iq: {} }; var r = t.createElement("script")
             ; r.type = "text/javascript"
@@ -59,8 +61,6 @@
             }
             ; e.amplitude = n
         })(window, document);
-
-        amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166");
     </script>
     <style>
 
@@ -189,6 +189,8 @@
                 userId = generateId();
                 setCookie('userId', userId, 1825);
             }
+
+            amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166", userId);
 
             // Catch incoming events from bot
             const store = window.WebChat.createStore(
