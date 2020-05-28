@@ -3,7 +3,7 @@
     public class Consts
     {
 #if RELEASE_PROD
-        public const string APP_VERSION = "4.6.20";
+        public const string APP_VERSION = "4.6.22";
 #else
         public const string APP_VERSION = "4.7.0";
 #endif
@@ -60,6 +60,9 @@
 
         // For verifying iOS in-app purchase receipts with Apple iTunes
         public const string ITUNES_VERIFY_RECEIPTS_PASSWORD = "e31a4b5a6bcd4c8d86db53f9fae7333c";
+
+        // For checking whether coordinates are water or not
+        public const string ONWATER_IO_API_KEY = "43d-sA4uufiucpqGZczs";
 
         // Google Maps etc thumbnail sizes to use in reply cards
         public const string THUMBNAIL_SIZE = "320x320";

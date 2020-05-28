@@ -191,7 +191,8 @@ namespace VFatumbot
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
 
                 case "Yes sans reporting":
-                    await stepContext.Context.SendActivityAsync("Hope you had a fun trip!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)");
+                    //await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!"), cancellationToken);
 
                     // At least mark the point as a visited one
                     await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers() { WasPointVisited = true });
@@ -621,7 +622,8 @@ namespace VFatumbot
 
             var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220 - w3wHashes.Length, answers.Report.Length)));
             await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[Tweet your report!](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
+            //await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!"), cancellationToken);
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
             return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);

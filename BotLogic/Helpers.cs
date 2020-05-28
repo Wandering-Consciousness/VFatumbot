@@ -21,6 +21,7 @@ using Newtonsoft.Json.Linq;
 using CoordinateSharp; //See CoordinateSharp EULA. (Must be removed if used outside EULA terms).
 using System.Threading;
 using System.Net.Http.Headers;
+using System.Net;
 
 namespace VFatumbot.BotLogic
 {
@@ -54,7 +55,7 @@ namespace VFatumbot.BotLogic
             }
             else
             {
-                await((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
+                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
                 return;
             }
         }
@@ -184,7 +185,7 @@ namespace VFatumbot.BotLogic
             if (w3wresult == null || w3wresult.country == null)
                 return "";
 
-            var country = Bia.Countries.Iso3166.Countries.GetCountryByAlpha2(w3wresult.country.ToString().Replace("{","").Replace("}",""));
+            var country = Bia.Countries.Iso3166.Countries.GetCountryByAlpha2(w3wresult.country.ToString().Replace("{", "").Replace("}", ""));
 
             if (country != null)
                 return $" ({country.ShortName})";
@@ -238,9 +239,19 @@ namespace VFatumbot.BotLogic
             return result;
         }
 
+        public class OnWaterIOResponse
+        {
+            public string query;
+            public string request_id;
+            public double lat;
+            public double lon;
+            public bool water;
+        }
+
         public static async Task<bool> IsWaterCoordinatesAsync(double[] incoords)
         {
             // Get a static map with no frills, and make the water green to compare
+            /* The old expensive Google Maps Static Image API way
             var url = "http://maps.googleapis.com/maps/api/staticmap?scale=2" +
                         "&zoom=13&size=1x1&sensor=false&visual_refresh=true" +
                         "&style=feature:water|color:0x00FF00" +
@@ -255,6 +266,18 @@ namespace VFatumbot.BotLogic
             var resultPng = response.Content.ReadAsByteArrayAsync().Result;
             var solidGreenPng = StringToByteArray("89504E470D0A1A0A0000000D494844520000000200000002010300000048789F6700000006504C544500FF00FFFFFF6FBD585100000001624B474401FF022DDE0000000C4944415408D7636060600000000400012734270A0000000049454E44AE426082");
             return resultPng.SequenceEqual(solidGreenPng);
+            */
+
+            var url = $"https://api.onwater.io/api/v1/results/{incoords[0]},{incoords[1]}?access_token={Consts.ONWATER_IO_API_KEY}";
+            var response = await new HttpClient().GetAsync(url);
+            var jsonContent = response.Content.ReadAsStringAsync().Result;
+            if (!string.IsNullOrEmpty(jsonContent))
+            {
+                var result = JsonConvert.DeserializeObject<OnWaterIOResponse>(jsonContent);
+                return result.water;
+            }
+
+            return false;
         }
 
         public static byte[] StringToByteArray(String hex)
