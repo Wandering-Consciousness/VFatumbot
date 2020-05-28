@@ -14,16 +14,13 @@ namespace VFatumbot
         protected readonly ILogger _logger;
         protected readonly IStatePropertyAccessor<UserProfilePersistent> _userProfilePersistentAccessor;
 
-        public PrivacyAndTermsDialog(IStatePropertyAccessor<UserProfilePersistent> userProfilePersistenAccessor, ILogger<MainDialog> logger, IBotTelemetryClient telemetryClient) : base(nameof(PrivacyAndTermsDialog))
+        public PrivacyAndTermsDialog(IStatePropertyAccessor<UserProfilePersistent> userProfilePersistenAccessor, ILogger<MainDialog> logger) : base(nameof(PrivacyAndTermsDialog))
         {
             _logger = logger;
             _userProfilePersistentAccessor = userProfilePersistenAccessor;
 
-            TelemetryClient = telemetryClient;
-
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -31,7 +28,6 @@ namespace VFatumbot
                 AgreeYesOrNoStepAsync,
             })
             {
-                TelemetryClient = telemetryClient,
             });
 
             InitialDialogId = nameof(WaterfallDialog);

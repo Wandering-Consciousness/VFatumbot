@@ -16,16 +16,13 @@ namespace VFatumbot
         protected readonly ILogger _logger;
         protected readonly IStatePropertyAccessor<UserProfileTemporary> _userProfileTemporaryAccessor;
 
-        public SettingsDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, ILogger<MainDialog> logger, IBotTelemetryClient telemetryClient) : base(nameof(SettingsDialog))
+        public SettingsDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, ILogger<MainDialog> logger) : base(nameof(SettingsDialog))
         {
             _logger = logger;
             _userProfileTemporaryAccessor = userProfileTemporaryAccessor;
 
-            TelemetryClient = telemetryClient;
-
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new ChoicePrompt("RadiusChoicePrompt",
               async (PromptValidatorContext<FoundChoice> promptContext, CancellationToken cancellationToken) =>
@@ -52,11 +49,9 @@ namespace VFatumbot
                   return true;
               })
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new TextPrompt(nameof(TextPrompt))
             {
-                TelemetryClient = telemetryClient,
             });
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
@@ -70,7 +65,6 @@ namespace VFatumbot
                 FinishSettingsStepAsync
             })
             {
-                TelemetryClient = telemetryClient,
             });
 
             InitialDialogId = nameof(WaterfallDialog);

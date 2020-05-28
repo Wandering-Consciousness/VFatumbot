@@ -16,19 +16,16 @@ namespace VFatumbot
         protected readonly IStatePropertyAccessor<UserProfileTemporary> _userProfileTemporaryAccessor;
         protected readonly MainDialog _mainDialog;
 
-        public MoreStuffDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger, IBotTelemetryClient telemetryClient) : base(nameof(MoreStuffDialog))
+        public MoreStuffDialog(IStatePropertyAccessor<UserProfileTemporary> userProfileTemporaryAccessor, MainDialog mainDialog, ILogger<MainDialog> logger) : base(nameof(MoreStuffDialog))
         {
             _logger = logger;
             _userProfileTemporaryAccessor = userProfileTemporaryAccessor;
             _mainDialog = mainDialog;
 
-            TelemetryClient = telemetryClient;
-
-            AddDialog(new ChainsDialog(_userProfileTemporaryAccessor, mainDialog, logger, telemetryClient));
-            AddDialog(new QuantumDiceDialog(_userProfileTemporaryAccessor, mainDialog, logger, telemetryClient));
+            AddDialog(new ChainsDialog(_userProfileTemporaryAccessor, mainDialog, logger));
+            AddDialog(new QuantumDiceDialog(_userProfileTemporaryAccessor, mainDialog, logger));
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                TelemetryClient = telemetryClient,
             });
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -36,7 +33,6 @@ namespace VFatumbot
                 PerformActionStepAsync,
             })
             {
-                TelemetryClient = telemetryClient,
             });
 
             InitialDialogId = nameof(WaterfallDialog);
