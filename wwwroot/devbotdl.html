@@ -7,20 +7,61 @@
     <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/4.6.0/webchat.js"></script>
     <script src="jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-var OneSignal = window.OneSignal || [];
-        OneSignal.push(function () {
-            OneSignal.init({
-                appId: "19b7d4eb-ea96-45ce-b5e5-ce24a1b142f2",
-            });
-        });</script>
+    <script>//var OneSignal = window.OneSignal || [];
+//        OneSignal.push(function () {
+//            OneSignal.init({
+//                appId: "da21a078-babf-4e22-a032-0ea22de561a7",
+//            });
+//        });
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150961256-1"></script>
-    <script>window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150961256-1"></script>
+    <script>//window.dataLayer = window.dataLayer || [];
+//        function gtag() { dataLayer.push(arguments); }
+//        gtag('js', new Date());
 
-        gtag('config', 'UA-150961256-1');</script>-->
+//        gtag('config', 'UA-150961256-1');
+    </script>
+    <script type="text/javascript">(function (e, t) {
+        var n = e.amplitude || { _q: [], _iq: {} }; var r = t.createElement("script")
+            ; r.type = "text/javascript"
+            ; r.integrity = "sha384-RsEu4WZflrqYcEacpfoGSib3qaSvdYwT4D+DrWqeBuDarSzjwUQR1jO8gDiXZd0E"
+            ; r.crossOrigin = "anonymous"; r.async = true
+            ; r.src = "https://cdn.amplitude.com/libs/amplitude-6.2.0-min.gz.js"
+            ; r.onload = function () {
+                if (!e.amplitude.runQueuedFunctions) {
+                    console.log("[Amplitude] Error: could not load SDK")
+                }
+            }
+            ; var i = t.getElementsByTagName("script")[0]; i.parentNode.insertBefore(r, i)
+            ; function s(e, t) {
+            e.prototype[t] = function () {
+                this._q.push([t].concat(Array.prototype.slice.call(arguments, 0))); return this
+            }
+            }
+        var o = function () { this._q = []; return this }
+            ; var a = ["add", "append", "clearAll", "prepend", "set", "setOnce", "unset"]
+            ; for (var u = 0; u < a.length; u++) { s(o, a[u]) } n.Identify = o; var c = function () {
+            this._q = []
+                ; return this
+            }
+            ; var l = ["setProductId", "setQuantity", "setPrice", "setRevenueType", "setEventProperties"]
+            ; for (var p = 0; p < l.length; p++) { s(c, l[p]) } n.Revenue = c
+            ; var d = ["init", "logEvent", "logRevenue", "setUserId", "setUserProperties", "setOptOut", "setVersionName", "setDomain", "setDeviceId", "enableTracking", "setGlobalUserProperties", "identify", "clearUserProperties", "setGroup", "logRevenueV2", "regenerateDeviceId", "groupIdentify", "onInit", "logEventWithTimestamp", "logEventWithGroups", "setSessionId", "resetSessionId"]
+            ; function v(e) {
+                function t(t) {
+                e[t] = function () {
+                    e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)))
+                }
+                }
+                for (var n = 0; n < d.length; n++) { t(d[n]) }
+            } v(n); n.getInstance = function (e) {
+                e = (!e || e.length === 0 ? "$default_instance" : e).toLowerCase()
+                    ; if (!n._iq.hasOwnProperty(e)) { n._iq[e] = { _q: [] }; v(n._iq[e]) } return n._iq[e]
+            }
+            ; e.amplitude = n
+        })(window, document);
+    </script>
     <style>
 
         @import "main.css";
@@ -55,14 +96,14 @@ var OneSignal = window.OneSignal || [];
             bottom: 30px; /* 30px from the bottom */
         }
 
-            /* Show the snackbar when clicking on a button (class added with JavaScript) */
-            #snackbar.show {
-                visibility: visible; /* Show the snackbar */
-                /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-            However, delay the fade out process for 2.5 seconds */
-                -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-                animation: fadein 0.5s, fadeout 0.5s 2.5s;
-            }
+        /* Show the snackbar when clicking on a button (class added with JavaScript) */
+        #snackbar.show {
+            visibility: visible; /* Show the snackbar */
+            /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+        However, delay the fade out process for 2.5 seconds */
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
 
         /* Animations to fade the snackbar in and out */
         @-webkit-keyframes fadein {
@@ -148,6 +189,8 @@ var OneSignal = window.OneSignal || [];
                 setCookie('userId', userId, 1825);
             }
 
+            amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166", userId);
+
             // Catch incoming events from bot
             const store = window.WebChat.createStore(
                 {},
@@ -169,12 +212,15 @@ var OneSignal = window.OneSignal || [];
                     if (data.channelData.startsWith("camrng")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadCamRNGWithBytesNeeded.postMessage(splitted[1]);
+                        amplitude.getInstance().logEvent('CameraRNG');
                     } else if (data.channelData.startsWith("temporal")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadTemporalWithBytesNeeded.postMessage(splitted[1]);
+                        amplitude.getInstance().logEvent('TemporalRNG');
                     } else if (data.channelData.startsWith("addons")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadNativeShop.postMessage(splitted[1]);
+                        amplitude.getInstance().logEvent('OpenShop');
                     }
                 }
             });
@@ -218,6 +264,26 @@ var OneSignal = window.OneSignal || [];
                 };
                 directLine.postActivity(activity).subscribe(function (id) {
                 });
+
+                var iapObj = JSON.parse(iapData);
+                var price = 0.0;
+                if (iapObj.productID == 'fatumbot.addons.nc.maps_pack.v2') {
+                    price = 1.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.skip_water_pack.v2') {
+                    price = 2.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.maps_skip_water_packs.v2') {
+                    price = 3.99;
+                }
+                var event_properties = {
+                    'purchaseID': iapObj.purchaseID,
+                    'localVerificationData': iapObj.localVerificationData,
+                    'serverVerificationData': iapObj.serverVerificationData,
+                    'source': iapObj.source,
+                    'transactionDate': iapObj.transactionDate,
+                    'status': iapObj.status,
+                };
+                var revenue = new amplitude.Revenue().setProductId(iapObj.productID).setPrice(price).setRevenueType('purchase').setEventProperties(event_properties);
+                amplitude.logRevenueV2(revenue);
             }
 
             let directLine = window.WebChat.createDirectLine({
