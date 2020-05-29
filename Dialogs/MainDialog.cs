@@ -260,6 +260,9 @@ namespace VFatumbot
                 case "Void":
                     stepContext.Values["PointType"] = "Void";
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                case "Anomaly":
+                    stepContext.Values["PointType"] = "Anomaly";
+                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 case "Options/Help":
                     await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                     return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
@@ -515,6 +518,16 @@ namespace VFatumbot
         {
             var actionOptions = new List<Choice>()
             {
+                 new Choice() {
+                    Value = "Anomaly",
+                    Synonyms = new List<string>()
+                                    {
+                                        "anomaly",
+                                        "getanomaly",
+                                        "ida",
+                                        "getida",
+                                    }
+                },
                 new Choice() {
                     Value = "Attractor",
                     Synonyms = new List<string>()
