@@ -20,11 +20,9 @@ namespace VFatumbot
         // For Discord Bot
         public AdapterWithErrorHandler() { }
 
-        public AdapterWithErrorHandler(ICredentialProvider credentialProvider, ILogger<BotFrameworkHttpAdapter> logger, IMiddleware middleware, ConversationState conversationState = null)
-            : base(credentialProvider, logger:logger)
+        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
+            : base(configuration, logger)
         {
-            Use(middleware);
-
             _conversationState = conversationState;
 
             OnTurnError = async (turnContext, exception) =>
