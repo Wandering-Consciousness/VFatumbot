@@ -144,7 +144,7 @@ namespace VFatumbot
 #if RELEASE_PROD
                 var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
 #else
-                var connStr = $"https://randonaut-api-dev.azurewebsites.net/entropy?{queryStr}";
+                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
                 //var connStr = $"http://127.0.0.1:3000/entropy?{queryStr}";
 #endif
                 var jsonStr = Client.DownloadString(connStr);
