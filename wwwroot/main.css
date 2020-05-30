@@ -102,7 +102,7 @@ div.css-6p8cnn button, *.ac-pushButton {
 
 button nobr {
 	padding: 0 9px 0 9px;
-	margin: 0 auto;
+	margin: 0 -20px 0 -20px;
 }
 
 div.css-6p8cnn button:hover, *.ac-pushButton:hover {

@@ -3,7 +3,8 @@
 First up you need to send a location which will be the center to generate points from by tapping 🌍/📎, or sending a Google Maps URL. If you have the Place Search Pack you can do so by typing \"search <place name or address>\".  
   
 ##### MAIN MENU  
-  
+
+* Anomaly (/getanomaly, /getida) - get the strongest Attractor or Void point  
 * Attractor (/getattractor) - generate an Attractor point  
 * Void (/getvoid) - generate a Void point  
 * Options/Help - set the search radius (/setradius 3000), displaying in-app map previews and enabling skipping water points and view this help  
