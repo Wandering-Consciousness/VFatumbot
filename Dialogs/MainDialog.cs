@@ -214,7 +214,7 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractor and Void.\n  \n\n\nNEW features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons"),
+                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n  \n\n\nNEW features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons"),
                     RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
                     Choices = GetActionChoices(stepContext.Context),
                 };
@@ -223,7 +223,7 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractor and Void.\n"),
+                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n"),
                     RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
                     Choices = GetActionChoices(stepContext.Context),
                 };
