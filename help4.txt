@@ -1,6 +1,6 @@
 #### INSTRUCTIONS  
   
-First up you need to send a location which will be the center to generate points from.  
+First up you need to send a location which will be the center to generate points from by tapping 🌍/📎, or sending a Google Maps URL. If you have the Place Search Pack you can do so by typing \"search <place name or address>\".  
   
 ##### MAIN MENU  
   

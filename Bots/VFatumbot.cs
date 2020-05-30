@@ -311,7 +311,7 @@ namespace VFatumbot
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
 
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled. Set your location by typing \"search <place name or address>\"."), cancellationToken);
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
                     {
@@ -321,7 +321,7 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        await turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled. Set your location by typing \"search <place name or address>\"."), cancellationToken);
                     }
                     else
                     {
