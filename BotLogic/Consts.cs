@@ -3,7 +3,7 @@
     public class Consts
     {
 #if RELEASE_PROD
-        public const string APP_VERSION = "4.6.23";
+        public const string APP_VERSION = "4.6.25";
 #else
         public const string APP_VERSION = "4.7.0";
 #endif
@@ -29,6 +29,7 @@
 
         // Google Maps API key
         public const string GOOGLE_MAPS_API_KEY = "AIzaSyBNNMGaGj9FRBfIInN8CGbCJYyw9_OsexI";
+        public const string GOOGLE_GEOCODE_API_KEY = "AIzaSyDZGQB0L0HXoZZAEu3FJzKZa2M3m2YIfNA";
 
         // OneSignal for Push Notifications
 #if RELEASE_PROD

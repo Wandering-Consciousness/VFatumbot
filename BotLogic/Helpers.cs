@@ -203,7 +203,7 @@ namespace VFatumbot.BotLogic
 
         public static async Task<Tuple<double, double>> GeocodeAddressAsync(string address)
         {
-            IGeocoder geocoder = new GoogleGeocoder() { ApiKey = Consts.GOOGLE_MAPS_API_KEY };
+            IGeocoder geocoder = new GoogleGeocoder() { ApiKey = Consts.GOOGLE_GEOCODE_API_KEY };
             IEnumerable<Address> addresses = await geocoder.GeocodeAsync(address);
 
             if (addresses.Count() != 0)
