@@ -3,7 +3,7 @@
     public class Consts
     {
 #if RELEASE_PROD
-        public const string APP_VERSION = "4.6.22";
+        public const string APP_VERSION = "4.6.23";
 #else
         public const string APP_VERSION = "4.7.0";
 #endif
