@@ -212,7 +212,7 @@ namespace VFatumbot
                 }
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) &&
-                     turnContext.Activity.Text.EndsWith("help", StringComparison.InvariantCultureIgnoreCase) &&
+                     turnContext.Activity.Text.EndsWith(Loc.g("help"), StringComparison.InvariantCultureIgnoreCase) &&
                      !turnContext.Activity.Text.Contains("options", StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
             {
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, _mainDialog, cancellationToken);

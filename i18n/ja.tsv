@@ -1,0 +1,14 @@
+﻿all_kinds_steve	俺は全種類のスティーブでござる！
+let_steve_help	スティーブが力になる！
+this_is_steve	こちらはスティーブ
+radius_gte	半径は{0}メートル以上必要
+radius_lte	半径は{0}メートル以下必要
+changed_radius	{0}メートルから{1}へと半径を変更した
+invalid_radius	不正な半径
+current_radius	現在半径が{0}メートル
+cant_find_place	場所が見つからない
+current_location	現在地が{0},{1}。  \n検出範囲の中心地となる。
+water_points_will_be	水中地点は{0}
+skipped	スキップする
+ignored	スキップしない
+class_mode	

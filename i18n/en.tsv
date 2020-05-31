@@ -1,0 +1,14 @@
+﻿all_kinds_steve	I'm all kinds of Steve!
+let_steve_help	Let Steve help you!
+this_is_steve	This is Steve
+radius_gte	Radius must be more than or equal to {0}m
+radius_lte	Radius must be less than or equal to {0}m
+changed_radius	Changed radius from {0}m to {1}m
+invalid_radius	Invalid radius
+current_radius	Your current radius from is {0}m
+cant_find_place	Place not found.
+current_location	Your current location is set to {0},{1}.  \nThis will be the center for searches.
+water_points_will_be	Water points will be {0}
+skipped	skipped
+ignored	ignored
+class_mode	Classic mode is now {0}
