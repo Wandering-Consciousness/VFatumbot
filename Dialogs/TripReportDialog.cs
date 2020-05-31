@@ -108,14 +108,14 @@ namespace VFatumbot
                 Choices = new List<Choice>()
                             {
                                 new Choice() {
-                                    Value = "No",
+                                    Value = Loc.g("no"),
                                     Synonyms = new List<string>()
                                                     {
                                                         "no"
                                                     }
                                 },
                                 new Choice() {
-                                    Value = "Yes and report!",
+                                    Value = Loc.g("tr_yes_report"),
                                     Synonyms = new List<string>()
                                                     {
                                                         "Yes",
@@ -123,7 +123,7 @@ namespace VFatumbot
                                                     }
                                 },
                                 new Choice() {
-                                    Value = "Yes sans reporting",
+                                    Value = Loc.g("tr_yes_sans_report"),
                                     Synonyms = new List<string>()
                                                     {
                                                         "Report",
@@ -142,62 +142,59 @@ namespace VFatumbot
 
             var callbackOptions = (CallbackOptions)stepContext.Options;
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("tr_yes_report").Equals(val))
             {
-                case "Yes and report!":
-                    // Go and start asking them about their trip
+                // Go and start asking them about their trip
 
-                    var answers = new ReportAnswers() { WasPointVisited = true };
-                    stepContext.Values[ReportAnswersKey] = answers;
+                var answers = new ReportAnswers() { WasPointVisited = true };
+                stepContext.Values[ReportAnswersKey] = answers;
 
-                    // TODO: [answers.PointNumberVisited] : implement the dialog steps/logic to ask this.
+                // TODO: [answers.PointNumberVisited] : implement the dialog steps/logic to ask this.
 
-                    switch (callbackOptions.PointTypes[answers.PointNumberVisited])
-                    {
-                        case PointTypes.Attractor:
-                        case PointTypes.Void:
-                        case PointTypes.Anomaly:
-                        case PointTypes.PairAttractor:
-                        case PointTypes.PairVoid:
-                        case PointTypes.ScanAttractor:
-                        case PointTypes.ScanVoid:
-                        case PointTypes.ScanAnomaly:
-                        case PointTypes.ScanPair:
-                        case PointTypes.ChainAttractor:
-                        case PointTypes.ChainVoid:
-                        case PointTypes.ChainAnomaly:
-                            var options = new PromptOptions()
+                switch (callbackOptions.PointTypes[answers.PointNumberVisited])
+                {
+                    case PointTypes.Attractor:
+                    case PointTypes.Void:
+                    case PointTypes.Anomaly:
+                    case PointTypes.PairAttractor:
+                    case PointTypes.PairVoid:
+                    case PointTypes.ScanAttractor:
+                    case PointTypes.ScanVoid:
+                    case PointTypes.ScanAnomaly:
+                    case PointTypes.ScanPair:
+                    case PointTypes.ChainAttractor:
+                    case PointTypes.ChainVoid:
+                    case PointTypes.ChainAnomaly:
+                        var options = new PromptOptions()
+                        {
+                            Prompt = MessageFactory.Text("Did you set an intent?"),
+                            RetryPrompt = MessageFactory.Text("That is not a valid choice."),
+                            Choices = new List<Choice>()
                             {
-                                Prompt = MessageFactory.Text("Did you set an intent?"),
-                                RetryPrompt = MessageFactory.Text("That is not a valid choice."),
-                                Choices = new List<Choice>()
-                                {
-                                    new Choice() { Value = "Yes" },
-                                    new Choice() { Value = "No" }
-                                }
-                            };
+                                new Choice() { Value = "Yes" },
+                                new Choice() { Value = "No" }
+                            }
+                        };
 
-                            return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
-                    }
+                        return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
+                }
 
-                    ((ReportAnswers)stepContext.Values[ReportAnswersKey]).SkipGetIntentStep = true;
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                ((ReportAnswers)stepContext.Values[ReportAnswersKey]).SkipGetIntentStep = true;
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("tr_yes_sans_report").Equals(val)) {
+                //await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!"), cancellationToken);
 
-                case "Yes sans reporting":
-                    //await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!"), cancellationToken);
+                // At least mark the point as a visited one
+                await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers() { WasPointVisited = true });
 
-                    // At least mark the point as a visited one
-                    await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers() { WasPointVisited = true });
-
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
-
-                case "No":
-                default:
-                    await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers());
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+            } else {
+                await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers());
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
         }
 
@@ -570,7 +567,7 @@ namespace VFatumbot
                 message.Replace("\n\n", "  \n") + "\n\n" +
                 "Report: " + answers.Report + "\n   \n" +
                 (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
-                (!string.IsNullOrEmpty(callbackOptions.What3Words[answers.PointNumberVisited]) ? "First point What 3 words address: [" + callbackOptions.What3Words[answers.PointNumberVisited] + "](https://what3words.com/" + callbackOptions.What3Words[answers.PointNumberVisited] + ")  \n" : "  \n") +
+                (!string.IsNullOrEmpty(callbackOptions.What3Words[answers.PointNumberVisited]) ? "First point what3words address: [" + callbackOptions.What3Words[answers.PointNumberVisited] + "](https://what3words.com/" + callbackOptions.What3Words[answers.PointNumberVisited] + ")  \n" : "  \n") +
                 "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
                 "[Google Earth](https://earth.google.com/web/search/" + incoords[0] + "," + incoords[1] + ")\n\n" +
                 (!string.IsNullOrEmpty(answers.Intent) ? "Intent set: " + answers.Intent + "  \n" : "") +

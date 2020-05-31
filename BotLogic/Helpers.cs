@@ -195,7 +195,7 @@ namespace VFatumbot.BotLogic
 
         public static async Task<object> GetWhat3WordsAddressAsync(double[] incoords)
         {
-            var response = await new HttpClient().GetAsync("https://api.what3words.com/v3/convert-to-3wa?coordinates=" + incoords[0] + "%2C" + incoords[1] + "&key=" + Consts.W3W_API_KEY);
+            var response = await new HttpClient().GetAsync("https://api.what3words.com/v3/convert-to-3wa?coordinates=" + incoords[0] + "%2C" + incoords[1] + "&key=" + Consts.W3W_API_KEY + "&language=" + Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
             var jsonContent = response.Content.ReadAsStringAsync().Result;
             dynamic result = JsonConvert.DeserializeObject(jsonContent);
             return result;

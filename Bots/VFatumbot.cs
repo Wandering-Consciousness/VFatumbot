@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -35,6 +36,9 @@ namespace VFatumbot
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", false); // TODO: testing forced JP
+
+
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
@@ -86,9 +90,9 @@ namespace VFatumbot
                     }
                     else
                     {
-                        var welcome = "#### Welcome to Randonautica!\n" +
-                            "Beginners: Please start by reviewing the [FAQs](https://www.randonautica.com/got-questions) and [The 9 Tenets of The Randonauts](https://i.redd.it/x97vcpvtd9p41.jpg).  \n\n\n" +
-                            "Once you've completed a trip, share in the discussion with the Randonauts on [Reddit](https://www.reddit.com/r/randonauts/) and [Twitter](https://twitter.com/TheRandonauts).  \n\n\n" +
+                        var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
+                            $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
+                            $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/TheRandonauts")}  \n\n\n" +
                             "Happy Randonauting!";
                         await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
                         //await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
@@ -97,7 +101,7 @@ namespace VFatumbot
                         //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         //}
                         //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("first_send_location")), cancellationToken);
                     }
 
                     // Hack coz Facebook Messenge stopped showing "Send Location" button
@@ -111,6 +115,8 @@ namespace VFatumbot
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", false); // TODO: testing forced JP
+
             _userProfilePersistentAccessor = _userPersistentState.CreateProperty<UserProfilePersistent>(nameof(UserProfilePersistent));
             var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(turnContext, () => new UserProfilePersistent());
 
@@ -213,7 +219,7 @@ namespace VFatumbot
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) &&
                      turnContext.Activity.Text.EndsWith(Loc.g("help"), StringComparison.InvariantCultureIgnoreCase) &&
-                     !turnContext.Activity.Text.Contains("options", StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
+                     !turnContext.Activity.Text.Contains(Loc.g("md_options"), StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
             {
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, _mainDialog, cancellationToken);
             }

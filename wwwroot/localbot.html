@@ -298,7 +298,7 @@
                     directLine: directLine,
                     store: store,
                     userID: userId,
-                    locale: 'en', // TODO: get from browser or does framework automatically do that for us?
+                    locale: getLang()
                 },
                 document.getElementById('webchat')
             );
@@ -463,6 +463,13 @@
                     }
                 }
             };
+
+            function getLang() {
+                if (navigator.languages != undefined)
+                    return navigator.languages[0];
+                else
+                    return navigator.language;
+            }
         })().catch(err => console.error(err));
     </script>
 </body>

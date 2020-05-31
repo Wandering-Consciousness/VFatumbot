@@ -1,5 +1,5 @@
-﻿all_kinds_steve	俺は全種類のスティーブでござる！
-let_steve_help	スティーブが力になる！
+﻿all_kinds_steve	俺はあらゆる種類のスティーブでござる！
+let_steve_help	スティーブが力になってあげる！
 this_is_steve	こちらはスティーブ
 radius_gte	半径は{0}メートル以上必要
 radius_lte	半径は{0}メートル以下必要
@@ -7,8 +7,101 @@ changed_radius	{0}メートルから{1}へと半径を変更した
 invalid_radius	不正な半径
 current_radius	現在半径が{0}メートル
 cant_find_place	場所が見つからない
-current_location	現在地が{0},{1}。  \n検出範囲の中心地となる。
-water_points_will_be	水中地点は{0}
+current_location	現在地が{0},{1}。  \n検出範囲の中心地点となる。
+water_points_will_be	水上地点は{0}
 skipped	スキップする
 ignored	スキップしない
-class_mode	
+classic_mode	クラッシックモードは今{0}
+enabled	有効中
+disabled	無効中
+help	ヘルプ
+invalid_num_points	不正な値。1~10以内必要。
+scan_time_take	スキャンに5〜15分を要する。
+finding_location	地点検出中・・・意図に集中して考えてね。
+nothing_but_water_points	水上地点しか見つからなかった。あとでもう一度試してみて。
+num_water_points_skipped_so_far	今まで水上地点を{0}回スキップした
+num_water_points_skipped	水上地点を{0}回スキップした
+point_generated	地点を見つけた
+no_points_detected_quantum	いま現在異常地点を検出できないため、量子地点を案内する
+no_points_detected	いま現在地点を検出できない
+address	のアドレス
+get_intent_suggestions	英語辞典を量子的にランダム化中・・・
+define	意味
+spotify_search	Spotifyで検索
+intent_suggestions	意図案
+num_water_attractors_skipped	アトラクターの水上地点を{0}回スキップした
+num_water_voids_skipped	ボイドの水上地点を{0}回スキップした
+pair_points_detected	地点のペアを見つけた
+generating_chain	チェインを生成中。指定した半径と地点数によって時間がかかることがある。
+chain_nothing_found	
+chain_nothing_but_water_points	{0}ヶ所目で水上地点しか見つからなかった。あとでもう一度試してみて。
+chain_num_water_points_skipped_so_far	今まで{0}ヶ所目で水上地点を{1}回スキップした
+chain_num_water_points_skipped	{0}ヶ所目で水上地点を{1}回スキップした
+chain_generated	チェインを生成した
+mystery_point_generated	ミステリー地点を見つけた
+exception_caught	例外発生
+error_sorry	エラーが発生した。
+open	開く
+chain_map_open	Googleマップでチェインの経路を開く
+view_on_google_maps	Googleマップで見る
+street_view	ストリートビュー
+google_earth	Googleアース
+location	位置
+open_map	マップを開く
+map	マップ
+earth	アース
+view_with_google	Googleで見る
+google_maps	Googleマップ
+google_street_view	Googleストリートビュー
+download_app	アプリをダウンロード
+md_anomaly	異常
+md_attractor	アトラクター
+md_void	ボイド
+md_options	設定・ヘルプ
+md_blindspotsmore	ブラインドスポット・その他
+md_mylocation	現在地
+md_lets_search_paid	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。\n  \n\n\nアプリ内地図表示、水上地点スキップ、現在地検索などのプレミアム機能は「設定・ヘルプ」より「追加機能」からアクセスできる。
+md_invalid_action	無効な動作。次のメニューから選んで。
+md_lets_search	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。
+md_how_many_idas	地点をいくつまで検出する？
+md_choose_qrng	エントロピー取得のための量子乱数生成器を選んで。わからないときはANUを
+md_invalid_qrng	無効なQRNGの選択。
+md_camera	カメラ
+md_anu	ANU
+md_temporal	時的
+md_temporal_server	時的 (サーバー)
+md_temporal_phone	時的 (携帯)
+md_anu_leftovers	ANUの残り物
+md_gcp_retro	GCP
+md_collecting_camera_entropy	カメラから乱数を取得中・・・
+md_collecting_temporalphone_entropy	携帯のCPUから時的な乱数を取得中・・・
+yes	はい
+no	いいえ
+addons	追加機能
+update_settings_q	設定を変更する？
+select_radius	地点検出範囲の半径を選んで。数字直接入力も可能
+include_water_points_q	水上地点をスキップする？
+show_google_street_earth_q	Googleのストリートビューもアースも表示する？
+invalid_answer	無効な選択だ。
+anonymized_id_is	匿名化されたIDが{0}。
+show_google_street_earth	Googleのストリートビューもアースは{0}。
+hidden	表示しない
+displayed	表示する
+get_locsearch_skipwater_pack	「追加機能」より場所検索・水上地点スキップ機能を手に入れよう。
+get_maps_pack	「追加機能」よりアプリ内地図機能を手に入れよう。
+bs_quantum	量子地点
+bs_quantum_time	量子地点+時刻
+bs_intent_suggestions	意図案
+bs_mystery_point	ミステリー地点
+bs_pair	ペア
+bs_pseudo	疑似地点
+bs_scan	スキャン
+bs_chains	チェイン
+bs_dice	量子サイコロ
+bs_back	< 戻る
+welcome_randonautica	Randonauticaへようこそ！
+welcome_beginners	初めて？まずは[よくある質問]({0})と[ランドノートの信条]({1})を確認してください。
+welcome_report_share	地点へ行ったら、[Reddit]({0})と[Twitter]({1})でシェアしてね！
+first_send_location	まずは、🌍/📎で現在地を送信するか、GoogleマップのURLを入力するか。
+tr_yes_sans_report	はい (レポートなし)
+tr_yes_report	はい！(レポートを書いて)

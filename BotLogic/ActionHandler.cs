@@ -549,7 +549,7 @@ namespace VFatumbot.BotLogic
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                                await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                                await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -571,13 +571,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -679,7 +679,7 @@ namespace VFatumbot.BotLogic
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                                await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                                await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -701,13 +701,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -722,9 +722,9 @@ namespace VFatumbot.BotLogic
 
             dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
-            await turnContext.SendActivityAsync(MessageFactory.Text($"Your current radius is {userProfileTemporary.Radius}m.\n\n" +
-                                                                    $"Your current location is {userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.\n\n" +
-                                                                    (w3wResult != null ? $"What 3 Words address: {w3wResult?.words}" : "")
+            await turnContext.SendActivityAsync(MessageFactory.Text($"{Loc.g("current_radius", userProfileTemporary.Radius)}\n\n" +
+                                                                    $"{Loc.g("current_location", userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))}\n\n" +
+                                                                    (w3wResult != null ? $"what3words {Loc.g("address")}: {w3wResult?.words}" : "")
                                                                     ), cancellationToken);
 
             await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
@@ -823,7 +823,7 @@ namespace VFatumbot.BotLogic
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                                await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                                await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -845,13 +845,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -862,7 +862,7 @@ namespace VFatumbot.BotLogic
 
         public async Task IntentSuggestionActionAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, CancellationToken cancellationToken, MainDialog mainDialog)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Text("Wait a minute. Quantumly randomizing the English dictionary for you."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("get_intent_suggestions")), cancellationToken);
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
             {
@@ -873,11 +873,11 @@ namespace VFatumbot.BotLogic
                         string suggestionsStr = "  \n";
                         foreach (var word in intentSuggestions)
                         {
-                            suggestionsStr += $"[{word}](https://www.google.com/search?q=define%20{word.Replace(" ", "%20")}) [(Search in Spotify)](https://open.spotify.com/search/{word.Replace(" ", "%20")})  \n";
+                            suggestionsStr += $"[{word}](https://www.google.com/search?q={Loc.g("define")}%20{word.Replace(" ", "%20")}) [({Loc.g("spotify_search")})](https://open.spotify.com/search/{word.Replace(" ", " %20")})  \n";
                         }
 
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Intent suggestions: " + suggestionsStr), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Intent Suggestions", suggestionsStr);
+                        await turnContext.SendActivityAsync(MessageFactory.Text($"{Loc.g("intent_suggestions")}: " + suggestionsStr), cancellationToken);
+                        await Helpers.SendPushNotification(userProfileTemporary, $"{Loc.g("intent_suggestions")}", suggestionsStr);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -941,7 +941,7 @@ namespace VFatumbot.BotLogic
                         }
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, forRemoteViewing: forRemoteViewing), cancellationToken);
-                        if (!string.IsNullOrEmpty(mesg)) await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                        if (!string.IsNullOrEmpty(mesg)) await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -1009,7 +1009,7 @@ namespace VFatumbot.BotLogic
                         dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                        await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -1149,11 +1149,11 @@ namespace VFatumbot.BotLogic
                             }
 
                             if (numAttWaterPointsSkipped > 1)
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of attractor water points skipped: " + numAttWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_attractors_skipped", numAttWaterPointsSkipped)), cancellationToken);
                             if (numVoiWaterPointsSkipped > 1)
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of void water points skipped: " + numVoiWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_voids_skipped", numVoiWaterPointsSkipped)), cancellationToken);
 
-                            await Helpers.SendPushNotification(userProfileTemporary, "Pair of Points Generated", attMessagesArray[0]); // just send one notification
+                            await Helpers.SendPushNotification(userProfileTemporary, Loc.g("pair_points_detected"), attMessagesArray[0]); // just send one notification
 
                             CallbackOptions callbackOptions = new CallbackOptions()
                             {
@@ -1174,13 +1174,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -1191,7 +1191,7 @@ namespace VFatumbot.BotLogic
 
         public async Task ChainActionAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, CancellationToken cancellationToken, MainDialog mainDialog, Enums.PointTypes pointType, int maxDistance, bool isCentered = false)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Text("Generating your chain. Depending on your radius and the number/type of points it may take a while."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("generating_chain")), cancellationToken);
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
             {
@@ -1241,7 +1241,7 @@ namespace VFatumbot.BotLogic
 
                             if (idas.Count() == 0)
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text($"No anomalies found at so far at point #{j+1}. Trying again..."), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_nothing_found", j+1)), cancellationToken);
                                 goto redo;
                             }
 
@@ -1258,12 +1258,12 @@ namespace VFatumbot.BotLogic
 
                                     if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                     {
-                                        await turnContext.SendActivityAsync(MessageFactory.Text($"Couldn't find anything but water points at point {j+1}. Try again later."), cancellationToken);
+                                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_nothing_but_water_points", j+1)), cancellationToken);
                                         await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = false });
                                         return;
                                     }
 
-                                    await turnContext.SendActivityAsync(MessageFactory.Text($"Number of water points skipped so far at point #{j+1}: {numWaterPointsSkipped}"), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_num_water_points_skipped_so_far", j+1, numWaterPointsSkipped)), cancellationToken);
                                     goto redo;
                                 }
                             }
@@ -1276,7 +1276,7 @@ namespace VFatumbot.BotLogic
 
                             if (numWaterPointsSkipped > 0)
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text($"Number of water points skipped at point #{j+1}: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_num_water_points_skipped", j+1, numWaterPointsSkipped)), cancellationToken);
                             }
 
                             messagesArray[j] = mesg;
@@ -1304,7 +1304,7 @@ namespace VFatumbot.BotLogic
                             };
                         var chain = origin.Concat(generatedPoints).ToArray();
                         await turnContext.SendActivitiesAsync(CardFactory.CreateChainCardReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), chain), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Chain Generated", mesg);
+                        await Helpers.SendPushNotification(userProfileTemporary, Loc.g("chain_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -1491,7 +1491,7 @@ namespace VFatumbot.BotLogic
                         dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Mystery Point Generated", mesg);
+                        await Helpers.SendPushNotification(userProfileTemporary, Loc.g("mystery_point_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {

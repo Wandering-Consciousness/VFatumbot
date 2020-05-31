@@ -11,4 +11,97 @@ current_location	Your current location is set to {0},{1}.  \nThis will be the ce
 water_points_will_be	Water points will be {0}
 skipped	skipped
 ignored	ignored
-class_mode	Classic mode is now {0}
+classic_mode	Classic mode is now {0}
+enabled	enabled
+disabled	disabled
+help	Help
+invalid_num_points	Incorrect value. Parameter should be a digit from 1 to 10.
+scan_time_take	Generation may take from 5 to 15 minutes.
+finding_location	Finding a location... focus on your intent.
+nothing_but_water_points	Couldn't find anything but water points. Try again later.
+num_water_points_skipped_so_far	Number of water points skipped so far: {0}
+num_water_points_skipped	Number of water points skipped: {0}
+point_generated	Point Generated
+no_points_detected_quantum	No points currently detected in the area, supplying a quantum-point for you instead.
+no_points_detected	No points currently detected in the area.
+address	address
+get_intent_suggestions	Quantumly randomizing the English dictionary for you.
+define	define
+spotify_search	Search in Spotify
+intent_suggestions	Intent suggestions
+num_water_attractors_skipped	Number of attractor water points skipped: {0}
+num_water_voids_skipped	Number of void water points skipped: {0}
+pair_points_detected	Pair of Points Generated
+generating_chain	Generating your chain. Depending on your radius and the number/type of points it may take a while.
+chain_nothing_found	No anomalies found at so far at point #{0}. Trying again...
+chain_nothing_but_water_points	Couldn't find anything but water points at point {0}. Try again later.
+chain_num_water_points_skipped_so_far	Number of water points skipped so far at point #{0}: {1}
+chain_num_water_points_skipped	Number of water points skipped at point #{0}: {1}
+chain_generated	Chain Generated
+mystery_point_generated	Mystery Point Generated
+exception_caught	Exception caught
+error_sorry	Sorry, it looks like something went wrong.
+open	Open
+chain_map_open	Travel Chain on Google Maps
+view_on_google_maps	View on Google Maps
+street_view	Street View
+google_earth	Google Earth
+location	Location
+open_map	Open Map
+map	Maps
+earth	Earth
+view_with_google	View with Google
+google_maps	Google Maps
+google_street_view	Google Street View
+download_app	Download the app
+md_anomaly	Anomaly
+md_attractor	Attractor
+md_void	Void
+md_options	Options/Help
+md_blindspotsmore	Blind Spots & More
+md_mylocation	My Location
+md_lets_search_paid	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n  \n\n\nPremium features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons
+md_invalid_action	That is not a valid action. What would you like to get?
+md_lets_search	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.
+md_how_many_idas	Up to how many points would you like to look for?
+md_choose_qrng	Choose your entropy source for the quantum random number generator (choose Australian National University - ANU if unsure)
+md_invalid_qrng	That is not a valid entropy source.
+md_camera	Camera
+md_anu	ANU
+md_temporal	Temporal
+md_temporal_server	Temporal (Server)
+md_temporal_phone	Temporal (Phone)
+md_anu_leftovers	ANU Leftovers
+md_gcp_retro	GCP Retro
+md_collecting_camera_entropy	Collecting randomness from your phone's camera (no photos are taken)...
+md_collecting_temporalphone_entropy	Collecting randomness from your phone's CPU...
+yes	Yes
+no	No
+addons	Add-ons
+update_settings_q	Update your settings?
+select_radius	Select your radius in meters, or enter the numbers directly
+include_water_points_q	Include water points?
+show_google_street_earth_q	Display Google Street View and Earth previews?
+invalid_answer	That is not a valid answer.
+anonymized_id_is	Your anonymized ID is {0}.
+show_google_street_earth	Street View and Earth previews will be {0}.
+hidden	hidden
+displayed	displayed
+get_locsearch_skipwater_pack	Get the Location Search and Skip Water Points Pack from the Add-ons button.
+get_maps_pack	Get the Maps Pack for in-app map and street previews from the Add-ons button.
+bs_quantum	Quantum
+bs_quantum_time	Quantum Time
+bs_intent_suggestions	Intent Suggestions
+bs_mystery_point	Mystery Point
+bs_pair	Pair of Points Generated
+bs_pseudo	Pseudo
+bs_scan	Scan
+bs_chains	Chains
+bs_dice	Quantum Dice
+bs_back	< Back
+welcome_randonautica	Welcome to Randonautica!
+welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}).
+welcome_report_share	Once you've completed a trip, share in the discussion with the Randonauts on [Reddit]({0}) and [Twitter]({1}).
+first_send_location	Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL.
+tr_yes_sans_report	Yes sans reporting
+tr_yes_report	Yes with report!
