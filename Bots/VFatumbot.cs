@@ -87,7 +87,7 @@ namespace VFatumbot
                     else
                     {
                         var welcome = "#### Welcome to Randonautica!\n" +
-                            "Beginners: Please start by reviewing the [FAQs](https://www.randonautica.com/got-questions) and [The 9 Tenets of The Randonauts](https://i.redd.it/x97vcpvtd9p41.jpg).  \n\n\n" +
+                            "Beginners: Please start by reviewing the [FAQs](https://www.randonautica.com/got-questions) and [The 9 Tenets of The Randonauts](https://i.redd.it/x97vcpvtd9p41.jpg).  \n\n\nFor a great overview of the Fatum Project's ideas and theories behind Randonauts checkout [MegaNerd's 15 min video](https://www.youtube.com/watch?v=Vbi7jFjWY98).  \n\n\n" +
                             "Once you've completed a trip, share in the discussion with the Randonauts on [Reddit](https://www.reddit.com/r/randonauts/) and [Twitter](https://twitter.com/TheRandonauts).  \n\n\n" +
                             "Happy Randonauting!";
                         await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
