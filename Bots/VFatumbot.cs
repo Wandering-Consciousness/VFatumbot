@@ -143,6 +143,7 @@ namespace VFatumbot
 
             // TODO: most of the logic/functionality in the following if statements I realised later on should probably be structured in the way the Bot Framework SDK talks about "middleware".
             // Maybe one day re-structure/re-factor it to following their middleware patterns...
+            // TODO update: Nup, that won't be happening. The bot will be walking the plank soon in favour of the Flutter app.
 
             var botSrc = WebSrc.nonweb;
 
