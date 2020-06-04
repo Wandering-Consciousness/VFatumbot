@@ -36,9 +36,6 @@ namespace VFatumbot
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", false); // TODO: testing forced JP
-
-
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
@@ -47,6 +44,7 @@ namespace VFatumbot
                     var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(turnContext, () => new UserProfileTemporary());
 
                     var isNonApp = userProfileTemporary.BotSrc != WebSrc.android && userProfileTemporary.BotSrc != WebSrc.ios;
+                    string startLocale = "";
 
                     if (Helpers.IsRandoLobby(turnContext))
                     {
@@ -87,21 +85,9 @@ namespace VFatumbot
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
                         await turnContext.SendActivityAsync(MessageFactory.Text(Consts.NO_LOCATION_SET_MSG), cancellationToken);
-                    }
-                    else
-                    {
-                        var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
-                            $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
-                            $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/TheRandonauts")}  \n\n\n" +
-                            "Happy Randonauting!";
-                        await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
-                        //await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
-                        //if (isNonApp) // disable for now coz it was clogging the welcome screen and we lost the ability to detect isNonApp properly
-                        //{
-                        //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
-                        //}
-                        //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
-                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("first_send_location")), cancellationToken);
+                    } else if (InterceptConversationStartWithLocale(turnContext, out startLocale)) {
+                        userProfilePersistent.SetLocale(startLocale);
+                        await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
                     }
 
                     // Hack coz Facebook Messenge stopped showing "Send Location" button
@@ -115,8 +101,6 @@ namespace VFatumbot
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", false); // TODO: testing forced JP
-
             _userProfilePersistentAccessor = _userPersistentState.CreateProperty<UserProfilePersistent>(nameof(UserProfilePersistent));
             var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(turnContext, () => new UserProfilePersistent());
 
@@ -155,9 +139,15 @@ namespace VFatumbot
 
             double lat = 0, lon = 0;
             string pushUserId = null;
+            string startLocale;
             userProfileTemporary.PushUserId = userProfilePersistent.PushUserId;
 
-            if (InterceptPushNotificationSubscription(turnContext, out pushUserId))
+            if (InterceptConversationStartWithLocale(turnContext, out startLocale))
+            {
+                userProfilePersistent.SetLocale(startLocale);
+                await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
+            }
+            else if (InterceptPushNotificationSubscription(turnContext, out pushUserId))
             {
                 if (userProfilePersistent.PushUserId != pushUserId)
                 {
@@ -274,6 +264,22 @@ namespace VFatumbot
             await _userTemporaryState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
+        private async Task DoWelcomeAsync(ITurnContext turnContext, CultureInfo locale, CancellationToken cancellationToken)
+        {
+            var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
+                $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
+                $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/TheRandonauts")}  \n\n\n" +
+                "Happy Randonauting!";
+            await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
+            //await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
+            //if (isNonApp) // disable for now coz it was clogging the welcome screen and we lost the ability to detect isNonApp properly
+            //{
+            //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+            //}
+            //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("first_send_location")), cancellationToken);
+        }
+
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             //_logger.LogInformation("Running dialog with Message Activity.");
@@ -377,6 +383,25 @@ namespace VFatumbot
 
                         return true;
                     }
+                }
+            }
+
+            return false;
+        }
+
+        protected bool InterceptConversationStartWithLocale(ITurnContext turnContext, out string startLocale)
+        {
+            startLocale = null;
+
+            var activity = turnContext.Activity;
+
+            if (activity.Properties != null)
+            {
+                var localeFromClient = (string)activity.Properties.GetValue("startLocale");
+                if (!string.IsNullOrEmpty(localeFromClient))
+                {
+                    startLocale = localeFromClient;
+                    return true;
                 }
             }
 

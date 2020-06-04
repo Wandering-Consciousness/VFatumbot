@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using Microsoft.Bot.Builder;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.FatumFunctions;
@@ -33,6 +35,25 @@ namespace VFatumbot
         public bool HasSetLocationOnce { get; set; } = false;
 
         public bool HasAgreedToToS { get; set; } = false;
+
+        public CultureInfo Locale
+        {
+            get;
+            set;
+        } = new CultureInfo("en-US");
+
+        public void SetLocale(string locale)
+        {
+            try
+            {
+                Locale = new CultureInfo(locale, false);
+                Thread.CurrentThread.CurrentCulture = Locale;
+            }
+            catch
+            {
+                Locale = new CultureInfo("en-US");
+            }
+        }
 
         // IAP
         public bool HasMapsPack { get; set; } = false;
