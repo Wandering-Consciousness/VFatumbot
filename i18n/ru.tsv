@@ -1,0 +1,224 @@
+﻿all_kinds_steve	Имя нам Стив!
+let_steve_help	Позволь Стиву помочь!
+this_is_steve	Это Стив
+radius_gte	Радиус должен быть больше или равен {0}м
+radius_lte	Радиус должен быть меньше или равен {0}м
+changed_radius	Радиус изменён с {0}м на {1}м
+invalid_radius	Неверный радиус
+current_radius	Текущий радиус {0}м
+cant_find_place	Место не найдено
+current_location	Ваше местоположение установлено в {0},{1}.  \nЭта точка станет центром поиска.
+water_points_will_be	Точки попавшие в водоёмы будут {0}
+skipped	пропущены
+ignored	игнорироваться
+classic_mode	Классический режим
+enabled	включён
+disabled	выключен
+help	Помощь
+invalid_num_points	
+scan_time_take	Генерация может занять от 5 до 15 минут.
+finding_location	Ищем координаты... сфокусируйтесь на намерении!
+nothing_but_water_points	Не нашлось ничего на суше. Попробуйте ещё раз позже
+num_water_points_skipped_so_far	Общее число пропущенных точек в воде: {0}
+num_water_points_skipped	Число пропущенных точек в воде: {0}
+point_generated	Точка сгенерирована
+no_points_detected_quantum	Точек не найдено, выдаём квантово-случайную координату.
+no_points_detected	В выбранной области точек не найдено.
+address	Адрес
+get_intent_suggestions	Рандомизируем английский словарь для Вас
+define	определение 
+spotify_search	Искать в Spotify
+intent_suggestions	Варианты намерений
+num_water_attractors_skipped	Число пропущенных аттракторов в воде: {0}
+num_water_voids_skipped	Число пропущенных войдов в воде: {0}
+pair_points_detected	Пара точек сгенерирована
+generating_chain	Генерируем цепочку. В зависимости от радиуса, числа и типа точек это может занять продолжительное время.
+chain_nothing_found	Пока что для точки #{0} аномалий не найдено. Продолжаем поиски...
+chain_nothing_but_water_points	Для точки #{0} не нашлось ничего, кроме водоёмов. Попытайтесь снова позднее.
+chain_num_water_points_skipped_so_far	Общее число пропущенных координат в воде для точки#{0}: {1}
+chain_num_water_points_skipped	Число пропущенных координат в воде для точки #{0}: {1}
+chain_generated	Цепочка сгенерирована
+mystery_point_generated	Загадочная точка сгенерирована
+exception_caught	Исключение в программе
+error_sorry	Простите, что-то пошло не так!
+open	Открыть
+chain_map_open	Цепочка в Гугл Картах
+view_on_google_maps	Смотреть в Гугл Картах
+street_view	Просмотр Улиц
+google_earth	Гугл Планета Земля
+location	Место
+open_map	Открыть карту
+map	Карты
+earth	Земля
+view_with_google	Посмотреть в Гугл
+google_maps	Гугл Карты
+google_street_view	Гугл Просмотр улиц
+download_app	Скачать приложение
+md_anomaly	Аномалия
+md_attractor	Аттрактор
+md_void	Войд
+md_options	Опции/Помощь
+md_blindspotsmore	Слепые пятна и Прочее
+md_mylocation	Мои места
+md_lets_search_paid	
+md_invalid_action	
+md_lets_search	
+md_how_many_idas	
+md_choose_qrng	
+md_invalid_qrng	
+md_camera	
+md_anu	
+md_temporal	
+md_temporal_server	
+md_temporal_phone	
+md_anu_leftovers	
+md_gcp_retro	
+md_collecting_camera_entropy	
+md_collecting_temporalphone_entropy	
+yes	
+no	
+addons	
+update_settings_q	
+select_radius	
+include_water_points_q	
+show_google_street_earth_q	
+invalid_answer	
+anonymized_id_is	
+show_google_street_earth	
+hidden	
+displayed	
+get_locsearch_skipwater_pack	
+get_maps_pack	
+bs_quantum	
+bs_quantum_time	
+bs_intent_suggestions	
+bs_mystery_point	
+bs_pair	
+bs_pseudo	
+bs_scan	
+bs_chains	
+bs_dice	
+bs_back	
+welcome_randonautica	
+welcome_beginners	
+welcome_report_share	
+first_send_location	
+choose_chain_type	
+ch_invalid_point_type	
+ch_anomalies	
+ch_voids	
+ch_attractors	
+ch_pseudos	
+ch_current_or_sequential	
+ch_current	
+ch_sequential	
+ch_num_points	
+ch_invalid_number	
+ch_reprompt_num_points	
+ch_mte	
+ch_lte	
+no_loc_or_reset	
+ida_found	
+ida_type	
+ida_radius	
+ida_power	
+ida_bearing	
+ida_zscore	
+randpoint_generated	
+suggested_time	
+blind_spots_more_menu	
+invalid_action	
+agree_to_terms_q	
+toc_dontagree	
+toc_doagree	
+toc_shame	
+toc_invalid_answer	
+qd_min1	
+qd_min2	
+qd_min3	
+qd_min4	
+qd_max1	
+qd_max2	
+qd_max3	
+qd_max4	
+qd_minmax	
+qd_rolling	
+qd_results	
+qd_onlyyess	
+err_no_entropy_fetch	
+err_qrng_service_failed	
+err_qrng_error	
+scan_choose_kind	
+scan_invalid_action	
+scan_attractor	
+scan_void	
+scan_anomaly	
+scan_pair	
+scan_sesson_inplace	Скан сессия уже запущена!
+tr_did_you_visit	Добрались ли вы до точки или в её окресности? Хотели бы составить отчёт?
+tr_yes_sans_report	Да, отчёт пропустим
+tr_yes_report	Да, составим отчёт!
+tr_invalid_choice	Такой выбор не предусмотрен
+tr_set_intent_q	Устанавливали ли вы намеренье?
+tr_hope_had_fun	Надеемся путешествие вышло весёлым!
+tr_collect_artifacts_q	Собрали ли вы какие-либо артефакты?
+tr_wow_and_astounding_q	Было ли это "УХ, ВАУ"?
+tr_meaningfulness_q	Оцените насколько осмысленным было происходившее с Вами в пути? (можно своим словом)
+tr_enriching	Жизненный опыт
+tr_meaningful	Значимо
+tr_casual	Обычно
+tr_meaningless	Бессмысленно
+tr_emotional_q	Оцените эмоциональный фактор (можно своим словом)
+tr_dopamine_hit	Кайф
+tr_inspirational	Вдохновляюще
+tr_plain	Обыкновенно
+tr_anxious	Тревожно
+tr_despair	Безысходно
+tr_dread	Угрожающе
+tr_importance_q	Оцените важность (можно своим словом)
+tr_lifechanging	Судьбоносно
+tr_influential	Значимо
+tr_ordinary	Обычно
+tr_waste_time	Потеря времени
+tr_strangeness_q	Оцените странность (можно своим словом)
+tr_woowooweird	Мистика
+tr_strange	Странно
+tr_normal	Нормально
+tr_nothing	Никак
+tr_synchronicity_q	Оцените фактор синхронистичности (можно своим словом)
+tr_dirk_gently	Дирк Джентли
+tr_mind_blowing	Крышесносно
+tr_somewhat	Немного
+tr_nothing	Никак
+tr_boredom	Скукотища
+tr_wanna_upload_photos_q	Хотите ли Вы загрузить фотки?
+tr_upload_photos_now	Так как отправка ограничена одним сообщением, выберите и загрузите все фотографии, которые вы хотите отправить.
+tr_not_valid_upload	Это не подходит для загрузки!
+tr_error_photo_upload	Во время загрузки фотографий произошла ошибка
+tr_photo_uploads_temp_disabled	Выполняются работы, загрузка фотографий временно отключена, извините!
+tr_write_report	"Введите текст вашего отчёта, 
+отправка ограничена одним сообщением."
+tr_tweet	Твитнуть отчёт!
+tr_thanks	Спасибо за отчёт!
+welcome_back	Добро пожаловать в Рандонавтику! Снова.
+dont_forgot_send_loc	Не забудьте отправить своё текущее местоположение
+iap_invalid_receipt	Неправильный чек покупки: {0}. Этот инцидент будет расследован.
+iap_maps_pack_enabled	Дополнение Карты включено.
+iap_search_water_points_enabled	Дополнения Поиск мест и Пропуск водоёмов вкючены. Установите местоположение набрав  \"search <название места или адрес>\".
+iap_everything_enabled	Дополнение Всё-всё-всё включено.Установите местоположение набрав  \"search <название места или адрес>\".
+iap_all_disabled	Все дополнения выключены
+iap_no_purchases	Вы пока ничего не покупали
+iap_buy	Купить
+iap_enable	ВКЛЮЧИТЬ
+iap_maps_pack	Только Карты
+iap_maps_pack_desc	Предпросмотр карт и улиц в приложении
+iap_search_water_points	Поиск мест + Пропуск водоёмов
+iap_search_water_points_desc	Поиск по названию мест и пропуск водоёмов
+iap_everything_pack	Всё-всё-всё!
+iap_everything_pack_desc	Карты + Поиск локаций + Пропуск водоёмов
+iap_enabling...	Включаем возможножность...
+iap_thanks_enabling	Спасибо Вам! Включаем...
+sending_location	Отправляем местоположение...
+connecting_bot	Подключаемся к боту...
+sending_entropy	Отправляем энтропию...
+terms	

@@ -60,7 +60,7 @@ md_void	Void
 md_options	Options/Help
 md_blindspotsmore	Blind Spots & More
 md_mylocation	My Location
-md_lets_search_paid	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n  \n\n\nPremium features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons
+md_lets_search_paid	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n  n\nPremium features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons
 md_invalid_action	That is not a valid action. What would you like to get?
 md_lets_search	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.
 md_how_many_idas	Up to how many points would you like to look for?
@@ -100,8 +100,144 @@ bs_chains	Chains
 bs_dice	Quantum Dice
 bs_back	< Back
 welcome_randonautica	Welcome to Randonautica!
-welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}).
+welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}). For a great overview of the Fatum Project’s ideas and theories behind Randonauts check out [MegaNerd’s 15 min video](https://www.youtube.com/watch?v=Vbi7jFjWY98).
 welcome_report_share	Once you've completed a trip, share in the discussion with the Randonauts on [Reddit]({0}) and [Twitter]({1}).
 first_send_location	Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL.
+choose_chain_type	What kind of points do you want to chain?
+ch_invalid_point_type	That is not a valid point type.
+ch_anomalies	Anomalies
+ch_voids	Voids
+ch_attractors	Attractors
+ch_pseudos	Pseudos
+ch_current_or_sequential	Generate all points from your current location or in sequential order?
+ch_current	Current
+ch_sequential	Sequential
+ch_num_points	Enter number of points to chain. Approximate maximum total distance will be that number multiplied by your current radius.
+ch_invalid_number	That is not a valid number.
+ch_reprompt_num_points	Invalid number. Enter number of points:
+ch_mte	Number must be more than or equal to {0}. Enter number:
+ch_lte	Number must be less than or equal to {0}. Enter number:
+no_loc_or_reset	You haven't set a location, or it was reset. Send it by tapping 🌍/📎 or sending a Google Maps URL. You can also type \"help\" anytime.
+ida_found	Intention Driven Anomaly found
+ida_type	Type: {0}
+ida_radius	Radius: {0}
+ida_power	Power: {0}
+ida_bearing	Bearing: {0}
+ida_zscore	z-score: {0}
+randpoint_generated	Random Point Generated
+suggested_time	Suggested time: {0}
+blind_spots_more_menu	What would you like to get?  \nQuantum points are single random ones (potential Blind Spots).  Mystery Points are a random type of point.
+invalid_action	That is not valid action.
+agree_to_terms_q	Do you agree to the terms of use and privacy policy, and to be a well behaved Randonaut?
+toc_dontagree	No
+toc_doagree	I agree
+toc_shame	That's a shame. So many random adventures are waiting for you.
+toc_invalid_answer	That is not a valid answer. {0}
+qd_min1	Enter an inclusive minimum number greater than or equal to 1. For a coin toss enter 1 and assign heads to it
+qd_min2	Invalid minimum. Enter desired minimum:
+qd_min3	Minimum must greater than or equal to 1. Try again:
+qd_min4	Invalid minimum, must be less than or equal to 254. Try again:
+qd_max1	Enter an inclusive maximum number greater than the minimum, up to 255. For a coin toss enter 2 and assign tails to it:
+qd_max2	Invalid maximum. Enter desired maximum:
+qd_max3	Maximum must greater than 1. Try again:
+qd_max4	Invalid maximum, must be less than or equal to 255. Try again:
+qd_minmax	Minimum ({0}) must be less than the maximum ({1}). Setting it to {2}.
+qd_rolling	Rolling...
+qd_results	Result: {0} [{1},{2}]. Roll again?
+qd_onlyyess	Yes or No, nothing else.
+err_no_entropy_fetch	Could not fetch new random data.
+err_qrng_service_failed	Service did not return random data.
+err_qrng_error	Sorry, there was an error sourcing quantum entropy needed to randomize. Try a bit later.
+scan_choose_kind	Choose the kind of scan:
+scan_invalid_action	That is not a valid scan.
+scan_attractor	Scan Attractor
+scan_void	Scan Void
+scan_anomaly	Scan Anomaly
+scan_pair	Scan Pair
+scan_sesson_inplace	Your scanning session is already in progress.
+tr_did_you_visit	Did you visit or get close to the point, and would you like to make a trip report?
 tr_yes_sans_report	Yes sans reporting
 tr_yes_report	Yes with report!
+tr_invalid_choice	That is not a valid choice.
+tr_set_intent_q	Did you set an intent?
+tr_hope_had_fun	Hope you had a fun trip!
+tr_collect_artifacts_q	Did you collect any artifacts?
+tr_wow_and_astounding_q	Was your trip \"wow and astounding!\"?
+tr_meaningfulness_q	Rate the meaningfulness of your trip (or enter your own word):
+tr_enriching	Enriching
+tr_meaningful	Meaningful
+tr_casual	Casual
+tr_meaningless	Meaningless
+tr_emotional_q	Rate the emotional factor (or enter your own word):
+tr_dopamine_hit	Dopamine Hit
+tr_inspirational	Inspirational
+tr_plain	Plain
+tr_anxious	Anxious
+tr_despair	Despair
+tr_dread	Dread
+tr_importance_q	Rate the importance (or enter your own word):
+tr_lifechanging	Life-changing
+tr_influential	Influential
+tr_ordinary	Ordinary
+tr_waste_time	Waste of time
+tr_strangeness_q	Rate the strangeness (or enter your own word):
+tr_woowooweird	Woo-woo weird
+tr_strange	Strange
+tr_normal	Normal
+tr_nothing	Nothing
+tr_synchronicity_q	Rate the synchroncity factor (or enter your own word):
+tr_dirk_gently	Dirk Gently
+tr_mind_blowing	Mind-blowing
+tr_somewhat	Somewhat
+tr_nothing	Nothing
+tr_boredom	Boredom
+tr_wanna_upload_photos_q	Do you want want to upload any photos?
+tr_upload_photos_now	Upload any photos you took now. Send them all at once as sending is limited to one message.
+tr_not_valid_upload	That is not a valid upload.
+tr_error_photo_upload	Sorry, there was an error uploading your photo.
+tr_photo_uploads_temp_disabled	Photo uploads are temporarily disabled while we change some things sorry! 
+tr_write_report	Lastly, write up your report. Typing up your report is limited to being sent in one message.
+tr_tweet	Tweet your report!
+tr_thanks	Thanks for the report!
+welcome_back	Welcome back to Randonautica!
+dont_forgot_send_loc	Don't forget to send your current location.
+iap_invalid_receipt	Invalid purchase receipt: {0}. You will be reported.
+iap_maps_pack_enabled	Maps Pack add-on enabled.
+iap_search_water_points_enabled	Place Search and Skip Water Points Pack add-on enabled. Set your location by typing \"search <place name or address>\".
+iap_everything_enabled	The Everything Pack add-on enabled. Set your location by typing \"search <place name or address>\".
+iap_all_disabled	All add-ons disabled.
+iap_no_purchases	You have no purchase history.
+iap_buy	BUY
+iap_enable	ENABLE
+iap_maps_pack	Maps Pack
+iap_maps_pack_desc	In-app preview of maps and streets
+iap_search_water_points	Place Search + Skip Water Pack
+iap_search_water_points_desc	Search by place names and skip water points
+iap_everything_pack	The Everything Pack
+iap_everything_pack_desc	Maps + Location Search + Skip Water Packs
+iap_enabling...	Enabling feature...
+iap_thanks_enabling	Thank you. Enabling now...
+sending_location	Sending your location...
+connecting_bot	Connecting to bot...
+sending_entropy	Sending entropy...
+terms	"PRIVACY POLICY AND TERMS OF USE  
+  
+By using Randonautica you agree to the Terms of Use and Privacy Policy.  
+  
+Randonautica uses truly randomized coordinates. It is the user’s responsibility and wholly at their own risk should they decide to physically travel to coordinates in the real world.  
+  
+By using Randonautica, you do so at your own risk. Randonautica/Randonauts LLC is not liable for any positive or adverse affects or consequences from the use of this platform.  
+  
+Use common sense, do not put yourself or others in harm's way. Don't trespass. Obey all quanrantine, curfew and social distancing regulations in your area.  
+  
+Don't steal, don't damage property, don't litter, don't do anything illegal nor anything that would otherwise cause danger to yourself or others.  
+  
+All your data is anonymized.  
+  
+Nothing is shared with any third party services, period.  
+  
+Any location data that you send is automatically deleted after 24 hours.  Anonymized data of points generated are stored.  
+  
+If you chose to write up a trip report, the report will be posted anonymously on the /r/randonaut_reports subreddit. Don't worry, we will never post your location, just the point generated.
+  
+Read the [full terms here](https://bot.randonauts.com/privacy-and-terms.html) before agreeing."

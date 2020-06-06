@@ -4,7 +4,7 @@ this_is_steve	こちらはスティーブ
 radius_gte	半径は{0}メートル以上必要
 radius_lte	半径は{0}メートル以下必要
 changed_radius	{0}メートルから{1}へと半径を変更した
-invalid_radius	不正な半径
+invalid_radius	無効な半径
 current_radius	現在半径が{0}メートル
 cant_find_place	場所が見つからない
 current_location	現在地が{0},{1}。  \n検出範囲の中心地点となる。
@@ -15,9 +15,9 @@ classic_mode	クラッシックモードは今{0}
 enabled	有効中
 disabled	無効中
 help	ヘルプ
-invalid_num_points	不正な値。1~10以内必要。
+invalid_num_points	無効な値。1~10以内必要。
 scan_time_take	スキャンに5〜15分を要する。
-finding_location	地点検出中・・・意図に集中して考えてね。
+finding_location	地点検出中・・・意図に集中して考えて。
 nothing_but_water_points	水上地点しか見つからなかった。あとでもう一度試してみて。
 num_water_points_skipped_so_far	今まで水上地点を{0}回スキップした
 num_water_points_skipped	水上地点を{0}回スキップした
@@ -54,13 +54,13 @@ view_with_google	Googleで見る
 google_maps	Googleマップ
 google_street_view	Googleストリートビュー
 download_app	アプリをダウンロード
-md_anomaly	異常
+md_anomaly	異常地点
 md_attractor	アトラクター
 md_void	ボイド
 md_options	設定・ヘルプ
 md_blindspotsmore	ブラインドスポット・その他
 md_mylocation	現在地
-md_lets_search_paid	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。\n  \n\n\nアプリ内地図表示、水上地点スキップ、現在地検索などのプレミアム機能は「設定・ヘルプ」より「追加機能」からアクセスできる。
+md_lets_search_paid	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。\n  n\nアプリ内地図表示、水上地点スキップ、現在地検索などのプレミアム機能は「設定・ヘルプ」より「追加機能」からアクセスできる。
 md_invalid_action	無効な動作。次のメニューから選んで。
 md_lets_search	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。
 md_how_many_idas	地点をいくつまで検出する？
@@ -77,7 +77,7 @@ md_collecting_camera_entropy	カメラから乱数を取得中・・・
 md_collecting_temporalphone_entropy	携帯のCPUから時的な乱数を取得中・・・
 yes	はい
 no	いいえ
-addons	追加機能
+addons	拡張機能
 update_settings_q	設定を変更する？
 select_radius	地点検出範囲の半径を選んで。数字直接入力も可能
 include_water_points_q	水上地点をスキップする？
@@ -87,7 +87,7 @@ anonymized_id_is	匿名化されたIDが{0}。
 show_google_street_earth	Googleのストリートビューもアースは{0}。
 hidden	表示しない
 displayed	表示する
-get_locsearch_skipwater_pack	「追加機能」より場所検索・水上地点スキップ機能を手に入れよう。
+get_locsearch_skipwater_pack	「拡張機能」より場所検索・水上地点スキップ機能を手に入れよう。
 get_maps_pack	「追加機能」よりアプリ内地図機能を手に入れよう。
 bs_quantum	量子地点
 bs_quantum_time	量子地点+時刻
@@ -100,8 +100,142 @@ bs_chains	チェイン
 bs_dice	量子サイコロ
 bs_back	< 戻る
 welcome_randonautica	Randonauticaへようこそ！
-welcome_beginners	初めて？まずは[よくある質問]({0})と[ランドノートの信条]({1})を確認してください。
+welcome_beginners	初めて？まずは[よくある質問]({0})と[ランドノートのルール]({1})を確認してください。
 welcome_report_share	地点へ行ったら、[Reddit]({0})と[Twitter]({1})でシェアしてね！
 first_send_location	まずは、🌍/📎で現在地を送信するか、GoogleマップのURLを入力するか。
-tr_yes_sans_report	はい (レポートなし)
-tr_yes_report	はい！(レポートを書いて)
+choose_chain_type	どの地点タイプでチェイン(順次に検出)する？
+ch_invalid_point_type	有効な地点タイプの選択ではない。
+ch_anomalies	異常地点
+ch_voids	アトラクター
+ch_attractors	ボイド
+ch_pseudos	疑似地点
+ch_current_or_sequential	全ての地点を現在地から、または順次に検出する？
+ch_current	現在地
+ch_sequential	順次
+ch_num_points	地点数を入力して。おおよその最大合計距離は、その数に現在の半径を掛けたものになる。
+ch_invalid_number	無効な数
+ch_reprompt_num_points	無効な数。地点数を入力して。
+ch_mte	{0}以上必要
+ch_lte	{0}以下必要
+no_loc_or_reset	現在地が設定されていないか、またはリセットされた。🌍/📎で現在地を送信するか、GoogleマップのURLを入力するか。\"help\"を入力してするとヘルプ画面が出る。
+ida_found	意図駆動型地点が見つかった
+ida_type	タイプ: {0}
+ida_radius	半径: {0}
+ida_power	パワー: {0}
+ida_bearing	方角: {0}
+ida_zscore	標準得点: {0}
+randpoint_generated	ランダムな地点を見つけた
+suggested_time	提案時間: {0}
+blind_spots_more_menu	次のメニューから選んで。  \n「量子」はシングルのランダム地点(潜在的なブラインドスポット)。 ミステリー地点は地点の種類がランダムで決まる。
+invalid_action	無効な動作
+agree_to_terms_q	利用規約に同意する?
+toc_dontagree	同意しない
+toc_doagree	同意する
+toc_shame	残念だ。たくさんのランダムな冒険があなたを待っているのに！
+toc_invalid_answer	有効な答えではない。
+qd_min1	1以上の最小値を入力して。コイン投げをしたい場合は、1を入力して表だとする。
+qd_min2	無効な最小値。 もう一度入力して：
+qd_min3	最小値は1以上必要。もう一度入力して：
+qd_min4	無効な最小値。254以下要。もう一度入力して：
+qd_max1	255以下の最大値を入力して。コイン投げをしたい場合は、2を入力して裏だとする。
+qd_max2	無効な最大値。 もう一度入力して：
+qd_max3	無効な最大値。1以上必要。もう一度入力して：
+qd_max4	無効な最大値。255以下要。もう一度入力して：
+qd_minmax	最小値({0})は最大値({1})より小さい必要がある。 {2}に設定する。
+qd_rolling	サイコロ振動中...
+qd_results	結果：{0} [{1}、{2}]。 もう一度振る？
+qd_onlyyess	はいまたはいいえ、他には何もない。
+err_no_entropy_fetch	乱数データを取得できなかった
+err_qrng_service_failed	サービスが乱数データを返さなかった
+err_qrng_error	ランダム化処理に必要な量子エントロピーの取得中にエラーが発生した。 あとでもう一度試してみて。
+scan_choose_kind	スキャンする地点の種類を選んで。
+scan_invalid_action	無効な選択ではない。
+scan_attractor	アトラクター
+scan_void	ボイド
+scan_anomaly	異常地点
+scan_pair	ペア
+scan_sesson_inplace	スキャン捜索中
+tr_did_you_visit	地点に行った、そして冒険レポートを出す？
+tr_yes_sans_report	行った。レポートなし。
+tr_yes_report	行った。レポートを出す。
+tr_invalid_choice	有効な選択ではない。
+tr_set_intent_q	意図を設定しておいた？
+tr_hope_had_fun	楽しい冒険だったといいね！
+tr_collect_artifacts_q	何か物を拾って持って帰った?
+tr_wow_and_astounding_q	すごくて驚くべき冒険だった？
+tr_meaningfulness_q	有意味度を評価して(または自分の言葉を入力してください)：
+tr_enriching	豊か
+tr_meaningful	有意義
+tr_casual	カジュアル
+tr_meaningless	無意味
+tr_emotional_q	感情度を評価して(または自分の言葉を入力してください)：
+tr_dopamine_hit	ドーパミン・ヒット
+tr_inspirational	感激
+tr_plain	普通
+tr_anxious	冷や冷や
+tr_despair	絶望
+tr_dread	恐怖
+tr_importance_q	重要度を評価して(または自分の言葉を入力してください)：
+tr_lifechanging	人生が変わる程
+tr_influential	影響力のある
+tr_ordinary	普通
+tr_waste_time	時間の無駄
+tr_strangeness_q	奇妙度を評価して(またはあなた自身の言葉を入力してください)：
+tr_woowooweird	神秘的
+tr_strange	奇妙
+tr_normal	普通
+tr_nothing	何ともない
+tr_synchronicity_q	共時性を評価して(または独自の単語を入力)：
+tr_dirk_gently	めちゃめちゃある
+tr_mind_blowing	わお！って感じ
+tr_somewhat	ややある
+tr_nothing	何もない
+tr_boredom	つまらない
+tr_wanna_upload_photos_q	写真をアップロードするか？
+tr_upload_photos_now	写真をアップロードして。送信は1つのメッセージに制限されているため、まとめて送って。
+tr_not_valid_upload	有効なアップロードではない。
+tr_error_photo_upload	写真のアップロード中にエラーが発生した。
+tr_photo_uploads_temp_disabled	写真のアップロード機能はいったん停止中。
+tr_write_report	最後に、レポートを書いて。投稿は1つのメッセージでの送信に限定されているため、まとめて送って。
+tr_tweet	レポートをつばやいて！
+tr_thanks	レポートの投稿、ありがとうございます！
+welcome_back	Randonauticaへようこそ。
+dont_forgot_send_loc	現在地の送信をお忘れなく！
+iap_invalid_receipt	不正な購入レシート：{0}。通報されるよ。
+iap_maps_pack_enabled	マップ拡張が有効になった。
+iap_search_water_points_enabled	場所検索と水上地点スキップ拡張が有効になった。 「search <場所の名前または住所> 」と入力して現在地を設定する。
+iap_everything_enabled	ザ・全て拡張が有効になった。 「search <場所の名前または住所> 」と入力して現在地を設定する。
+iap_all_disabled	すべての拡張機能が無効になった。
+iap_no_purchases	購入履歴がない。
+iap_buy	購入
+iap_enable	有効にする
+iap_maps_pack	マップ拡張
+iap_maps_pack_desc	地図と道のアプリ内プレビュー
+iap_search_water_points	場所検索と水上地点スキップ拡張
+iap_search_water_points_desc	現在地を場所検索で設定したり、水上地点をスキップしたり
+iap_everything_pack	ザ・全てパック拡張
+iap_everything_pack_desc	マップ+場所検索+水上地点スキップ
+iap_enabling...	拡張機能を有効中・・・
+iap_thanks_enabling	ありがとうございます。拡張機能を有効中・・・
+sending_location	現在地を送信中・・・
+connecting_bot	ボットに接続中・・・
+sending_entropy	エントロピーを送信中・・・
+terms	"利用規約とプライバシーポリシー  
+  
+ランドノーティカ(Randonautica)アプリを使用すると、利用規約とプライバシーポリシーに同意したことになります。
+  
+ランドノーティカは真にランダム化された座標を使用します。これはあなたの責任であり、現実の世界の座標に物理的に移動することを決定した場合、完全に自己責任となります。  
+  
+ランドノーティカを使用する場合は、自己責任で使ってください。 Randonautica / Randonauts LLCは、このプラットフォームの使用によるプラスまたはマイナスの影響または結果について責任を負いません。  
+  
+常識を働かせ、自分自身や他の人に危害を加えてはいけません。不法侵入してはいけません。住まいの地域のすべての検疫、門限、および社会的距離に関する規制に従ってください。  
+  
+物を盗んだり、壊したり、ゴミを散らしたり、違法なことをしたり、自分や他の人に危険を及ぼすようなことはしないでください。  
+  
+すべてのデータは匿名化されます。サードパーティサービスと共有されるものは一切ありません。  
+  
+送信した位置情報は24時間後に自動的に削除されます。検出された地点は匿名化され保存されます。  
+  
+トリップレポートを出す場合、/r/randonaut_reportsのsubredditに匿名で投稿されます。あなたの居場所を投稿することは一切ありませんのでご安心ください。検出された地点のみ投稿されます。
+  
+同意する前に、必ず[完全な利用規約](https://bot.randonauts.com/privacy-and-terms.html)をお読みください。」"
