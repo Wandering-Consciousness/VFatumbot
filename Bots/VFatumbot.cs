@@ -69,17 +69,17 @@ namespace VFatumbot
                     }
                     else if (userProfileTemporary.IsLocationSet)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("welcome_back")), cancellationToken);
                         if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Don't forget to send your current location."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dont_forgot_send_loc")), cancellationToken);
                         await _mainDialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                     }
                     else if (userProfilePersistent.HasSetLocationOnce)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("welcome_back")), cancellationToken);
                         if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
@@ -137,17 +137,22 @@ namespace VFatumbot
                 await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
             }
 
-            double lat = 0, lon = 0;
-            string pushUserId = null;
             string startLocale;
-            userProfileTemporary.PushUserId = userProfilePersistent.PushUserId;
-
             if (InterceptConversationStartWithLocale(turnContext, out startLocale))
             {
                 userProfilePersistent.SetLocale(startLocale);
                 await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
             }
-            else if (InterceptPushNotificationSubscription(turnContext, out pushUserId))
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = userProfilePersistent.Locale;
+            }
+
+            double lat = 0, lon = 0;
+            string pushUserId = null;
+            userProfileTemporary.PushUserId = userProfilePersistent.PushUserId;
+
+            if (InterceptPushNotificationSubscription(turnContext, out pushUserId))
             {
                 if (userProfilePersistent.PushUserId != pushUserId)
                 {
@@ -307,7 +312,7 @@ namespace VFatumbot
                     }
                     if (verify != 0)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text($"Invalid purchase receipt: {verify}. You will be reported."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
                         return true;
                     }
 
@@ -316,7 +321,7 @@ namespace VFatumbot
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
 
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Maps Pack add-on enabled."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_maps_pack_enabled")), cancellationToken);
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
                     {
@@ -324,7 +329,7 @@ namespace VFatumbot
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
 
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled. Set your location by typing \"search <place name or address>\"."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
                     {
@@ -334,14 +339,14 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        await turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled. Set your location by typing \"search <place name or address>\"."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_everything_enabled")), cancellationToken);
                     }
                     else
                     {
                         userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
                         userProfilePersistent.IsIncludeWaterPoints = true;
-                        await turnContext.SendActivityAsync(MessageFactory.Text("All add-ons disabled."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_all_disabled")), cancellationToken);
                     }
 
                     if (userProfilePersistent.Purchases == null)
@@ -374,7 +379,7 @@ namespace VFatumbot
                     {
                         if (userProfilePersistent.Purchases == null || userProfilePersistent.Purchases.Count == 0)
                         {
-                            await turnContext.SendActivityAsync(MessageFactory.Text("You have no purchase history."), cancellationToken);
+                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_no_purchases")), cancellationToken);
                         }
                         else
                         {

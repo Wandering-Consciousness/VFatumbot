@@ -150,8 +150,8 @@ namespace VFatumbot.BotLogic
 
         public static string Tolog(ITurnContext context, string type, FinalAttractor ida, string shortCode) //idas
         {
-            string resp = "Intention Driven Anomaly found" + "\n\n";
-            if (type == "blind") { resp = "Mystery Point Generated" + "\n\n"; }
+            string resp = Loc.g("ida_found") + "\n\n";
+            if (type == "blind") { resp = Loc.g("mystery_point_generated") + "\n\n"; }
 
             var code = "";
             if (type == "blind") { code = "X-" + shortCode; }
@@ -172,11 +172,11 @@ namespace VFatumbot.BotLogic
                         bearing = (bearing + 360) % 360.0;
                     }
 
-                    resp += "Type: Attractor" + "\n\n";
-                    resp += "Radius: " + (int)(ida.X.radiusM) + "m" + "\n\n";
-                    resp += "Power: " + ida.X.power.ToString("#0.00", System.Globalization.CultureInfo.InvariantCulture) + "\n\n";
-                    resp += "Bearing: " + ida.X.center.bearing.distance.ToString("#0m", System.Globalization.CultureInfo.InvariantCulture) + " / "
-                                        + bearing.ToString("#0.0°", System.Globalization.CultureInfo.InvariantCulture) + "\n\n";
+                    resp += Loc.g("ida_type", Loc.g("md_attractor")) + "\n\n";
+                    resp += Loc.g("ida_radius", (int)(ida.X.radiusM)) + "m" + "\n\n";
+                    resp += Loc.g("ida_power", ida.X.power.ToString("#0.00", System.Globalization.CultureInfo.InvariantCulture)) + "\n\n";
+                    resp += Loc.g("ida_bearing", ida.X.center.bearing.distance.ToString("#0m", System.Globalization.CultureInfo.InvariantCulture) + " / "
+                                        + bearing.ToString("#0.0°", System.Globalization.CultureInfo.InvariantCulture)) + "\n\n";
                 }
             }
             else if (ida.X.type == 2)
@@ -189,11 +189,11 @@ namespace VFatumbot.BotLogic
                         bearing = (bearing + 360) % 360.0;
                     }
 
-                    resp += "Type: Void" + "\n\n";
-                    resp += "Radius: " + (int)(ida.X.radiusM) + "m" + "\n\n";
-                    resp += "Power: " + (1 / ida.X.power).ToString("#0.00", System.Globalization.CultureInfo.InvariantCulture) + "\n\n";
-                    resp += "Bearing: " + ida.X.center.bearing.distance.ToString("#0m", System.Globalization.CultureInfo.InvariantCulture) + " / "
-                                        + bearing.ToString("#0.0°", System.Globalization.CultureInfo.InvariantCulture) + "\n\n";
+                    resp += Loc.g("ida_type", Loc.g("md_void")) + "\n\n";
+                    resp += Loc.g("ida_radius", (int)(ida.X.radiusM)) + "m" + "\n\n";
+                    resp += Loc.g("ida_power", (1 / ida.X.power).ToString("#0.00", System.Globalization.CultureInfo.InvariantCulture)) + "\n\n";
+                    resp += Loc.g("ida_bearing", ida.X.center.bearing.distance.ToString("#0m", System.Globalization.CultureInfo.InvariantCulture) + " / "
+                                        + bearing.ToString("#0.0°", System.Globalization.CultureInfo.InvariantCulture)) + "\n\n";
                 }
             }
             string pl = "";
@@ -218,15 +218,15 @@ namespace VFatumbot.BotLogic
             if (type != "blind")
             {
                 if (ida.X.rarity > 0) { resp += "Abnormality Rank: " + pl + "\n\n"; }
-                resp += "z-score: " + ida.X.z_score.ToString("#0.00", System.Globalization.CultureInfo.InvariantCulture) + "\n\n";
+                resp += Loc.g("ida_zscore", ida.X.z_score.ToString("#0.00", System.Globalization.CultureInfo.InvariantCulture))  + "\n\n";
             }
             return resp;
         }
 
         public static string Tolog(ITurnContext context, string type, double Lat, double Lng, string ptype, string shortCode, QuantumRandomNumberGeneratorWrapper rnd) //randoms
         {
-            string resp = "Random Point generated" + "\n\n";
-            if (type == "blind") { resp = "Mystery Point Generated" + "\n\n"; }
+            string resp = Loc.g("randpoint_generated") + "\n\n";
+            if (type == "blind") { resp = Loc.g("mystery_point_generated") + "\n\n"; }
 
             var code = "";
             if (type == "blind") { code = "X-" + shortCode; }
@@ -239,7 +239,7 @@ namespace VFatumbot.BotLogic
                 + " " + Lng.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture) + ")" + "\n\n";
             if (ptype == "qtime")
             {
-                resp += "Suggested time: " + ((int)rnd.Next(23)).ToString("#0") + ":" + ((int)rnd.Next(59)).ToString("00") + "\n\n";
+                resp += Loc.g("suggested_time", ((int)rnd.Next(23)).ToString("#0") + ":" + ((int)rnd.Next(59)).ToString("00")) + "\n\n";
             }
             return resp;
         }

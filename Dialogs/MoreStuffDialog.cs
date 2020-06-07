@@ -44,8 +44,8 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("What would you like to get?  \nQuantum points are single random ones (potential Blind Spots).  Mystery Points are a random type of point."),
-                RetryPrompt = MessageFactory.Text("That is not valid action."),
+                Prompt = MessageFactory.Text(Loc.g("blind_spots_more_menu")),
+                RetryPrompt = MessageFactory.Text(Loc.g("invalid_action")),
                 Choices = GetActionChoices(),
             };
 

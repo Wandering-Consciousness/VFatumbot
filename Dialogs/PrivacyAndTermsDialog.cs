@@ -37,28 +37,27 @@ namespace VFatumbot
         {
             //_logger.LogInformation("PrivacyAndTermsDialog.MustAgreeStepAsync");
 
-            var help2 = System.IO.File.ReadAllText("help2.txt").Replace("APP_VERSION", Consts.APP_VERSION);
+            var help2 = System.IO.File.ReadAllText($"help2-{Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName}.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(help2), cancellationToken);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Do you agree to the terms of use and privacy policy, and to be a well behaved Randonaut?"), cancellationToken);
+            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions(Loc.g("agree_to_terms_q")), cancellationToken);
         }
 
         private async Task<DialogTurnResult> AgreeYesOrNoStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             //_logger.LogInformation($"PrivacyAndTermsDialog.AgreeYesOrNoStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (val.Equals(Loc.g("")))
             {
-                case "I agree":
-                    var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(stepContext.Context);
-                    userProfilePersistent.HasAgreedToToS = true;
-                    await _userProfilePersistentAccessor.SetAsync(stepContext.Context, userProfilePersistent);
-                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
-                case "No":
-                default:
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Text($"That's a shame. So many random adventures are waiting for you."), cancellationToken);
-                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
+                var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(stepContext.Context);
+                userProfilePersistent.HasAgreedToToS = true;
+                await _userProfilePersistentAccessor.SetAsync(stepContext.Context, userProfilePersistent);
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
+
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("toc_shame")), cancellationToken);
+            return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
         }
 
         private PromptOptions GetPromptOptions(string prompt)
@@ -66,18 +65,18 @@ namespace VFatumbot
             return new PromptOptions()
             {
                 Prompt = MessageFactory.Text(prompt),
-                RetryPrompt = MessageFactory.Text($"That is not a valid answer. {prompt}"),
+                RetryPrompt = MessageFactory.Text(Loc.g("toc_invalid_answer", prompt)),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() {
-                                        Value = "No",
+                                        Value = Loc.g("toc_dontagree"),
                                         Synonyms = new List<string>()
                                                         {
                                                             "no",
                                                         }
                                     },
                                     new Choice() {
-                                        Value = "I agree",
+                                        Value = Loc.g("toc_doagree"),
                                         Synonyms = new List<string>()
                                                         {
                                                             "i agree",

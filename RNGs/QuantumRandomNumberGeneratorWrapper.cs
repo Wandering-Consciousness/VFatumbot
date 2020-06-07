@@ -119,12 +119,12 @@ namespace VFatumbot
             // Here's a dirty hack (the codebase is starting to get filled with lots of these :-))
             // to catch QRNG source related exceptions to allow us to do operations like
             // send the user a message, reset their scanning flags and take them back to MainDialog prompt
-            if ((exception.GetType().Equals(typeof(InvalidDataException)) && "Service did not return random data.".Equals(exception.Message)) ||
+            if ((exception.GetType().Equals(typeof(InvalidDataException)) && Loc.g("err_qrng_service_failed").Equals(exception.Message)) ||
                 (exception.GetType().Equals(typeof(RuntimeBinderException)) && exception.Message.Contains("does not contain a definition")) ||
                 (exception.GetType().Equals(typeof(WebException)))
                 )
             {
-                _turnContext.SendActivityAsync("Sorry, there was an error sourcing quantum entropy needed to randomize. Try a bit later.").GetAwaiter().GetResult();
+                _turnContext.SendActivityAsync(Loc.g("err_qrng_error")).GetAwaiter().GetResult();
                 ((AdapterWithErrorHandler)_turnContext.Adapter).RepromptMainDialog(_turnContext, _mainDialog, _cancellationToken, new CallbackOptions() { ResetFlag = true }).GetAwaiter().GetResult();
                 return true;
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using VFatumbot.BotLogic;
 
 namespace VFatumbot
 {
@@ -55,7 +56,7 @@ namespace VFatumbot
                 }
             }
 
-            throw new Exception("Could not fetch new random data.");
+            throw new Exception(Loc.g("err_no_entropy_fetch"));
         }
 
         private string FetchRandomHexData(int lnts)
@@ -106,7 +107,7 @@ namespace VFatumbot
 
             if (_randomData == null)
             {
-                throw new InvalidDataException("Service did not return random data.");
+                throw new InvalidDataException(Loc.g("err_qrng_service_failed"));
             }
 
             return byte.Parse(_randomData[_randomDataIndex++]);
@@ -124,7 +125,7 @@ namespace VFatumbot
             }
             if (hexstring.Length < lnts)
             {
-                throw new InvalidDataException("Service did not return random data.");
+                throw new InvalidDataException(Loc.g("err_qrng_service_failed"));
             }
             return hexstring;
         }

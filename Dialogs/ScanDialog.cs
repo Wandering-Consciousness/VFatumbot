@@ -62,8 +62,8 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Choose the kind of scan:"),
-                RetryPrompt = MessageFactory.Text("That is not a valid scan."),
+                Prompt = MessageFactory.Text(Loc.g("scan_choose_kind")),
+                RetryPrompt = MessageFactory.Text(Loc.g("scan_invalid_action")),
                 Choices = GetActionChoices(),
             };
 
@@ -78,59 +78,58 @@ namespace VFatumbot
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
             var goBackMainMenuThisRound = false;
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (val.Equals(Loc.g("scan_attractor")))
             {
-                case "Scan Attractor":
-                    if (!userProfileTemporary.IsScanning)
-                    {
-                        stepContext.Values["PointType"] = "Attractor";
-                        return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                    }
-                    else
-                    {
-                        goBackMainMenuThisRound = true;
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("Your scanning session is already in progress."), cancellationToken);
-                    }
-                    break;
-                case "Scan Void":
-                    if (!userProfileTemporary.IsScanning)
-                    {
-                        stepContext.Values["PointType"] = "Void";
-                        return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                    }
-                    else
-                    {
-                        goBackMainMenuThisRound = true;
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("Your scanning session is already in progress."), cancellationToken);
-                    }
-                    break;
-                case "Scan Anomaly":
-                    if (!userProfileTemporary.IsScanning)
-                    {
-                        stepContext.Values["PointType"] = "Anomaly";
-                        return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                    }
-                    else
-                    {
-                        goBackMainMenuThisRound = true;
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("Your scanning session is already in progress."), cancellationToken);
-                    }
-                    break;
-                case "Scan Pair":
-                    if (!userProfileTemporary.IsScanning)
-                    {
-                        stepContext.Values["PointType"] = "Pair";
-                        return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                    }
-                    else
-                    {
-                        goBackMainMenuThisRound = true;
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("Your scanning session is already in progress."), cancellationToken);
-                    }
-                    break;
-                case "< Back":
+                if (!userProfileTemporary.IsScanning)
+                {
+                    stepContext.Values["PointType"] = "Attractor";
+                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                }
+                else
+                {
                     goBackMainMenuThisRound = true;
-                    break;
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("scan_sesson_inplace")), cancellationToken);
+                }
+            } else if (val.Equals(Loc.g("scan_void"))) {
+                if (!userProfileTemporary.IsScanning)
+                {
+                    stepContext.Values["PointType"] = "Void";
+                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                }
+                else
+                {
+                    goBackMainMenuThisRound = true;
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("scan_sesson_inplace")), cancellationToken);
+                }
+            }
+            else if (val.Equals(Loc.g("scan_anomaly")))
+            {
+                if (!userProfileTemporary.IsScanning)
+                {
+                    stepContext.Values["PointType"] = "Anomaly";
+                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                }
+                else
+                {
+                    goBackMainMenuThisRound = true;
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("scan_sesson_inplace")), cancellationToken);
+                }
+            } else if (val.Equals(Loc.g("scan_pair"))) {
+                if (!userProfileTemporary.IsScanning)
+                {
+                    stepContext.Values["PointType"] = "Pair";
+                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                }
+                else
+                {
+                    goBackMainMenuThisRound = true;
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("scan_sesson_inplace")), cancellationToken);
+                }
+            }
+            else if (val.Equals(Loc.g("bs_back")))
+            {
+                goBackMainMenuThisRound = true;
             }
 
             if (goBackMainMenuThisRound)
@@ -150,8 +149,8 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("How many intention driven quantum points would you like to look for?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 10."),
+                Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
+                RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() { Value = "1" },
@@ -206,35 +205,35 @@ namespace VFatumbot
             var actionOptions = new List<Choice>()
             {
                 new Choice() {
-                    Value = "Scan Attractor",
+                    Value = Loc.g("scan_attractor"),
                     Synonyms = new List<string>()
                                     {
                                         "scanattractor",
                                     }
                 },
                 new Choice() {
-                    Value = "Scan Void",
+                    Value = Loc.g("scan_void"),
                     Synonyms = new List<string>()
                                     {
                                         "scanvoid",
                                     }
                 },
                 new Choice() {
-                    Value = "Scan Anomaly",
+                    Value = Loc.g("scan_anomaly"),
                     Synonyms = new List<string>()
                                     {
                                         "scananomaly",
                                     }
                 },
                 new Choice() {
-                    Value = "Scan Pair",
+                    Value = Loc.g("scan_pair"),
                     Synonyms = new List<string>()
                                     {
                                         "scanpair",
                                     }
                 },
                 new Choice() {
-                    Value = "< Back",
+                    Value = Loc.g("bs_back"),
                     Synonyms = new List<string>()
                                     {
                                         "<",
