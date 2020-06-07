@@ -100,8 +100,8 @@ bs_chains	체인
 bs_dice	양자 주사위
 bs_back	<이전
 welcome_randonautica	Randonautica에 오신 것을 환영합니다!
-welcome_beginners	처음? 우선 [자주 묻는 질문]({0}) 및 랜드 노트의 규칙 ({1})를 확인하십시오.
-welcome_report_share	지점에 가면, Reddit ({0}) 및 Twitter ({1})에서 점유율을!
+welcome_beginners	처음? 우선 [자주 묻는 질문]({0}) 및 [랜드노트의 규칙]({1})를 확인하십시오.
+welcome_report_share	지점에 가면, [Reddit]({0}) 및 [Twitter]({1})에서 점유율을!
 first_send_location	우선 🌍 / 📎 현재 위치를 전송하거나 Google지도의 URL을 입력하거나.
 choose_chain_type	어느 지점 유형으로 체인 (순차적으로 검출) 할?
 ch_invalid_point_type	유효한 지점 유형 선택이 아니다.
