@@ -60,7 +60,7 @@ md_void	vuoto
 md_options	Opzioni / Aiuto
 md_blindspotsmore	Spot ciechi e altro
 md_mylocation	La mia posizione
-md_lets_search_paid	Cerchiamo! Cosa vorresti ottenere? \nGli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto. \nLe anomalie sono le più potenti tra attrattori e vuoti. \n \n \n \nPremium funzioni disponibili - Anteprime mappe, salta punti d'acqua e ricerca personalizzata della posizione. \nVai su Opzioni / Guida → Componenti aggiuntivi
+md_lets_search_paid	Cerchiamo! Cosa vorresti ottenere? \nGli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto. \nLe anomalie sono le più potenti tra attrattori e vuoti.   \n   \n\n\nPremium funzioni disponibili - Anteprime mappe, salta punti d'acqua e ricerca personalizzata della posizione. \nVai su Opzioni / Guida → Componenti aggiuntivi
 md_invalid_action	Questa non è un'azione valida. Cosa vorresti ottenere?
 md_lets_search	Cerchiamo! Cosa vorresti ottenere? \nGli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto. \nLe anomalie sono le più forti tra attrattori e vuoti.
 md_how_many_idas	Fino a quanti punti vorresti cercare?
@@ -100,7 +100,7 @@ bs_chains	Catene
 bs_dice	Dadi Quantici
 bs_back	<Indietro
 welcome_randonautica	Benvenuti in Randonautica!
-welcome_beginners	Principianti: iniziare esaminando le [FAQ]({0}) e [I 9 principi dei Randonauti]({1}). Per una fantastica panoramica delle idee e delle teorie del Progetto Fatum alla base di Randonauts dai un'occhiata a [video di 15 min di MegaNerd](https://www.youtube.com/watch?v=Vbi7jFjWY98).
+welcome_beginners	Principianti: iniziare esaminando le [FAQ]({0}) e [I 9 principi dei Randonauti]({1}).
 welcome_report_share	Dopo aver completato un viaggio, condividi la discussione con i Randonauts su [Reddit]({0}) e [Twitter]({1}).
 first_send_location	Inizia inviando la tua posizione toccando 🌍 / 📎 o inviando un URL di Google Maps.
 choose_chain_type	Che tipo di punti vuoi concatenare?
@@ -108,7 +108,6 @@ ch_invalid_point_type	Questo non è un tipo di punto valido.
 ch_anomalies	anomalie
 ch_voids	vuoti
 ch_attractors	attrattori
-ch_pseudos	pseudos
 ch_current_or_sequential	Generare tutti i punti dalla posizione corrente o in ordine sequenziale?
 ch_current	attuale
 ch_sequential	Sequenziale
@@ -189,7 +188,6 @@ tr_synchronicity_q	Valuta il fattore di sincronizzazione (o inserisci la tua par
 tr_dirk_gently	Dirk delicatamente
 tr_mind_blowing	Mente-blowing
 tr_somewhat	piuttosto
-tr_nothing	Niente
 tr_boredom	La noia
 tr_wanna_upload_photos_q	Vuoi caricare qualche foto?
 tr_upload_photos_now	Carica tutte le foto che hai scattato ora. Inviali tutti in una volta poiché l'invio è limitato a un messaggio.
@@ -213,31 +211,10 @@ iap_maps_pack	Pacchetto mappe
 iap_maps_pack_desc	Anteprima in-app di mappe e strade
 iap_search_water_points	Cerca posto + Salta pacchetto acqua
 iap_search_water_points_desc	Cerca per nome dei luoghi e salta i punti d'acqua
-iap_everything_pack	The Everything Pack
+iap_everything_pack	Cerca posto + Salta pacchetto acqua
 iap_everything_pack_desc	Mappe + Ricerca posizione + Skip Water Packs
 iap_enabling...	Abilitazione della funzione ...
 iap_thanks_enabling	Grazie. Abilitazione ora ...
 sending_location	Invio della tua posizione ...
 connecting_bot	Connessione al bot ...
 sending_entropy	Invio entropia ...
-terms	"NORME SULLA PRIVACY E CONDIZIONI D'USO  
-  
-Utilizzando Randonautica si accettano i Termini di utilizzo e l'Informativa sulla privacy.  
-  
-Randonautica utilizza coordinate veramente casuali. È responsabilità dell'utente e totalmente a proprio rischio se decidono di viaggiare fisicamente verso le coordinate nel mondo reale.  
-  
-Usando Randonautica, lo fai a tuo rischio e pericolo. Randonautica / Randonauts LLC non è responsabile per eventuali effetti positivi o negativi o conseguenze derivanti dall'uso di questa piattaforma.  
-  
-Usa il buon senso, non mettere te stesso o gli altri in pericolo. Non violare. Rispettare tutte le normative relative a quanrantine, coprifuoco e distanza sociale nella propria zona.  
-  
-Non rubare, non danneggiare la proprietà, non sporcare, non fare nulla di illegale né qualsiasi cosa che altrimenti causerebbe pericolo a te stesso o agli altri.  
-  
-Tutti i tuoi dati sono anonimizzati.  
-  
-Nulla è condiviso con servizi di terze parti, punto.  
-  
-Tutti i dati sulla posizione inviati vengono eliminati automaticamente dopo 24 ore. Vengono memorizzati i dati anonimi dei punti generati.  
-  
-Se si è scelto di scrivere un rapporto di viaggio, il rapporto verrà pubblicato anonimamente nel subreddit /r/randonaut_reports. Non preoccuparti, non pubblicheremo mai la tua posizione, solo il punto generato.  
-  
-Leggi i [termini completi qui](https://bot.randonauts.com/privacy-and-terms.html) prima di accettare."

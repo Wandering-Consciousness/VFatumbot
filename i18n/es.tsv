@@ -60,7 +60,7 @@ md_void	Vacío
 md_options	Opciones / Ayuda
 md_blindspotsmore	Puntos ciegos y más
 md_mylocation	Mi ubicacion
-md_lets_search_paid	¡Busquemos! ¿Qué te gustaría conseguir? \nLos atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario. \nLas anomalías son las más fuertes de Atractores y vacíos. \n \n \n \nCaracterísticas principales disponibles: vistas previas de mapas, saltos de puntos de agua y búsqueda de ubicaciones personalizadas. \nVaya a Opciones / Ayuda → Complementos
+md_lets_search_paid	¡Busquemos! ¿Qué te gustaría conseguir? \nLos atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario. \nLas anomalías son las más fuertes de Atractores y vacíos.   \n   \n\n\nCaracterísticas principales disponibles: vistas previas de mapas, saltos de puntos de agua y búsqueda de ubicaciones personalizadas. \nVaya a Opciones / Ayuda → Complementos
 md_invalid_action	Esa no es una acción válida. ¿Qué te gustaría conseguir?
 md_lets_search	¡Busquemos! ¿Qué te gustaría conseguir? \nLos atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario. \nLas anomalías son las más fuertes de atractores y vacíos.
 md_how_many_idas	¿Hasta cuántos puntos te gustaría buscar?
@@ -100,7 +100,7 @@ bs_chains	Cadenas
 bs_dice	Dados cuánticos
 bs_back	<Volver
 welcome_randonautica	¡Bienvenido a Randonautica!
-welcome_beginners	Principiantes: comience por revisar las [Preguntas frecuentes]({0}) y [Los 9 principios de los Randonauts]({1}). Para obtener una excelente visión general de las ideas y teorías del Proyecto Fatum detrás de Randonauts, consulte [el video de 15 minutos de MegaNerd](https://www.youtube.com/watch?v=Vbi7jFjWY98).
+welcome_beginners	Principiantes: comience por revisar las [Preguntas frecuentes]({0}) y [Los 9 principios de los Randonauts]({1}).
 welcome_report_share	Una vez que haya completado un viaje, comparta la discusión con los Randonauts en [Reddit]({0}) y [Twitter]({1}).
 first_send_location	Comience enviando su ubicación tocando 🌍 / 📎 o enviando una URL de Google Maps.
 choose_chain_type	¿Qué tipo de puntos quieres encadenar?
@@ -108,7 +108,6 @@ ch_invalid_point_type	Ese no es un tipo de punto válido.
 ch_anomalies	Anomalías
 ch_voids	Vacíos
 ch_attractors	Atractores
-ch_pseudos	Pseudos
 ch_current_or_sequential	¿Generar todos los puntos desde su ubicación actual o en orden secuencial?
 ch_current	Actual
 ch_sequential	Secuencial
@@ -189,7 +188,6 @@ tr_synchronicity_q	Califique el factor de sincronización (o ingrese su propia p
 tr_dirk_gently	Dirk gentilmente
 tr_mind_blowing	Alucinante
 tr_somewhat	Algo
-tr_nothing	Nada
 tr_boredom	Aburrimiento
 tr_wanna_upload_photos_q	¿Quieres subir fotos?
 tr_upload_photos_now	Sube las fotos que tomaste ahora. Envíelos todos a la vez, ya que el envío está limitado a un mensaje.
@@ -220,24 +218,3 @@ iap_thanks_enabling	Gracias. Habilitando ahora ...
 sending_location	Enviando su ubicación ...
 connecting_bot	Conectando a bot ...
 sending_entropy	Enviando entropía ...
-terms	"POLÍTICA DE PRIVACIDAD Y CONDICIONES DE USO  
-  
-Al usar Randonautica, acepta los Términos de uso y la Política de privacidad.  
-  
-Randonautica utiliza coordenadas verdaderamente aleatorias. Es responsabilidad del usuario y bajo su propio riesgo si deciden viajar físicamente a coordenadas en el mundo real.  
-  
-Al usar Randonautica, lo hace bajo su propio riesgo. Randonautica / Randonauts LLC no se hace responsable de los efectos o consecuencias positivas o adversas del uso de esta plataforma.  
-  
-Use el sentido común, no se ponga a sí mismo ni a otros en peligro. No traspases. Obedezca todas las regulaciones de cuarentena, toque de queda y distanciamiento social en su área.  
-  
-No robes, no dañes la propiedad, no tires basura, no hagas nada ilegal ni nada que de otra manera te causaría peligro a ti mismo o a otros.  
-  
-Todos sus datos son anónimos.  
-  
-Nada se comparte con ningún servicio de terceros, punto.  
-  
-Cualquier información de ubicación que envíe se elimina automáticamente después de 24 horas. Los datos anónimos de los puntos generados se almacenan.  
-  
-Si elige escribir un informe de viaje, el informe se publicará de forma anónima en el subreddit /r/randonaut_reports. No se preocupe, nunca publicaremos su ubicación, solo el punto generado.  
-  
-Lea los [términos completos aquí](https://bot.randonauts.com/privacy-and-terms.html) antes de aceptar."

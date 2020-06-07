@@ -60,7 +60,7 @@ md_void	空洞
 md_options	選項/幫助
 md_blindspotsmore	盲點及更多
 md_mylocation	我的位置
-md_lets_search_paid	讓我們搜索！您想得到什麼？ \n吸引子是密集的隨機點簇。空隙則相反。 \n異常是吸引人和虛空中最強的。\n \n \n \n可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。 \n轉到選項/幫助→附加組件
+md_lets_search_paid	讓我們搜索！您想得到什麼？ \n吸引子是密集的隨機點簇。空隙則相反。 \n異常是吸引人和虛空中最強的。  \n   \n\n\n可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。 \n轉到選項/幫助→附加組件
 md_invalid_action	這不是有效的措施。您想得到什麼？
 md_lets_search	讓我們搜索！您想得到什麼？ \n吸引子是密集的隨機點簇。空隙則相反。 \n異常是吸引者和虛空中最強的。
 md_how_many_idas	您最多要尋找幾分？
@@ -100,7 +100,7 @@ bs_chains	鏈條
 bs_dice	量子骰子
 bs_back	<返回
 welcome_randonautica	歡迎來到Randonautica！
-welcome_beginners	初學者：請先閱讀[FAQ]({0})和[Randonauts的9條原則]({1})。要詳細了解Ratumonauts背後的Fatum項目的思想和理論，請查看[MegaNerd的15分鐘視頻](https://www.youtube.com/watch?v=Vbi7jFjWY98)。
+welcome_beginners	初學者：請先閱讀[FAQ]({0})和[Randonauts的9條原則]({1})。
 welcome_report_share	完成旅行後，在[Reddit]({0})和[Twitter]({1})上與Randonauts共享討論。
 first_send_location	首先通過點擊🌍/📎發送位置信息或發送Google Maps URL。
 choose_chain_type	您想鏈接什麼樣的積分？
@@ -108,7 +108,6 @@ ch_invalid_point_type	這不是有效的點類型。
 ch_anomalies	異常現象
 ch_voids	空洞
 ch_attractors	吸引者
-ch_pseudos	假的
 ch_current_or_sequential	從您當前的位置或按順序生成所有點？
 ch_current	當前
 ch_sequential	順序的
@@ -189,7 +188,6 @@ tr_synchronicity_q	評價同步因子(或輸入您自己的詞)：
 tr_dirk_gently	德克·溫特利
 tr_mind_blowing	吹牛
 tr_somewhat	有些
-tr_nothing	沒有
 tr_boredom	無聊
 tr_wanna_upload_photos_q	您要上傳任何照片嗎？
 tr_upload_photos_now	上傳您現在拍攝的所有照片。一次發送所有消息，因為發送僅限於一條消息。
@@ -220,24 +218,3 @@ iap_thanks_enabling	謝謝。正在啟用...
 sending_location	正在傳送您的位置...
 connecting_bot	正在連接機器人...
 sending_entropy	正在發送熵...
-terms	"隱私政策和使用條款  
-  
-使用Randonautica，即表示您同意使用條款和隱私政策。  
-  
-Randonautica使用真正的隨機坐標。這是用戶的責任，如果用戶決定實際旅行以協調現實世界，則後果自負。  
-  
-使用Randonautica，後果自負。 Randonautica / Randonauts LLC對使用此平台產生的任何正面或負面影響或後果概不負責。  
-  
-使用常識，不要對自己或他人造成傷害。不要侵入。遵守您所在地區的所有檢疫，宵禁和社會隔離規定。  
-  
-不要偷東西，不要破壞財產，不要亂扔垃圾，不要做任何違法的事情，也不要做任何可能對自己或他人造成危險的事情。  
-  
-您的所有數據都是匿名的。  
-  
-期間，任何第三方服務均不共享任何內容。  
-  
-您發送的所有位置數據都會在24小時後自動刪除。存儲生成的點的匿名數據。  
-  
-如果您選擇編寫旅行報告，該報告將匿名發佈在/r/randonaut_reports子目錄中。不用擔心，我們將永遠不會發布您的位置，而只會發布您生成的點。  
-  
-在同意之前，請閱讀[此處的完整條款](https://bot.randonauts.com/privacy-and-terms.html)。"

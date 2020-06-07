@@ -60,7 +60,7 @@ md_void	ボイド
 md_options	設定・ヘルプ
 md_blindspotsmore	ブラインドスポット・その他
 md_mylocation	現在地
-md_lets_search_paid	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。\n  n\nアプリ内地図表示、水上地点スキップ、現在地検索などのプレミアム機能は「設定・ヘルプ」より「追加機能」からアクセスできる。
+md_lets_search_paid	検出しよう！次のメニューから選んで。  \n「アトラクター」はランダムな地点が集中している場所。「ボイド」はその反対。 \n「異常地点」はそのうちの強い方。\n  \n\nアプリ内地図表示、水上地点スキップ、現在地検索などのプレミアム機能は「設定・ヘルプ」より「拡張機能」からアクセスできる。
 md_invalid_action	無効な動作。次のメニューから選んで。
 md_lets_search	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。
 md_how_many_idas	地点をいくつまで検出する？
@@ -88,7 +88,7 @@ show_google_street_earth	Googleのストリートビューもアースは{0}。
 hidden	表示しない
 displayed	表示する
 get_locsearch_skipwater_pack	「拡張機能」より場所検索・水上地点スキップ機能を手に入れよう。
-get_maps_pack	「追加機能」よりアプリ内地図機能を手に入れよう。
+get_maps_pack	「拡張機能」よりアプリ内地図機能を手に入れよう。
 bs_quantum	量子地点
 bs_quantum_time	量子地点+時刻
 bs_intent_suggestions	意図案
@@ -108,7 +108,6 @@ ch_invalid_point_type	有効な地点タイプの選択ではない。
 ch_anomalies	異常地点
 ch_voids	アトラクター
 ch_attractors	ボイド
-ch_pseudos	疑似地点
 ch_current_or_sequential	全ての地点を現在地から、または順次に検出する？
 ch_current	現在地
 ch_sequential	順次
@@ -126,7 +125,7 @@ ida_bearing	方角: {0}
 ida_zscore	標準得点: {0}
 randpoint_generated	ランダムな地点を見つけた
 suggested_time	提案時間: {0}
-blind_spots_more_menu	次のメニューから選んで。  \n「量子」はシングルのランダム地点(潜在的なブラインドスポット)。 ミステリー地点は地点の種類がランダムで決まる。
+blind_spots_more_menu	次のメニューから選んで。  \n「量子地点」はシングルのランダム地点(潜在的なブラインドスポット)。 「ミステリー地点」は地点の種類がランダムで決まる。
 invalid_action	無効な動作
 agree_to_terms_q	利用規約に同意する?
 toc_dontagree	同意しない
@@ -189,7 +188,6 @@ tr_synchronicity_q	共時性を評価して(または独自の単語を入力)�
 tr_dirk_gently	めちゃめちゃある
 tr_mind_blowing	わお！って感じ
 tr_somewhat	ややある
-tr_nothing	何もない
 tr_boredom	つまらない
 tr_wanna_upload_photos_q	写真をアップロードするか？
 tr_upload_photos_now	写真をアップロードして。送信は1つのメッセージに制限されているため、まとめて送って。
@@ -213,29 +211,10 @@ iap_maps_pack	マップ拡張
 iap_maps_pack_desc	地図と道のアプリ内プレビュー
 iap_search_water_points	場所検索と水上地点スキップ拡張
 iap_search_water_points_desc	現在地を場所検索で設定したり、水上地点をスキップしたり
-iap_everything_pack	ザ・全てパック拡張
+iap_everything_pack	ザ・全て拡張
 iap_everything_pack_desc	マップ+場所検索+水上地点スキップ
 iap_enabling...	拡張機能を有効中・・・
 iap_thanks_enabling	ありがとうございます。拡張機能を有効中・・・
 sending_location	現在地を送信中・・・
 connecting_bot	ボットに接続中・・・
 sending_entropy	エントロピーを送信中・・・
-terms	"利用規約とプライバシーポリシー  
-  
-ランドノーティカ(Randonautica)アプリを使用すると、利用規約とプライバシーポリシーに同意したことになります。
-  
-ランドノーティカは真にランダム化された座標を使用します。これはあなたの責任であり、現実の世界の座標に物理的に移動することを決定した場合、完全に自己責任となります。  
-  
-ランドノーティカを使用する場合は、自己責任で使ってください。 Randonautica / Randonauts LLCは、このプラットフォームの使用によるプラスまたはマイナスの影響または結果について責任を負いません。  
-  
-常識を働かせ、自分自身や他の人に危害を加えてはいけません。不法侵入してはいけません。住まいの地域のすべての検疫、門限、および社会的距離に関する規制に従ってください。  
-  
-物を盗んだり、壊したり、ゴミを散らしたり、違法なことをしたり、自分や他の人に危険を及ぼすようなことはしないでください。  
-  
-すべてのデータは匿名化されます。サードパーティサービスと共有されるものは一切ありません。  
-  
-送信した位置情報は24時間後に自動的に削除されます。検出された地点は匿名化され保存されます。  
-  
-トリップレポートを出す場合、/r/randonaut_reportsのsubredditに匿名で投稿されます。あなたの居場所を投稿することは一切ありませんのでご安心ください。検出された地点のみ投稿されます。
-  
-同意する前に、必ず[完全な利用規約](https://bot.randonauts.com/privacy-and-terms.html)をお読みください。」"

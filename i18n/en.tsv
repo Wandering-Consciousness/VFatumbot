@@ -60,7 +60,7 @@ md_void	Void
 md_options	Options/Help
 md_blindspotsmore	Blind Spots & More
 md_mylocation	My Location
-md_lets_search_paid	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n  n\nPremium features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons
+md_lets_search_paid	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n  \n\nPremium features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons
 md_invalid_action	That is not a valid action. What would you like to get?
 md_lets_search	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.
 md_how_many_idas	Up to how many points would you like to look for?
@@ -100,7 +100,7 @@ bs_chains	Chains
 bs_dice	Quantum Dice
 bs_back	< Back
 welcome_randonautica	Welcome to Randonautica!
-welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}). For a great overview of the Fatum Project’s ideas and theories behind Randonauts check out [MegaNerd’s 15 min video](https://www.youtube.com/watch?v=Vbi7jFjWY98).
+welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}).
 welcome_report_share	Once you've completed a trip, share in the discussion with the Randonauts on [Reddit]({0}) and [Twitter]({1}).
 first_send_location	Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL.
 choose_chain_type	What kind of points do you want to chain?
@@ -189,7 +189,6 @@ tr_synchronicity_q	Rate the synchroncity factor (or enter your own word):
 tr_dirk_gently	Dirk Gently
 tr_mind_blowing	Mind-blowing
 tr_somewhat	Somewhat
-tr_nothing	Nothing
 tr_boredom	Boredom
 tr_wanna_upload_photos_q	Do you want want to upload any photos?
 tr_upload_photos_now	Upload any photos you took now. Send them all at once as sending is limited to one message.
@@ -220,24 +219,3 @@ iap_thanks_enabling	Thank you. Enabling now...
 sending_location	Sending your location...
 connecting_bot	Connecting to bot...
 sending_entropy	Sending entropy...
-terms	"PRIVACY POLICY AND TERMS OF USE  
-  
-By using Randonautica you agree to the Terms of Use and Privacy Policy.  
-  
-Randonautica uses truly randomized coordinates. It is the user’s responsibility and wholly at their own risk should they decide to physically travel to coordinates in the real world.  
-  
-By using Randonautica, you do so at your own risk. Randonautica/Randonauts LLC is not liable for any positive or adverse affects or consequences from the use of this platform.  
-  
-Use common sense, do not put yourself or others in harm's way. Don't trespass. Obey all quanrantine, curfew and social distancing regulations in your area.  
-  
-Don't steal, don't damage property, don't litter, don't do anything illegal nor anything that would otherwise cause danger to yourself or others.  
-  
-All your data is anonymized.  
-  
-Nothing is shared with any third party services, period.  
-  
-Any location data that you send is automatically deleted after 24 hours.  Anonymized data of points generated are stored.  
-  
-If you chose to write up a trip report, the report will be posted anonymously on the /r/randonaut_reports subreddit. Don't worry, we will never post your location, just the point generated.
-  
-Read the [full terms here](https://bot.randonauts.com/privacy-and-terms.html) before agreeing."
