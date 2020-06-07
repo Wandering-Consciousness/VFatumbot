@@ -32,7 +32,7 @@ namespace VFatumbot.BotLogic
             var help1 = System.IO.File.ReadAllText("help1.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help1), cancellationToken);
 
-            var help2 = System.IO.File.ReadAllText($"help2-{Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName}.txt").Replace("APP_VERSION", Consts.APP_VERSION);
+            var help2 = System.IO.File.ReadAllText($"help2-{Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName}.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help2), cancellationToken);
 
             var help3 = System.IO.File.ReadAllText("help3.txt").Replace("APP_VERSION", Consts.APP_VERSION);
@@ -195,7 +195,7 @@ namespace VFatumbot.BotLogic
 
         public static async Task<object> GetWhat3WordsAddressAsync(double[] incoords)
         {
-            var response = await new HttpClient().GetAsync("https://api.what3words.com/v3/convert-to-3wa?coordinates=" + incoords[0] + "%2C" + incoords[1] + "&key=" + Consts.W3W_API_KEY + "&language=" + Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
+            var response = await new HttpClient().GetAsync("https://api.what3words.com/v3/convert-to-3wa?coordinates=" + incoords[0] + "%2C" + incoords[1] + "&key=" + Consts.W3W_API_KEY + "&language=" + Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
             var jsonContent = response.Content.ReadAsStringAsync().Result;
             dynamic result = JsonConvert.DeserializeObject(jsonContent);
             return result;

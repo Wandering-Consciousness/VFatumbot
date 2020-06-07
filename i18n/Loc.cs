@@ -28,7 +28,7 @@ namespace VFatumbot.BotLogic
         {
             key = key.ToLower();
 
-            var cl = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+            var cl = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (!dicts.ContainsKey(cl))
             {
                 if (dicts["en"].ContainsKey(key))

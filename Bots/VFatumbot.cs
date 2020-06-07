@@ -145,7 +145,7 @@ namespace VFatumbot
             }
             else
             {
-                Thread.CurrentThread.CurrentCulture = userProfilePersistent.Locale;
+                Thread.CurrentThread.CurrentUICulture = userProfilePersistent.Locale;
             }
 
             double lat = 0, lon = 0;

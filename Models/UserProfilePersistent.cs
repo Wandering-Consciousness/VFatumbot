@@ -47,7 +47,7 @@ namespace VFatumbot
             try
             {
                 Locale = new CultureInfo(locale, false);
-                Thread.CurrentThread.CurrentCulture = Locale;
+                Thread.CurrentThread.CurrentUICulture = Locale;
             }
             catch
             {
