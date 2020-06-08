@@ -586,7 +586,7 @@ namespace VFatumbot
             if (answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos)) // also post a short version to /r/randonauts if we deem it interesting)
             {
                 var oldLines = message.Split("\n");
-                var newLines = oldLines.Where(line => !line.Contains("Intention Driven Anomaly found"));
+                var newLines = oldLines.Where(line => !line.Contains(Loc.g("ida_found")));
                 newLines = newLines.Where(line => !line.Contains("(")); // A-8FF89AC5 (43.105433 -76.121310)
                 newLines = newLines.Where(line => !line.Contains("Radius")); // Radius
                 var shortMessage = string.Join("\n", newLines);
@@ -608,8 +608,7 @@ namespace VFatumbot
             var w3wHashes = $" #{callbackOptions.What3Words[answers.PointNumberVisited].Replace(".", " #")}";
 
             var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220 - w3wHashes.Length, answers.Report.Length)));
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", " %20%23")})"), cancellationToken);
-            //await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_thanks")), cancellationToken);
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
