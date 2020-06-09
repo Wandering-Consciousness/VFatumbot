@@ -469,11 +469,9 @@
             function getLang() {
                 var ret;
                 if (navigator.languages != undefined)
-                    return navigator.languages[0];
-                ret = navigator.languages[0];
+                    ret = navigator.languages[0];
                 else
-                return navigator.language;
-                ret = navigator.language;
+                    ret = navigator.language;
                 return ret;
             };
         })().catch(err => console.error(err));
