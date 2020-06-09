@@ -48,7 +48,7 @@ namespace VFatumbot
             //_logger.LogInformation($"PrivacyAndTermsDialog.AgreeYesOrNoStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
             var val = ((FoundChoice)stepContext.Result)?.Value;
-            if (val.Equals(Loc.g("")))
+            if (val.Equals(Loc.g("toc_doagree")))
             {
                 var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(stepContext.Context);
                 userProfilePersistent.HasAgreedToToS = true;
