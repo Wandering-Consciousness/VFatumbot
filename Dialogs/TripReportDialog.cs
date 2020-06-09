@@ -493,7 +493,8 @@ namespace VFatumbot
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"{Loc.g("tr_error_photo_upload")}: ({e.GetType().Name}: {e.Message})"));
             }
 
-            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text(Loc.g("tr_photo_uploads_temp_disabled")) };
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_photo_uploads_temp_disabled")), cancellationToken);
+            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text(Loc.g("tr_write_report")) };
             return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
         }
 
