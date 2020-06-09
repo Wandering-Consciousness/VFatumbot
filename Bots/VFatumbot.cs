@@ -195,7 +195,7 @@ namespace VFatumbot
                     userProfileTemporary.Latitude = lat;
                     userProfileTemporary.Longitude = lon;
 
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Your current location is set to {lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.  \nThis will be the center for searches."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("current_location", lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))), cancellationToken);
 
                     var incoords = new double[] { lat, lon };
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
