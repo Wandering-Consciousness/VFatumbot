@@ -106,8 +106,8 @@ first_send_location	まずは、🌍/📎で現在地を送信するか、Google
 choose_chain_type	どの地点タイプでチェイン(順次に検出)する？
 ch_invalid_point_type	有効な地点タイプの選択ではない。
 ch_anomalies	異常地点
-ch_voids	アトラクター
-ch_attractors	ボイド
+ch_attractors	アトラクター
+ch_voids	ボイド
 ch_current_or_sequential	全ての地点を現在地から、または順次に検出する？
 ch_current	現在地
 ch_sequential	順次

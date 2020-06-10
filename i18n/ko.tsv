@@ -106,8 +106,8 @@ first_send_location	우선 🌍 / 📎 현재 위치를 전송하거나 Google�
 choose_chain_type	어느 지점 유형으로 체인 (순차적으로 검출) 할?
 ch_invalid_point_type	유효한 지점 유형 선택이 아니다.
 ch_anomalies	이상 지점
-ch_voids	끌개
-ch_attractors	보이드
+ch_attractors	끌개
+ch_voids	보이드
 ch_current_or_sequential	모든 지점을 현재 위치에서 또는 순차적으로 감지?
 ch_current	현재 위치
 ch_sequential	순차적으로
