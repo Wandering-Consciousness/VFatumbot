@@ -873,7 +873,7 @@ namespace VFatumbot.BotLogic
                         string suggestionsStr = "  \n";
                         foreach (var word in intentSuggestions)
                         {
-                            suggestionsStr += $"[{word}](https://www.google.com/search?q={Loc.g("define")}%20{word.Replace(" ", "%20")}) [({Loc.g("spotify_search")})](https://open.spotify.com/search/{word.Replace(" ", " %20")})  \n";
+                            suggestionsStr += $"[{word}](https://www.google.com/search?q=define%20{word.Replace(" ", "%20")}) [({Loc.g("spotify_search")})](https://open.spotify.com/search/{word.Replace(" ", " %20")})  \n";
                         }
 
                         await turnContext.SendActivityAsync(MessageFactory.Text($"{Loc.g("intent_suggestions")}: " + suggestionsStr), cancellationToken);
