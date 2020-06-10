@@ -169,7 +169,7 @@ namespace VFatumbot
                         var options = new PromptOptions()
                         {
                             Prompt = MessageFactory.Text(Loc.g("tr_set_intent_q")),
-                            RetryPrompt = MessageFactory.Text(Loc.g("invalid_choice")),
+                            RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                             Choices = new List<Choice>()
                             {
                                 new Choice() { Value = Loc.g("yes") },
@@ -243,7 +243,7 @@ namespace VFatumbot
             var options = new PromptOptions()
             {
                 Prompt = MessageFactory.Text(Loc.g("tr_collect_artifacts_q")),
-                RetryPrompt = MessageFactory.Text(Loc.g("invalid_choice")),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() { Value = Loc.g("yes") },
@@ -268,7 +268,7 @@ namespace VFatumbot
             var options = new PromptOptions()
             {
                 Prompt = MessageFactory.Text(Loc.g("tr_wow_and_astounding_q")),
-                RetryPrompt = MessageFactory.Text(Loc.g("invalid_choice")),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() { Value = Loc.g("yes") },
@@ -413,7 +413,7 @@ namespace VFatumbot
             var options = new PromptOptions()
             {
                 Prompt = MessageFactory.Text(Loc.g("tr_wanna_upload_photos_q")),
-                RetryPrompt = MessageFactory.Text(Loc.g("invalid_choice")),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() { Value = Loc.g("yes") },
