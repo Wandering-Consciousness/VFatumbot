@@ -104,7 +104,7 @@ namespace VFatumbot
             var options = new PromptOptions()
             {
                 Prompt = MessageFactory.Text(Loc.g("tr_did_you_visit")),
-                RetryPrompt = MessageFactory.Text("That is not a valid choice."),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                             {
                                 new Choice() {

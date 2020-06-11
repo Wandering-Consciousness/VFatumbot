@@ -114,7 +114,7 @@ namespace VFatumbot
             //_logger.LogInformation("SettingsDialog.RadiusStepAsync");
 
             var promptOptions = new PromptOptions {
-                Prompt = MessageFactory.Text("Select your radius in meters, or enter the numbers directly:"),
+                Prompt = MessageFactory.Text(Loc.g("select_radius")),
                 Choices = new List<Choice>()
                     {
                         new Choice() {
