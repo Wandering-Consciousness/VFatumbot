@@ -283,11 +283,10 @@ namespace VFatumbot
 
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    answers.WasFuckingAmazing = true;
-                    break;
+               answers.WasFuckingAmazing = true;
             }
 
             var options = new PromptOptions()
@@ -428,19 +427,17 @@ namespace VFatumbot
 
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    var promptOptions = new PromptOptions {
-                        Prompt = MessageFactory.Text(Loc.g("tr_upload_photos_now")),
-                        RetryPrompt = MessageFactory.Text(Loc.g("tr_not_valid_upload")),
-                    };
-                    return await stepContext.PromptAsync(nameof(AttachmentPrompt), promptOptions, cancellationToken);
-
-                case "No":
-                default:
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                var promptOptions = new PromptOptions {
+                    Prompt = MessageFactory.Text(Loc.g("tr_upload_photos_now")),
+                    RetryPrompt = MessageFactory.Text(Loc.g("tr_not_valid_upload")),
+                };
+                return await stepContext.PromptAsync(nameof(AttachmentPrompt), promptOptions, cancellationToken);
             }
+
+           return await stepContext.NextAsync(cancellationToken: cancellationToken);
         }
 
         private async Task<DialogTurnResult> WriteReportStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
