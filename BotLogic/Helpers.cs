@@ -32,7 +32,7 @@ namespace VFatumbot.BotLogic
             var help1 = System.IO.File.ReadAllText("help1.txt").Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help1), cancellationToken);
 
-            var help2 = System.IO.File.ReadAllText($"help2-{Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName}.txt").Replace("APP_VERSION", Consts.APP_VERSION);
+            var help2 = System.IO.File.ReadAllText(Loc.getTermsFilename()).Replace("APP_VERSION", Consts.APP_VERSION);
             await turnContext.SendActivityAsync(MessageFactory.Text(help2), cancellationToken);
 
             var help3 = System.IO.File.ReadAllText("help3.txt").Replace("APP_VERSION", Consts.APP_VERSION);
