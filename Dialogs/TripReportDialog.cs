@@ -448,6 +448,9 @@ namespace VFatumbot
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
 
+            // TODO: remove if we ever reinstate the two functions above for uploading photos
+            answers.Rating_Synchronicty = stepContext.Context.Activity.Text;
+
             try
             {
                 if (stepContext.Context.Activity.Attachments != null && stepContext.Context.Activity.Attachments.Count >= 1)
