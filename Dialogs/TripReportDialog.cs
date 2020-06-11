@@ -208,16 +208,14 @@ namespace VFatumbot
 
             //_logger.LogInformation($"TripReportDialog.SetIntentYesOrNoStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    var promptOptions = new PromptOptions { Prompt = MessageFactory.Text(Loc.g("tr_collect_artifacts_q")) };
-                    return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
-
-                case "No":
-                default:
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                var promptOptions = new PromptOptions { Prompt = MessageFactory.Text(Loc.g("tr_enter_intent")) };
+                return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
             }
+
+           return await stepContext.NextAsync(cancellationToken: cancellationToken);
         }
 
         private async Task<DialogTurnResult> GetIntentStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
