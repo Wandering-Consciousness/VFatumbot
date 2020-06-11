@@ -7,7 +7,7 @@ changed_radius	{0} 미터에서 {1}로 반경을 변경 한
 invalid_radius	잘못된 반경
 current_radius	현재 반경 {0} 미터
 cant_find_place	위치를 찾을 수없는
-current_location	현재 위치가 {0},{1}. \n 감지 범위의 중심 지점이다.
+current_location	현재 위치가 {0},{1}.  <br> 감지 범위의 중심 지점이다.
 water_points_will_be	수상 지점은 {0}
 skipped	건너 뛰기
 ignored	스킵하지 않는
@@ -60,11 +60,11 @@ md_void	보이드
 md_options	설정 도움말
 md_blindspotsmore	블라인드 스팟 기타
 md_mylocation	현재 위치
-md_lets_search_paid	검색하자! 다음 메뉴에서 선택. \n 끌개는 임의의 지점이 집중되어있는 곳. 보이드는 그 반대. \n "이상"은 그중 강한 편.   \n   \n\n\n 앱에서지도 표시, 수상 지점 건너 뛰기, 현재 위치 검색 등의 고급 기능은 '설정 도움말 "에서"추가 기능 "에서 액세스 할 수있다.
+md_lets_search_paid	검색하자! 다음 메뉴에서 선택.  <br> 끌개는 임의의 지점이 집중되어있는 곳. 보이드는 그 반대.  <br> "이상"은 그중 강한 편.   <br>   <br><br><br> 앱에서지도 표시, 수상 지점 건너 뛰기, 현재 위치 검색 등의 고급 기능은 '설정 도움말 "에서"추가 기능 "에서 액세스 할 수있다.
 md_invalid_action	잘못된 동작. 다음 메뉴에서 선택.
-md_lets_search	검색하자! 다음 메뉴에서 선택. \n 끌개는 임의의 지점이 집중되어있는 곳. 보이드는 그 반대. \n "이상"은 그중 강한 편.
+md_lets_search	검색하자! 다음 메뉴에서 선택.  <br> 끌개는 임의의 지점이 집중되어있는 곳. 보이드는 그 반대.  <br> "이상"은 그중 강한 편.
 md_how_many_idas	지점을 몇까지 감지?
-md_choose_qrng	엔트로피 취득을위한 양자 난수 생성기를 선택. 모를 때는 ANU을
+md_choose_qrng	양자 난수 생성기를 선택. 모를 때는 ANU을.
 md_invalid_qrng	잘못된 QRNG의 선택.
 md_camera	카메라
 md_anu	ANU
@@ -93,7 +93,7 @@ bs_quantum	양자 지점
 bs_quantum_time	양자 지점 + 시간
 bs_intent_suggestions	의도 방안
 bs_mystery_point	미스터리 지점
-bs_pair	쌍
+bs_pair	포인트 쌍
 bs_pseudo	의사 지점
 bs_scan	검색
 bs_chains	체인
@@ -106,8 +106,8 @@ first_send_location	우선 🌍 / 📎 현재 위치를 전송하거나 Google�
 choose_chain_type	어느 지점 유형으로 체인 (순차적으로 검출) 할?
 ch_invalid_point_type	유효한 지점 유형 선택이 아니다.
 ch_anomalies	이상 지점
-ch_attractors	끌개
 ch_voids	보이드
+ch_attractors	끌개
 ch_current_or_sequential	모든 지점을 현재 위치에서 또는 순차적으로 감지?
 ch_current	현재 위치
 ch_sequential	순차적으로
@@ -125,7 +125,7 @@ ida_bearing	방향 : {0}
 ida_zscore	표준 점수 : {0}
 randpoint_generated	임의의 지점을 찾아 냈다
 suggested_time	제안 시간 : {0}
-blind_spots_more_menu	다음 메뉴에서 선택. \n "양자"는 단일의 임의 지점 (잠재적 인 맹점). 미스터리 지점은 지점의 종류가 랜덤으로 결정된다.
+blind_spots_more_menu	다음 메뉴에서 선택.  <br> "양자"는 단일의 임의 지점 (잠재적 인 맹점). 미스터리 지점은 지점의 종류가 랜덤으로 결정된다.
 invalid_action	잘못된 동작
 agree_to_terms_q	이용 약관에 동의?
 toc_dontagree	동의하지
@@ -159,6 +159,7 @@ tr_yes_sans_report	했다. 보고서 없음.
 tr_yes_report	했다. 보고서를 낸다.
 tr_invalid_choice	올바른 선택이 아니다.
 tr_set_intent_q	의도를 설정 해둔?
+tr_enter_intent	당신의 의도는 무엇입니까?
 tr_hope_had_fun	즐거운 모험이었다고하네요!
 tr_collect_artifacts_q	뭔가 물건을 주워 가지고 돌아간?
 tr_wow_and_astounding_q	정말 놀라운 모험이었다?

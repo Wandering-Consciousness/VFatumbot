@@ -7,7 +7,7 @@ changed_radius	{0}メートルから{1}へと半径を変更した
 invalid_radius	無効な半径
 current_radius	現在半径が{0}メートル
 cant_find_place	場所が見つからない
-current_location	現在地が{0},{1}。  \n検出範囲の中心地点となる。
+current_location	現在地が{0},{1}。  <br>検出範囲の中心地点となる。
 water_points_will_be	水上地点は{0}
 skipped	スキップする
 ignored	スキップしない
@@ -60,11 +60,11 @@ md_void	ボイド
 md_options	設定・ヘルプ
 md_blindspotsmore	ブラインドスポット・その他
 md_mylocation	現在地
-md_lets_search_paid	検出しよう！次のメニューから選んで。  \n「アトラクター」はランダムな地点が集中している場所。「ボイド」はその反対。 \n「異常地点」はそのうちの強い方。\n  \n\nアプリ内地図表示、水上地点スキップ、現在地検索などのプレミアム機能は「設定・ヘルプ」より「拡張機能」からアクセスできる。
+md_lets_search_paid	検出しよう！次のメニューから選んで。  <br>「アトラクター」はランダムな地点が集中している場所。「ボイド」はその反対。  <br>「異常地点」はそのうちの強い方。<br>  <br><br>アプリ内地図表示、水上地点スキップ、現在地検索などのプレミアム機能は「設定・ヘルプ」より「拡張機能」からアクセスできる。
 md_invalid_action	無効な動作。次のメニューから選んで。
-md_lets_search	検出しよう！次のメニューから選んで。  \nアトラクターはランダムな地点が集中している場所。ボイドはその反対。 \n「異常」はそのうちの強い方。
+md_lets_search	検出しよう！次のメニューから選んで。  <br>「アトラクター」はランダムな地点が多く集中している場所。「ボイド」はその反対。  <br>「異常地点」はそのうちの強い方。
 md_how_many_idas	地点をいくつまで検出する？
-md_choose_qrng	エントロピー取得のための量子乱数生成器を選んで。わからないときはANUを
+md_choose_qrng	量子乱数生成器を選んで。わからないときはANUを。
 md_invalid_qrng	無効なQRNGの選択。
 md_camera	カメラ
 md_anu	ANU
@@ -106,8 +106,8 @@ first_send_location	まずは、🌍/📎で現在地を送信するか、Google
 choose_chain_type	どの地点タイプでチェイン(順次に検出)する？
 ch_invalid_point_type	有効な地点タイプの選択ではない。
 ch_anomalies	異常地点
-ch_attractors	アトラクター
 ch_voids	ボイド
+ch_attractors	アトラクター
 ch_current_or_sequential	全ての地点を現在地から、または順次に検出する？
 ch_current	現在地
 ch_sequential	順次
@@ -125,7 +125,7 @@ ida_bearing	方角: {0}
 ida_zscore	標準得点: {0}
 randpoint_generated	ランダムな地点を見つけた
 suggested_time	提案時間: {0}
-blind_spots_more_menu	次のメニューから選んで。  \n「量子地点」はシングルのランダム地点(潜在的なブラインドスポット)。 「ミステリー地点」は地点の種類がランダムで決まる。
+blind_spots_more_menu	次のメニューから選んで。  <br>「量子地点」はシングルのランダム地点(潜在的なブラインドスポット)。 「ミステリー地点」は地点の種類がランダムで決まる。
 invalid_action	無効な動作
 agree_to_terms_q	利用規約に同意する?
 toc_dontagree	同意しない
@@ -154,37 +154,38 @@ scan_void	ボイド
 scan_anomaly	異常地点
 scan_pair	ペア
 scan_sesson_inplace	スキャン捜索中
-tr_did_you_visit	地点に行った、そして冒険レポートを出す？
+tr_did_you_visit	地点に行った？、そして冒険レポートも出す？
 tr_yes_sans_report	行った。レポートなし。
-tr_yes_report	行った。レポートを出す。
+tr_yes_report	行った。レポートも出す。
 tr_invalid_choice	有効な選択ではない。
 tr_set_intent_q	意図を設定しておいた？
+tr_enter_intent	意図は何に設定した？
 tr_hope_had_fun	楽しい冒険だったといいね！
 tr_collect_artifacts_q	何か物を拾って持って帰った?
 tr_wow_and_astounding_q	すごくて驚くべき冒険だった？
-tr_meaningfulness_q	有意味度を評価して(または自分の言葉を入力してください)：
+tr_meaningfulness_q	有意味度を評価して(または直接言葉を入力することも可能)：
 tr_enriching	豊か
 tr_meaningful	有意義
 tr_casual	カジュアル
 tr_meaningless	無意味
-tr_emotional_q	感情度を評価して(または自分の言葉を入力してください)：
+tr_emotional_q	感情度を評価して(または直接言葉を入力することも可能)：
 tr_dopamine_hit	ドーパミン・ヒット
 tr_inspirational	感激
 tr_plain	普通
 tr_anxious	冷や冷や
 tr_despair	絶望
 tr_dread	恐怖
-tr_importance_q	重要度を評価して(または自分の言葉を入力してください)：
+tr_importance_q	重要度を評価して(または直接言葉を入力することも可能)：
 tr_lifechanging	人生が変わる程
 tr_influential	影響力のある
 tr_ordinary	普通
 tr_waste_time	時間の無駄
-tr_strangeness_q	奇妙度を評価して(またはあなた自身の言葉を入力してください)：
+tr_strangeness_q	奇妙度を評価して(または直接言葉を入力することも可能)：
 tr_woowooweird	神秘的
 tr_strange	奇妙
 tr_normal	普通
 tr_nothing	何ともない
-tr_synchronicity_q	共時性を評価して(または独自の単語を入力)：
+tr_synchronicity_q	共時性を評価して(または直接言葉を入力することも可能)：
 tr_dirk_gently	めちゃめちゃある
 tr_mind_blowing	わお！って感じ
 tr_somewhat	ややある

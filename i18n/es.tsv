@@ -7,7 +7,7 @@ changed_radius	Radio cambiado de {0}m a {1}m
 invalid_radius	Radio inválido
 current_radius	Su radio actual es de {0}m 
 cant_find_place	Lugar no encontrado
-current_location	Su ubicación actual está establecida en {0},{1}. \nEste será el centro de las búsquedas.
+current_location	Su ubicación actual está establecida en {0},{1}.  <br>Este será el centro de las búsquedas.
 water_points_will_be	Los puntos de agua serán {0}
 skipped	omitido
 ignored	ignorado
@@ -60,11 +60,11 @@ md_void	Vacío
 md_options	Opciones / Ayuda
 md_blindspotsmore	Puntos ciegos y más
 md_mylocation	Mi ubicacion
-md_lets_search_paid	¡Busquemos! ¿Qué te gustaría conseguir? \nLos atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario. \nLas anomalías son las más fuertes de Atractores y vacíos.   \n   \n\n\nCaracterísticas principales disponibles: vistas previas de mapas, saltos de puntos de agua y búsqueda de ubicaciones personalizadas. \nVaya a Opciones / Ayuda → Complementos
+md_lets_search_paid	¡Busquemos! ¿Qué te gustaría conseguir?  <br>Los atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario.  <br>Las anomalías son las más fuertes de Atractores y vacíos.   <br>   <br><br><br>Características principales disponibles: vistas previas de mapas, saltos de puntos de agua y búsqueda de ubicaciones personalizadas.  <br>Vaya a Opciones / Ayuda → Complementos
 md_invalid_action	Esa no es una acción válida. ¿Qué te gustaría conseguir?
-md_lets_search	¡Busquemos! ¿Qué te gustaría conseguir? \nLos atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario. \nLas anomalías son las más fuertes de atractores y vacíos.
+md_lets_search	¡Busquemos! ¿Qué te gustaría conseguir?  <br>Los atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario.  <br>Las anomalías son las más fuertes de atractores y vacíos.
 md_how_many_idas	¿Hasta cuántos puntos te gustaría buscar?
-md_choose_qrng	Elija su fuente de entropía para el generador de números aleatorios cuánticos (elija Australian National University - ANU si no está seguro)
+md_choose_qrng	Elija su fuente de entropía: (elija Australian National University - ANU si no está seguro)
 md_invalid_qrng	Esa no es una fuente de entropía válida.
 md_camera	Cámara
 md_anu	ANU
@@ -91,9 +91,9 @@ get_locsearch_skipwater_pack	Obtenga el paquete de búsqueda de ubicación y omi
 get_maps_pack	Obtenga el paquete de mapas para obtener vistas previas de mapas y calles en la aplicación desde el botón Complementos.
 bs_quantum	Cuántico
 bs_quantum_time	Tiempo cuántico
-bs_intent_suggestions	Sugerencias de intenciones
+bs_intent_suggestions	Ideas intencionales
 bs_mystery_point	Punto misterioso
-bs_pair	Par de puntos generados
+bs_pair	Par de puntos
 bs_pseudo	Seudo
 bs_scan	Escanear
 bs_chains	Cadenas
@@ -125,7 +125,7 @@ ida_bearing	Rodamiento: {0}
 ida_zscore	puntaje z: {0}
 randpoint_generated	Punto aleatorio generado
 suggested_time	Tiempo sugerido: {0}
-blind_spots_more_menu	¿Qué te gustaría conseguir? \nLos puntos cuánticos son aleatorios individuales (posibles puntos ciegos). Los puntos misteriosos son un tipo de punto aleatorio.
+blind_spots_more_menu	¿Qué te gustaría conseguir?  <br>Los puntos cuánticos son aleatorios individuales (posibles puntos ciegos). Los puntos misteriosos son un tipo de punto aleatorio.
 invalid_action	Esa no es una acción válida.
 agree_to_terms_q	¿Está de acuerdo con los términos de uso y la política de privacidad, y para ser un Randonaut con buen comportamiento?
 toc_dontagree	No
@@ -149,16 +149,17 @@ err_qrng_service_failed	El servicio no devolvió datos aleatorios.
 err_qrng_error	Lo sentimos, hubo un error de fuente de entropía cuántica necesaria para aleatorizar. Intenta un poco más tarde.
 scan_choose_kind	Elija el tipo de escaneo:
 scan_invalid_action	Ese no es un escaneo válido.
-scan_attractor	Scan Attractor
-scan_void	Escaneo vacío
-scan_anomaly	Anomalía de escaneo
-scan_pair	Escanear par
+scan_attractor	Escaneo Atractor
+scan_void	Escaneo Vacío
+scan_anomaly	Escaneo Anomalía
+scan_pair	Escanear Par
 scan_sesson_inplace	Su sesión de escaneo ya está en progreso.
 tr_did_you_visit	¿Visitaste o te acercaste al punto, y te gustaría hacer un informe de viaje?
 tr_yes_sans_report	Sí sin informar
 tr_yes_report	Sí con informe!
 tr_invalid_choice	Esa no es una opción válida.
 tr_set_intent_q	¿Estableciste una intención?
+tr_enter_intent	¿Cuál fue tu intención?
 tr_hope_had_fun	Espero que hayas tenido un viaje divertido!
 tr_collect_artifacts_q	¿Coleccionaste algún artefacto?
 tr_wow_and_astounding_q	¿Fue su viaje "asombroso y asombroso"?

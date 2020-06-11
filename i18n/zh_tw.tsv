@@ -7,7 +7,7 @@ changed_radius	半徑從{0}m 更改為{1}m
 invalid_radius	無效的半徑
 current_radius	您當前的半徑為{0}m 
 cant_find_place	找不到地方。
-current_location	您當前的位置設置為{0}，{1}。 \n這將是搜索的中心。
+current_location	您當前的位置設置為{0}，{1}。  <br>這將是搜索的中心。
 water_points_will_be	水位將為{0}
 skipped	跳過
 ignored	被忽略
@@ -55,16 +55,16 @@ google_maps	谷歌地圖
 google_street_view	Google街景
 download_app	下載應用程式
 md_anomaly	異常現象
-md_attractor	吸引人
+md_attractor	吸引點
 md_void	空洞
 md_options	選項/幫助
 md_blindspotsmore	盲點及更多
 md_mylocation	我的位置
-md_lets_search_paid	讓我們搜索！您想得到什麼？ \n吸引子是密集的隨機點簇。空隙則相反。 \n異常是吸引人和虛空中最強的。  \n   \n\n\n可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。 \n轉到選項/幫助→附加組件
+md_lets_search_paid	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。  <br>   <br><br><br>可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。  <br>轉到選項/幫助→附加組件
 md_invalid_action	這不是有效的措施。您想得到什麼？
-md_lets_search	讓我們搜索！您想得到什麼？ \n吸引子是密集的隨機點簇。空隙則相反。 \n異常是吸引者和虛空中最強的。
+md_lets_search	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。
 md_how_many_idas	您最多要尋找幾分？
-md_choose_qrng	為量子隨機數生成器選擇熵源(如果不確定，請選擇澳大利亞國立大學-ANU)
+md_choose_qrng	選擇您的熵源：（如果不確定，請選擇澳大利亞國立大學-澳大利亞國立大學）
 md_invalid_qrng	那不是有效的熵源。
 md_camera	相機
 md_anu	澳大利亞國立大學
@@ -93,7 +93,7 @@ bs_quantum	量子
 bs_quantum_time	量子時間
 bs_intent_suggestions	意向建議
 bs_mystery_point	神秘點
-bs_pair	成對的點
+bs_pair	對點
 bs_pseudo	偽
 bs_scan	掃瞄
 bs_chains	鏈條
@@ -107,7 +107,7 @@ choose_chain_type	您想鏈接什麼樣的積分？
 ch_invalid_point_type	這不是有效的點類型。
 ch_anomalies	異常現象
 ch_voids	空洞
-ch_attractors	吸引者
+ch_attractors	吸引點
 ch_current_or_sequential	從您當前的位置或按順序生成所有點？
 ch_current	當前
 ch_sequential	順序的
@@ -125,7 +125,7 @@ ida_bearing	方位：{0}
 ida_zscore	z分數：{0}
 randpoint_generated	隨機點生成
 suggested_time	建議時間：{0}
-blind_spots_more_menu	您想得到什麼？ \n量子點是單個隨機的點(潛在的盲點)。神秘點是隨機類型的點。
+blind_spots_more_menu	您想得到什麼？  <br>量子點是單個隨機的點(潛在的盲點)。神秘點是隨機類型的點。
 invalid_action	那是無效的動作。
 agree_to_terms_q	您是否同意使用條款和隱私政策，並成為行為良好的Randonaut？
 toc_dontagree	沒有
@@ -149,8 +149,8 @@ err_qrng_service_failed	服務未返回隨機數據。
 err_qrng_error	抱歉，隨機化需要錯誤的量子熵。請稍後再試。
 scan_choose_kind	選擇掃描類型：
 scan_invalid_action	那不是有效的掃描。
-scan_attractor	掃描吸引器
-scan_void	掃描空隙
+scan_attractor	掃描吸引點
+scan_void	掃描空洞
 scan_anomaly	掃描異常
 scan_pair	掃描對
 scan_sesson_inplace	您的掃描會話已經在進行中。
@@ -159,6 +159,7 @@ tr_yes_sans_report	是，無報告
 tr_yes_report	是的，報告！
 tr_invalid_choice	那不是一個有效的選擇。
 tr_set_intent_q	你有打算嗎
+tr_enter_intent	你的意圖是什麼？
 tr_hope_had_fun	希望您旅途愉快！
 tr_collect_artifacts_q	您收集了任何文物嗎？
 tr_wow_and_astounding_q	您的旅行是否“令人驚嘆！”？

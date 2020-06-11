@@ -7,7 +7,7 @@ changed_radius	Changed radius from {0}m to {1}m
 invalid_radius	Invalid radius
 current_radius	Your current radius from is {0}m
 cant_find_place	Place not found.
-current_location	Your current location is set to {0},{1}.  \nThis will be the center for searches.
+current_location	Your current location is set to {0},{1}.  <br>This will be the center for searches.
 water_points_will_be	Water points will be {0}
 skipped	skipped
 ignored	ignored
@@ -60,11 +60,11 @@ md_void	Void
 md_options	Options/Help
 md_blindspotsmore	Blind Spots & More
 md_mylocation	My Location
-md_lets_search_paid	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.\n  \n\nPremium features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons
+md_lets_search_paid	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.<br>  <br><br>Premium features available - Map previews, skip water points & custom location searching.  <br>Go to Options/Help → Add-ons
 md_invalid_action	That is not a valid action. What would you like to get?
-md_lets_search	Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractors and Voids.
+md_lets_search	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.
 md_how_many_idas	Up to how many points would you like to look for?
-md_choose_qrng	Choose your entropy source for the quantum random number generator (choose Australian National University - ANU if unsure)
+md_choose_qrng	Choose your entropy source: (choose Australian National University - ANU if unsure)
 md_invalid_qrng	That is not a valid entropy source.
 md_camera	Camera
 md_anu	ANU
@@ -91,16 +91,16 @@ get_locsearch_skipwater_pack	Get the Location Search and Skip Water Points Pack 
 get_maps_pack	Get the Maps Pack for in-app map and street previews from the Add-ons button.
 bs_quantum	Quantum
 bs_quantum_time	Quantum Time
-bs_intent_suggestions	Intent Suggestions
+bs_intent_suggestions	Intent Ideas
 bs_mystery_point	Mystery Point
-bs_pair	Pair of Points Generated
+bs_pair	Pair of Points
 bs_pseudo	Pseudo
 bs_scan	Scan
 bs_chains	Chains
 bs_dice	Quantum Dice
 bs_back	< Back
 welcome_randonautica	Welcome to Randonautica!
-welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}).
+welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}). 
 welcome_report_share	Once you've completed a trip, share in the discussion with the Randonauts on [Reddit]({0}) and [Twitter]({1}).
 first_send_location	Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL.
 choose_chain_type	What kind of points do you want to chain?
@@ -108,7 +108,6 @@ ch_invalid_point_type	That is not a valid point type.
 ch_anomalies	Anomalies
 ch_voids	Voids
 ch_attractors	Attractors
-ch_pseudos	Pseudos
 ch_current_or_sequential	Generate all points from your current location or in sequential order?
 ch_current	Current
 ch_sequential	Sequential
@@ -126,7 +125,7 @@ ida_bearing	Bearing: {0}
 ida_zscore	z-score: {0}
 randpoint_generated	Random Point Generated
 suggested_time	Suggested time: {0}
-blind_spots_more_menu	What would you like to get?  \nQuantum points are single random ones (potential Blind Spots).  Mystery Points are a random type of point.
+blind_spots_more_menu	What would you like to get?  <br>Quantum points are single random ones (potential Blind Spots).  Mystery Points are a random type of point.
 invalid_action	That is not valid action.
 agree_to_terms_q	Do you agree to the terms of use and privacy policy, and to be a well behaved Randonaut?
 toc_dontagree	No
@@ -160,6 +159,7 @@ tr_yes_sans_report	Yes sans reporting
 tr_yes_report	Yes with report!
 tr_invalid_choice	That is not a valid choice.
 tr_set_intent_q	Did you set an intent?
+tr_enter_intent	What was your intent?
 tr_hope_had_fun	Hope you had a fun trip!
 tr_collect_artifacts_q	Did you collect any artifacts?
 tr_wow_and_astounding_q	Was your trip \"wow and astounding!\"?

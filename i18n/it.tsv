@@ -7,7 +7,7 @@ changed_radius	Raggio cambiato da {0}m a {1}m
 invalid_radius	Raggio non valido
 current_radius	Il raggio corrente é di {0}m
 cant_find_place	Impossibile trovare un luogo
-current_location	La tua posizione é segnata {0},{1}.  \nQuesto sarà il centro per la ricerca
+current_location	La tua posizione é segnata {0},{1}.  <br>Questo sarà il centro per la ricerca
 water_points_will_be	I punti in acqua saranno {0}
 skipped	saltato
 ignored	ignorato
@@ -60,11 +60,11 @@ md_void	Vuoto
 md_options	Opzioni / Aiuto
 md_blindspotsmore	Spot ciechi e altro
 md_mylocation	La mia posizione
-md_lets_search_paid	Cerchiamo! Cosa vorresti ottenere? \nGli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto. \nLe anomalie sono le più potenti tra attrattori e vuoti.   \n   \n\n\nPremium funzioni disponibili - Anteprime mappe, salta punti d'acqua e ricerca personalizzata della posizione. \nVai su Opzioni / Guida → Componenti aggiuntivi
+md_lets_search_paid	Cerchiamo! Cosa vorresti ottenere?  <br>Gli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto.  <br>Le anomalie sono le più potenti tra attrattori e vuoti.   <br>   <br><br><br>Premium funzioni disponibili - Anteprime mappe, salta punti d'acqua e ricerca personalizzata della posizione.  <br>Vai su Opzioni / Guida → Componenti aggiuntivi
 md_invalid_action	Questa non è un'azione valida. Cosa vorresti ottenere?
-md_lets_search	Cerchiamo! Cosa vorresti ottenere? \nGli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto. \nLe anomalie sono le più forti tra attrattori e vuoti.
+md_lets_search	Cerchiamo! Cosa vorresti ottenere?  <br>Gli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto.  <br>Le anomalie sono le più forti tra attrattori e vuoti.
 md_how_many_idas	Fino a quanti punti vorresti cercare?
-md_choose_qrng	Scegli la tua fonte di entropia per il generatore di numeri casuali quantistici (scegli Australian National University - ANU se non sei sicuro)
+md_choose_qrng	Scegli la tua fonte di entropia: (scegli Australian National University - ANU se non sei sicuro)
 md_invalid_qrng	Questa non è una fonte di entropia valida.
 md_camera	telecamera
 md_anu	ANU
@@ -91,9 +91,9 @@ get_locsearch_skipwater_pack	Ottieni la ricerca della posizione e salta il pacch
 get_maps_pack	Ottieni il Maps Pack per mappe in-app e anteprime stradali dal pulsante Componenti aggiuntivi.
 bs_quantum	quantistico
 bs_quantum_time	Quantum Time
-bs_intent_suggestions	Suggerimenti di intenti
-bs_mystery_point	Mystery Point
-bs_pair	Coppia di punti generati
+bs_intent_suggestions	Idee di intenti
+bs_mystery_point	Punto misterioso
+bs_pair	Coppia di punti
 bs_pseudo	Pseudo
 bs_scan	Scansione
 bs_chains	Catene
@@ -125,7 +125,7 @@ ida_bearing	Rilevamento: {0}
 ida_zscore	punteggio z: {0}
 randpoint_generated	Punto casuale generato
 suggested_time	Tempo suggerito: {0}
-blind_spots_more_menu	Cosa vorresti ottenere? \nI punti quantici sono singoli casuali (potenziali punti ciechi). I punti misteriosi sono un tipo casuale di punti.
+blind_spots_more_menu	Cosa vorresti ottenere?  <br>I punti quantici sono singoli casuali (potenziali punti ciechi). I punti misteriosi sono un tipo casuale di punti.
 invalid_action	Questa non è un'azione valida.
 agree_to_terms_q	Accetti i termini di utilizzo e l'informativa sulla privacy e di essere un Randonaut ben educato?
 toc_dontagree	No
@@ -149,16 +149,17 @@ err_qrng_service_failed	Il servizio non ha restituito dati casuali.
 err_qrng_error	Siamo spiacenti, si è verificato un errore nell'acquisizione dell'entropia quantistica necessaria per la randomizzazione. Prova più tardi.
 scan_choose_kind	Scegli il tipo di scansione:
 scan_invalid_action	Questa non è una scansione valida.
-scan_attractor	Scan Attractor
-scan_void	Scan Void
+scan_attractor	Scansione Attrattore
+scan_void	Scansione Vuota
 scan_anomaly	Scansione Anomalia
 scan_pair	Coppia di scansione
 scan_sesson_inplace	La tua sessione di scansione è già in corso.
 tr_did_you_visit	Hai visitato o ti sei avvicinato al punto e desideri fare un rapporto di viaggio?
 tr_yes_sans_report	Sì senza report
-tr_yes_report	Sì con la segnalazione!
+tr_yes_report	Sì e segnala!
 tr_invalid_choice	Questa non è una scelta valida.
 tr_set_intent_q	Hai fissato un intento?
+tr_enter_intent	Qual era il tuo intento?
 tr_hope_had_fun	Spero che tu abbia fatto un viaggio divertente!
 tr_collect_artifacts_q	Hai collezionato artefatti?
 tr_wow_and_astounding_q	Il tuo viaggio è stato \ "strabiliante e sorprendente! \"?
