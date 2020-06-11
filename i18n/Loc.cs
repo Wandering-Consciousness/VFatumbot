@@ -31,6 +31,7 @@ namespace VFatumbot.BotLogic
         public static string g(string key, params object[] formatters)
         {
             key = key.ToLower();
+            var ret = "";
 
             var clN = Thread.CurrentThread.CurrentUICulture.Name.ToLower();
             var cl2 = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower();
@@ -38,24 +39,27 @@ namespace VFatumbot.BotLogic
             {
                 if (dicts["en"].ContainsKey(key))
                 {
-                    return string.Format(dicts["en"][key], formatters);
+                    ret = string.Format(dicts["en"][key], formatters);
                 }
                 else
                 {
-                    return key;
+                    ret = key;
                 }
             }
 
             if (dicts.ContainsKey(clN) && dicts[clN].ContainsKey(key))
             {
-                return string.Format(dicts[clN][key], formatters);
+                ret = string.Format(dicts[clN][key], formatters);
             }
             else if (dicts.ContainsKey(cl2) && dicts[cl2].ContainsKey(key))
             {
-                return string.Format(dicts[cl2][key], formatters);
+                ret = string.Format(dicts[cl2][key], formatters);
             }
 
-            return key;
+            ret = ret.Replace("<br>", "\n");
+            return ret;
+        }
+            }
         }
     }
 }
