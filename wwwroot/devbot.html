@@ -323,6 +323,7 @@
                 },
                 src: src,
                 type: 'event',
+                startLocale: getLang()
             };
             directLine.postActivity(activity).subscribe(function (id) {
                 hideSnackbar();
@@ -463,6 +464,15 @@
                         return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
                     }
                 }
+            };
+
+            function getLang() {
+                var ret;
+                if (navigator.languages != undefined)
+                    ret = navigator.languages[0];
+                else
+                    ret = navigator.language;
+                return ret;
             };
         })().catch(err => console.error(err));
     </script>
