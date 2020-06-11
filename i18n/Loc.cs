@@ -59,7 +59,26 @@ namespace VFatumbot.BotLogic
             ret = ret.Replace("<br>", "\n");
             return ret;
         }
+
+        public static string getTermsFilename()
+        {
+            var clN = Thread.CurrentThread.CurrentUICulture.Name.ToLower();
+            var cl2 = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower();
+            if (!File.Exists($"help2-{clN}.txt") && !File.Exists($"help2-{cl2}.txt"))
+            {
+                return "help2-en.txt";
             }
+
+            if (File.Exists($"help2-{clN}.txt"))
+            {
+                return $"help2-{clN}.txt";
+            }
+            else if (File.Exists($"help2-{cl2}.txt"))
+            {
+                return $"help2-{cl2}.txt";
+            }
+
+            return "help2-en.txt";
         }
     }
 }
