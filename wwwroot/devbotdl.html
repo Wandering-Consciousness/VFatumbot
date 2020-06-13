@@ -3,7 +3,7 @@
 <head>
     <title>Randonautica</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0" />
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main49.css">
     <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/4.9.0/webchat.js"></script>
     <script src="jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
@@ -64,7 +64,7 @@
     </script>
     <style>
 
-        @import "main.css";
+        @import "main49.css";
 
         html,
         body {
@@ -323,6 +323,7 @@
                 },
                 src: src,
                 type: 'event',
+                startLocale: getLang()
             };
             directLine.postActivity(activity).subscribe(function (id) {
                 hideSnackbar();
@@ -463,6 +464,15 @@
                         return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
                     }
                 }
+            };
+
+            function getLang() {
+                var ret;
+                if (navigator.languages != undefined)
+                    ret = navigator.languages[0];
+                else
+                    ret = navigator.language;
+                return ret;
             };
         })().catch(err => console.error(err));
     </script>

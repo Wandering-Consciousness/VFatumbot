@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using VFatumbot.BotLogic;
 
 namespace VFatumbot
 {
@@ -118,7 +119,7 @@ namespace VFatumbot
 
             if (_randomData == null)
             {
-                throw new InvalidDataException("Service did not return random data.");
+                throw new InvalidDataException(Loc.g("err_qrng_service_failed"));
             }
 
             return _randomData[_randomDataIndex++];

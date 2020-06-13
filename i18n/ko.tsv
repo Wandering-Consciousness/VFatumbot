@@ -1,0 +1,221 @@
+﻿all_kinds_steve	나는 모든 종류의 스티브 하오!
+let_steve_help	스티브가 힘이되어 줄!
+this_is_steve	이곳은 스티브
+radius_gte	반경 {0} 미터 이상 필요
+radius_lte	반경 {0} 미터 이하 필요
+changed_radius	{0} 미터에서 {1}로 반경을 변경 한
+invalid_radius	잘못된 반경
+current_radius	현재 반경 {0} 미터
+cant_find_place	위치를 찾을 수없는
+current_location	현재 위치가 {0},{1}.  <br> 감지 범위의 중심 지점이다.
+water_points_will_be	수상 지점은 {0}
+skipped	건너 뛰기
+ignored	스킵하지 않는
+classic_mode	클래식 모드는 지금 {0}
+enabled	사용 중
+disabled	해제 중
+help	도움말
+invalid_num_points	잘못된 값. 1 ~ 10 이내 필요.
+scan_time_take	스캔에 5 ~ 15 분을 요한다.
+finding_location	지점 검색 중 ... 의도에 집중하여 생각.
+nothing_but_water_points	수상 지점 밖에 발견되지 않았다. 나중에 다시 시도해보세요.
+num_water_points_skipped_so_far	지금까지 해상 지점을 {0} 번 건너 뛴
+num_water_points_skipped	수상 지점을 {0} 번 건너 뛴
+point_generated	지점을 찾아 냈다
+no_points_detected_quantum	지금 현재 이상 지점을 찾을 수 없기 때문에 양자 지점을 안내하는
+no_points_detected	지금 현재 지점을 찾을 수없는
+address	주소
+get_intent_suggestions	영어 사전을 양자으로 무작위 중 ...
+define	의미
+spotify_search	Spotify 검색
+intent_suggestions	의도 방안
+num_water_attractors_skipped	끌개의 해상 지점을 {0} 번 건너 뛴
+num_water_voids_skipped	보이드의 해상 지점을 {0} 번 건너 뛴
+pair_points_detected	지점의 쌍을 발견했다
+generating_chain	체인을 생성 중. 지정한 반경과 지점 수에 따라 시간이 걸릴 수있다.
+chain_nothing_found	
+chain_nothing_but_water_points	{0} 개소 만에 수상 지점 밖에 발견되지 않았다. 나중에 다시 시도해보세요.
+chain_num_water_points_skipped_so_far	지금까지 {0} 개 눈에서 수상 지점을 {1} 회 스킵 한
+chain_num_water_points_skipped	{0} 개의 눈으로 해상 지점을 {1} 회 스킵 한
+chain_generated	체인을 생성 한
+mystery_point_generated	미스터리 지점을 찾아 냈다
+exception_caught	예외 발생
+error_sorry	오류가 발생했다.
+open	열
+chain_map_open	Google지도에서 체인의 경로를 열
+view_on_google_maps	Google지도에서보기
+street_view	스트리트 뷰
+google_earth	Google 어스
+location	위치
+open_map	맵 열기
+map	지도
+earth	접지
+view_with_google	Google에서보기
+google_maps	Google지도
+google_street_view	Google 스트리트 뷰
+download_app	앱 다운로드
+md_anomaly	이상 지점
+md_attractor	끌개
+md_void	보이드
+md_options	설정 도움말
+md_blindspotsmore	블라인드 스팟 기타
+md_mylocation	현재 위치
+md_lets_search_paid	검색하자! 다음 메뉴에서 선택.  <br> 끌개는 임의의 지점이 집중되어있는 곳. 보이드는 그 반대.  <br> "이상"은 그중 강한 편.   <br>   <br><br><br> 앱에서지도 표시, 수상 지점 건너 뛰기, 현재 위치 검색 등의 고급 기능은 '설정 도움말 "에서"추가 기능 "에서 액세스 할 수있다.
+md_invalid_action	잘못된 동작. 다음 메뉴에서 선택.
+md_lets_search	검색하자! 다음 메뉴에서 선택.  <br> 끌개는 임의의 지점이 집중되어있는 곳. 보이드는 그 반대.  <br> "이상"은 그중 강한 편.
+md_how_many_idas	지점을 몇까지 감지?
+md_choose_qrng	양자 난수 생성기를 선택. 모를 때는 ANU을.
+md_invalid_qrng	잘못된 QRNG의 선택.
+md_camera	카메라
+md_anu	ANU
+md_temporal	시적
+md_temporal_server	시적 (서버)
+md_temporal_phone	시적 (휴대)
+md_anu_leftovers	ANU 남은
+md_gcp_retro	GCP
+md_collecting_camera_entropy	카메라에서 난수를 가져 오는 중 ...
+md_collecting_temporalphone_entropy	모바일 CPU에서 시간적인 난수 가져 오는 중 ...
+yes	예
+no	아니오
+addons	확장
+update_settings_q	설정을 변경하려면?
+select_radius	지점 탐지 반경을 선택. 숫자 직접 입력도 가능
+include_water_points_q	수상 지점 건너 뛰기?
+show_google_street_earth_q	Google 스트리트 뷰도 지구도 표시?
+invalid_answer	잘못된 선택이다.
+anonymized_id_is	익명 된 ID가 {0}.
+show_google_street_earth	Google 스트리트 뷰도 접지는 {0}.
+hidden	표시하지
+displayed	보기
+get_locsearch_skipwater_pack	확장보다 위치 검색 · 해상 지점 건너 뛰기 기능을 손에 넣자.
+get_maps_pack	추가 기능에서 인앱지도 기능을 손에 넣자.
+bs_quantum	양자 지점
+bs_quantum_time	양자 지점 + 시간
+bs_intent_suggestions	의도 방안
+bs_mystery_point	미스터리 지점
+bs_pair	포인트 쌍
+bs_pseudo	의사 지점
+bs_scan	검색
+bs_chains	체인
+bs_dice	양자 주사위
+bs_back	<이전
+welcome_randonautica	Randonautica에 오신 것을 환영합니다!
+welcome_beginners	처음? 우선 [자주 묻는 질문]({0}) 및 [랜드노트의 규칙]({1})를 확인하십시오.
+welcome_report_share	지점에 가면, [Reddit]({0}) 및 [Twitter]({1})에서 점유율을!
+first_send_location	우선 🌍 / 📎 현재 위치를 전송하거나 Google지도의 URL을 입력하거나.
+choose_chain_type	어느 지점 유형으로 체인 (순차적으로 검출) 할?
+ch_invalid_point_type	유효한 지점 유형 선택이 아니다.
+ch_anomalies	이상 지점
+ch_voids	보이드
+ch_attractors	끌개
+ch_current_or_sequential	모든 지점을 현재 위치에서 또는 순차적으로 감지?
+ch_current	현재 위치
+ch_sequential	순차적으로
+ch_num_points	지점 수를 입력하고. 대략적인 최대 총 거리는 그 수를 현재의 반경을 곱한 것이된다.
+ch_invalid_number	잘못된 숫자
+ch_reprompt_num_points	잘못된 숫자. 지점 수를 입력하고.
+ch_mte	{0} 이상 필요
+ch_lte	{0} 다음 필요
+no_loc_or_reset	현재 위치가 설정되어 있지 않거나 재설정되었다. 🌍 / 📎 현재 위치를 전송하거나 Google지도의 URL을 입력하거나. \ "help \"를 입력하면 도움말 화면이 나온다.
+ida_found	의도 구동 지점이 발견
+ida_type	유형 : {0}
+ida_radius	반경 : {0}
+ida_power	파워 : {0}
+ida_bearing	방향 : {0}
+ida_zscore	표준 점수 : {0}
+randpoint_generated	임의의 지점을 찾아 냈다
+suggested_time	제안 시간 : {0}
+blind_spots_more_menu	다음 메뉴에서 선택.  <br> "양자"는 단일의 임의 지점 (잠재적 인 맹점). 미스터리 지점은 지점의 종류가 랜덤으로 결정된다.
+invalid_action	잘못된 동작
+agree_to_terms_q	이용 약관에 동의?
+toc_dontagree	동의하지
+toc_doagree	동의
+toc_shame	유감이다. 많은 임의의 모험이 당신을 기다리고 있는데!
+toc_invalid_answer	유효한 대답이 아니다.
+qd_min1	1보다 크거나 같은 값을 입력하고. 동전 던지기를하려면 1을 입력하고 표라고한다.
+qd_min2	잘못된 최소. 다시 입력 :
+qd_min3	최소 1 이상 필요. 다시 입력 :
+qd_min4	잘못된 최소. 254 요. 다시 입력 :
+qd_max1	255 이하의 최대 값을 입력하고. 동전 던지기를하려면 2를 입력하고 뒷면이라고한다.
+qd_max2	잘못된 최대치. 다시 입력 :
+qd_max3	잘못된 최대치. 1 이상 필요. 다시 입력 :
+qd_max4	잘못된 최대치. 255 이하 요. 다시 입력 :
+qd_minmax	최소 ({0})는 최대 값 ({1})보다 작아야한다. {2}로 설정한다.
+qd_rolling	주사위 진동 중 ...
+qd_results	결과 : {0} {1},{2}]. 다시 흔들?
+qd_onlyyess	예 또는 아니요 다른 아무것도 없다.
+err_no_entropy_fetch	난수 데이터를 취득 할 수 없었던
+err_qrng_service_failed	서비스가 난수 데이터를 반환 않았다
+err_qrng_error	무작위 처리에 필요한 양자 엔트로피를 검색하는 동안 오류가 발생했습니다. 나중에 다시 시도해보세요.
+scan_choose_kind	검사 지점의 유형을 선택.
+scan_invalid_action	잘못된 선택이 아니다.
+scan_attractor	끌개
+scan_void	보이드
+scan_anomaly	이상 지점
+scan_pair	쌍
+scan_sesson_inplace	스캔 수색 중
+tr_did_you_visit	지점에 갔다, 그리고 모험 보고서를 낸다?
+tr_yes_sans_report	했다. 보고서 없음.
+tr_yes_report	했다. 보고서를 낸다.
+tr_invalid_choice	올바른 선택이 아니다.
+tr_set_intent_q	의도를 설정 해둔?
+tr_enter_intent	당신의 의도는 무엇입니까?
+tr_hope_had_fun	즐거운 모험이었다고하네요!
+tr_collect_artifacts_q	뭔가 물건을 주워 가지고 돌아간?
+tr_wow_and_astounding_q	정말 놀라운 모험이었다?
+tr_meaningfulness_q	유의미한 수준을 평가하고 (또는 자신의 단어를 입력하십시오) :
+tr_enriching	부자
+tr_meaningful	의미
+tr_casual	캐주얼
+tr_meaningless	의미
+tr_emotional_q	감정도를 평가하고 (또는 자신의 단어를 입력하십시오) :
+tr_dopamine_hit	도파민 히트
+tr_inspirational	감격
+tr_plain	보통
+tr_anxious	조마 조마
+tr_despair	절망
+tr_dread	공포
+tr_importance_q	중요도를 평가하고 (또는 자신의 단어를 입력하십시오) :
+tr_lifechanging	인생이 바뀌는만큼
+tr_influential	영향력있는
+tr_ordinary	보통
+tr_waste_time	시간 낭비
+tr_strangeness_q	이상한 정도를 평가하고 (또는 자신의 단어를 입력하십시오) :
+tr_woowooweird	신비
+tr_strange	이상한
+tr_normal	보통
+tr_nothing	아무렇지 않은
+tr_synchronicity_q	공시 성을 평가하고 (또는 자신의 단어를 입력) :
+tr_dirk_gently	엉망이다
+tr_mind_blowing	와우! 라는 느낌
+tr_somewhat	약간의
+tr_boredom	재미
+tr_wanna_upload_photos_q	사진을 업로드 할 수 있습니까?
+tr_upload_photos_now	사진을 업로드하고. 전송 한 메시지로 제한되어 있기 때문에 한꺼번에 보내.
+tr_not_valid_upload	유효한 업로드가 아니다.
+tr_error_photo_upload	사진 업로드 중 오류가 발생했습니다.
+tr_photo_uploads_temp_disabled	사진 업로드 기능은 중지 중.
+tr_write_report	마지막으로 보고서를 작성. 게시 한 메시지의 전송에 한정되어 있기 때문에 한꺼번에 보내.
+tr_tweet	보고서를 つばやい て!
+tr_thanks	보고서 게시, 감사합니다!
+welcome_back	Randonautica에 오신 것을 환영합니다.
+dont_forgot_send_loc	현재 위치 보내기를 잊지 마세요!
+iap_invalid_receipt	잘못된 구매 영수증 : {0}. 통보되는거야.
+iap_maps_pack_enabled	맵 확장이 사용되었다.
+iap_search_water_points_enabled	위치 검색 및 수상 지점 건너 확장이 사용되었다. "search <장소의 이름 또는 주소>"를 입력하여 현재 위치를 설정한다.
+iap_everything_enabled	더 모든 확장이 활성화되었다. "search <장소의 이름 또는 주소>"를 입력하여 현재 위치를 설정한다.
+iap_all_disabled	모든 확장 기능이 비활성화되었다.
+iap_no_purchases	구매 내역이 없다.
+iap_buy	구매
+iap_enable	활성화
+iap_maps_pack	지도 확장
+iap_maps_pack_desc	지도와 길의 앱에서 미리보기
+iap_search_water_points	위치 검색 및 수상 지점 건너 확장
+iap_search_water_points_desc	현재 위치를 위치 검색 설정하거나 해상 지점을 건너 뛰거나
+iap_everything_pack	더 모든 팩 확장
+iap_everything_pack_desc	지도 + 위치 검색 + 수상 지점 건너 뛰기
+iap_enabling...	확장 기능을 사용 중 ...
+iap_thanks_enabling	감사합니다. 확장 기능을 사용 중 ...
+sending_location	현재 위치를 전송 중 ...
+connecting_bot	봇에 접속 중 ...
+sending_entropy	엔트로피를 보내는 중 ...

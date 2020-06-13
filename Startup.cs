@@ -17,6 +17,7 @@ namespace VFatumbot
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Loc.init();
         }
 
         public IConfiguration Configuration { get; }

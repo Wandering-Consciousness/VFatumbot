@@ -30,19 +30,19 @@ namespace VFatumbot
                   int inputtedRadius;
                   if (!int.TryParse(promptContext.Context.Activity.Text, out inputtedRadius))
                   {
-                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Invalid radius. Choose desired radius:"), cancellationToken);
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("invalid_radius")), cancellationToken);
                       return false;
                   }
 
                   if (inputtedRadius < Consts.RADIUS_MIN)
                   {
-                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be more than or equal to {Consts.RADIUS_MIN}m. Enter desired radius:"), cancellationToken);
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_gte", Consts.RADIUS_MIN)), cancellationToken);
                       return false;
                   }
 
                   if (inputtedRadius > Consts.RADIUS_MAX)
                   {
-                      await promptContext.Context.SendActivityAsync(MessageFactory.Text($"Radius must be less than or equal to {Consts.RADIUS_MAX}m. Enter desired radius:"), cancellationToken);
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", Consts.RADIUS_MAX)), cancellationToken);
                       return false;
                   }
 
@@ -78,7 +78,7 @@ namespace VFatumbot
 
             await ShowCurrentSettingsAsync(stepContext, cancellationToken);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Update your settings?", userProfileTemporary.BotSrc), cancellationToken);
+            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions(Loc.g("update_settings_q"), userProfileTemporary.BotSrc), cancellationToken);
         }
 
         private async Task<DialogTurnResult> UpdateSettingsYesOrNoStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -87,29 +87,25 @@ namespace VFatumbot
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
-            {
-                case "Yes":
-                    // TODO: a quick hack to reset IsScanning in case it gets stuck in that state
-                    userProfileTemporary.IsScanning = false;
-                    await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
-                    // << EOF TODO. Will figure out whether this needs handling properly later on.
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val)) {
+                // TODO: a quick hack to reset IsScanning in case it gets stuck in that state
+                userProfileTemporary.IsScanning = false;
+                await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
+                // << EOF TODO. Will figure out whether this needs handling properly later on.
 
-                    return await stepContext.NextAsync();
-
-                case "Add-ons":
-                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                    // and then pass onto the app layer to load the native add-ons shop screen
-                    var requestEntropyActivity = Activity.CreateEventActivity();
-                    requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                    await stepContext.Context.SendActivityAsync(requestEntropyActivity);
-                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
-
+                return await stepContext.NextAsync();
+            } else if (Loc.g("addons").Equals(val)) {
+                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                // and then pass onto the app layer to load the native add-ons shop screen
+                var requestEntropyActivity = Activity.CreateEventActivity();
+                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
+                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+            //} else if (Loc.g("help").Equals(val)) {
                 // case "Help" is picked up elsewhere
-
-                case "No":
-                default:
-                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
+            } else {
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
             }
         }
 
@@ -118,7 +114,7 @@ namespace VFatumbot
             //_logger.LogInformation("SettingsDialog.RadiusStepAsync");
 
             var promptOptions = new PromptOptions {
-                Prompt = MessageFactory.Text("Select your radius in meters, or enter the numbers directly:"),
+                Prompt = MessageFactory.Text(Loc.g("select_radius")),
                 Choices = new List<Choice>()
                     {
                         new Choice() {
@@ -148,7 +144,7 @@ namespace VFatumbot
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
             if (userProfileTemporary.HasSkipWaterPoints)
-                return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Include water points?", userProfileTemporary.BotSrc), cancellationToken);
+                return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions(Loc.g("include_water_points_q"), userProfileTemporary.BotSrc), cancellationToken);
 
             return await stepContext.NextAsync();
         }
@@ -163,29 +159,27 @@ namespace VFatumbot
             if (!userProfileTemporary.HasMapsPack)
                 return await stepContext.NextAsync();
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    userProfileTemporary.IsIncludeWaterPoints = true;
-                    break;
-
-                case "Add-ons":
-                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                    // and then pass onto the app layer to load the native add-ons shop screen
-                    var requestEntropyActivity = Activity.CreateEventActivity();
-                    requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                    await stepContext.Context.SendActivityAsync(requestEntropyActivity);
-                    break;
-
-                case "No":
-                default:
-                    userProfileTemporary.IsIncludeWaterPoints = false;
-                    break;
+                userProfileTemporary.IsIncludeWaterPoints = true;
+            }
+            else if (Loc.g("addons").Equals(val))
+            {
+                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                // and then pass onto the app layer to load the native add-ons shop screen
+                var requestEntropyActivity = Activity.CreateEventActivity();
+                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
+                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+            }
+            else
+            {
+                userProfileTemporary.IsIncludeWaterPoints = false;
             }
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
-            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions("Also display Google Street View and Earth previews?", userProfileTemporary.BotSrc), cancellationToken);
+            return await stepContext.PromptAsync(nameof(ChoicePrompt), GetPromptOptions(Loc.g("show_google_street_earth_q"), userProfileTemporary.BotSrc), cancellationToken);
         }
 
         private async Task<DialogTurnResult> GoogleThumbnailsDisplayToggleStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -198,24 +192,22 @@ namespace VFatumbot
             if (!userProfileTemporary.HasMapsPack)
                 return await stepContext.NextAsync();
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    userProfileTemporary.IsDisplayGoogleThumbnails = true;
-                    break;
-
-                case "Add-ons":
-                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                    // and then pass onto the app layer to load the native add-ons shop screen
-                    var requestEntropyActivity = Activity.CreateEventActivity();
-                    requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                    await stepContext.Context.SendActivityAsync(requestEntropyActivity);
-                    break;
-
-                case "No":
-                default:
-                    userProfileTemporary.IsDisplayGoogleThumbnails = false;
-                    break; ;
+                userProfileTemporary.IsDisplayGoogleThumbnails = true;
+            }
+            else if (Loc.g("addons").Equals(val))
+            {
+                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                // and then pass onto the app layer to load the native add-ons shop screen
+                var requestEntropyActivity = Activity.CreateEventActivity();
+                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
+                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+            }
+            else
+            {
+                userProfileTemporary.IsDisplayGoogleThumbnails = false;
             }
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
@@ -243,11 +235,11 @@ namespace VFatumbot
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(
-                $"Your anonymized ID is {userProfileTemporary.UserId}.{Helpers.GetNewLine(stepContext.Context)}" +
-                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasSkipWaterPoints ? "Get the Location Search and Skip Water Points Pack from the Add-ons button." : $"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}.") + Helpers.GetNewLine(stepContext.Context) : "") +
-                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasMapsPack ? "Get the Maps Pack for in-app map and street previews from the Add-ons button." : $"Street View and Earth previews will be {(userProfileTemporary.IsDisplayGoogleThumbnails ? "displayed" : "hidden")}.") + Helpers.GetNewLine(stepContext.Context) : "") +
-                $"Current location is {userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.{Helpers.GetNewLine(stepContext.Context)}" +
-                $"Current radius is {userProfileTemporary.Radius}m.{Helpers.GetNewLine(stepContext.Context)}"));
+                $"{Loc.g("anonymized_id_is", userProfileTemporary.UserId)}{Helpers.GetNewLine(stepContext.Context)}" +
+                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasSkipWaterPoints ? Loc.g("get_locsearch_skipwater_pack") : Loc.g("water_points_will_be", userProfileTemporary.IsIncludeWaterPoints ? Loc.g("included") : Loc.g("skipped"))) + Helpers.GetNewLine(stepContext.Context) : "") +
+                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasMapsPack ? Loc.g("get_maps_pack") : Loc.g("show_google_street_earth", userProfileTemporary.IsDisplayGoogleThumbnails ? Loc.g("displayed") : Loc.g("hidden"))) + Helpers.GetNewLine(stepContext.Context) : "") +
+                $"{Loc.g("current_location", userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))}{Helpers.GetNewLine(stepContext.Context)}" +
+                $"{Loc.g("current_radius", userProfileTemporary.Radius)}{Helpers.GetNewLine(stepContext.Context)}"));
         }
 
         private PromptOptions GetPromptOptions(string prompt, WebSrc botSrc)
@@ -257,25 +249,25 @@ namespace VFatumbot
                 return new PromptOptions()
                 {
                     Prompt = MessageFactory.Text(prompt),
-                    RetryPrompt = MessageFactory.Text($"That is not a valid answer. {prompt}"),
+                    RetryPrompt = MessageFactory.Text($"{Loc.g("invalid_answer")} {prompt}"),
                     Choices = new List<Choice>()
                                 {
                                     new Choice() {
-                                        Value = "Yes",
+                                        Value = Loc.g("yes"),
                                         Synonyms = new List<string>()
                                                         {
                                                             "yes",
                                                         }
                                     },
                                     new Choice() {
-                                        Value = "No",
+                                        Value = Loc.g("no"),
                                         Synonyms = new List<string>()
                                                         {
                                                             "no",
                                                         }
                                     },
                                     new Choice() {
-                                        Value = "Add-ons",
+                                        Value = Loc.g("addons"),
                                           Synonyms = new List<string>()
                                                         {
                                                             "Addons",
@@ -284,7 +276,7 @@ namespace VFatumbot
                                                         }
                                     },
                                     new Choice() {
-                                        Value = "Help",
+                                        Value = Loc.g("help"),
                                     },
                                 }
                 };
@@ -294,25 +286,25 @@ namespace VFatumbot
                 return new PromptOptions()
                 {
                     Prompt = MessageFactory.Text(prompt),
-                    RetryPrompt = MessageFactory.Text($"That is not a valid answer. {prompt}"),
+                    RetryPrompt = MessageFactory.Text($"{Loc.g("invalid_answer")} {prompt}"),
                     Choices = new List<Choice>()
                                 {
                                     new Choice() {
-                                        Value = "Yes",
+                                        Value = Loc.g("yes"),
                                         Synonyms = new List<string>()
                                                         {
                                                             "yes",
                                                         }
                                     },
                                     new Choice() {
-                                        Value = "No",
+                                        Value = Loc.g("no"),
                                         Synonyms = new List<string>()
                                                         {
                                                             "no",
                                                         }
                                     },
                                     new Choice() {
-                                        Value = "Help",
+                                        Value = Loc.g("help"),
                                     },
                                 }
                 };

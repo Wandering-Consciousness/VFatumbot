@@ -58,7 +58,7 @@ namespace VFatumbot
             //var images = new List<CardImage>();
             //images.Add(new CardImage(CreateGoogleMapsStaticThumbnail(incoords[0])));
 
-            var cardAction = new CardAction(ActionTypes.OpenUrl, "Open", value: CreateGoogleMapsRouteUrl(incoords));
+            var cardAction = new CardAction(ActionTypes.OpenUrl, Loc.g("open"), value: CreateGoogleMapsRouteUrl(incoords));
 
             var buttons = new List<CardAction> {
                 cardAction,
@@ -66,7 +66,7 @@ namespace VFatumbot
 
             var heroCard = new HeroCard
             {
-                Title = "Travel Chain on Google Maps",
+                Title = Loc.g("chain_map_open"),
                 //Images = images,
                 Buttons = buttons,
                 Tap = cardAction
@@ -87,10 +87,10 @@ namespace VFatumbot
                 embed.Author.Name = w3wResult?.words;
                 embed.Color = DiscordColor.Azure;
 
-                embed.Title = "View on Google Maps";
+                embed.Title = Loc.g("view_on_google_maps");
                 embed.Url = CreateGoogleMapsUrl(incoords);
 
-                embed.Description = $"Street View:\n{CreateGoogleStreetViewUrl(incoords)}\n\nGoogle Earth:\n{CreateGoogleEarthUrl(incoords)}";
+                embed.Description = $"{Loc.g("street_view")}:\n{CreateGoogleStreetViewUrl(incoords)}\n\n{Loc.g("google_earth")}:\n{CreateGoogleEarthUrl(incoords)}";
                 embed.ImageUrl = (!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords));
                 embed.ThumbnailUrl = (!paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords));
 
@@ -115,7 +115,7 @@ namespace VFatumbot
                 var geo = new GeoCoordinates(latitude: incoords[0],
                                              longitude: incoords[1],
                                              elevation: 0);
-                var place = new Place(name: w3wResult != null ? "What 3 Words Address" : "Location",
+                var place = new Place(name: w3wResult != null ? $"what3words {Loc.g("address")}" : Loc.g("location"),
                                        address: w3wResult != null ? w3wResult.words : "",
                                        geo: geo);
                 entity.SetAs(place);
@@ -147,8 +147,8 @@ namespace VFatumbot
                 images.Add(new CardImage((!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords, forRemoteViewing))));
             }
 
-            var w3wAction = new CardAction(ActionTypes.OpenUrl, (forRemoteViewing ? $"{w3wResult.words} - {w3wResult?.nearestPlace}{Helpers.GetCountryFromW3W(w3wResult)}" : "What 3 Words"), value: $"https://what3words.com/{w3wResult.words}");
-            var cardAction = new CardAction(ActionTypes.OpenUrl, showStreetAndEarthThumbnails ? "Open Map" : "Maps", value: CreateGoogleMapsUrl(incoords));
+            var w3wAction = new CardAction(ActionTypes.OpenUrl, (forRemoteViewing ? $"{w3wResult.words} - {w3wResult?.nearestPlace}{Helpers.GetCountryFromW3W(w3wResult)}" : "what3words"), value: $"https://what3words.com/{w3wResult.words}");
+            var cardAction = new CardAction(ActionTypes.OpenUrl, showStreetAndEarthThumbnails ? Loc.g("open_map") : Loc.g("map"), value: CreateGoogleMapsUrl(incoords));
 
             var buttons = new List<CardAction> {
                 w3wAction,
@@ -157,13 +157,13 @@ namespace VFatumbot
 
             if (!showStreetAndEarthThumbnails)
             {
-                buttons.Add(new CardAction(ActionTypes.OpenUrl, "Street View", value: CreateGoogleStreetViewUrl(incoords)));
-                buttons.Add(new CardAction(ActionTypes.OpenUrl, "Earth", value: CreateGoogleEarthUrl(incoords)));
+                buttons.Add(new CardAction(ActionTypes.OpenUrl, Loc.g("street_view"), value: CreateGoogleStreetViewUrl(incoords)));
+                buttons.Add(new CardAction(ActionTypes.OpenUrl, Loc.g("earth"), value: CreateGoogleEarthUrl(incoords)));
             }
 
             var heroCard = new HeroCard
             {
-                Title = !showStreetAndEarthThumbnails ? "View with Google:" : "Google Maps",
+                Title = !showStreetAndEarthThumbnails ? $"{Loc.g("view_with_google")}:" : Loc.g("google_maps"),
                 Images = images,
                 Buttons = buttons,
                 Tap = cardAction
@@ -178,7 +178,7 @@ namespace VFatumbot
                 new CardImage((!paying ? BIT_PNG : CreateGoogleStreetViewThumbnailUrl(incoords))),
             };
 
-            var cardAction = new CardAction(ActionTypes.OpenUrl, "Open", value: CreateGoogleStreetViewUrl(incoords));
+            var cardAction = new CardAction(ActionTypes.OpenUrl, Loc.g("open"), value: CreateGoogleStreetViewUrl(incoords));
 
             var buttons = new List<CardAction> {
                 cardAction
@@ -186,7 +186,7 @@ namespace VFatumbot
 
             var heroCard = new HeroCard
             {
-                Title = "Google Street View",
+                Title = Loc.g("google_street_view"),
                 Images = images,
                 Buttons = buttons,
                 Tap = cardAction,
@@ -201,7 +201,7 @@ namespace VFatumbot
                 new CardImage((!paying ? BIT_PNG : CreateGoogleEarthThumbnailUrl(incoords))),
             };
 
-            var cardAction = new CardAction(ActionTypes.OpenUrl, "Open", value: CreateGoogleEarthUrl(incoords));
+            var cardAction = new CardAction(ActionTypes.OpenUrl, Loc.g("open"), value: CreateGoogleEarthUrl(incoords));
 
             var buttons = new List<CardAction> {
                 cardAction
@@ -209,7 +209,7 @@ namespace VFatumbot
 
             var heroCard = new HeroCard
             {
-                Title = "Google Earth View",
+                Title = Loc.g("google_earth"),
                 Images = images,
                 Buttons = buttons,
                 Tap = cardAction
@@ -268,7 +268,7 @@ namespace VFatumbot
 
             var heroCard = new HeroCard
             {
-                Title = "Download the app",
+                Title = Loc.g("download_app"),
                 Buttons = buttons,
             };
 

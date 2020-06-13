@@ -103,19 +103,19 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Did you visit or get close to the point, and would you like to make a trip report?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid choice."),
+                Prompt = MessageFactory.Text(Loc.g("tr_did_you_visit")),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                             {
                                 new Choice() {
-                                    Value = "No",
+                                    Value = Loc.g("no"),
                                     Synonyms = new List<string>()
                                                     {
                                                         "no"
                                                     }
                                 },
                                 new Choice() {
-                                    Value = "Yes and report!",
+                                    Value = Loc.g("tr_yes_report"),
                                     Synonyms = new List<string>()
                                                     {
                                                         "Yes",
@@ -123,7 +123,7 @@ namespace VFatumbot
                                                     }
                                 },
                                 new Choice() {
-                                    Value = "Yes sans reporting",
+                                    Value = Loc.g("tr_yes_sans_report"),
                                     Synonyms = new List<string>()
                                                     {
                                                         "Report",
@@ -142,62 +142,58 @@ namespace VFatumbot
 
             var callbackOptions = (CallbackOptions)stepContext.Options;
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("tr_yes_report").Equals(val))
             {
-                case "Yes and report!":
-                    // Go and start asking them about their trip
+                // Go and start asking them about their trip
 
-                    var answers = new ReportAnswers() { WasPointVisited = true };
-                    stepContext.Values[ReportAnswersKey] = answers;
+                var answers = new ReportAnswers() { WasPointVisited = true };
+                stepContext.Values[ReportAnswersKey] = answers;
 
-                    // TODO: [answers.PointNumberVisited] : implement the dialog steps/logic to ask this.
+                // TODO: [answers.PointNumberVisited] : implement the dialog steps/logic to ask this.
 
-                    switch (callbackOptions.PointTypes[answers.PointNumberVisited])
-                    {
-                        case PointTypes.Attractor:
-                        case PointTypes.Void:
-                        case PointTypes.Anomaly:
-                        case PointTypes.PairAttractor:
-                        case PointTypes.PairVoid:
-                        case PointTypes.ScanAttractor:
-                        case PointTypes.ScanVoid:
-                        case PointTypes.ScanAnomaly:
-                        case PointTypes.ScanPair:
-                        case PointTypes.ChainAttractor:
-                        case PointTypes.ChainVoid:
-                        case PointTypes.ChainAnomaly:
-                            var options = new PromptOptions()
+                switch (callbackOptions.PointTypes[answers.PointNumberVisited])
+                {
+                    case PointTypes.Attractor:
+                    case PointTypes.Void:
+                    case PointTypes.Anomaly:
+                    case PointTypes.PairAttractor:
+                    case PointTypes.PairVoid:
+                    case PointTypes.ScanAttractor:
+                    case PointTypes.ScanVoid:
+                    case PointTypes.ScanAnomaly:
+                    case PointTypes.ScanPair:
+                    case PointTypes.ChainAttractor:
+                    case PointTypes.ChainVoid:
+                    case PointTypes.ChainAnomaly:
+                        var options = new PromptOptions()
+                        {
+                            Prompt = MessageFactory.Text(Loc.g("tr_set_intent_q")),
+                            RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
+                            Choices = new List<Choice>()
                             {
-                                Prompt = MessageFactory.Text("Did you set an intent?"),
-                                RetryPrompt = MessageFactory.Text("That is not a valid choice."),
-                                Choices = new List<Choice>()
-                                {
-                                    new Choice() { Value = "Yes" },
-                                    new Choice() { Value = "No" }
-                                }
-                            };
+                                new Choice() { Value = Loc.g("yes") },
+                                new Choice() { Value = Loc.g("no") }
+                            }
+                        };
 
-                            return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
-                    }
+                        return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
+                }
 
-                    ((ReportAnswers)stepContext.Values[ReportAnswersKey]).SkipGetIntentStep = true;
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                ((ReportAnswers)stepContext.Values[ReportAnswersKey]).SkipGetIntentStep = true;
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("tr_yes_sans_report").Equals(val)) {
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_hope_had_fun")), cancellationToken);
 
-                case "Yes sans reporting":
-                    //await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Text("Hope you had a fun trip!"), cancellationToken);
+                // At least mark the point as a visited one
+                await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers() { WasPointVisited = true });
 
-                    // At least mark the point as a visited one
-                    await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers() { WasPointVisited = true });
-
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
-
-                case "No":
-                default:
-                    await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers());
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+            } else {
+                await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers());
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
         }
 
@@ -212,16 +208,14 @@ namespace VFatumbot
 
             //_logger.LogInformation($"TripReportDialog.SetIntentYesOrNoStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("What did you set your intent to?") };
-                    return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
-
-                case "No":
-                default:
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                var promptOptions = new PromptOptions { Prompt = MessageFactory.Text(Loc.g("tr_enter_intent")) };
+                return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
             }
+
+           return await stepContext.NextAsync(cancellationToken: cancellationToken);
         }
 
         private async Task<DialogTurnResult> GetIntentStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -246,12 +240,12 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Did you collect any artifacts?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid choice."),
+                Prompt = MessageFactory.Text(Loc.g("tr_collect_artifacts_q")),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Yes" },
-                                    new Choice() { Value = "No" }
+                                    new Choice() { Value = Loc.g("yes") },
+                                    new Choice() { Value = Loc.g("no") }
                                 }
             };
 
@@ -264,21 +258,19 @@ namespace VFatumbot
 
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            if (Loc.g("yes").Equals(((FoundChoice)stepContext.Result)?.Value))
             {
-                case "Yes":
-                    answers.ArtifactCollected = true;
-                    break;
+               answers.ArtifactCollected = true;
             }
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Was your trip \"wow and astounding!\"?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid choice."),
+                Prompt = MessageFactory.Text(Loc.g("tr_wow_and_astounding_q")),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Yes" },
-                                    new Choice() { Value = "No" }
+                                    new Choice() { Value = Loc.g("yes") },
+                                    new Choice() { Value = Loc.g("no") }
                                 }
             };
 
@@ -291,22 +283,21 @@ namespace VFatumbot
 
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    answers.WasFuckingAmazing = true;
-                    break;
+               answers.WasFuckingAmazing = true;
             }
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Rate the meaningfulness of your trip (or enter your own word):"),
+                Prompt = MessageFactory.Text(Loc.g("tr_meaningfulness_q")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Enriching" },
-                                    new Choice() { Value = "Meaningful" },
-                                    new Choice() { Value = "Casual" },
-                                    new Choice() { Value = "Meaningless" },
+                                    new Choice() { Value = Loc.g("tr_enriching") },
+                                    new Choice() { Value = Loc.g("tr_meaningful") },
+                                    new Choice() { Value = Loc.g("tr_casual") },
+                                    new Choice() { Value = Loc.g("tr_meaningless") },
                                 },
             };
 
@@ -323,15 +314,15 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Rate the emotional factor (or enter your own word):"),
+                Prompt = MessageFactory.Text(Loc.g("tr_emotional_q")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Dopamine Hit" },
-                                    new Choice() { Value = "Inspirational" },
-                                    new Choice() { Value = "Plain" },
-                                    new Choice() { Value = "Anxious" },
-                                    new Choice() { Value = "Despair" },
-                                    new Choice() { Value = "Dread" },
+                                    new Choice() { Value = Loc.g("tr_dopamine_hit") },
+                                    new Choice() { Value = Loc.g("tr_inspirational") },
+                                    new Choice() { Value = Loc.g("tr_plain") },
+                                    new Choice() { Value = Loc.g("tr_anxious") },
+                                    new Choice() { Value = Loc.g("tr_despair") },
+                                    new Choice() { Value = Loc.g("tr_dread") },
                                 }
             };
 
@@ -348,13 +339,13 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Rate the importance (or enter your own word):"),
+                Prompt = MessageFactory.Text(Loc.g("tr_importance_q")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Life-changing" },
-                                    new Choice() { Value = "Influential" },
-                                    new Choice() { Value = "Ordinary" },
-                                    new Choice() { Value = "Waste of time" },
+                                    new Choice() { Value = Loc.g("tr_lifechanging") },
+                                    new Choice() { Value = Loc.g("tr_influential") },
+                                    new Choice() { Value = Loc.g("tr_ordinary") },
+                                    new Choice() { Value = Loc.g("tr_waste_time") },
                                 }
             };
 
@@ -371,13 +362,13 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Rate the strangeness (or enter your own word):"),
+                Prompt = MessageFactory.Text(Loc.g("tr_strangeness_q")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Woo-woo weird" },
-                                    new Choice() { Value = "Strange" },
-                                    new Choice() { Value = "Normal" },
-                                    new Choice() { Value = "Nothing" },
+                                    new Choice() { Value = Loc.g("tr_woowooweird") },
+                                    new Choice() { Value = Loc.g("tr_strange") },
+                                    new Choice() { Value = Loc.g("tr_normal") },
+                                    new Choice() { Value = Loc.g("tr_nothing") },
                                 }
             };
 
@@ -394,14 +385,14 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Rate the synchroncity factor (or enter your own word):"),
+                Prompt = MessageFactory.Text(Loc.g("tr_synchronicity_q")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Dirk Gently" },
-                                    new Choice() { Value = "Mind-blowing" },
-                                    new Choice() { Value = "Somewhat" },
-                                    new Choice() { Value = "Nothing" },
-                                    new Choice() { Value = "Boredom" },
+                                    new Choice() { Value = Loc.g("tr_dirk_gently") },
+                                    new Choice() { Value = Loc.g("tr_mind_blowing") },
+                                    new Choice() { Value = Loc.g("tr_somewhat") },
+                                    new Choice() { Value = Loc.g("tr_nothing") },
+                                    new Choice() { Value = Loc.g("tr_boredom") },
                                 }
             };
 
@@ -418,12 +409,12 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("Do you want want to upload any photos?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid choice."),
+                Prompt = MessageFactory.Text(Loc.g("tr_wanna_upload_photos_q")),
+                RetryPrompt = MessageFactory.Text(Loc.g("tr_invalid_choice")),
                 Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Yes" },
-                                    new Choice() { Value = "No" }
+                                    new Choice() { Value = Loc.g("yes") },
+                                    new Choice() { Value = Loc.g("no") }
                                 }
             };
 
@@ -436,19 +427,17 @@ namespace VFatumbot
 
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("yes").Equals(val))
             {
-                case "Yes":
-                    var promptOptions = new PromptOptions {
-                        Prompt = MessageFactory.Text("Upload any photos you took now. Send them all at once as sending is limited to one message."),
-                        RetryPrompt = MessageFactory.Text("That is not a valid upload."),
-                    };
-                    return await stepContext.PromptAsync(nameof(AttachmentPrompt), promptOptions, cancellationToken);
-
-                case "No":
-                default:
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                var promptOptions = new PromptOptions {
+                    Prompt = MessageFactory.Text(Loc.g("tr_upload_photos_now")),
+                    RetryPrompt = MessageFactory.Text(Loc.g("tr_not_valid_upload")),
+                };
+                return await stepContext.PromptAsync(nameof(AttachmentPrompt), promptOptions, cancellationToken);
             }
+
+           return await stepContext.NextAsync(cancellationToken: cancellationToken);
         }
 
         private async Task<DialogTurnResult> WriteReportStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -458,6 +447,9 @@ namespace VFatumbot
             var callbackOptions = (CallbackOptions)stepContext.Options;
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
+
+            // TODO: remove if we ever reinstate the two functions above for uploading photos
+            answers.Rating_Synchronicty = stepContext.Context.Activity.Text;
 
             try
             {
@@ -496,10 +488,11 @@ namespace VFatumbot
             }
             catch (Exception e)
             {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Sorry, there was an error uploading your photo. ({e.GetType().Name}: {e.Message})"));
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"{Loc.g("tr_error_photo_upload")}: ({e.GetType().Name}: {e.Message})"));
             }
 
-            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("Photo uploads are temporarily disabled while we change some things sorry! Lastly, write up your report. Typing up your report is limited to being sent in one message.") };
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_photo_uploads_temp_disabled")), cancellationToken);
+            var promptOptions = new PromptOptions { Prompt = MessageFactory.Text(Loc.g("tr_write_report")) };
             return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
         }
 
@@ -570,7 +563,7 @@ namespace VFatumbot
                 message.Replace("\n\n", "  \n") + "\n\n" +
                 "Report: " + answers.Report + "\n   \n" +
                 (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
-                (!string.IsNullOrEmpty(callbackOptions.What3Words[answers.PointNumberVisited]) ? "First point What 3 words address: [" + callbackOptions.What3Words[answers.PointNumberVisited] + "](https://what3words.com/" + callbackOptions.What3Words[answers.PointNumberVisited] + ")  \n" : "  \n") +
+                (!string.IsNullOrEmpty(callbackOptions.What3Words[answers.PointNumberVisited]) ? "First point what3words address: [" + callbackOptions.What3Words[answers.PointNumberVisited] + "](https://what3words.com/" + callbackOptions.What3Words[answers.PointNumberVisited] + ")  \n" : "  \n") +
                 "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
                 "[Google Earth](https://earth.google.com/web/search/" + incoords[0] + "," + incoords[1] + ")\n\n" +
                 (!string.IsNullOrEmpty(answers.Intent) ? "Intent set: " + answers.Intent + "  \n" : "") +
@@ -592,7 +585,7 @@ namespace VFatumbot
             if (answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos)) // also post a short version to /r/randonauts if we deem it interesting)
             {
                 var oldLines = message.Split("\n");
-                var newLines = oldLines.Where(line => !line.Contains("Intention Driven Anomaly found"));
+                var newLines = oldLines.Where(line => !line.Contains(Loc.g("ida_found")));
                 newLines = newLines.Where(line => !line.Contains("(")); // A-8FF89AC5 (43.105433 -76.121310)
                 newLines = newLines.Where(line => !line.Contains("Radius")); // Radius
                 var shortMessage = string.Join("\n", newLines);
@@ -614,9 +607,8 @@ namespace VFatumbot
             var w3wHashes = $" #{callbackOptions.What3Words[answers.PointNumberVisited].Replace(".", " #")}";
 
             var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220 - w3wHashes.Length, answers.Report.Length)));
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[Tweet your report!](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
-            //await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!  \n\n\nWatch this week's [message from Comrade](https://youtu.be/hosepHP9958)"), cancellationToken);
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thanks for the report!"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_thanks")), cancellationToken);
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
             return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);

@@ -1,0 +1,221 @@
+﻿all_kinds_steve	I'm all kinds of Steve!
+let_steve_help	Let Steve help you!
+this_is_steve	This is Steve
+radius_gte	Radius must be more than or equal to {0}m
+radius_lte	Radius must be less than or equal to {0}m
+changed_radius	Changed radius from {0}m to {1}m
+invalid_radius	Invalid radius
+current_radius	Your current radius from is {0}m
+cant_find_place	Place not found.
+current_location	Your current location is set to {0},{1}.  <br>This will be the center for searches.
+water_points_will_be	Water points will be {0}
+skipped	skipped
+ignored	ignored
+classic_mode	Classic mode is now {0}
+enabled	enabled
+disabled	disabled
+help	Help
+invalid_num_points	Incorrect value. Parameter should be a digit from 1 to 10.
+scan_time_take	Generation may take from 5 to 15 minutes.
+finding_location	Finding a location... focus on your intent.
+nothing_but_water_points	Couldn't find anything but water points. Try again later.
+num_water_points_skipped_so_far	Number of water points skipped so far: {0}
+num_water_points_skipped	Number of water points skipped: {0}
+point_generated	Point Generated
+no_points_detected_quantum	No points currently detected in the area, supplying a quantum-point for you instead.
+no_points_detected	No points currently detected in the area.
+address	address
+get_intent_suggestions	Quantumly randomizing the English dictionary for you.
+define	define
+spotify_search	Search in Spotify
+intent_suggestions	Intent suggestions
+num_water_attractors_skipped	Number of attractor water points skipped: {0}
+num_water_voids_skipped	Number of void water points skipped: {0}
+pair_points_detected	Pair of Points Generated
+generating_chain	Generating your chain. Depending on your radius and the number/type of points it may take a while.
+chain_nothing_found	No anomalies found at so far at point #{0}. Trying again...
+chain_nothing_but_water_points	Couldn't find anything but water points at point {0}. Try again later.
+chain_num_water_points_skipped_so_far	Number of water points skipped so far at point #{0}: {1}
+chain_num_water_points_skipped	Number of water points skipped at point #{0}: {1}
+chain_generated	Chain Generated
+mystery_point_generated	Mystery Point Generated
+exception_caught	Exception caught
+error_sorry	Sorry, it looks like something went wrong.
+open	Open
+chain_map_open	Travel Chain on Google Maps
+view_on_google_maps	View on Google Maps
+street_view	Street View
+google_earth	Google Earth
+location	Location
+open_map	Open Map
+map	Maps
+earth	Earth
+view_with_google	View with Google
+google_maps	Google Maps
+google_street_view	Google Street View
+download_app	Download the app
+md_anomaly	Anomaly
+md_attractor	Attractor
+md_void	Void
+md_options	Options/Help
+md_blindspotsmore	Blind Spots & More
+md_mylocation	My Location
+md_lets_search_paid	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.<br>  <br><br>Premium features available - Map previews, skip water points & custom location searching.  <br>Go to Options/Help → Add-ons
+md_invalid_action	That is not a valid action. What would you like to get?
+md_lets_search	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.
+md_how_many_idas	Up to how many points would you like to look for?
+md_choose_qrng	Choose your entropy source: (choose Australian National University - ANU if unsure)
+md_invalid_qrng	That is not a valid entropy source.
+md_camera	Camera
+md_anu	ANU
+md_temporal	Temporal
+md_temporal_server	Temporal (Server)
+md_temporal_phone	Temporal (Phone)
+md_anu_leftovers	ANU Leftovers
+md_gcp_retro	GCP Retro
+md_collecting_camera_entropy	Collecting randomness from your phone's camera (no photos are taken)...
+md_collecting_temporalphone_entropy	Collecting randomness from your phone's CPU...
+yes	Yes
+no	No
+addons	Add-ons
+update_settings_q	Update your settings?
+select_radius	Select your radius in meters, or enter the numbers directly
+include_water_points_q	Include water points?
+show_google_street_earth_q	Display Google Street View and Earth previews?
+invalid_answer	That is not a valid answer.
+anonymized_id_is	Your anonymized ID is {0}.
+show_google_street_earth	Street View and Earth previews will be {0}.
+hidden	hidden
+displayed	displayed
+get_locsearch_skipwater_pack	Get the Location Search and Skip Water Points Pack from the Add-ons button.
+get_maps_pack	Get the Maps Pack for in-app map and street previews from the Add-ons button.
+bs_quantum	Quantum
+bs_quantum_time	Quantum Time
+bs_intent_suggestions	Intent Ideas
+bs_mystery_point	Mystery Point
+bs_pair	Pair of Points
+bs_pseudo	Pseudo
+bs_scan	Scan
+bs_chains	Chains
+bs_dice	Quantum Dice
+bs_back	< Back
+welcome_randonautica	Welcome to Randonautica!
+welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}). 
+welcome_report_share	Once you've completed a trip, share in the discussion with the Randonauts on [Reddit]({0}) and [Twitter]({1}).
+first_send_location	Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL.
+choose_chain_type	What kind of points do you want to chain?
+ch_invalid_point_type	That is not a valid point type.
+ch_anomalies	Anomalies
+ch_voids	Voids
+ch_attractors	Attractors
+ch_current_or_sequential	Generate all points from your current location or in sequential order?
+ch_current	Current
+ch_sequential	Sequential
+ch_num_points	Enter number of points to chain. Approximate maximum total distance will be that number multiplied by your current radius.
+ch_invalid_number	That is not a valid number.
+ch_reprompt_num_points	Invalid number. Enter number of points:
+ch_mte	Number must be more than or equal to {0}. Enter number:
+ch_lte	Number must be less than or equal to {0}. Enter number:
+no_loc_or_reset	You haven't set a location, or it was reset. Send it by tapping 🌍/📎 or sending a Google Maps URL. You can also type \"help\" anytime.
+ida_found	Intention Driven Anomaly found
+ida_type	Type: {0}
+ida_radius	Radius: {0}
+ida_power	Power: {0}
+ida_bearing	Bearing: {0}
+ida_zscore	z-score: {0}
+randpoint_generated	Random Point Generated
+suggested_time	Suggested time: {0}
+blind_spots_more_menu	What would you like to get?  <br>Quantum points are single random ones (potential Blind Spots).  Mystery Points are a random type of point.
+invalid_action	That is not valid action.
+agree_to_terms_q	Do you agree to the terms of use and privacy policy, and to be a well behaved Randonaut?
+toc_dontagree	No
+toc_doagree	I agree
+toc_shame	That's a shame. So many random adventures are waiting for you.
+toc_invalid_answer	That is not a valid answer. {0}
+qd_min1	Enter an inclusive minimum number greater than or equal to 1. For a coin toss enter 1 and assign heads to it
+qd_min2	Invalid minimum. Enter desired minimum:
+qd_min3	Minimum must greater than or equal to 1. Try again:
+qd_min4	Invalid minimum, must be less than or equal to 254. Try again:
+qd_max1	Enter an inclusive maximum number greater than the minimum, up to 255. For a coin toss enter 2 and assign tails to it:
+qd_max2	Invalid maximum. Enter desired maximum:
+qd_max3	Maximum must greater than 1. Try again:
+qd_max4	Invalid maximum, must be less than or equal to 255. Try again:
+qd_minmax	Minimum ({0}) must be less than the maximum ({1}). Setting it to {2}.
+qd_rolling	Rolling...
+qd_results	Result: {0} [{1},{2}]. Roll again?
+qd_onlyyess	Yes or No, nothing else.
+err_no_entropy_fetch	Could not fetch new random data.
+err_qrng_service_failed	Service did not return random data.
+err_qrng_error	Sorry, there was an error sourcing quantum entropy needed to randomize. Try a bit later.
+scan_choose_kind	Choose the kind of scan:
+scan_invalid_action	That is not a valid scan.
+scan_attractor	Scan Attractor
+scan_void	Scan Void
+scan_anomaly	Scan Anomaly
+scan_pair	Scan Pair
+scan_sesson_inplace	Your scanning session is already in progress.
+tr_did_you_visit	Did you visit or get close to the point, and would you like to make a trip report?
+tr_yes_sans_report	Yes sans reporting
+tr_yes_report	Yes with report!
+tr_invalid_choice	That is not a valid choice.
+tr_set_intent_q	Did you set an intent?
+tr_enter_intent	What was your intent?
+tr_hope_had_fun	Hope you had a fun trip!
+tr_collect_artifacts_q	Did you collect any artifacts?
+tr_wow_and_astounding_q	Was your trip \"wow and astounding!\"?
+tr_meaningfulness_q	Rate the meaningfulness of your trip (or enter your own word):
+tr_enriching	Enriching
+tr_meaningful	Meaningful
+tr_casual	Casual
+tr_meaningless	Meaningless
+tr_emotional_q	Rate the emotional factor (or enter your own word):
+tr_dopamine_hit	Dopamine Hit
+tr_inspirational	Inspirational
+tr_plain	Plain
+tr_anxious	Anxious
+tr_despair	Despair
+tr_dread	Dread
+tr_importance_q	Rate the importance (or enter your own word):
+tr_lifechanging	Life-changing
+tr_influential	Influential
+tr_ordinary	Ordinary
+tr_waste_time	Waste of time
+tr_strangeness_q	Rate the strangeness (or enter your own word):
+tr_woowooweird	Woo-woo weird
+tr_strange	Strange
+tr_normal	Normal
+tr_nothing	Nothing
+tr_synchronicity_q	Rate the synchroncity factor (or enter your own word):
+tr_dirk_gently	Dirk Gently
+tr_mind_blowing	Mind-blowing
+tr_somewhat	Somewhat
+tr_boredom	Boredom
+tr_wanna_upload_photos_q	Do you want want to upload any photos?
+tr_upload_photos_now	Upload any photos you took now. Send them all at once as sending is limited to one message.
+tr_not_valid_upload	That is not a valid upload.
+tr_error_photo_upload	Sorry, there was an error uploading your photo.
+tr_photo_uploads_temp_disabled	Photo uploads are temporarily disabled while we change some things sorry! 
+tr_write_report	Lastly, write up your report. Typing up your report is limited to being sent in one message.
+tr_tweet	Tweet your report!
+tr_thanks	Thanks for the report!
+welcome_back	Welcome back to Randonautica!
+dont_forgot_send_loc	Don't forget to send your current location.
+iap_invalid_receipt	Invalid purchase receipt: {0}. You will be reported.
+iap_maps_pack_enabled	Maps Pack add-on enabled.
+iap_search_water_points_enabled	Place Search and Skip Water Points Pack add-on enabled. Set your location by typing \"search <place name or address>\".
+iap_everything_enabled	The Everything Pack add-on enabled. Set your location by typing \"search <place name or address>\".
+iap_all_disabled	All add-ons disabled.
+iap_no_purchases	You have no purchase history.
+iap_buy	BUY
+iap_enable	ENABLE
+iap_maps_pack	Maps Pack
+iap_maps_pack_desc	In-app preview of maps and streets
+iap_search_water_points	Place Search + Skip Water Pack
+iap_search_water_points_desc	Search by place names and skip water points
+iap_everything_pack	The Everything Pack
+iap_everything_pack_desc	Maps + Location Search + Skip Water Packs
+iap_enabling...	Enabling feature...
+iap_thanks_enabling	Thank you. Enabling now...
+sending_location	Sending your location...
+connecting_bot	Connecting to bot...
+sending_entropy	Sending entropy...

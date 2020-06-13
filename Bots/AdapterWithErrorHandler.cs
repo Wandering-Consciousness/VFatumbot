@@ -34,13 +34,13 @@ namespace VFatumbot
                 }
 
                 // Log any leaked exception from the application.
-                logger.LogError($"Exception caught : {exception.Message} {exception.StackTrace}");
+                logger.LogError($"{Loc.g("exception_caught")}: {exception.Message} {exception.StackTrace}");
 
                 // Send a catch-all apology to the user.
 #if RELEASE_PROD
-                await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. {exception.GetType().Name}: {exception.Message}");
+                await turnContext.SendActivityAsync($"{Loc.g("error_sorry")} {exception.GetType().Name}: {exception.Message}");
 #else
-                await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. {exception.GetType().Name}: {exception.Message} {exception.StackTrace}");
+                await turnContext.SendActivityAsync($"{Loc.g("error_sorry")} {exception.GetType().Name}: {exception.Message} {exception.StackTrace}");
 #endif
 
                 if (conversationState != null)

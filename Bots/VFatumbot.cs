@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -43,6 +44,7 @@ namespace VFatumbot
                     var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(turnContext, () => new UserProfileTemporary());
 
                     var isNonApp = userProfileTemporary.BotSrc != WebSrc.android && userProfileTemporary.BotSrc != WebSrc.ios;
+                    string startLocale = "";
 
                     if (Helpers.IsRandoLobby(turnContext))
                     {
@@ -67,37 +69,25 @@ namespace VFatumbot
                     }
                     else if (userProfileTemporary.IsLocationSet)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("welcome_back")), cancellationToken);
                         if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Don't forget to send your current location."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dont_forgot_send_loc")), cancellationToken);
                         await _mainDialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                     }
                     else if (userProfilePersistent.HasSetLocationOnce)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Welcome back to Randonautica!"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("welcome_back")), cancellationToken);
                         if (isNonApp)
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
                         await turnContext.SendActivityAsync(MessageFactory.Text(Consts.NO_LOCATION_SET_MSG), cancellationToken);
-                    }
-                    else
-                    {
-                        var welcome = "#### Welcome to Randonautica!\n" +
-                            "Beginners: Please start by reviewing the [FAQs](https://www.randonautica.com/got-questions) and [The 9 Tenets of The Randonauts](https://i.redd.it/x97vcpvtd9p41.jpg).  \n\n\nFor a great overview of the Fatum Project's ideas and theories behind Randonauts checkout [MegaNerd's 15 min video](https://www.youtube.com/watch?v=Vbi7jFjWY98).  \n\n\n" +
-                            "Once you've completed a trip, share in the discussion with the Randonauts on [Reddit](https://www.reddit.com/r/randonauts/) and [Twitter](https://twitter.com/TheRandonauts).  \n\n\n" +
-                            "Happy Randonauting!";
-                        await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
-                        //await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
-                        //if (isNonApp) // disable for now coz it was clogging the welcome screen and we lost the ability to detect isNonApp properly
-                        //{
-                        //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
-                        //}
-                        //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL."), cancellationToken);
+                    } else if (InterceptConversationStartWithLocale(turnContext, out startLocale)) {
+                        userProfilePersistent.SetLocale(startLocale);
+                        await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
                     }
 
                     // Hack coz Facebook Messenge stopped showing "Send Location" button
@@ -137,6 +127,7 @@ namespace VFatumbot
 
             // TODO: most of the logic/functionality in the following if statements I realised later on should probably be structured in the way the Bot Framework SDK talks about "middleware".
             // Maybe one day re-structure/re-factor it to following their middleware patterns...
+            // TODO update: Nup, that won't be happening. The bot will be walking the plank soon in favour of the Flutter app.
 
             var botSrc = WebSrc.nonweb;
 
@@ -144,6 +135,17 @@ namespace VFatumbot
             {
                 userProfileTemporary.BotSrc = botSrc;
                 await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
+            }
+
+            string startLocale;
+            if (InterceptConversationStartWithLocale(turnContext, out startLocale))
+            {
+                userProfilePersistent.SetLocale(startLocale);
+                await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentUICulture = userProfilePersistent.Locale;
             }
 
             double lat = 0, lon = 0;
@@ -193,7 +195,7 @@ namespace VFatumbot
                     userProfileTemporary.Latitude = lat;
                     userProfileTemporary.Longitude = lon;
 
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Your current location is set to {lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.  \nThis will be the center for searches."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("current_location", lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))), cancellationToken);
 
                     var incoords = new double[] { lat, lon };
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
@@ -212,8 +214,8 @@ namespace VFatumbot
                 }
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) &&
-                     turnContext.Activity.Text.EndsWith("help", StringComparison.InvariantCultureIgnoreCase) &&
-                     !turnContext.Activity.Text.Contains("options", StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
+                     turnContext.Activity.Text.EndsWith(Loc.g("help"), StringComparison.InvariantCultureIgnoreCase) &&
+                     !turnContext.Activity.Text.Contains(Loc.g("md_options"), StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
             {
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, _mainDialog, cancellationToken);
             }
@@ -267,6 +269,22 @@ namespace VFatumbot
             await _userTemporaryState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
+        private async Task DoWelcomeAsync(ITurnContext turnContext, CultureInfo locale, CancellationToken cancellationToken)
+        {
+            var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
+                $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
+                $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/TheRandonauts")}  \n\n\n" +
+                "Happy Randonauting!";
+            await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
+            //await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
+            //if (isNonApp) // disable for now coz it was clogging the welcome screen and we lost the ability to detect isNonApp properly
+            //{
+            //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
+            //}
+            //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("first_send_location")), cancellationToken);
+        }
+
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             //_logger.LogInformation("Running dialog with Message Activity.");
@@ -294,7 +312,7 @@ namespace VFatumbot
                     }
                     if (verify != 0)
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text($"Invalid purchase receipt: {verify}. You will be reported."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
                         return true;
                     }
 
@@ -303,7 +321,7 @@ namespace VFatumbot
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
 
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Maps Pack add-on enabled."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_maps_pack_enabled")), cancellationToken);
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
                     {
@@ -311,7 +329,7 @@ namespace VFatumbot
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
 
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Place Search and Skip Water Points Pack add-on enabled. Set your location by typing \"search <place name or address>\"."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
                     {
@@ -321,14 +339,14 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
-                        await turnContext.SendActivityAsync(MessageFactory.Text("The Everything Pack add-on enabled. Set your location by typing \"search <place name or address>\"."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_everything_enabled")), cancellationToken);
                     }
                     else
                     {
                         userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
                         userProfilePersistent.IsIncludeWaterPoints = true;
-                        await turnContext.SendActivityAsync(MessageFactory.Text("All add-ons disabled."), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_all_disabled")), cancellationToken);
                     }
 
                     if (userProfilePersistent.Purchases == null)
@@ -361,7 +379,7 @@ namespace VFatumbot
                     {
                         if (userProfilePersistent.Purchases == null || userProfilePersistent.Purchases.Count == 0)
                         {
-                            await turnContext.SendActivityAsync(MessageFactory.Text("You have no purchase history."), cancellationToken);
+                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_no_purchases")), cancellationToken);
                         }
                         else
                         {
@@ -370,6 +388,25 @@ namespace VFatumbot
 
                         return true;
                     }
+                }
+            }
+
+            return false;
+        }
+
+        protected bool InterceptConversationStartWithLocale(ITurnContext turnContext, out string startLocale)
+        {
+            startLocale = null;
+
+            var activity = turnContext.Activity;
+
+            if (activity.Properties != null)
+            {
+                var localeFromClient = (string)activity.Properties.GetValue("startLocale");
+                if (!string.IsNullOrEmpty(localeFromClient))
+                {
+                    startLocale = localeFromClient;
+                    return true;
                 }
             }
 

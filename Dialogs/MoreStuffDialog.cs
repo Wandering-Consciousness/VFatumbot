@@ -44,8 +44,8 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("What would you like to get?  \nQuantum points are single random ones (potential Blind Spots).  Mystery Points are a random type of point."),
-                RetryPrompt = MessageFactory.Text("That is not valid action."),
+                Prompt = MessageFactory.Text(Loc.g("blind_spots_more_menu")),
+                RetryPrompt = MessageFactory.Text(Loc.g("invalid_action")),
                 Choices = GetActionChoices(),
             };
 
@@ -61,50 +61,59 @@ namespace VFatumbot
 
             CallbackOptions callbackOptions = new CallbackOptions(); // for contiuing Anomalies and Pairs on the MainDialog
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("bs_quantum").Equals(val))
             {
-                case "Quantum":
-                    await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
-                    break;
-                case "Intent Suggestions":
-                    await actionHandler.IntentSuggestionActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
-                    break;
-                case "Mystery Point":
-                    await actionHandler.MysteryPointActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
-                    break;
-
-                // Anomalies and Pairs were originally in the MainDialog so we fudge a way to here to go back to the MainDialog and skip to the GetNumIdas prompt
+                await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
+            }
+            else if (Loc.g("bs_intent_suggestions").Equals(val))
+            {
+                await actionHandler.IntentSuggestionActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
+            }
+            else if (Loc.g("bs_mystery_point").Equals(val))
+            {
+                await actionHandler.MysteryPointActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
+            }
+            else if (Loc.g("bs_pair").Equals(val))
+            {
+                // Pairs was originally in the MainDialog so we fudge a way to here to go back to the MainDialog and skip to the GetNumIdas prompt
                 // to avoid having to copy/paste half the MainDialog's code here (too lazy for proper refactoring)
-                case "Anomaly":
-                    callbackOptions.JumpToAskHowManyIDAs = "Anomaly";
-                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken, options: callbackOptions);
-                case "Pair":
-                    callbackOptions.JumpToAskHowManyIDAs = "Pair";
-                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken, options: callbackOptions);
-
-                case "Quantum Time":
-                    await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, true);
-                    break;
-                case "Pseudo":
-                    await actionHandler.PseudoActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
-                    break;
-                case "Scan":
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(ScanDialog), this, cancellationToken);
-                case "Chains":
-                    return await stepContext.BeginDialogAsync(nameof(ChainsDialog), this, cancellationToken);
-                case "Quantum Dice":
-                    return await stepContext.BeginDialogAsync(nameof(QuantumDiceDialog), this, cancellationToken);
-
-                //case "My Randotrips":
-                //    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, "my");
-                //    break;
-                //case "Today's Randotrips":
-                //    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, DateTime.UtcNow.ToString("yyyy-MM-dd"));
-                //    break;
-
-                case "< Back":
-                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                callbackOptions.JumpToAskHowManyIDAs = "Pair";
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken, options: callbackOptions);
+            }
+            else if (Loc.g("bs_quantum_time").Equals(val))
+            {
+                await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, true);
+            }
+            else if (Loc.g("bs_pseudo").Equals(val))
+            {
+                await actionHandler.PseudoActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
+            }
+            else if (Loc.g("bs_scan").Equals(val))
+            {
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(ScanDialog), this, cancellationToken);
+            }
+            else if (Loc.g("bs_chains").Equals(val))
+            {
+                return await stepContext.BeginDialogAsync(nameof(ChainsDialog), this, cancellationToken);
+            }
+            else if (Loc.g("bs_dice").Equals(val))
+            {
+                return await stepContext.BeginDialogAsync(nameof(QuantumDiceDialog), this, cancellationToken);
+            }
+            //else if (Loc.g("bs_randotrips").Equals(val))
+            //{
+            //    //case "My Randotrips":
+            //    //    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, "my");
+            //    //    break;
+            //    //case "Today's Randotrips":
+            //    //    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, DateTime.UtcNow.ToString("yyyy-MM-dd"));
+            //    //    break;
+            //}
+            else if (Loc.g("bs_back").Equals(val))
+            {
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
 
             // Long-running tasks like /getattractors etc will make use of ContinueDialog to re-prompt users
@@ -116,7 +125,7 @@ namespace VFatumbot
             var actionOptions = new List<Choice>()
             {
                 new Choice() {
-                    Value = "Quantum",
+                    Value = Loc.g("bs_quantum"),
                     Synonyms = new List<string>()
                                     {
                                         "quantum",
@@ -124,13 +133,13 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Intent Suggestions",
+                    Value = Loc.g("bs_intent_suggestions"),
                     Synonyms = new List<string>()
                                     {
                                     }
                 },
                 new Choice() {
-                    Value = "Mystery Point",
+                    Value = Loc.g("bs_mystery_point"),
                     Synonyms = new List<string>()
                                     {
                                         "Mystery point",
@@ -141,17 +150,7 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Anomaly",
-                    Synonyms = new List<string>()
-                                    {
-                                        "anomaly",
-                                        "getanomaly",
-                                        "ida",
-                                        "getida",
-                                    }
-                },
-                new Choice() {
-                    Value = "Pair",
+                    Value = Loc.g("bs_pair"),
                     Synonyms = new List<string>()
                                     {
                                         "pair",
@@ -159,7 +158,7 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Quantum Time",
+                    Value = Loc.g("bs_quantum_time"),
                     Synonyms = new List<string>()
                                     {
                                         "quantumtime",
@@ -168,7 +167,7 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Pseudo",
+                    Value = Loc.g("bs_pseudo"),
                     Synonyms = new List<string>()
                                     {
                                         "pseudo",
@@ -176,21 +175,21 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Scan",
+                    Value = Loc.g("bs_scan"),
                     Synonyms = new List<string>()
                                     {
                                         "scan",
                                     }
                 },
                 new Choice() {
-                    Value = "Chains",
+                    Value = Loc.g("bs_chains"),
                     Synonyms = new List<string>()
                                     {
                                         "chains",
                                     }
                 },
                 new Choice() {
-                    Value = "Quantum Dice",
+                    Value = Loc.g("bs_dice"),
                     Synonyms = new List<string>()
                                     {
                                         "quantum dice",
@@ -219,7 +218,7 @@ namespace VFatumbot
                 //                    }
                 //},
                 new Choice() {
-                    Value = "< Back",
+                    Value = Loc.g("bs_back"),
                     Synonyms = new List<string>()
                                     {
                                         "<",

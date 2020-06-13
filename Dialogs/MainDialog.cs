@@ -214,8 +214,8 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractor and Void.\n  \n\n\nNEW features available - Map previews, skip water points & custom location searching.  \nGo to Options/Help → Add-ons"),
-                    RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
+                    Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid")),
+                    RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
                     Choices = GetActionChoices(stepContext.Context),
                 };
             }
@@ -223,8 +223,8 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Let's search! What would you like to get?  \nAttractors are dense clusters of random points. Voids are the opposite.  \nAnomalies are the strongest out of Attractor and Void.\n"),
-                    RetryPrompt = MessageFactory.Text("That is not a valid action. What would you like to get?"),
+                    Prompt = MessageFactory.Text(Loc.g("md_lets_search")),
+                    RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
                     Choices = GetActionChoices(stepContext.Context),
                 };
             }
@@ -247,38 +247,34 @@ namespace VFatumbot
             var actionHandler = new ActionHandler();
             var repromptThisRound = false;
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
-            {
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if ("Set Location".Equals(val)) {
                 // Hack coz Facebook Messenge stopped showing "Send Location" button
-                case "Set Location":
-                    repromptThisRound = true;
-                    await stepContext.Context.SendActivityAsync(CardFactory.CreateGetLocationFromGoogleMapsReply());
-                    break;
-                case "Attractor":
-                    stepContext.Values["PointType"] = "Attractor";
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                case "Void":
-                    stepContext.Values["PointType"] = "Void";
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                case "Anomaly":
-                    stepContext.Values["PointType"] = "Anomaly";
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
-                case "Options/Help":
+                repromptThisRound = true;
+                await stepContext.Context.SendActivityAsync(CardFactory.CreateGetLocationFromGoogleMapsReply());
+            } else if (Loc.g("md_attractor").Equals(val)) {
+                stepContext.Values["PointType"] = "Attractor";
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("md_void").Equals(val)) {
+                stepContext.Values["PointType"] = "Void";
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("md_anomaly").Equals(val)) {
+                stepContext.Values["PointType"] = "Anomaly";
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("md_options").Equals(val)) {
                     await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                     return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
-                case "Blind Spots & More":
+            } else if (Loc.g("md_blindspotsmore").Equals(val)) {
                     await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                     return await stepContext.BeginDialogAsync(nameof(MoreStuffDialog), this, cancellationToken);
-                case "My Location":
+            } else if (Loc.g("md_mylocation").Equals(val)) {
                     repromptThisRound = true;
                     await actionHandler.LocationActionAsync(stepContext.Context, userProfileTemporary, cancellationToken);
-                    break;
-                case "Donate":
+            } else if ("Donate".Equals(val)) {
                     repromptThisRound = true;
                     await stepContext.Context.SendActivityAsync($"Enjoying Randonauting?");
                     await stepContext.Context.SendActivityAsync($"The Randonauts are 100% volunteer based and could use your support to improve features and cover server costs.");
                     await stepContext.Context.SendActivityAsync($"[Donate now](https://www.paypal.me/therandonauts)");
-                    break;
             }
 
             if (repromptThisRound)
@@ -298,8 +294,8 @@ namespace VFatumbot
 
             var options = new PromptOptions()
             {
-                Prompt = MessageFactory.Text("How many intention driven quantum points would you like to look for?"),
-                RetryPrompt = MessageFactory.Text("That is not a valid number. It should be a number from 1 to 10."),
+                Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
+                RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
                 Choices = new List<Choice>()
                                 {
                                     new Choice() { Value = "1" },
@@ -331,16 +327,16 @@ namespace VFatumbot
             {
                 var options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Choose your entropy source for the quantum random number generator (choose Australian National University - ANU if unsure):"),
-                    RetryPrompt = MessageFactory.Text("That is not a valid QRNG source."),
+                    Prompt = MessageFactory.Text($"{Loc.g("md_choose_qrng")}:"),
+                    RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_qrng")),
                     Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "Camera" },
-                                    new Choice() { Value = "ANU" },
-                                    new Choice() { Value = "Temporal (Phone)" },
-                                    new Choice() { Value = "Temporal (Server)" },
-                                    //new Choice() { Value = "ANU Leftovers" },
-                                    //new Choice() { Value = "GCP Retro" },
+                                    new Choice() { Value = Loc.g("md_camera") },
+                                    new Choice() { Value = Loc.g("md_anu") },
+                                    new Choice() { Value = Loc.g("md_temporal_phone") },
+                                    new Choice() { Value = Loc.g("md_temporal_server") },
+                                    //new Choice() { Value = Loc.g("md_gcp_retro") },
+                                    //new Choice() { Value = Loc.g("md_anu_leftovers") },
                                 }
                 };
 
@@ -350,14 +346,14 @@ namespace VFatumbot
             {
                 var options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text("Choose your entropy source for the quantum random number generator (choose Australian National University - ANU if unsure):"),
-                    RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
+                    Prompt = MessageFactory.Text($"{Loc.g("md_choose_qrng")}:"),
+                    RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_qrng")),
                     Choices = new List<Choice>()
                                 {
-                                    new Choice() { Value = "ANU" },
-                                    new Choice() { Value = "Temporal" },
-                                    //new Choice() { Value = "ANU Leftovers" },
-                                    //new Choice() { Value = "GCP Retro" },
+                                    new Choice() { Value = Loc.g("md_anu") },
+                                    new Choice() { Value = Loc.g("md_temporal") },
+                                    //new Choice() { Value = Loc.g("md_gcp_retro") },
+                                    //new Choice() { Value = Loc.g("md_anu_leftovers") },
                                 }
                 };
 
@@ -378,91 +374,82 @@ namespace VFatumbot
             int numDots = getOptimizedDots(userProfileTemporary.Radius);
             int bytesSize = requiredEnthropyBytes(numDots);
 
-            switch (((FoundChoice)stepContext.Result)?.Value)
-            {
-                case "Camera":
-                    stepContext.Values["qrng_source"] = "Camera";
-                    stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
+            var val = ((FoundChoice)stepContext.Result)?.Value;
+            if (Loc.g("md_camera").Equals(val)) {
+                stepContext.Values["qrng_source"] = "Camera";
+                stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
 
-                    var promptOptions = new PromptOptions
-                    {
-                        Prompt = MessageFactory.Text("Collecting randomness from your phone's camera (no photos are taken)..."),
-                        RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
-                    };
+                var promptOptions = new PromptOptions
+                {
+                    Prompt = MessageFactory.Text(Loc.g("md_collecting_camera_entropy")),
+                    RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_qrng")),
+                };
 
-                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                    // and then pass onto the app layer to load the camera
-                    var requestEntropyActivity = Activity.CreateEventActivity();
-                    requestEntropyActivity.ChannelData = $"camrng,{bytesSize}";
-                    await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                // and then pass onto the app layer to load the camera
+                var requestEntropyActivity = Activity.CreateEventActivity();
+                requestEntropyActivity.ChannelData = $"camrng,{bytesSize}";
+                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
 
-                    return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", promptOptions, cancellationToken);
+                return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", promptOptions, cancellationToken);
+            } else if (Loc.g("md_temporal_phone").Equals(val)) {
+                stepContext.Values["qrng_source"] = "TemporalPhone";
+                stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
 
-                case "Temporal (Phone)":
-                    stepContext.Values["qrng_source"] = "TemporalPhone";
-                    stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
+                var stevePromptOptions = new PromptOptions
+                {
+                    Prompt = MessageFactory.Text(Loc.g("md_collecting_temporalphone_entropy")),
+                    RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_qrng")),
+                };
 
-                    var stevePromptOptions = new PromptOptions
-                    {
-                        Prompt = MessageFactory.Text("Collecting temporal randomness from your phone's CPU..."),
-                        RetryPrompt = MessageFactory.Text("That is not a valid entropy source."),
-                    };
+                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                // and then pass onto the app layer to load the temporal (SteveLib) generator
+                var requestSteveEntropyActivity = Activity.CreateEventActivity();
+                requestSteveEntropyActivity.ChannelData = $"temporal,{bytesSize}";
+                await stepContext.Context.SendActivityAsync(requestSteveEntropyActivity);
 
-                    // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                    // and then pass onto the app layer to load the temporal (SteveLib) generator
-                    var requestSteveEntropyActivity = Activity.CreateEventActivity();
-                    requestSteveEntropyActivity.ChannelData = $"temporal,{bytesSize}";
-                    await stepContext.Context.SendActivityAsync(requestSteveEntropyActivity);
+                return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", stevePromptOptions, cancellationToken);
+            } else if (Loc.g("md_temporal_server").Equals(val) || Loc.g("md_temporal").Equals(val)) {
+                stepContext.Values["qrng_source"] = "Temporal";
+                stepContext.Values["qrng_source_query_str"] = $"raw=true&temporal=true&size={bytesSize}";
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("md_anu_leftovers").Equals(val)) {
+                stepContext.Values["qrng_source"] = "Pool";
 
-                    return await stepContext.PromptAsync("GetQRNGSourceChoicePrompt", stevePromptOptions, cancellationToken);
-
-                case "Temporal":
-                case "Temporal (Server)":
-                    stepContext.Values["qrng_source"] = "Temporal";
-                    stepContext.Values["qrng_source_query_str"] = $"raw=true&temporal=true&size={bytesSize}";
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
-
-                case "ANU Leftovers":
-                    stepContext.Values["qrng_source"] = "Pool";
-
-                    // Chose a random entropy GID from the list of GIDs in the pool (pseudo randomly selecting quantum randomness?! there's a joke in there somewhere :)
+                // Chose a random entropy GID from the list of GIDs in the pool (pseudo randomly selecting quantum randomness?! there's a joke in there somewhere :)
 #if RELEASE_PROD
-                    var connStr = $"https://api.randonauts.com/getPools";
+                var connStr = $"https://api.randonauts.com/getPools";
 #else
-                    var connStr = $"https://api.randonauts.com/getpools";
-                    //var connStr = $"http://127.0.0.1:3000/getpools";
+                var connStr = $"https://api.randonauts.com/getpools";
+                //var connStr = $"http://127.0.0.1:3000/getpools";
 #endif
-                    var jsonStr = new WebClient().DownloadString(connStr);
-                    var pools = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonStr);
-                    var r = new Random();
-                    var idx = r.Next(pools.Count);
-                    var pool = pools[idx];
-                    var time = DateTime.Parse(pool.time.ToString());
+                var jsonStr = new WebClient().DownloadString(connStr);
+                var pools = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonStr);
+                var r = new Random();
+                var idx = r.Next(pools.Count);
+                var pool = pools[idx];
+                var time = DateTime.Parse(pool.time.ToString());
 
-                    await stepContext.Context.SendActivityAsync($"Enjoy some residual ANU pool entropy from around {time.ToString("yyyy-MM-dd")}");
+                await stepContext.Context.SendActivityAsync($"Enjoy some residual ANU pool entropy from around {time.ToString("yyyy-MM-dd")}");
 
-                    stepContext.Values["qrng_source_query_str"] = $"pool=true&gid={pool.pool.ToString().Replace(".pool", "")}&raw=true";
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                stepContext.Values["qrng_source_query_str"] = $"pool=true&gid={pool.pool.ToString().Replace(".pool", "")}&raw=true";
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("md_gcp_retro").Equals(val)) {
+                stepContext.Values["qrng_source"] = "GCPRetro";
+                stepContext.Values["qrng_source_query_str"] = $"raw=true&gcp=true&size={bytesSize * 2}";
 
-                case "GCP Retro":
-                    stepContext.Values["qrng_source"] = "GCPRetro";
-                    stepContext.Values["qrng_source_query_str"] = $"raw=true&gcp=true&size={bytesSize * 2}";
+                // Until the libwrapper supports proper paging spanning over multiple days restrict the amount of entropy we ask for to within 5km
+                if (userProfileTemporary.Radius > 5000)
+                {
+                    userProfileTemporary.Radius = 5000;
+                    await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
+                }
 
-                    // Until the libwrapper supports proper paging spanning over multiple days restrict the amount of entropy we ask for to within 5km
-                    if (userProfileTemporary.Radius > 5000)
-                    {
-                        userProfileTemporary.Radius = 5000;
-                        await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
-                    }
-
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
-
-
-                default:
-                case "ANU":
-                    stepContext.Values["qrng_source"] = "ANU";
-                    stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
-                    return await stepContext.NextAsync(cancellationToken: cancellationToken);
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else { // ANU is default
+                stepContext.Values["qrng_source"] = "ANU";
+                stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
+                return await stepContext.NextAsync(cancellationToken: cancellationToken);
             }
         }
 
@@ -519,7 +506,8 @@ namespace VFatumbot
             var actionOptions = new List<Choice>()
             {
                  new Choice() {
-                    Value = "Anomaly",
+                    
+                    Value = Loc.g("md_anomaly"),
                     Synonyms = new List<string>()
                                     {
                                         "anomaly",
@@ -529,7 +517,7 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Attractor",
+                    Value = Loc.g("md_attractor"),
                     Synonyms = new List<string>()
                                     {
                                         "attractor",
@@ -537,7 +525,7 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Void",
+                    Value = Loc.g("md_void"),
                     Synonyms = new List<string>()
                                     {
                                         "void",
@@ -548,7 +536,7 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Options/Help",
+                    Value = Loc.g("md_options"),
                     Synonyms = new List<string>()
                                     {
                                         "options",
@@ -558,7 +546,7 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "Blind Spots & More",
+                    Value = Loc.g("md_blindspotsmore"),
                     Synonyms = new List<string>()
                                     {
                                         "Blind spots & more",
@@ -575,14 +563,14 @@ namespace VFatumbot
                                     }
                 },
                 new Choice() {
-                    Value = "My Location",
+                    Value = Loc.g("md_mylocation"),
                     Synonyms = new List<string>()
                                     {
                                         "My Location",
                                         "My location",
                                         "my location",
                                         "location",
-                                    }
+                                    },
                 },
                 //new Choice() {
                 //    Value = "Donate",

@@ -73,18 +73,18 @@ namespace VFatumbot.BotLogic
             }
             else if (command.StartsWith("/steve", StringComparison.InvariantCulture))
             {
-                var imallkinds = MessageFactory.Text("I'm all kinds of Steve!");
+                var imallkinds = MessageFactory.Text(Loc.g("all_kinds_steve"));
                 
                 var images = new List<CardImage> {
                     new CardImage("http://thispersondoesnotexist.com/image"),
                 };
-                var cardAction = new CardAction(ActionTypes.OpenUrl, "Let Steve help you!", value: "https://docs.google.com/forms/d/e/1FAIpQLSekcgPLv7MUd5nfPn9JVLpZHH0I5MNP_e7ekw7_mEmJsMJkzw/viewform");
+                var cardAction = new CardAction(ActionTypes.OpenUrl, Loc.g("let_steve_help"), value: "https://docs.google.com/forms/d/e/1FAIpQLSekcgPLv7MUd5nfPn9JVLpZHH0I5MNP_e7ekw7_mEmJsMJkzw/viewform");
                 var buttons = new List<CardAction> {
                     cardAction
                 };
                 var heroCard = new HeroCard
                 {
-                    Title = "↑↑ This is Steve ↑↑",
+                    Title = $"↑↑ {Loc.g("this_is_steve")} ↑↑",
                     Images = images,
                     Buttons = buttons,
                     Tap = cardAction,
@@ -229,29 +229,29 @@ namespace VFatumbot.BotLogic
                         {
                             if (inputtedRadius < Consts.RADIUS_MIN)
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text($"Radius must be more than or equal to {Consts.RADIUS_MIN}m"), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("radius_gte", Consts.RADIUS_MIN)), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
                                 return;
                             }
                             if (inputtedRadius > Consts.RADIUS_MAX)
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text($"Radius must be less than or equal to {Consts.RADIUS_MAX}m"), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", Consts.RADIUS_MAX)), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
                                 return;
                             }
                         }
 
                         userProfileTemporary.Radius = inputtedRadius;
-                        await turnContext.SendActivityAsync(MessageFactory.Text($"Changed radius from {oldRadius}m to {userProfileTemporary.Radius}m"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("radius_changed", oldRadius, userProfileTemporary.Radius)), cancellationToken);
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync(MessageFactory.Text($"Invalid radius"), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("invalid_radius")), cancellationToken);
                     }
                 }
                 else
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Your current radius from is {userProfileTemporary.Radius}m"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("current_radius", userProfileTemporary.Radius)), cancellationToken);
                 }
 
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
@@ -275,7 +275,7 @@ namespace VFatumbot.BotLogic
                             }
                             else
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Place not found."), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("cant_find_place")), cancellationToken);
                                 validCoords = false;
                             }
                         }
@@ -291,7 +291,7 @@ namespace VFatumbot.BotLogic
                             userProfileTemporary.Latitude = lat;
                             userProfileTemporary.Longitude = lon;
 
-                            await turnContext.SendActivityAsync(MessageFactory.Text($"Your current location is set to {lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.  \nThis will be the center for searches."), cancellationToken);
+                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("current_location", lat.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), lon.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))), cancellationToken);
 
                             var incoords = new double[] { lat, lon };
                             var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
@@ -314,13 +314,13 @@ namespace VFatumbot.BotLogic
             else if (command.StartsWith("/togglewater", StringComparison.InvariantCulture))
             {
                 userProfileTemporary.IsIncludeWaterPoints = !userProfileTemporary.IsIncludeWaterPoints;
-                await turnContext.SendActivityAsync(MessageFactory.Text($"Water points will be {(userProfileTemporary.IsIncludeWaterPoints ? "included" : "skipped")}"), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("water_points_will_be", userProfileTemporary.IsIncludeWaterPoints ? Loc.g("included") : Loc.g("skipped"))), cancellationToken);
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
             }
             else if (command.StartsWith("/toggleclassic", StringComparison.InvariantCulture))
             {
                 userProfileTemporary.IsUseClassicMode = !userProfileTemporary.IsUseClassicMode;
-                await turnContext.SendActivityAsync(MessageFactory.Text($"Classic mode is now {(userProfileTemporary.IsUseClassicMode ? "enabled" : "disabled")}"), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("classic_mode", userProfileTemporary.IsUseClassicMode ? Loc.g("enabled") : Loc.g("disabled"))), cancellationToken);
                 CallbackOptions callbackOptions = new CallbackOptions();
                 callbackOptions.UpdateSettings = true;
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken, callbackOptions);
@@ -463,7 +463,7 @@ namespace VFatumbot.BotLogic
                 Int32.TryParse(buf[1], out idacou);
                 if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("invalid_num_points")), cancellationToken);
                     return;
                 }
             }
@@ -471,11 +471,11 @@ namespace VFatumbot.BotLogic
             if (doScan)
             {
                 userProfileTemporary.IsScanning = true;
-                await turnContext.SendActivityAsync(MessageFactory.Text("Generation may take from 5 to 15 minutes."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("scan_time_take")), cancellationToken);
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("finding_location")), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -516,14 +516,14 @@ namespace VFatumbot.BotLogic
 
                                         if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                         {
-                                            await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                                             return;
                                         }
 
                                         if (ida.Length == 1)
                                         {
-                                            await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                             goto redo;
                                         }
 
@@ -539,7 +539,7 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > 0)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped: " + numWaterPointsSkipped), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped", numWaterPointsSkipped)), cancellationToken);
                                 }
 
                                 messagesArray[i] = mesg;
@@ -549,7 +549,7 @@ namespace VFatumbot.BotLogic
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                                await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                                await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -571,13 +571,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -594,7 +594,7 @@ namespace VFatumbot.BotLogic
                 Int32.TryParse(buf[1], out idacou);
                 if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("invalid_num_points")), cancellationToken);
                     return;
                 }
             }
@@ -602,11 +602,11 @@ namespace VFatumbot.BotLogic
             if (doScan)
             {
                 userProfileTemporary.IsScanning = true;
-                await turnContext.SendActivityAsync(MessageFactory.Text("Generation may take from 5 to 15 minutes."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("scan_time_take")), cancellationToken);
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("finding_location")), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -646,14 +646,14 @@ namespace VFatumbot.BotLogic
 
                                         if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                         {
-                                            await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                                             return;
                                         }
 
                                         if (ida.Length == 1)
                                         {
-                                            await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                             goto redo;
                                         }
 
@@ -669,7 +669,7 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > 0)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped: " + numWaterPointsSkipped), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped", numWaterPointsSkipped)), cancellationToken);
                                 }
 
                                 messagesArray[i] = mesg;
@@ -679,7 +679,7 @@ namespace VFatumbot.BotLogic
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                                await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                                await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -701,13 +701,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -722,9 +722,9 @@ namespace VFatumbot.BotLogic
 
             dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
-            await turnContext.SendActivityAsync(MessageFactory.Text($"Your current radius is {userProfileTemporary.Radius}m.\n\n" +
-                                                                    $"Your current location is {userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)},{userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture)}.\n\n" +
-                                                                    (w3wResult != null ? $"What 3 Words address: {w3wResult?.words}" : "")
+            await turnContext.SendActivityAsync(MessageFactory.Text($"{Loc.g("current_radius", userProfileTemporary.Radius)}\n\n" +
+                                                                    $"{Loc.g("current_location", userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))}\n\n" +
+                                                                    (w3wResult != null ? $"what3words {Loc.g("address")}: {w3wResult?.words}" : "")
                                                                     ), cancellationToken);
 
             await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
@@ -738,7 +738,7 @@ namespace VFatumbot.BotLogic
                 Int32.TryParse(buf[1], out idacou);
                 if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("invalid_num_points")), cancellationToken);
                     return;
                 }
             }
@@ -746,11 +746,11 @@ namespace VFatumbot.BotLogic
             if (doScan)
             {
                 userProfileTemporary.IsScanning = true;
-                await turnContext.SendActivityAsync(MessageFactory.Text("Generation may take from 5 to 15 minutes."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("scan_time_take")), cancellationToken);
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("finding_location")), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -790,14 +790,14 @@ namespace VFatumbot.BotLogic
 
                                         if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                         {
-                                            await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                                             return;
                                         }
 
                                         if (ida.Length == 1)
                                         {
-                                            await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                             goto redo;
                                         }
 
@@ -813,7 +813,7 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > 0)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped: " + numWaterPointsSkipped), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped", numWaterPointsSkipped)), cancellationToken);
                                 }
 
                                 messagesArray[i] = mesg;
@@ -823,7 +823,7 @@ namespace VFatumbot.BotLogic
                                 nearestPlacesArray[i] = "" + w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult);
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                                await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                                await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -845,13 +845,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -862,7 +862,7 @@ namespace VFatumbot.BotLogic
 
         public async Task IntentSuggestionActionAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, CancellationToken cancellationToken, MainDialog mainDialog)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Text("Wait a minute. Quantumly randomizing the English dictionary for you."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("get_intent_suggestions")), cancellationToken);
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
             {
@@ -873,11 +873,11 @@ namespace VFatumbot.BotLogic
                         string suggestionsStr = "  \n";
                         foreach (var word in intentSuggestions)
                         {
-                            suggestionsStr += $"[{word}](https://www.google.com/search?q=define%20{word.Replace(" ", "%20")}) [(Search in Spotify)](https://open.spotify.com/search/{word.Replace(" ", "%20")})  \n";
+                            suggestionsStr += $"[{word}](https://www.google.com/search?q=define%20{word.Replace(" ", "%20")}) [({Loc.g("spotify_search")})](https://open.spotify.com/search/{word.Replace(" ", " %20")})  \n";
                         }
 
-                        await turnContext.SendActivityAsync(MessageFactory.Text("Intent suggestions: " + suggestionsStr), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Intent Suggestions", suggestionsStr);
+                        await turnContext.SendActivityAsync(MessageFactory.Text($"{Loc.g("intent_suggestions")}: " + suggestionsStr), cancellationToken);
+                        await Helpers.SendPushNotification(userProfileTemporary, $"{Loc.g("intent_suggestions")}", suggestionsStr);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -912,11 +912,11 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                     return;
                                 }
 
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                 goto redo;
                             }
                         }
@@ -941,7 +941,7 @@ namespace VFatumbot.BotLogic
                         }
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, forRemoteViewing: forRemoteViewing), cancellationToken);
-                        if (!string.IsNullOrEmpty(mesg)) await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                        if (!string.IsNullOrEmpty(mesg)) await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -993,11 +993,11 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                     return;
                                 }
 
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                 goto redo;
                             }
                         }
@@ -1009,7 +1009,7 @@ namespace VFatumbot.BotLogic
                         dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Point Generated", mesg);
+                        await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -1047,7 +1047,7 @@ namespace VFatumbot.BotLogic
                 Int32.TryParse(buf[1], out idacou);
                 if (idacou < 1 || idacou > 10)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Incorrect value. Parameter should be a digit from 1 to 10."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("invalid_num_points")), cancellationToken);
                     return;
                 }
             }
@@ -1055,11 +1055,11 @@ namespace VFatumbot.BotLogic
             if (doScan)
             {
                 userProfileTemporary.IsScanning = true;
-                await turnContext.SendActivityAsync(MessageFactory.Text("Generation may take from 5 to 15 minutes."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("scan_time_take")), cancellationToken);
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("finding_location")), cancellationToken);
             }
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
@@ -1149,11 +1149,11 @@ namespace VFatumbot.BotLogic
                             }
 
                             if (numAttWaterPointsSkipped > 1)
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of attractor water points skipped: " + numAttWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_attractors_skipped", numAttWaterPointsSkipped)), cancellationToken);
                             if (numVoiWaterPointsSkipped > 1)
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of void water points skipped: " + numVoiWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_voids_skipped", numVoiWaterPointsSkipped)), cancellationToken);
 
-                            await Helpers.SendPushNotification(userProfileTemporary, "Pair of Points Generated", attMessagesArray[0]); // just send one notification
+                            await Helpers.SendPushNotification(userProfileTemporary, Loc.g("pair_points_detected"), attMessagesArray[0]); // just send one notification
 
                             CallbackOptions callbackOptions = new CallbackOptions()
                             {
@@ -1174,13 +1174,13 @@ namespace VFatumbot.BotLogic
                         {
                             if (!userProfileTemporary.IsUseClassicMode && !doScan)
                             {
-                                mesg = "No anomalies currently detected in the area, supplying a quantum-point for you instead.";
+                                mesg = Loc.g("no_points_detected_quantum");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await QuantumActionAsync(turnContext, userProfileTemporary, cancellationToken, mainDialog);
                             }
                             else
                             {
-                                mesg = "No anomalies currently detected in the area.";
+                                mesg = Loc.g("no_points_detected");
                                 await turnContext.SendActivityAsync(MessageFactory.Text(mesg), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = doScan });
                             }
@@ -1191,7 +1191,7 @@ namespace VFatumbot.BotLogic
 
         public async Task ChainActionAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, CancellationToken cancellationToken, MainDialog mainDialog, Enums.PointTypes pointType, int maxDistance, bool isCentered = false)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Text("Generating your chain. Depending on your radius and the number/type of points it may take a while."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("generating_chain")), cancellationToken);
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
             {
@@ -1241,7 +1241,7 @@ namespace VFatumbot.BotLogic
 
                             if (idas.Count() == 0)
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text($"No anomalies found at so far at point #{j+1}. Trying again..."), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_nothing_found", j+1)), cancellationToken);
                                 goto redo;
                             }
 
@@ -1258,12 +1258,12 @@ namespace VFatumbot.BotLogic
 
                                     if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                     {
-                                        await turnContext.SendActivityAsync(MessageFactory.Text($"Couldn't find anything but water points at point {j+1}. Try again later."), cancellationToken);
+                                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_nothing_but_water_points", j+1)), cancellationToken);
                                         await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, new CallbackOptions() { ResetFlag = false });
                                         return;
                                     }
 
-                                    await turnContext.SendActivityAsync(MessageFactory.Text($"Number of water points skipped so far at point #{j+1}: {numWaterPointsSkipped}"), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_num_water_points_skipped_so_far", j+1, numWaterPointsSkipped)), cancellationToken);
                                     goto redo;
                                 }
                             }
@@ -1276,7 +1276,7 @@ namespace VFatumbot.BotLogic
 
                             if (numWaterPointsSkipped > 0)
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text($"Number of water points skipped at point #{j+1}: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("chain_num_water_points_skipped", j+1, numWaterPointsSkipped)), cancellationToken);
                             }
 
                             messagesArray[j] = mesg;
@@ -1304,7 +1304,7 @@ namespace VFatumbot.BotLogic
                             };
                         var chain = origin.Concat(generatedPoints).ToArray();
                         await turnContext.SendActivitiesAsync(CardFactory.CreateChainCardReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), chain), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Chain Generated", mesg);
+                        await Helpers.SendPushNotification(userProfileTemporary, Loc.g("chain_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -1326,7 +1326,7 @@ namespace VFatumbot.BotLogic
 
         public async Task MysteryPointActionAsync(ITurnContext turnContext, UserProfileTemporary userProfileTemporary, CancellationToken cancellationToken, MainDialog mainDialog)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Text("Finding a location... focus on your intent."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("finding_location")), cancellationToken);
 
             DispatchWorkerThread((object sender, DoWorkEventArgs e) =>
             {
@@ -1352,12 +1352,12 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                     await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken);
                                     return;
                                 }
 
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                 goto redoIDA;
                             }
                         }
@@ -1372,12 +1372,12 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                     await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken);
                                     return;
                                 }
 
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                 goto redoIDA;
                             }
                         }
@@ -1395,12 +1395,12 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                     await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken);
                                     return;
                                 }
 
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                 goto redoPseudo;
                             }
                         }
@@ -1416,12 +1416,12 @@ namespace VFatumbot.BotLogic
 
                                 if (numWaterPointsSkipped > Consts.WATER_POINTS_SEARCH_MAX)
                                 {
-                                    await turnContext.SendActivityAsync(MessageFactory.Text("Couldn't find anything but water points. Try again later."), cancellationToken);
+                                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("nothing_but_water_points")), cancellationToken);
                                     await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken);
                                     return;
                                 }
 
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Number of water points skipped so far: " + numWaterPointsSkipped), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_points_skipped_so_far", numWaterPointsSkipped)), cancellationToken);
                                 goto redoQuantum;
                             }
                         }
@@ -1491,7 +1491,7 @@ namespace VFatumbot.BotLogic
                         dynamic w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
-                        await Helpers.SendPushNotification(userProfileTemporary, "Mystery Point Generated", mesg);
+                        await Helpers.SendPushNotification(userProfileTemporary, Loc.g("mystery_point_generated"), mesg);
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
