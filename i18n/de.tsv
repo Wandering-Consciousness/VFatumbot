@@ -1,0 +1,221 @@
+﻿all_kinds_steve	Ich bin alle Arten von Steve!
+let_steve_help	Lass dir von Steve helfen!
+this_is_steve	Das ist Steve
+radius_gte	Radius muss mindestens {0}m sein.
+radius_lte	Radius muss höchstens {0}m sein.
+changed_radius	Radius von {0}m nach {1}m geändert.
+invalid_radius	Ungültiger Radius
+current_radius	Dein derzeitiger Radius ist {0}m
+cant_find_place	Ort nicht gefunden
+current_location	Deine derzeitige Position ist auf {0},{1} eingestellt.  <br>Dies wird der Mittelpunkt deiner Suchen sein.
+water_points_will_be	Punkte im Wasser werden {0}
+skipped	übersprungen
+ignored	ignoriert
+classic_mode	Classic-Modus ist jetzt {0}
+enabled	aktiviert
+disabled	deaktiviert
+help	Hilfe
+invalid_num_points	Falscher Wert. Parameter muss eine Ziffer zwischen 1 und 10 sein.
+scan_time_take	Erzeugung kann zwischen 5 und 15 Minuten dauern.
+finding_location	Ort wird gefunden... Fokussiere deine Intention
+nothing_but_water_points	Leider konnte nichts ausser Punkten im Wasser gefunden werden. Versuche es später noch einmal.
+num_water_points_skipped_so_far	Zahl der bisher übersprungenen Punkte im Wasser: {0}
+num_water_points_skipped	Zahl der übersprungenen Punkte im Wasser: {0}
+point_generated	Punkt wurde erzeugt.
+no_points_detected_quantum	Keine Punkte konnten derzeit in dem Gebiet gefunden werden. Du bekommst stattdessen einen Quanten-Punkt.
+no_points_detected	Keine Punkte konnten derzeit in dem Gebiet gefunden werden. Du bekommst stattdessen einen Quanten-Punkt.
+address	Adresse
+get_intent_suggestions	Das englische Wörterbuch würd für Dich quantenzufällig gemischt.
+define	definiere 
+spotify_search	In Spotify suchen
+intent_suggestions	Intentionsvorschläge
+num_water_attractors_skipped	Anzahl der übersprungenen Attractor-Punkte im Wasser: {0}
+num_water_voids_skipped	Anzahl der übersprungenen Void-Punkte im Wasser: {0}
+pair_points_detected	Erzeugte Punktpaare
+generating_chain	Deine Kette wird erzeugt. Je nach Größe deines Radiuses und der Anzahl/Art der Punkte kann es eine Weile dauern.
+chain_nothing_found	Keine Anomalien konnten für Punkt #{0} gefunden werden. Erneuter Versuch...
+chain_nothing_but_water_points	Konnte nichts ausser Punkten im Wasser bei Punkt {0} finden. Versuche es später noch einmal.
+chain_num_water_points_skipped_so_far	Bisherige Anzahl der übersprungenen Punkte im Wasser bei Punkt #{0}: {1}
+chain_num_water_points_skipped	Anzahl der übersprungenen Punkte im Wasser bei Punkt #{0}: {1}
+chain_generated	Kette wurde erzeugt
+mystery_point_generated	Geheimnispunkt erzeugt
+exception_caught	Ausnahmfehler erkannt
+error_sorry	Entschuldige, es scheint etwas schiefgegangen zu sein.
+open	Öffnen
+chain_map_open	Bereise die Kette in Google Maps
+view_on_google_maps	In Google Maps ansehen
+street_view	Street View
+google_earth	Google Earth
+location	Standort
+open_map	Karte Öffnen
+map	Karten
+earth	Erde
+view_with_google	Mit Google ansehen
+google_maps	Google Maps
+google_street_view	Google Street View
+download_app	App downloaden
+md_anomaly	Anomalie
+md_attractor	Attractor
+md_void	Void
+md_options	Optionen/Hilfe
+md_blindspotsmore	Blindeflecken & Mehr
+md_mylocation	Mein Standort
+md_lets_search_paid	Lass uns suchen! Was hättest Du denn gerne? <br>Attractor-Punkte sind dicht beieinander liegende Häufungen zufälliger Punkte. Void-Punkte sind das Gegenteil. <br>Anomalien sind die jeweils stärksten unter den gefundenen Attractor- und Void-Punkten.<br><br><br>Premium Features verfügbar - Kartenvorschau, Punkte im Wasser überspringen & individuell angepasste Standortsuche. <br>Öffne Optionen/Hilfe → Erweiterungen
+md_invalid_action	Das ist eine ungültiger Vorgang. Was hättest Du denn gerne?
+md_lets_search	Lass uns suchen! Was hättest Du denn gerne? <br>Attractor-Punkte sind dicht beieinander liegende Häufungen zufälliger Punkte. Void-Punkte sind das Gegenteil. <br>Anomalien sind die jeweils stärksten unter den gefundenen Attractor- und Void-Punkten.
+md_how_many_idas	Bis zu wie viele Punkte würdest Du gerne suchen?
+md_choose_qrng	Wähle deine Entropiequelle: (nimm Australian National University - ANU falls unsicher)
+md_invalid_qrng	Das ist keine gültige Entropiequelle.
+md_camera	Kamera
+md_anu	ANU
+md_temporal	Temporal
+md_temporal_server	Temporal (Server)
+md_temporal_phone	Temporal (Handy)
+md_anu_leftovers	ANU Überbleibsel
+md_gcp_retro	GCP Retro
+md_collecting_camera_entropy	Zufallszahlen werden von deiner Handykamera gesammelt (es werden keine Fotos gemacht)...
+md_collecting_temporalphone_entropy	Zufallszahlen werden von deinem Handyprozessor gesammelt...
+yes	Ja
+no	Nein
+addons	Erweiterungen
+update_settings_q	Einstellungen aktualisieren?
+select_radius	Wähle deinen Radius in Metern oder gib die Zahlen direkt ein
+include_water_points_q	Punkte im Wasser einbeziehen?
+show_google_street_earth_q	Google Street View und Earth Vorschau anzeigen?
+invalid_answer	Das ist keine gültige Antwort.
+anonymized_id_is	Deine anonymisierte ID ist {0}.
+show_google_street_earth	Street View und Earth Vorschau wird {0}.
+hidden	versteckt
+displayed	angezeigt
+get_locsearch_skipwater_pack	Hol Dir die Ortsuche und Punkte im Wasser Überspringen Pakete über den Erweiterungen Knopf.
+get_maps_pack	Hol dir das Kartenpaket für eine Vorschau von Karten und Straßen innerhalb der App über den Erweiterungen Knopf
+bs_quantum	Quanten
+bs_quantum_time	Quantenzeit
+bs_intent_suggestions	Intentionsvorschläge
+bs_mystery_point	Geheimnispunkt
+bs_pair	Punktpaar
+bs_pseudo	Pseudo
+bs_scan	Scan
+bs_chains	Ketten
+bs_dice	Quantenwürfel
+bs_back	< Zurück
+welcome_randonautica	Willkommen bei Randonautica!
+welcome_beginners	Anfänger: Bitte lies zuerst die [FAQ]({0}) und [Die 9 Randonauten-Grundsätze]({1}).
+welcome_report_share	Sobald du einen Trip absolviert hast, nimm in der Diskussion mit anderen Randonauten auf [Reddit]({0}) und [Twitter]({1}) teil.
+first_send_location	Fang an, indem du deinen Standort mitteilst. Das geht durch Tippen der 🌍/📎 Taste oder einer Google Maps URL.
+choose_chain_type	Welche Art von Punkten würdest du gerne verketten?
+ch_invalid_point_type	Das ist keine gültige Punktart.
+ch_anomalies	Anomalien
+ch_voids	Void-Punkte
+ch_attractors	Attractor-Punkte
+ch_current_or_sequential	Erzeuge alle Punkte nach Entfernung von deinem aktuellen Standort aus oder in sequentieller Reihenfolge.
+ch_current	Aktuell
+ch_sequential	Sequentiell
+ch_num_points	Gib die Anzahl der zu verkettenden Punkte ein. Die geschätzt weiteste Entfernung wird diese Zahl multipliziert mit deinem derzeitigen Radius sein.
+ch_invalid_number	Das ist keine gültige Nummer.
+ch_reprompt_num_points	Ungültige Nummer. Gib die Anzahl der Punkte ein:
+ch_mte	Anzahl muss mehr oder gleich [0} sein. Gib eine Zahl ein:
+ch_lte	Anzahl muss weniger oder gleich [0} sein. Gib eine Zahl ein:
+no_loc_or_reset	Du hast keinen Standort mitgeteilt oder er wurde zurückgesetzt. Das geht durch Tippen der 🌍/📎 Taste oder einer Google Maps URL. Du kannst auch jederzeit \"help\" tippen.
+ida_found	Intentionsgesteuerte Anomalie gefunden
+ida_type	Art: {0}
+ida_radius	Radius: {0}
+ida_power	Stärke: {0}
+ida_bearing	Peilung: {0}
+ida_zscore	Z-Score: {0}
+randpoint_generated	Zufallspunkt erzeugt
+suggested_time	Besuchszeitvorschlag: {0}
+blind_spots_more_menu	Was hättest Du gerne? <br>Quantenpunkte sind einzelne Zufallspunkte (mögliche Blinde Flecken). Geheimnispunkte sind eine zufällig gewählte Art von Punkt.
+invalid_action	Das ist kein gültiger Vorgang.
+agree_to_terms_q	Stimmst Du den Benutzer- und Privatsphärenrichtlinien zu und dass Du dich wie ein anstäniger Randonaut verhalten wirst?
+toc_dontagree	Nein
+toc_doagree	Ich stimme zu
+toc_shame	Sehr schade. So viele zufällige Abenteuer warten auf Dich.
+toc_invalid_answer	Das ist keine gültige Antwort. {0}
+qd_min1	Gib eine inklusive kleinstmögliche Zahl größer als 1 ein. Für einen \"Kopf oder Zahl\" Münzwurf gib 1 ein und betrachte Sie als \"Kopf\".
+qd_min2	Ungültige Untergrenze. Gib eine gewünschte Untergrenze ein:
+qd_min3	Untergrenze muss größer oder gleich 1 sein. Versuche es noch einmal:
+qd_min4	Ungültige Untergrenze. Sie muss kleiner oder gleich 254 sein.
+qd_max1	Gib eine inklusive größtmögliche Zahl größer als die Untergrenze und maximal 255 ein. Für einen \"Kopf oder Zahl\" Münzwurf gib 2 ein und betrachte Sie als \"Zahl\".
+qd_max2	Ungültige Obergrenze. Gib eine gewünschte Obergrenze ein:
+qd_max3	Obergrenze muss größer als 1 sein. Versuche es noch einmal:
+qd_max4	Ungültige Obergrenze. Sie muss kleiner oder gleich 255 sein. Versuche es noch einmal:
+qd_minmax	Untergrenze ({0}) muss kleiner als die Obergrenze sein ({1}). Sie wird auf {2} eingestellt.
+qd_rolling	Würfeln...
+qd_results	Ergebnis: {0} [{1}, {2}]. Nochmal würfeln?
+qd_onlyyess	Ja oder Nein, nichts Anderes.
+err_no_entropy_fetch	Konnte keine Zufallsdaten abrufen.
+err_qrng_service_failed	Der Dienst hat keine Zufallsdaten zurückgegeben.
+err_qrng_error	Es tut uns leid, es gab einen Fehler bei der Beschaffung der benötigten Entropiemenge zur Zufallsgenerierung. Versuche es später noch einmal.
+scan_choose_kind	Wähle einen Scanmodus:
+scan_invalid_action	Das ist kein gültiger Scanmodus.
+scan_attractor	Attractor Scan
+scan_void	Void Scan
+scan_anomaly	Anomalie Scan
+scan_pair	Paar Scan
+scan_sesson_inplace	Deine Scanning-Session ist schon im Gange.
+tr_did_you_visit	Hast Du den Punk besucht oder kamst ihm nahe und würdest gerne einen Trip-Bericht einreichen?
+tr_yes_sans_report	Ja,aber ohne Bericht
+tr_yes_report	Ja, mit Bericht!
+tr_invalid_choice	Das ist keine gültige Auswahl.
+tr_set_intent_q	Hast Du Dich auf eine Intention konzentriert?
+tr_enter_intent	Was war Deine Intention?
+tr_hope_had_fun	Hattest du Spaß?
+tr_collect_artifacts_q	Hast du irgendwelche Gegenstände gesammelt?
+tr_wow_and_astounding_q	War dein Trip ein \"Aha\"-Erlebnis oder von Bedeutung?
+tr_meaningfulness_q	Beurteile die Bedeutsamkeit deines Trips (oder gib einen eigenen passenden Begriff ein):
+tr_enriching	Bereichernd
+tr_meaningful	Beteutungsvoll
+tr_casual	Gleichgültig
+tr_meaningless	Bedeutungslos
+tr_emotional_q	Beurteile den Gefühlsfaktor (oder gib einen eigenen passenden Begriff ein):
+tr_dopamine_hit	Dopaminkick
+tr_inspirational	Inspirierend
+tr_plain	Nüchtern
+tr_anxious	Unruhig
+tr_despair	Verzweifelnd
+tr_dread	Entsetzlich
+tr_importance_q	Beurteile die Wichtigkeit (oder gib einen eigenen passenden Begriff ein):
+tr_lifechanging	Lebensverändernd
+tr_influential	Einflussnehmend
+tr_ordinary	Gewöhnlich
+tr_waste_time	Zeitverschwendung
+tr_strangeness_q	Beurteile die Merkwürdigkeit (oder gib einen eigenen passenden Begriff ein):
+tr_woowooweird	Woo-woo gruselig
+tr_strange	Seltsam
+tr_normal	Normal
+tr_nothing	Garnichts
+tr_synchronicity_q	Beurteile den Synchronizitätsfaktor (oder gib einen eigenen passenden Begriff ein):
+tr_dirk_gently	Dirk Gently
+tr_mind_blowing	Überwältigend
+tr_somewhat	Geringfügig
+tr_boredom	Langweilig
+tr_wanna_upload_photos_q	Möchtest du Fotos hochladen?
+tr_upload_photos_now	Lade jetzt Fotos Deines Trips hoch. Sende sie alle gleichzeitig, denn das Senden ist auf eine einzige Nachricht limitiert.
+tr_not_valid_upload	Das ist kein gültiger Upload.
+tr_error_photo_upload	Es tut uns leid, es gab einen Fehler beim Hochladen Deines Fotos.
+tr_photo_uploads_temp_disabled	Fotoupload ist vorübergehend abgeschaltet während wir Änderungen vornehmen, sorry!
+tr_write_report	Zum Schluss schreibe uns Deinen Bericht in eigenen Worten in einer einzigen Nachricht.
+tr_tweet	Tweete Deinen Bericht!
+tr_thanks	Danke für Deinen Bericht!
+welcome_back	Willkommen zurück bei Randonautica!
+dont_forgot_send_loc	Vergiss nicht, uns Deinen derzeitigen Standort mitzuteilen.
+iap_invalid_receipt	Ungültiger Kaufbeleg: {0}. Du wirst gemeldet.
+iap_maps_pack_enabled	Kartenpaket-Erweiterung aktiviert.
+iap_search_water_points_enabled	Ortsuche und Punkte im Wasser Paket-Erweiterung aktiviert. Teile uns Deinen Standort durch \"search <Ortsname oder Adresse>\" mit.
+iap_everything_enabled	Komplettpaket-Erweiterung aktiviert. Teile uns Deinen Standort durch \"search <Ortsname oder Adresse>\" mit.
+iap_all_disabled	Alle Erweiterungen deaktiviert.
+iap_no_purchases	Du hast keine Einkaufshistorie
+iap_buy	KAUFEN
+iap_enable	AKTIVIEREN
+iap_maps_pack	Kartenpaket
+iap_maps_pack_desc	Vorschau von Karten und Straßen innerhalb der App
+iap_search_water_points	Ortsuche + Punkte im Wasser Überspringen Paket
+iap_search_water_points_desc	Nach Ortsnamen suchen und Punkte im Wasser vermeiden
+iap_everything_pack	Komplettpaket
+iap_everything_pack_desc	Karten + Ortssuche +Punkte im Wasser Überspringen Paket
+iap_enabling...	Feature wird aktiviert...
+iap_thanks_enabling	Vielen Dank. Es wird aktiviert...
+sending_location	Standortmitteilung...
+connecting_bot	Verbinde zum Bot...
+sending_entropy	Entropie wird gesendet...

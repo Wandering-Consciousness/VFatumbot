@@ -100,7 +100,7 @@ bs_chains	Chains
 bs_dice	Quantum Dice
 bs_back	< Back
 welcome_randonautica	Welcome to Randonautica!
-welcome_beginners	Beginners: Please start by reviewing the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1}). 
+welcome_beginners	New to Randonauting? [Watch this video](https://www.youtube.com/watch?v=h148J7ym7Ww) to find out what it's all about.  <br><br><br>You can also check out the [FAQs]({0}) and [The 9 Tenets of The Randonauts]({1})	
 welcome_report_share	Once you've completed a trip, share in the discussion with the Randonauts on [Reddit]({0}) and [Twitter]({1}).
 first_send_location	Start by sending your location by tapping 🌍/📎 or sending a Google Maps URL.
 choose_chain_type	What kind of points do you want to chain?
