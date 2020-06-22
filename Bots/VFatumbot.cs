@@ -274,7 +274,18 @@ namespace VFatumbot
             var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
                 $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
                 $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/TheRandonauts")}  \n\n\n" +
-                "Happy Randonauting!";
+                "##### Pro Tips  \n" +
+                "   \n\n\n" +
+                "* Randonaut with a positive mindset!  \n" +
+                "* Bring a trash bag to help the environment.  \n" +
+                "* If you normally wouldn't adventure alone, go with a friend or small group.  \n" +
+                "* Randonauting is best done as a daytime activity.  \n" +
+                "* Always Randonaut with a charged phone.  \n" +
+                "* Use situational awareness.  \n" +
+                "* Be respectful of property owners. Never trespass.  \n" +
+                "* Do not go into dangerous areas.  \n\n\n" +
+                "Happy Randonauting!"
+               ;
             await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
             //await turnContext.SendActivityAsync(CardFactory.GetWelcomeVideoCard());
             //if (isNonApp) // disable for now coz it was clogging the welcome screen and we lost the ability to detect isNonApp properly
