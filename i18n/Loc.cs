@@ -27,6 +27,7 @@ namespace VFatumbot.BotLogic
             dicts.Add("it", File.ReadLines($"i18n/it.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
             dicts.Add("es", File.ReadLines($"i18n/es.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
             dicts.Add("de", File.ReadLines($"i18n/de.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
+            dicts.Add("pt", File.ReadLines($"i18n/pt.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
         }
 
         public static string g(string key, params object[] formatters)
