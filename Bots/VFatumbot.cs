@@ -273,7 +273,7 @@ namespace VFatumbot
         {
             var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
                 $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
-                $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/TheRandonauts")}  \n\n\n" +
+                $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/RandonauticaApp")}  \n\n\n" +
                 "##### Pro Tips  \n" +
                 "   \n\n\n" +
                 "* Randonaut with a positive mindset!  \n" +
