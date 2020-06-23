@@ -390,6 +390,19 @@
                 }
             });
 
+            // Hijack the Retry button to force page reload coz, well, Retry Send doesn't work
+            var scanRepeater;
+            function scanForRetryBtn() {
+                var retryButton = jQuery('.css-17jhb11');
+                if (retryButton.length > 0) {
+                    retryButton.click(function () {
+                        location.reload();
+                    });
+                }
+                scanRepeater = setTimeout(scanForRetryBtn, 500);
+            }
+            scanForRetryBtn();
+
             //
             // Helper functions below
             //
