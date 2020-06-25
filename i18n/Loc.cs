@@ -29,6 +29,11 @@ namespace VFatumbot.BotLogic
             dicts.Add("de", File.ReadLines($"i18n/de.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
             dicts.Add("pt", File.ReadLines($"i18n/pt.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
             dicts.Add("tr", File.ReadLines($"i18n/tr.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
+            dicts.Add("fr", File.ReadLines($"i18n/fr.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
+            dicts.Add("pl", File.ReadLines($"i18n/pl.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
+            dicts.Add("ro", File.ReadLines($"i18n/ro.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
+            dicts.Add("hu", File.ReadLines($"i18n/hu.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
+            dicts.Add("uk", File.ReadLines($"i18n/uk.tsv").Select(line => line.Split('\t')).ToDictionary(line => line[0], line => line[1]));
         }
 
         public static string g(string key, params object[] formatters)

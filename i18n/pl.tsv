@@ -1,0 +1,221 @@
+﻿all_kinds_steve	Jestem wszystkimi rodzajami Stefanów!
+let_steve_help	Daj sobie pomóc Stefanowi!
+this_is_steve	Tu Stefan
+radius_gte	Obszar musi mieć więcej lub równo {0}m
+radius_lte	Obszar musi mieć mniej lub równo {0}m
+changed_radius	Zmieniono obszar z {0}m do {1}m
+invalid_radius	Nieprawidłowy obszar
+current_radius	Twoja obecna odległość od celu to {0}m
+cant_find_place	Miejsce nie znalezione
+current_location	Twoja obecna lokalizacja to {0},{1}
+water_points_will_be	
+skipped	pominięte
+ignored	zignorowane 
+classic_mode	Tryb klasyczny włączony {0}
+enabled	Włączone
+disabled	Wyłączone
+help	Pomoc 
+invalid_num_points	Nieprawidłowa wartość. Wybierz numer od 1 do 10
+scan_time_take	wygenerowanie może zająć od 5 do 15 minut
+finding_location	Szukanie lokalizacji... skup uwagę na intencji.
+nothing_but_water_points	Nie mogliśmy znaleźć nic oprócz punktów na wodzie. Spróbuj ponownie później.
+num_water_points_skipped_so_far	Aktualna liczba pominiętych punktów na wodzie: {0}
+num_water_points_skipped	Liczba pominiętych punktów wodnych: {0}
+point_generated	Wygenerowano punktowo
+no_points_detected_quantum	W tej chwili nie wykryto żadnych punktów w okolicy, dostarczając za to punkt kwantowy.
+no_points_detected	W okolicy nie wykryto żadnych punktów.
+address	adres
+get_intent_suggestions	Ilościowo losowy słownik angielski dla Ciebie.
+define	definiować
+spotify_search	Szukaj w Spotify
+intent_suggestions	Celowe sugestie
+num_water_attractors_skipped	Pominięto liczbę punktów przyciągania wody: {0}
+num_water_voids_skipped	Liczba pominiętych pustych punktów wodnych: {0}
+pair_points_detected	Para wygenerowanych punktów
+generating_chain	Generowanie łańcucha. W zależności od promienia i liczby / rodzaju punktów może to chwilę potrwać.
+chain_nothing_found	Do tej pory nie znaleziono anomalii w punkcie # {0}. Próbuję ponownie...
+chain_nothing_but_water_points	Nie można znaleźć niczego oprócz punktów wodnych w punkcie {0}. Spróbuj ponownie później.
+chain_num_water_points_skipped_so_far	Liczba punktów wodnych pomijanych do tej pory w punkcie # {0}: {1}
+chain_num_water_points_skipped	Liczba punktów wodnych pominiętych w punkcie # {0}: {1}
+chain_generated	Wygenerowano z łańcucha
+mystery_point_generated	Wygenerowano punkt tajemnicy
+exception_caught	Złapany wyjątek
+error_sorry	Przepraszamy, wygląda na to, że coś poszło nie tak.
+open	otwarty
+chain_map_open	Łańcuch podróży w Mapach Google
+view_on_google_maps	Wyświetl w Mapach Google
+street_view	widok ulicy
+google_earth	Google Earth
+location	Lokalizacja
+open_map	Otwórz mapę
+map	Mapy
+earth	Ziemia
+view_with_google	Wyświetl za pomocą Google
+google_maps	mapy Google
+google_street_view	Google Street View
+download_app	Pobierz aplikację
+md_anomaly	Anomalia
+md_attractor	Atraktor
+md_void	Unieważnić
+md_options	Opcje / Pomoc
+md_blindspotsmore	Blind Spots i więcej
+md_mylocation	Moja lokacja
+md_lets_search_paid	Szukajmy! Co chciałbyś dostać <br> Atraktory to gęste skupiska losowych punktów. Pustki są odwrotnie. <br> Anomalie są najsilniejsze z atraktorów i pustek. <br> <br> <br> Dostępne funkcje premium - Podgląd mapy, pomijanie punktów wodnych i niestandardowe wyszukiwanie lokalizacji. <br> Przejdź do Opcje / Pomoc → Dodatki
+md_invalid_action	To nie jest prawidłowe działanie. Co chciałbyś dostać
+md_lets_search	Szukajmy! Co chciałbyś dostać <br> Atraktory to gęste skupiska losowych punktów. Pustki są odwrotnie. <br> Anomalie są najsilniejsze z atraktorów i pustek.
+md_how_many_idas	Do ilu punktów chciałbyś szukać?
+md_choose_qrng	Wybierz źródło entropii: (wybierz Australian National University - ANU, jeśli nie masz pewności)
+md_invalid_qrng	To nie jest prawidłowe źródło entropii.
+md_camera	Aparat fotograficzny
+md_anu	ANU
+md_temporal	Czasowy
+md_temporal_server	Temporal (serwer)
+md_temporal_phone	Tymczasowy (telefon)
+md_anu_leftovers	Resztki ANU
+md_gcp_retro	GCP Retro
+md_collecting_camera_entropy	Zbieranie losowości z aparatu telefonu (nie są wykonywane zdjęcia)...
+md_collecting_temporalphone_entropy	Zbieranie losowości z procesora telefonu...
+yes	tak
+no	Nie
+addons	Dodatki
+update_settings_q	Zaktualizować ustawienia?
+select_radius	Wybierz promień w metrach lub wprowadź liczby bezpośrednio
+include_water_points_q	Uwzględnić punkty wody?
+show_google_street_earth_q	Wyświetlać podgląd Google Street View i Earth?
+invalid_answer	To nie jest poprawna odpowiedź.
+anonymized_id_is	Twój anonimowy identyfikator to {0}.
+show_google_street_earth	Podglądami Street View i Earth będą {0}.
+hidden	ukryty
+displayed	wystawiany
+get_locsearch_skipwater_pack	Pobierz pakiet Wyszukiwanie lokalizacji i Pomiń punkty wodne z przycisku Dodatki.
+get_maps_pack	Pobierz pakiet map dla map w aplikacji i podglądów ulic z przycisku Dodatki.
+bs_quantum	Kwant
+bs_quantum_time	Czas kwantowy
+bs_intent_suggestions	Zamierzone pomysły
+bs_mystery_point	Tajemniczy punkt
+bs_pair	Para punktów
+bs_pseudo	Rzekomy
+bs_scan	Skanowanie
+bs_chains	Więzy
+bs_dice	Kości kwantowe
+bs_back	<Wróć
+welcome_randonautica	Witamy w Randonautica!
+welcome_beginners	Nowy w Randonauting? [Obejrzyj ten film](https://www.youtube.com/watch?v=h148J7ym7Ww), aby dowiedzieć się, o co chodzi. <br> <br> <br> Możesz także zapoznać się z [The 9 Tenets of The Randonauts]({1})
+welcome_report_share	Po ukończeniu podróży podziel się dyskusją z Randonautami na [Reddit]({0}) i [Twitter]({1}).
+first_send_location	Zacznij od wysłania swojej lokalizacji, dotykając 🌍 / 📎 lub wysyłając adres URL Map Google.
+choose_chain_type	Jakie punkty chcesz połączyć?
+ch_invalid_point_type	To nie jest prawidłowy typ punktu.
+ch_anomalies	Anomalie
+ch_voids	Puste przestrzenie
+ch_attractors	Atraktory
+ch_current_or_sequential	Wygenerować wszystkie punkty z bieżącej lokalizacji lub w kolejności sekwencyjnej?
+ch_current	obecny
+ch_sequential	Sekwencyjny
+ch_num_points	Wprowadź liczbę punktów do łańcucha. Przybliżona maksymalna łączna odległość to liczba pomnożona przez bieżący promień.
+ch_invalid_number	To nie jest poprawny numer.
+ch_reprompt_num_points	Nieprawidłowy numer. Podaj liczbę punktów:
+ch_mte	Liczba musi być większa lub równa {0}. Wpisz numer:
+ch_lte	Liczba musi być mniejsza lub równa {0}. Wpisz numer:
+no_loc_or_reset	Nie ustawiłeś lokalizacji lub została ona zresetowana. Wyślij go, dotykając 🌍 / 📎 lub wysyłając adres URL Map Google. Możesz także wpisać „pomoc” w dowolnym momencie.
+ida_found	Znaleziono nieprawidłowość wynikającą z zamiaru
+ida_type	Wpisz: {0}
+ida_radius	Promień: {0}
+ida_power	Moc: {0}
+ida_bearing	Łożysko: {0}
+ida_zscore	wynik z: {0}
+randpoint_generated	Generowany losowy punkt
+suggested_time	Sugerowany czas: {0}
+blind_spots_more_menu	Co chciałbyś dostać <br> Punkty kwantowe to pojedyncze losowe punkty (potencjalne ślepe punkty). Punkty Tajemnicze są losowym typem punktów.
+invalid_action	To nie jest poprawne działanie.
+agree_to_terms_q	Czy zgadzasz się z warunkami użytkowania i polityką prywatności i dobrze postępujesz w Randonaut?
+toc_dontagree	Nie
+toc_doagree	zgadzam się
+toc_shame	Jaka szkoda. Czeka na ciebie tyle losowych przygód.
+toc_invalid_answer	To nie jest poprawna odpowiedź. {0}
+qd_min1	Wpisz minimalną liczbę, która jest większa lub równa 1. W przypadku rzutu monetą wpisz 1 i przypisz do niej głowy
+qd_min2	Nieprawidłowe minimum. Wpisz pożądane minimum:
+qd_min3	Minimum musi być większe lub równe 1. Spróbuj ponownie:
+qd_min4	Nieprawidłowe minimum, musi być mniejsze lub równe 254. Spróbuj ponownie:
+qd_max1	Wpisz maksymalną liczbę włącznie większą niż minimum, do 255. Aby rzucić monetą, wpisz 2 i przypisz do niej ogony:
+qd_max2	Nieprawidłowe maksimum. Wpisz pożądane maksimum:
+qd_max3	Maksymalna musi być większa niż 1. Spróbuj ponownie:
+qd_max4	Nieprawidłowe maksimum, musi być mniejsze lub równe 255. Spróbuj ponownie:
+qd_minmax	Minimum ({0}) musi być mniejsze niż maksimum ({1}). Ustawienie na {2}.
+qd_rolling	Walcowanie...
+qd_results	Wynik: {0} [{1}, {2}]. Toczyć ponownie?
+qd_onlyyess	Tak lub Nie, nic więcej.
+err_no_entropy_fetch	Nie można pobrać nowych losowych danych.
+err_qrng_service_failed	Usługa nie zwróciła losowych danych.
+err_qrng_error	Niestety, wystąpił błąd podczas pozyskiwania entropii kwantowej niezbędnej do randomizacji. Spróbuj trochę później.
+scan_choose_kind	Wybierz rodzaj skanowania:
+scan_invalid_action	To nie jest prawidłowy skan.
+scan_attractor	Atraktor
+scan_void	Unieważnić
+scan_anomaly	Anomalia
+scan_pair	Para
+scan_sesson_inplace	Twoja sesja skanowania już trwa.
+tr_did_you_visit	Odwiedziłeś lub zbliżyłeś się do punktu i chciałbyś sporządzić raport z podróży?
+tr_yes_sans_report	Tak, bez zgłaszania się
+tr_yes_report	Tak, z raportem!
+tr_invalid_choice	To nie jest prawidłowy wybór.
+tr_set_intent_q	Czy ustaliłeś zamiar?
+tr_enter_intent	Jaki był twój zamiar?
+tr_hope_had_fun	Mam nadzieję, że miałeś fajną wycieczkę!
+tr_collect_artifacts_q	Czy zebrałeś jakieś artefakty?
+tr_wow_and_astounding_q	Czy Twoja podróż była „zachwycająca i zdumiewająca!”?
+tr_meaningfulness_q	Oceń sens swojej podróży (lub wprowadź własne słowo):
+tr_enriching	Wzbogacanie
+tr_meaningful	Znaczący
+tr_casual	Codzienny
+tr_meaningless	Bez znaczenia
+tr_emotional_q	Oceń czynnik emocjonalny (lub wprowadź własne słowo):
+tr_dopamine_hit	Hit dopaminy
+tr_inspirational	Inspirujący
+tr_plain	Równina
+tr_anxious	Niespokojny
+tr_despair	Rozpacz
+tr_dread	Strach
+tr_importance_q	Oceń znaczenie (lub wprowadź własne słowo):
+tr_lifechanging	Zmieniający życie
+tr_influential	Wpływowy
+tr_ordinary	Zwyczajny
+tr_waste_time	Strata czasu
+tr_strangeness_q	Oceń dziwność (lub wpisz własne słowo):
+tr_woowooweird	Woo-woo dziwne
+tr_strange	Dziwne
+tr_normal	Normalna
+tr_nothing	Nic
+tr_synchronicity_q	Oceń współczynnik synchronizacji (lub wprowadź własne słowo):
+tr_dirk_gently	Dirk Delikatnie
+tr_mind_blowing	Niesamowite
+tr_somewhat	Nieco
+tr_boredom	Nuda
+tr_wanna_upload_photos_q	Czy chcesz przesłać jakieś zdjęcia?
+tr_upload_photos_now	Prześlij wszystkie zrobione teraz zdjęcia. Wyślij je wszystkie naraz, ponieważ wysyłanie jest ograniczone do jednej wiadomości.
+tr_not_valid_upload	To nie jest prawidłowy przesyłany plik.
+tr_error_photo_upload	Przepraszamy, podczas przesyłania zdjęcia wystąpił błąd.
+tr_photo_uploads_temp_disabled	Przesyłanie zdjęć jest tymczasowo wyłączone, a my przepraszamy za niektóre zmiany!
+tr_write_report	Na koniec napisz swój raport. Pisanie raportu jest ograniczone do wysłania w jednej wiadomości.
+tr_tweet	Tweetuj swój raport!
+tr_thanks	Dziękuję za raport!
+welcome_back	Witamy ponownie w Randonautica!
+dont_forgot_send_loc	Nie zapomnij wysłać swojej bieżącej lokalizacji.
+iap_invalid_receipt	Nieprawidłowy dowód zakupu: {0}. Zostaniesz zgłoszony.
+iap_maps_pack_enabled	Włączono dodatek Maps Pack.
+iap_search_water_points_enabled	Włączono funkcję wyszukiwania miejsca i pomijania punktów wodnych. Ustaw swoją lokalizację, wpisując \ "szukaj <nazwa miejsca lub adres> \".
+iap_everything_enabled	Włączono dodatek Everything Pack. Ustaw swoją lokalizację, wpisując \ "szukaj <nazwa miejsca lub adres> \".
+iap_all_disabled	Wszystkie dodatki wyłączone.
+iap_no_purchases	Nie masz historii zakupów.
+iap_buy	KUP
+iap_enable	WŁĄCZYĆ
+iap_maps_pack	Pakiet map
+iap_maps_pack_desc	Podgląd map i ulic w aplikacji
+iap_search_water_points	Wyszukiwanie miejsca + Skip Water Pack
+iap_search_water_points_desc	Wyszukaj według nazw miejsc i pomiń punkty wodne
+iap_everything_pack	Pakiet „Wszystko”
+iap_everything_pack_desc	Mapy + Wyszukiwanie lokalizacji + Pomiń pakiety wody
+iap_enabling...	Włączam funkcję...
+iap_thanks_enabling	Dziękuję Ci. Włączam teraz...
+sending_location	Wysyłam swoją lokalizację...
+connecting_bot	Łączenie z botem...
+sending_entropy	Wysyłanie entropii...
