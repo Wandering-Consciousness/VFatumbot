@@ -33,7 +33,7 @@ namespace VFatumbot.BotLogic
         public static string g(string key, params object[] formatters)
         {
             key = key.ToLower();
-            var ret = "";
+            var ret = key;
 
             var clN = Thread.CurrentThread.CurrentUICulture.Name.ToLower();
             var cl2 = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower();

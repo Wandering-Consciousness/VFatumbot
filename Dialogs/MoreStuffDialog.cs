@@ -24,6 +24,7 @@ namespace VFatumbot
 
             AddDialog(new ChainsDialog(_userProfileTemporaryAccessor, mainDialog, logger));
             AddDialog(new QuantumDiceDialog(_userProfileTemporaryAccessor, mainDialog, logger));
+            AddDialog(new TalkingSteveDialog(_userProfileTemporaryAccessor, mainDialog, logger));
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
             });
@@ -111,6 +112,11 @@ namespace VFatumbot
             //    //    await actionHandler.RandotripsActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, DateTime.UtcNow.ToString("yyyy-MM-dd"));
             //    //    break;
             //}
+            else if (Loc.g("bs_talkwithsteve").Equals(val))
+            {
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(TalkingSteveDialog), this, cancellationToken);
+            }
             else if (Loc.g("bs_back").Equals(val))
             {
                 return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
@@ -217,6 +223,10 @@ namespace VFatumbot
                 //                        "randotrips",
                 //                    }
                 //},
+                new Choice() {
+                    Value = Loc.g("bs_talkwithsteve"),
+                    Synonyms = new List<string>() { }
+                },
                 new Choice() {
                     Value = Loc.g("bs_back"),
                     Synonyms = new List<string>()
