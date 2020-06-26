@@ -17,10 +17,10 @@ namespace VFatumbot
 #if EMULATORDEBUG
         protected readonly PseudoRandomNumberGenerator qRNG;
 #else
-        protected readonly QuantumRandomNumberGenerator qRNG;
+        protected readonly PseudoRandomNumberGenerator qRNG; //QuantumRandomNumberGenerator qRNG;
 #endif
 
-#if EMULATORDEBUG
+#if EMULATORDEBUG || DEBUG
         bool barfExceptionsHere = true;
 #else
         bool barfExceptionsHere = false;
@@ -37,7 +37,7 @@ namespace VFatumbot
 #if EMULATORDEBUG
             qRNG = new PseudoRandomNumberGenerator();
 #else
-            qRNG = new QuantumRandomNumberGenerator();
+            qRNG = new PseudoRandomNumberGenerator(); // QuantumRandomNumberGenerator();
             qRNG.EntropySrcQueryString = entropyQueryString;
 #endif
         }
