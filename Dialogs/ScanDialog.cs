@@ -84,6 +84,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Attractor";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Attractor");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -95,6 +96,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Void";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Void");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -108,6 +110,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Anomaly";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Anomaly");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -119,6 +122,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Pair";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Pair");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -129,6 +133,7 @@ namespace VFatumbot
             }
             else if (val.Equals(Loc.g("bs_back")))
             {
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("< Back");
                 goBackMainMenuThisRound = true;
             }
 
