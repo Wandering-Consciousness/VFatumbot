@@ -254,27 +254,33 @@ namespace VFatumbot
                 await stepContext.Context.SendActivityAsync(CardFactory.CreateGetLocationFromGoogleMapsReply());
             } else if (Loc.g("md_attractor").Equals(val)) {
                 stepContext.Values["PointType"] = "Attractor";
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Attractor");
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("md_void").Equals(val)) {
                 stepContext.Values["PointType"] = "Void";
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Void");
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("md_anomaly").Equals(val)) {
                 stepContext.Values["PointType"] = "Anomaly";
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Anomaly");
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("md_options").Equals(val)) {
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Options/Help");
+                return await stepContext.BeginDialogAsync(nameof(SettingsDialog), this, cancellationToken);
             } else if (Loc.g("md_blindspotsmore").Equals(val)) {
-                    await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
-                    return await stepContext.BeginDialogAsync(nameof(MoreStuffDialog), this, cancellationToken);
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Blind Spots & More");
+                await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(MoreStuffDialog), this, cancellationToken);
             } else if (Loc.g("md_mylocation").Equals(val)) {
-                    repromptThisRound = true;
-                    await actionHandler.LocationActionAsync(stepContext.Context, userProfileTemporary, cancellationToken);
+                repromptThisRound = true;
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("My Location");
+                await actionHandler.LocationActionAsync(stepContext.Context, userProfileTemporary, cancellationToken);
             } else if ("Donate".Equals(val)) {
-                    repromptThisRound = true;
-                    await stepContext.Context.SendActivityAsync($"Enjoying Randonauting?");
-                    await stepContext.Context.SendActivityAsync($"The Randonauts are 100% volunteer based and could use your support to improve features and cover server costs.");
-                    await stepContext.Context.SendActivityAsync($"[Donate now](https://www.paypal.me/therandonauts)");
+                repromptThisRound = true;
+                await stepContext.Context.SendActivityAsync($"Enjoying Randonauting?");
+                await stepContext.Context.SendActivityAsync($"The Randonauts are 100% volunteer based and could use your support to improve features and cover server costs.");
+                await stepContext.Context.SendActivityAsync($"[Donate now](https://www.paypal.me/therandonauts)");
             }
 
             if (repromptThisRound)
@@ -323,6 +329,9 @@ namespace VFatumbot
             }
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
+
+            AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("How many IDAs", new Dictionary<string, object>() { { "number", stepContext.Values["idacou"] } });
+
             if (userProfileTemporary.BotSrc == Enums.WebSrc.ios || userProfileTemporary.BotSrc == Enums.WebSrc.android)
             {
                 var options = new PromptOptions()
@@ -379,6 +388,8 @@ namespace VFatumbot
                 stepContext.Values["qrng_source"] = "Camera";
                 stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
 
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Camera");
+
                 var promptOptions = new PromptOptions
                 {
                     Prompt = MessageFactory.Text(Loc.g("md_collecting_camera_entropy")),
@@ -396,6 +407,8 @@ namespace VFatumbot
                 stepContext.Values["qrng_source"] = "TemporalPhone";
                 stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
 
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Temporal (Phone)");
+
                 var stevePromptOptions = new PromptOptions
                 {
                     Prompt = MessageFactory.Text(Loc.g("md_collecting_temporalphone_entropy")),
@@ -412,9 +425,14 @@ namespace VFatumbot
             } else if (Loc.g("md_temporal_server").Equals(val) || Loc.g("md_temporal").Equals(val)) {
                 stepContext.Values["qrng_source"] = "Temporal";
                 stepContext.Values["qrng_source_query_str"] = $"raw=true&temporal=true&size={bytesSize}";
+
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Temporal (Server)");
+
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("md_anu_leftovers").Equals(val)) {
                 stepContext.Values["qrng_source"] = "Pool";
+
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("ANU Leftovers");
 
                 // Chose a random entropy GID from the list of GIDs in the pool (pseudo randomly selecting quantum randomness?! there's a joke in there somewhere :)
 #if RELEASE_PROD
@@ -438,6 +456,8 @@ namespace VFatumbot
                 stepContext.Values["qrng_source"] = "GCPRetro";
                 stepContext.Values["qrng_source_query_str"] = $"raw=true&gcp=true&size={bytesSize * 2}";
 
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("GCP Retro");
+
                 // Until the libwrapper supports proper paging spanning over multiple days restrict the amount of entropy we ask for to within 5km
                 if (userProfileTemporary.Radius > 5000)
                 {
@@ -449,6 +469,9 @@ namespace VFatumbot
             } else { // ANU is default
                 stepContext.Values["qrng_source"] = "ANU";
                 stepContext.Values["qrng_source_query_str"] = ""; // generated later in QRNG class
+
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("ANU");
+
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             }
         }

@@ -8,6 +8,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using AmplitudeService;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.Enums;
 
@@ -137,11 +138,48 @@ namespace VFatumbot
                 await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
             }
 
+            // Amplitude event tracking initializing
+            Amplitude.Initialize(Consts.AMPLITUDE_HTTP_API_KEY);
+            var platform = "";
+            if (userProfileTemporary.BotSrc == WebSrc.ios)
+            {
+                platform = "iOS";
+            }
+            else if (userProfileTemporary.BotSrc == WebSrc.android)
+            {
+                platform = "Android";
+            }
+            else
+            {
+                platform = "Web";
+            }
+            var userProperties = new Dictionary<string, object>()
+            {
+                {"Locale", userProfilePersistent.Locale?.ToString()},
+                {"BotSrc", userProfileTemporary.BotSrc.ToString() },
+                {"HasSkipWaterPoints", userProfilePersistent.HasSkipWaterPoints },
+                {"HasLocationSearch", userProfilePersistent.HasLocationSearch },
+                {"HasMapsPack", userProfilePersistent.HasMapsPack },
+                {"IsIncludeWaterPoints", userProfileTemporary.IsIncludeWaterPoints },
+                {"IsDisplayGoogleThumbnails", userProfileTemporary.IsDisplayGoogleThumbnails },
+                {"IsUseClassicMode", userProfileTemporary.IsUseClassicMode },
+                {"Platform", platform},
+            };
+            if (!string.IsNullOrEmpty(userProfileTemporary.Country))
+            {
+                userProperties.Add("Country", userProfileTemporary.Country);
+            }
+            userProfileTemporary.UserProperties = userProperties;
+
             string startLocale;
             if (InterceptConversationStartWithLocale(turnContext, out startLocale))
             {
                 userProfilePersistent.SetLocale(startLocale);
                 await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
+
+                // Piggy back of the startup event here for Amplitude
+                userProfileTemporary.StartSessionTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                Amplitude.InstanceFor(userProfilePersistent.UserId, userProfileTemporary.UserProperties).Track("Start");
             }
             else
             {
@@ -177,6 +215,7 @@ namespace VFatumbot
                     {
                         lat = result.Item1;
                         lon = result.Item2;
+                        AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Search Location");
                     }
                     else
                     {
@@ -201,6 +240,13 @@ namespace VFatumbot
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
                     await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
 
+                    userProfileTemporary.Country = Helpers.GetCountryFromW3W(w3wResult);
+                    if (!string.IsNullOrEmpty(userProfileTemporary.Country))
+                    {
+                        userProfileTemporary.Country = userProfileTemporary.Country.Replace("(", "").Replace(")", "");
+                    }
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Location Sent");
+
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                     await _userTemporaryState.SaveChangesAsync(turnContext, false, cancellationToken);
 
@@ -217,6 +263,7 @@ namespace VFatumbot
                      turnContext.Activity.Text.EndsWith(Loc.g("help"), StringComparison.InvariantCultureIgnoreCase) &&
                      !turnContext.Activity.Text.Contains(Loc.g("md_options"), StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
             {
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Help");
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, _mainDialog, cancellationToken);
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && (
