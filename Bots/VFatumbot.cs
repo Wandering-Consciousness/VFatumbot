@@ -278,7 +278,7 @@ namespace VFatumbot
                 "   \n\n\n" +
                 "* Randonaut with a positive mindset!  \n" +
                 "* Bring a trash bag to help the environment.  \n" +
-                "* If you normally wouldn't adventure alone, go with a friend or small group.  \n" +
+                "* If you normally wouldn't adventure alone, go with a friend or group.  \n" +
                 "* Randonauting is best done as a daytime activity.  \n" +
                 "* Always Randonaut with a charged phone.  \n" +
                 "* Use situational awareness.  \n" +
