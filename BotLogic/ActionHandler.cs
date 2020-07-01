@@ -49,28 +49,28 @@ namespace VFatumbot.BotLogic
                 await turnContext.SendActivityAsync("You're not authorized to do that!");
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
             }
-            else if (command.StartsWith("/stevedick", StringComparison.InvariantCulture))
-            {
-                var dstr = "";
-                dstr += "...............…………………………._¸„„„„_  \n";
-                dstr += "…………………….…………...„--~*'¯…….'\\  \n";
-                dstr += "………….…………………… („-~~--„¸_….,/ì'Ì  \n";
-                dstr += "…….…………………….¸„-^\"¯ : : : : :¸-¯\"¯/'  \n";
-                dstr += "……………………¸„„-^\"¯ : : : : : : : '\\¸„„,-\"  \n";
-                dstr += "**¯¯¯'^^~-„„„----~^*'\"¯ : : : : : : : : : :¸-\"  \n";
-                dstr += ".:.:.:.:.„-^\" : : : : : : : : : : : : : : : : :„-\"  \n";
-                dstr += ":.:.:.:.:.:.:.:.:.:.: : : : : : : : : : ¸„-^¯  \n";
-                dstr += ".::.:.:.:.:.:.:.:. : : : : : : : ¸„„-^¯  \n";
-                dstr += ":.' : : '\\ : : : : : : : ;¸„„-~\"  \n";
-                dstr += ":.:.:: :\"-„\"\"***/*'ì¸'¯  \n";
-                dstr += ":.': : : : :\"-„ : : :\"\\  \n";
-                dstr += ".:.:.: : : : :\" : : : : \\,  \n";
-                dstr += ":.: : : : : : : : : : : : 'Ì  \n";
-                dstr += ": : : : : : :, : : : : : :/  \n";
-                dstr += "\"-„_::::_„-*__„„~\"  \n";
+            //else if (command.StartsWith("/stevedick", StringComparison.InvariantCulture))
+            //{
+            //    var dstr = "";
+            //    dstr += "...............…………………………._¸„„„„_  \n";
+            //    dstr += "…………………….…………...„--~*'¯…….'\\  \n";
+            //    dstr += "………….…………………… („-~~--„¸_….,/ì'Ì  \n";
+            //    dstr += "…….…………………….¸„-^\"¯ : : : : :¸-¯\"¯/'  \n";
+            //    dstr += "……………………¸„„-^\"¯ : : : : : : : '\\¸„„,-\"  \n";
+            //    dstr += "**¯¯¯'^^~-„„„----~^*'\"¯ : : : : : : : : : :¸-\"  \n";
+            //    dstr += ".:.:.:.:.„-^\" : : : : : : : : : : : : : : : : :„-\"  \n";
+            //    dstr += ":.:.:.:.:.:.:.:.:.:.: : : : : : : : : : ¸„-^¯  \n";
+            //    dstr += ".::.:.:.:.:.:.:.:. : : : : : : : ¸„„-^¯  \n";
+            //    dstr += ":.' : : '\\ : : : : : : : ;¸„„-~\"  \n";
+            //    dstr += ":.:.:: :\"-„\"\"***/*'ì¸'¯  \n";
+            //    dstr += ":.': : : : :\"-„ : : :\"\\  \n";
+            //    dstr += ".:.:.: : : : :\" : : : : \\,  \n";
+            //    dstr += ":.: : : : : : : : : : : : 'Ì  \n";
+            //    dstr += ": : : : : : :, : : : : : :/  \n";
+            //    dstr += "\"-„_::::_„-*__„„~\"  \n";
 
-                await turnContext.SendActivityAsync(dstr);
-            }
+            //    await turnContext.SendActivityAsync(dstr);
+            //}
             else if (command.StartsWith("/steve", StringComparison.InvariantCulture))
             {
                 var imallkinds = MessageFactory.Text(Loc.g("all_kinds_steve"));
