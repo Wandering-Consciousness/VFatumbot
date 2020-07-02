@@ -100,7 +100,7 @@ bs_chains	Cadenas
 bs_dice	Dados cuánticos
 bs_back	<Volver
 welcome_randonautica	¡Bienvenido a Randonautica!
-welcome_beginners	Principiantes: comience por revisar las [Preguntas frecuentes]({0}) y [Los 9 principios de los Randonauts]({1}).  <br><br>Los hablantes de español y portugués son bienvenidos en nuestro [Telegram](https://t.me/ElRandonauts).
+welcome_beginners	Principiantes: comience por revisar las [Preguntas frecuentes]({0}) y [Los 9 principios de los Randonauts]({1}).  <br><br>Los hablantes de español y portugués son bienvenidos en nuestro [Telegram](https://t.me/LosRandonauts).
 welcome_report_share	Una vez que haya completado un viaje, comparta la discusión con los Randonauts en [Reddit]({0}) y [Twitter]({1}).
 first_send_location	Comience enviando su ubicación tocando 🌍 / 📎 o enviando una URL de Google Maps.
 choose_chain_type	¿Qué tipo de puntos quieres encadenar?
