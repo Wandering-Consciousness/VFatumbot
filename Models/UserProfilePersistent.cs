@@ -59,6 +59,44 @@ namespace VFatumbot
         public bool HasMapsPack { get; set; } = false;
         public bool HasSkipWaterPoints { get; set; } = false;
         public bool HasLocationSearch { get; set; } = false;
+        public bool HasInfinitePoints { get; set; } = false;
+        public bool Has20kmRadius { get; set; } = false;
+
+        public int OwlTokens { get; set; } = Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL;
+        public DateTime OwlTokens_LastRefill = DateTime.UnixEpoch;
+
+        public void RefillCheck()
+        {
+            if (OwlTokens_LastRefill == DateTime.UnixEpoch)
+            {
+                // first time
+                OwlTokens = Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL;
+                OwlTokens_LastRefill = DateTime.UtcNow;
+                return;
+            }
+
+            if (DateTimeOffset.UtcNow.Subtract(OwlTokens_LastRefill).TotalSeconds > (120 /*24 * 60 * 60*/))
+            {
+                // Has been more than 24 hours since their last refill
+
+
+                if (OwlTokens < Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)
+                {
+                    // Refill their balance up to the free limit
+                    OwlTokens = Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL;
+                }
+            }
+        }
+
+        public bool IsNoOwlTokens
+        {
+            get
+            {
+                RefillCheck();
+                return OwlTokens <= 0;
+            }
+        }
+
         public Dictionary<string, Purchases> Purchases;
     }
 }

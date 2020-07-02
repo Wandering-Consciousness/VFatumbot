@@ -137,6 +137,13 @@ namespace VFatumbot
                     await _userTemporaryState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
                 }
 
+                if (callbackOptions.DeductOwlTokens > 0)
+                {
+                    // CONSUME
+                    userProfilePersistent.OwlTokens -= callbackOptions.DeductOwlTokens;
+                    await _userPersistentState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
+                }
+
                 if (callbackOptions.StartTripReportDialog)
                 {
                     return await stepContext.ReplaceDialogAsync(nameof(TripReportDialog), callbackOptions, cancellationToken);
@@ -214,7 +221,7 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid")),
+                    Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid") + "<br><br>" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
                     Choices = GetActionChoices(stepContext.Context),
                 };
@@ -229,7 +236,6 @@ namespace VFatumbot
                 };
             }
             
-
             return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
         }
 
@@ -243,6 +249,7 @@ namespace VFatumbot
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             }
 
+            var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(stepContext.Context, () => new UserProfilePersistent());
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
             var actionHandler = new ActionHandler();
             var repromptThisRound = false;
@@ -254,14 +261,35 @@ namespace VFatumbot
                 await stepContext.Context.SendActivityAsync(CardFactory.CreateGetLocationFromGoogleMapsReply());
             } else if (Loc.g("md_attractor").Equals(val)) {
                 stepContext.Values["PointType"] = "Attractor";
+
+                if (userProfilePersistent.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Attractor");
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("md_void").Equals(val)) {
                 stepContext.Values["PointType"] = "Void";
+
+                if (userProfilePersistent.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Void");
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("md_anomaly").Equals(val)) {
                 stepContext.Values["PointType"] = "Anomaly";
+
+                if (userProfilePersistent.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Anomaly");
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("md_options").Equals(val)) {

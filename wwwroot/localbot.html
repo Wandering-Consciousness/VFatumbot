@@ -269,12 +269,22 @@
 
                 var iapObj = JSON.parse(iapData);
                 var price = 0.0;
-                if (iapObj.productID == 'fatumbot.addons.nc.maps_pack.v2') {
+                if (iapObj.productID == 'fatumbot.addons.c.add_20_points.v2') {
+                    price = 0.99;
+                } else if (iapObj.productID == 'fatumbot.addons.c.add_60_points.v2') {
+                    price = 1.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.infinite_points.v2') {
+                    price = 9.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.extend_radius_20km.v2') {
+                    price = 4.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.maps_pack.v2') {
                     price = 1.99;
                 } else if (iapObj.productID == 'fatumbot.addons.nc.skip_water_pack.v2') {
                     price = 2.99;
                 } else if (iapObj.productID == 'fatumbot.addons.nc.maps_skip_water_packs.v2') {
                     price = 3.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.everything_pack.v3') {
+                    price = 14.99
                 }
                 var event_properties = {
                     'purchaseID': iapObj.purchaseID,

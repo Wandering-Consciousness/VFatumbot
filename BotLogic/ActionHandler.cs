@@ -566,7 +566,8 @@ namespace VFatumbot.BotLogic
                                 NumWaterPointsSkipped = numWaterPointsSkippedArray,
                                 What3Words = what3WordsArray,
                                 NearestPlaces = nearestPlacesArray,
-                                ResetFlag = doScan
+                                ResetFlag = doScan,
+                                DeductOwlTokens = 1
                             };
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, callbackOptions);
                         }
@@ -697,7 +698,8 @@ namespace VFatumbot.BotLogic
                                 NumWaterPointsSkipped = numWaterPointsSkippedArray,
                                 What3Words = what3WordsArray,
                                 NearestPlaces = nearestPlacesArray,
-                                ResetFlag = doScan
+                                ResetFlag = doScan,
+                                DeductOwlTokens = 1
                             };
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, callbackOptions);
                         }
@@ -842,7 +844,8 @@ namespace VFatumbot.BotLogic
                                 NumWaterPointsSkipped = numWaterPointsSkippedArray,
                                 What3Words = what3WordsArray,
                                 NearestPlaces = nearestPlacesArray,
-                                ResetFlag = doScan
+                                ResetFlag = doScan,
+                                DeductOwlTokens = 1
                             };
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, callbackOptions);
                         }
@@ -974,6 +977,7 @@ namespace VFatumbot.BotLogic
                             NumWaterPointsSkipped = new int[] { numWaterPointsSkipped },
                             What3Words = new string[] { w3wResult?.words },
                             NearestPlaces = new string[] { w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult) },
+                            DeductOwlTokens = 1
                         };
                         await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken, callbackOptions);
                     }, cancellationToken);
@@ -1043,6 +1047,7 @@ namespace VFatumbot.BotLogic
                             NumWaterPointsSkipped = new int[] { numWaterPointsSkipped },
                             What3Words = new string[] { w3wResult?.words },
                             NearestPlaces = new string[] { w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult) },
+                            DeductOwlTokens = 1
                         };
                         await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken, callbackOptions);
                     }, cancellationToken);
@@ -1177,7 +1182,8 @@ namespace VFatumbot.BotLogic
                                 NumWaterPointsSkipped = attNumWaterPointsSkippedArray.Concat(voiNumWaterPointsSkippedArray).ToArray(),
                                 What3Words = attWhat3WordsArray.Concat(voiWhat3WordsArray).ToArray(),
                                 NearestPlaces = attNearestPlacesArray.Concat(voiNearestPlacesArray).ToArray(),
-                                ResetFlag = doScan
+                                ResetFlag = doScan,
+                                DeductOwlTokens = 1
                             };
                             await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, callbackOptions);
                         }
@@ -1517,6 +1523,7 @@ namespace VFatumbot.BotLogic
                             NumWaterPointsSkipped = new int[] { numWaterPointsSkipped },
                             What3Words = new string[] { w3wResult?.words },
                             NearestPlaces = new string[] { w3wResult?.nearestPlace + Helpers.GetCountryFromW3W(w3wResult) },
+                            DeductOwlTokens = 1
                         };
                         await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(context, mainDialog, cancellationToken, callbackOptions);
                     }, cancellationToken);

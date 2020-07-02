@@ -177,6 +177,8 @@ namespace VFatumbot
                 userProfilePersistent.SetLocale(startLocale);
                 await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
 
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_x_remaining", userProfilePersistent.OwlTokens, Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)), cancellationToken);
+
                 // Piggy back of the startup event here for Amplitude
                 userProfileTemporary.StartSessionTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 Amplitude.InstanceFor(userProfilePersistent.UserId, userProfileTemporary.UserProperties).Track("Start");
@@ -340,6 +342,7 @@ namespace VFatumbot
             //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
             //}
             //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
+
             await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("first_send_location")), cancellationToken);
         }
 
@@ -374,7 +377,25 @@ namespace VFatumbot
                         return true;
                     }
 
-                    if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
+                    if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points"))
+                    {
+                        userProfilePersistent.OwlTokens += 20;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 20, userProfilePersistent.OwlTokens)), cancellationToken);
+                    }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points"))
+                    {
+                        userProfilePersistent.OwlTokens += 60;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 60, userProfilePersistent.OwlTokens)), cancellationToken);
+                    }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points"))
+                    {
+                        userProfilePersistent.HasInfinitePoints = true;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_infinite_points_enabled")), cancellationToken);
+                    }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
                     {
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
@@ -389,6 +410,13 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
+                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km"))
+                    {
+                        userProfilePersistent.Has20kmRadius = true;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_20km_radius_extended")), cancellationToken);
+                    }
+                    // everything
                     else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
                     {
                         userProfilePersistent.HasMapsPack = true;
@@ -397,6 +425,10 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
+
+                        userProfilePersistent.HasInfinitePoints = true;
+                        userProfilePersistent.Has20kmRadius = true;
+
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_everything_enabled")), cancellationToken);
                     }
                     else
@@ -404,6 +436,7 @@ namespace VFatumbot
                         userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
                         userProfilePersistent.IsIncludeWaterPoints = true;
+
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_all_disabled")), cancellationToken);
                     }
 
