@@ -294,14 +294,15 @@
                     'transactionDate': iapObj.transactionDate,
                     'status': iapObj.status,
                 };
-                var revenue = new amplitude.Revenue().setProductId(iapObj.productID).setPrice(price).setRevenueType('purchase').setEventProperties(event_properties);
-                amplitude.logRevenueV2(revenue);
+                //var revenue = new amplitude.Revenue().setProductId(iapObj.productID).setPrice(price).setRevenueType('purchase').setEventProperties(event_properties);
+                //amplitude.logRevenueV2(revenue);
             }
 
             let directLine = window.WebChat.createDirectLine({
                 secret: '',
                 token: '',
-                domain: 'http://127.0.0.1:3000/directline',
+                //domain: 'http://127.0.0.1:3000/directline',
+                domain: 'http://192.168.44.6:3000/directline',
                 webSocket: false // defaults to true
             });
 

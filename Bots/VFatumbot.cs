@@ -437,6 +437,9 @@ namespace VFatumbot
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
                         userProfilePersistent.IsIncludeWaterPoints = true;
 
+                        userProfilePersistent.HasInfinitePoints = false;
+                        userProfilePersistent.Has20kmRadius = false;
+
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_all_disabled")), cancellationToken);
                     }
 

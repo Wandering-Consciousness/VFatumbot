@@ -221,7 +221,7 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid") + "<br><br>" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
+                    Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
                     Choices = GetActionChoices(stepContext.Context),
                 };
@@ -230,7 +230,7 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text(Loc.g("md_lets_search")),
+                    Prompt = MessageFactory.Text(Loc.g("md_lets_search") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
                     Choices = GetActionChoices(stepContext.Context),
                 };
