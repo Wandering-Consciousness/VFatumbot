@@ -48,7 +48,7 @@ namespace VFatumbot
                 ChoiceActionStepAsync,
                 PerformActionStepAsync,
                 AskHowManyScanIDAsStepAsync,
-                GetHowManyScanIDAsStepAsync,
+                //GetHowManyScanIDAsStepAsync,
             })
             {
             });
@@ -150,40 +150,41 @@ namespace VFatumbot
 
         private async Task<DialogTurnResult> AskHowManyScanIDAsStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            //_logger.LogInformation($"ScanDialog.AskHowManyScanIDAsStepAsync");
+            //    //_logger.LogInformation($"ScanDialog.AskHowManyScanIDAsStepAsync");
 
-            var options = new PromptOptions()
-            {
-                Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
-                RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
-                Choices = new List<Choice>()
-                                {
-                                    new Choice() { Value = "1" },
-                                    new Choice() { Value = "2" },
-                                    new Choice() { Value = "5" },
-                                    new Choice() { Value = "10" },
-                                }
-            };
+            //    var options = new PromptOptions()
+            //    {
+            //        Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
+            //        RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
+            //        Choices = new List<Choice>()
+            //                        {
+            //                            new Choice() { Value = "1" },
+            //                            new Choice() { Value = "2" },
+            //                            new Choice() { Value = "5" },
+            //                            new Choice() { Value = "10" },
+            //                        }
+            //    };
 
-            return await stepContext.PromptAsync("AskHowManyScanIDAsChoicePrompt", options, cancellationToken);
-        }
+            //    return await stepContext.PromptAsync("AskHowManyScanIDAsChoicePrompt", options, cancellationToken);
+            //}
 
-        private async Task<DialogTurnResult> GetHowManyScanIDAsStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
-        {
-            //_logger.LogInformation($"ScanDialog.GetHowManyScanIDAsStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
+            //private async Task<DialogTurnResult> GetHowManyScanIDAsStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+            //{
+            //    //_logger.LogInformation($"ScanDialog.GetHowManyScanIDAsStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
+
+            //    int idacou;
+            //    if (stepContext.Result == null)
+            //    {
+            //        idacou = int.Parse(stepContext.Context.Activity.Text); // manually inputted a number
+            //    }
+            //    else
+            //    {
+            //        idacou = int.Parse(((FoundChoice)stepContext.Result)?.Value);
+            //    }
+            var idacou = 1; // Skip actual AskHowManyIDAsStep for now becuase we've introduce Owl Tokens which this question would confuse people about how many are consumed
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
             var actionHandler = new ActionHandler();
-
-            int idacou;
-            if (stepContext.Result == null)
-            {
-                idacou = int.Parse(stepContext.Context.Activity.Text); // manually inputted a number
-            }
-            else
-            {
-                idacou = int.Parse(((FoundChoice)stepContext.Result)?.Value);
-            }
 
             switch (stepContext.Values["PointType"].ToString())
             {

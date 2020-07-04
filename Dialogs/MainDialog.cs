@@ -93,7 +93,7 @@ namespace VFatumbot
                 ChoiceActionStepAsync,
                 PerformActionStepAsync,
                 AskHowManyIDAsStepAsync,
-                SelectQRNGSourceStepAsync,
+                //SelectQRNGSourceStepAsync,
                 GetQRNGSourceStepAsync,
                 GenerateIDAsStepAsync
             })
@@ -326,35 +326,36 @@ namespace VFatumbot
         {
             //_logger.LogInformation($"MainDialog.AskHowManyIDAsStepAsync");
 
-            var options = new PromptOptions()
-            {
-                Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
-                RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
-                Choices = new List<Choice>()
-                                {
-                                    new Choice() { Value = "1" },
-                                    new Choice() { Value = "2" },
-                                    new Choice() { Value = "5" },
-                                    new Choice() { Value = "10" },
-                                }
-            };
+        //    var options = new PromptOptions()
+        //    {
+        //        Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
+        //        RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
+        //        Choices = new List<Choice>()
+        //                        {
+        //                            new Choice() { Value = "1" },
+        //                            new Choice() { Value = "2" },
+        //                            new Choice() { Value = "5" },
+        //                            new Choice() { Value = "10" },
+        //                        }
+        //    };
 
-            return await stepContext.PromptAsync("AskHowManyIDAsChoicePrompt", options, cancellationToken);
-        }
+        //    return await stepContext.PromptAsync("AskHowManyIDAsChoicePrompt", options, cancellationToken);
+        //}
 
-        private async Task<DialogTurnResult> SelectQRNGSourceStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
-        {
-            //_logger.LogInformation($"MainDialog.SelectQRNGSourceStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
+        //private async Task<DialogTurnResult> SelectQRNGSourceStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        //{
+        //    //_logger.LogInformation($"MainDialog.SelectQRNGSourceStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
-            // Number of IDAs to look for from previous step
-            if (stepContext.Result == null)
-            {
-                stepContext.Values["idacou"] = int.Parse(stepContext.Context.Activity.Text); // manually inputted a number
-            }
-            else
-            {
-                stepContext.Values["idacou"] = int.Parse(((FoundChoice)stepContext.Result)?.Value);
-            }
+        //    // Number of IDAs to look for from previous step
+        //    if (stepContext.Result == null)
+        //    {
+        //        stepContext.Values["idacou"] = int.Parse(stepContext.Context.Activity.Text); // manually inputted a number
+        //    }
+        //    else
+        //    {
+        //        stepContext.Values["idacou"] = int.Parse(((FoundChoice)stepContext.Result)?.Value);
+        //    }
+            stepContext.Values["idacou"] = 1; // Skip actual AskHowManyIDAsStep for now becuase we've introduce Owl Tokens which this question would confuse people about how many are consumed
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
 
