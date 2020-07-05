@@ -561,7 +561,7 @@ namespace VFatumbot
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
-        private IList<Choice> GetActionChoices(ITurnContext turnContext)
+        private IList<Choice> GetActionChoices(ITurnContext turnContext, bool isApp)
         {
             var actionOptions = new List<Choice>()
             {
