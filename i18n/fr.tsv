@@ -60,7 +60,7 @@ md_void	Néant
 md_options	Options / Aide
 md_blindspotsmore	Taches aveugles&plus
 md_mylocation	Ma position
-md_lets_search_paid	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des grappes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs et des vides. <br> <br> <br> Fonctionnalités Premium disponibles - Prévisualisations de cartes, saut de points d'eau et recherche d'emplacement personnalisée. <br> Allez dans Options / Aide → Modules complémentaires
+md_lets_search_paid	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des grappes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs et des vides. <br> <br> <br> Fonctionnalités Premium disponibles - Prévisualisations de cartes, saut de points d'eau et recherche d'emplacement personnalisée. <br> Allez dans Modules complémentaires
 md_invalid_action	Ce n'est pas une action valable. Qu'aimeriez-vous obtenir?
 md_lets_search	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des grappes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs et des vides.
 md_how_many_idas	Jusqu'à combien de points aimeriez-vous chercher?

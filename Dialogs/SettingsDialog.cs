@@ -169,15 +169,6 @@ namespace VFatumbot
                 userProfileTemporary.IsIncludeWaterPoints = true;
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Skip Water Points", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsIncludeWaterPoints } });
             }
-            else if (Loc.g("addons").Equals(val))
-            {
-                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                // and then pass onto the app layer to load the native add-ons shop screen
-                var requestEntropyActivity = Activity.CreateEventActivity();
-                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Open Add-ons");
-                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
-            }
             else
             {
                 userProfileTemporary.IsIncludeWaterPoints = false;
@@ -204,15 +195,6 @@ namespace VFatumbot
             {
                 userProfileTemporary.IsDisplayGoogleThumbnails = true;
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Display Google Thumbnails", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsDisplayGoogleThumbnails } });
-            }
-            else if (Loc.g("addons").Equals(val))
-            {
-                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                // and then pass onto the app layer to load the native add-ons shop screen
-                var requestEntropyActivity = Activity.CreateEventActivity();
-                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Open Add-ons");
-                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
             }
             else
             {
@@ -274,15 +256,6 @@ namespace VFatumbot
                                         Synonyms = new List<string>()
                                                         {
                                                             "no",
-                                                        }
-                                    },
-                                    new Choice() {
-                                        Value = Loc.g("addons"),
-                                          Synonyms = new List<string>()
-                                                        {
-                                                            "Addons",
-                                                            "add-ons",
-                                                            "addons"
                                                         }
                                     },
                                     new Choice() {

@@ -60,7 +60,7 @@ md_void	空洞
 md_options	選項/幫助
 md_blindspotsmore	盲點及更多
 md_mylocation	我的位置
-md_lets_search_paid	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。  <br>   <br><br><br>可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。  <br>轉到選項/幫助→附加組件
+md_lets_search_paid	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。  <br>   <br><br><br>可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。  <br>轉到附加組件
 md_invalid_action	這不是有效的措施。您想得到什麼？
 md_lets_search	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。
 md_how_many_idas	您最多要尋找幾分？

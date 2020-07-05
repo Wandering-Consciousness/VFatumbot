@@ -223,7 +223,7 @@ namespace VFatumbot
                 {
                     Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
-                    Choices = GetActionChoices(stepContext.Context),
+                    Choices = GetActionChoices(stepContext.Context, userProfileTemporary.BotSrc == Enums.WebSrc.ios || userProfileTemporary.BotSrc == Enums.WebSrc.android),
                 };
             }
             else
@@ -232,7 +232,7 @@ namespace VFatumbot
                 {
                     Prompt = MessageFactory.Text(Loc.g("md_lets_search") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
-                    Choices = GetActionChoices(stepContext.Context),
+                    Choices = GetActionChoices(stepContext.Context, userProfileTemporary.BotSrc == Enums.WebSrc.ios || userProfileTemporary.BotSrc == Enums.WebSrc.android),
                 };
             }
             
@@ -292,6 +292,14 @@ namespace VFatumbot
 
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Anomaly");
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            } else if (Loc.g("addons").Equals(val)) {
+                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
+                // and then pass onto the app layer to load the native add-ons shop screen
+                var requestEntropyActivity = Activity.CreateEventActivity();
+                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Add-ons");
+                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             } else if (Loc.g("md_options").Equals(val)) {
                 await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Options/Help");
@@ -632,6 +640,19 @@ namespace VFatumbot
                 //                    }
                 //},
             };
+
+            if (isApp)
+            {
+                actionOptions.Insert(3, new Choice()
+                {
+                    Value = Loc.g("addons"),
+                    Synonyms = new List<string>()
+                                    {
+                                         "Addons"
+,                                        "add-ons",
+                                    }
+                });
+            }
 
             // Hack coz Facebook Messenge stopped showing "Send Location" button
             if (turnContext.Activity.ChannelId.Equals("facebook"))

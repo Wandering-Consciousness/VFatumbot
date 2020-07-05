@@ -60,7 +60,7 @@ md_void	Void
 md_options	Options/Help
 md_blindspotsmore	Blind Spots & More
 md_mylocation	My Location
-md_lets_search_paid	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.<br>  <br><br>Premium features available - Owl Token top-ups, infinite points, map previews, skip water points, extended radius and custom location searching.  <br>Go to Options/Help → Add-ons
+md_lets_search_paid	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.<br>  <br><br>Premium features available - Point top-ups, infinite points, map previews, skip water points, extended radius and custom location searching.  <br>Go to Add-ons
 md_invalid_action	That is not a valid action. What would you like to get?
 md_lets_search	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.
 md_how_many_idas	Up to how many points would you like to look for?
