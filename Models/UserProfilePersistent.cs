@@ -79,11 +79,11 @@ namespace VFatumbot
             {
                 // Has been more than 24 hours since their last refill
 
-
                 if (OwlTokens < Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)
                 {
                     // Refill their balance up to the free limit
                     OwlTokens = Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL;
+                    OwlTokens_LastRefill = DateTime.UtcNow;
                 }
             }
         }
@@ -93,7 +93,7 @@ namespace VFatumbot
             get
             {
                 RefillCheck();
-                return OwlTokens <= 0;
+                return HasInfinitePoints || OwlTokens <= 0;
             }
         }
 

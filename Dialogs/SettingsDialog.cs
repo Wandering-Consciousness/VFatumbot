@@ -40,7 +40,13 @@ namespace VFatumbot
                       return false;
                   }
 
-                  if (inputtedRadius > Consts.RADIUS_MAX)
+                  var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(promptContext.Context);
+                  if (userProfileTemporary.Has20kmRadius && inputtedRadius > 20000)
+                  {
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", 20000)), cancellationToken);
+                      return false;
+                  }
+                  else if (inputtedRadius > Consts.RADIUS_MAX)
                   {
                       await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", Consts.RADIUS_MAX)), cancellationToken);
                       return false;
@@ -96,14 +102,6 @@ namespace VFatumbot
                 // << EOF TODO. Will figure out whether this needs handling properly later on.
 
                 return await stepContext.NextAsync();
-            } else if (Loc.g("addons").Equals(val)) {
-                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                // and then pass onto the app layer to load the native add-ons shop screen
-                var requestEntropyActivity = Activity.CreateEventActivity();
-                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Open Add-ons");
-                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
-                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             //} else if (Loc.g("help").Equals(val)) {
                 // case "Help" is picked up elsewhere
             } else {
@@ -115,6 +113,38 @@ namespace VFatumbot
         private async Task<DialogTurnResult> RadiusStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             //_logger.LogInformation("SettingsDialog.RadiusStepAsync");
+
+            var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
+
+            if (userProfileTemporary.Has20kmRadius)
+            {
+                var promptOptionsExt = new PromptOptions
+                {
+                    Prompt = MessageFactory.Text(Loc.g("select_radius")),
+                    Choices = new List<Choice>()
+                    {
+                        new Choice() {
+                            Value = "1000",
+                        },
+                        new Choice() {
+                            Value = "3000",
+                        },
+                        new Choice() {
+                            Value = "5000",
+                        },
+                        new Choice() {
+                            Value = "10000",
+                        },
+                        new Choice() {
+                            Value = "15000",
+                        },
+                        new Choice() {
+                            Value = "20000",
+                        },
+                    }
+                };
+                return await stepContext.PromptAsync("RadiusChoicePrompt", promptOptionsExt, cancellationToken);
+            }
 
             var promptOptions = new PromptOptions {
                 Prompt = MessageFactory.Text(Loc.g("select_radius")),

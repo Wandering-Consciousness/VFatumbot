@@ -296,6 +296,12 @@ namespace VFatumbot
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && turnContext.Activity.Text.StartsWith("/", StringComparison.InvariantCulture))
             {
+                if (userProfilePersistent.IsNoOwlTokens)
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return;
+                }
+
                 await new ActionHandler().ParseSlashCommands(turnContext, userProfileTemporary, cancellationToken, _mainDialog);
 
                 await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
@@ -358,13 +364,29 @@ namespace VFatumbot
         {
             var activity = turnContext.Activity;
 
-            if (activity.Properties != null)
+            if (activity.Properties != null
+#if !RELEASE_PROD
+                || turnContext.Activity.Text.StartsWith("x")
+#endif
+                )
             {
                 var iapDataStr = (string)activity.Properties.GetValue("iapData");
-                if (!string.IsNullOrEmpty(iapDataStr))
+                if (!string.IsNullOrEmpty(iapDataStr)
+#if !RELEASE_PROD
+                    || turnContext.Activity.Text.StartsWith("x")
+#endif
+                    )
                 {
                     // Do server verification with Apple on the receipt before enabling paid features
-                    var iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
+                    Purchases iapData = new Purchases();
+                    if (iapDataStr != null)
+                    {
+                        iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
+                    }
+#if !RELEASE_PROD
+                  if (!turnContext.Activity.Text.StartsWith("x"))
+                  {
+#endif
                     var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
                     if (verify == 21007)
                     {
@@ -376,33 +398,56 @@ namespace VFatumbot
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
                         return true;
                     }
+#if !RELEASE_PROD
+                    }
+#endif
 
-                    if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points"))
+                    if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("x20")
+#endif
+                        )
                     {
                         userProfilePersistent.OwlTokens += 20;
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 20, userProfilePersistent.OwlTokens)), cancellationToken);
                     }
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("x60")
+#endif
+                        )
                     {
                         userProfilePersistent.OwlTokens += 60;
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 60, userProfilePersistent.OwlTokens)), cancellationToken);
                     }
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xinfp")
+#endif
+                        )
                     {
                         userProfilePersistent.HasInfinitePoints = true;
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_infinite_points_enabled")), cancellationToken);
                     }
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xmaps")
+#endif
+                        )
                     {
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_maps_pack_enabled")), cancellationToken);
                     }
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xwater")
+#endif
+                        )
                     {
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
@@ -410,14 +455,22 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xrad")
+#endif
+                        )
                     {
                         userProfilePersistent.Has20kmRadius = true;
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_20km_radius_extended")), cancellationToken);
                     }
                     // everything
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xallr")
+#endif
+                        )
                     {
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
@@ -443,14 +496,17 @@ namespace VFatumbot
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_all_disabled")), cancellationToken);
                     }
 
-                    if (userProfilePersistent.Purchases == null)
+                    if (iapData.productID != null)
                     {
-                        userProfilePersistent.Purchases = new Dictionary<string, Purchases>();
-                        userProfilePersistent.Purchases.Add(iapData.productID, iapData);
-                    }
-                    else
-                    {
-                        userProfilePersistent.Purchases[iapData.productID] = iapData;
+                        if (userProfilePersistent.Purchases == null)
+                        {
+                            userProfilePersistent.Purchases = new Dictionary<string, Purchases>();
+                            userProfilePersistent.Purchases.Add(iapData.productID, iapData);
+                        }
+                        else
+                        {
+                            userProfilePersistent.Purchases[iapData.productID] = iapData;
+                        }
                     }
 
                     return true;
@@ -465,6 +521,12 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
+
+                        userProfilePersistent.HasInfinitePoints = true;
+                        userProfilePersistent.Has20kmRadius = true;
+
+                        userProfilePersistent.OwlTokens += 5;
+
                         await turnContext.SendActivityAsync(MessageFactory.Text("Steve.Steve.Steve!"), cancellationToken);
 
                         return true;

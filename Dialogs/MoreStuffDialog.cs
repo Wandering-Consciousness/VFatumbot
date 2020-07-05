@@ -64,6 +64,12 @@ namespace VFatumbot
             var val = ((FoundChoice)stepContext.Result)?.Value;
             if (Loc.g("bs_quantum").Equals(val))
             {
+                if (userProfileTemporary.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum");
                 await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
             }
@@ -74,11 +80,23 @@ namespace VFatumbot
             }
             else if (Loc.g("bs_mystery_point").Equals(val))
             {
+                if (userProfileTemporary.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Mystery Point");
                 await actionHandler.MysteryPointActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
             }
             else if (Loc.g("bs_pair").Equals(val))
             {
+                if (userProfileTemporary.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Pair");
                 // Pairs was originally in the MainDialog so we fudge a way to here to go back to the MainDialog and skip to the GetNumIdas prompt
                 // to avoid having to copy/paste half the MainDialog's code here (too lazy for proper refactoring)
@@ -87,6 +105,12 @@ namespace VFatumbot
             }
             else if (Loc.g("bs_quantum_time").Equals(val))
             {
+                if (userProfileTemporary.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum Time");
                 await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, true);
             }
@@ -97,12 +121,24 @@ namespace VFatumbot
             }
             else if (Loc.g("bs_scan").Equals(val))
             {
+                if (userProfileTemporary.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan");
                 await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(ScanDialog), this, cancellationToken);
             }
             else if (Loc.g("bs_chains").Equals(val))
             {
+                if (userProfileTemporary.IsNoOwlTokens)
+                {
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+                }
+
                 AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Chains");
                 return await stepContext.BeginDialogAsync(nameof(ChainsDialog), this, cancellationToken);
             }

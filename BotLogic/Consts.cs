@@ -85,7 +85,7 @@
         public const int DEFAULT_RADIUS = 3000;
 
         // Max radius
-        public const int RADIUS_MAX = 100000;
+        public const int RADIUS_MAX = 10000;
 
         // Min radius
         public const int RADIUS_MIN = 1000;

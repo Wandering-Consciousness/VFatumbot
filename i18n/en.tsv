@@ -219,9 +219,19 @@ iap_thanks_enabling	Thank you. Enabling now...
 sending_location	Sending your location...
 connecting_bot	Connecting to bot...
 sending_entropy	Sending entropy...
-dl_x_remaining	You currently have {0} Owl Tokens. A token is consumed everytime you generate a point. Your balance will be refilled up to a maximum of {1} free tokens each day you open the app.
-dl_x_tokens	You currently have {0} Owl Tokens.
-dl_no_tokens	You have no more Owl Tokens left. Please top-up from the Options/Help->Add-ons menu or what 24 hours for your free refill.
-iap_added_x_points"	Added {0} Owl Tokens. You now have {1}.
-iap_infinite_points_enabled	Infinite Owl Tokens enabled.
-iap_20km_radius_extended	Maximum search radius extended to 20km.
+dl_x_remaining	You currently have {0} point(s). 1 point is consumed everytime you generate a location. Your balance will be refilled for free up to a maximum of {1} points each day you open the app.
+dl_x_tokens	You currently have {0} point(s).
+dl_no_tokens	You have no more points left. Please top-up from the Add-ons menu or wait 24 hours for your free refill.
+iap_added_x_points	Added {0} Points. You now have {1}.
+iap_infinite_points_enabled	Infinite Points enabled.
+iap_20km_radius_extended	Maximum search radius extended to 20 km.
+iap_add_20_t	Add 20 Points
+iap_add_20_d	Gives you 20 more points
+iap_add_60_t	Add 60 Points
+iap_add_60_d	Gives you 60 more points
+iap_20km_r_t	Extend Radius to 20km Pack
+iap_20km_r_d	Extends the search radius to 20 km
+iap_everything_t	The Everything Pack
+iap_everything_d	All Packs + Infinite Points
+iap_infinnypoints_t	Infinite Points
+iap_infinnypoints_d	Find an unlimited number of locations

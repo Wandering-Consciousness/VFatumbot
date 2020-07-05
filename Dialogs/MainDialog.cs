@@ -208,6 +208,22 @@ namespace VFatumbot
                 userProfileTemporary.HasSkipWaterPoints = userProfilePersistent.HasSkipWaterPoints;
                 doSync = true;
             }
+            if (userProfileTemporary.HasInfinitePoints != userProfilePersistent.HasInfinitePoints)
+            {
+                userProfileTemporary.HasInfinitePoints = userProfilePersistent.HasInfinitePoints;
+                doSync = true;
+            }
+            if (userProfileTemporary.Has20kmRadius != userProfilePersistent.Has20kmRadius)
+            {
+                userProfileTemporary.Has20kmRadius = userProfilePersistent.Has20kmRadius;
+                doSync = true;
+            }
+            if (userProfileTemporary.OwlTokens != userProfilePersistent.OwlTokens)
+            {
+                userProfileTemporary.OwlTokens = userProfilePersistent.OwlTokens;
+                doSync = true;
+            }
+
             if (doSync)
             {
                 await _userTemporaryState.SaveChangesAsync(stepContext.Context, false, cancellationToken);

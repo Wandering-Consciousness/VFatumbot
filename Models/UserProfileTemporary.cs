@@ -80,6 +80,18 @@ namespace VFatumbot
         public bool HasMapsPack { get; set; } = false;
         public bool HasLocationSearch { get; set; } = false;
         public bool HasSkipWaterPoints { get; set; } = false;
+        public bool HasInfinitePoints { get; set; } = false;
+        public bool Has20kmRadius { get; set; } = false;
+        public int OwlTokens { get; set; }
+
+        public bool IsNoOwlTokens
+        {
+            get
+            {
+                return HasInfinitePoints || OwlTokens <= 0;
+            }
+        }
+
 
         // For Amplitude event tracking
         public long StartSessionTime = -1;
