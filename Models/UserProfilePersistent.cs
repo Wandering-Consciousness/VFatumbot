@@ -75,7 +75,7 @@ namespace VFatumbot
                 return;
             }
 
-            if (DateTimeOffset.UtcNow.Subtract(OwlTokens_LastRefill).TotalSeconds > (120 /*24 * 60 * 60*/))
+            if (DateTimeOffset.UtcNow.Subtract(OwlTokens_LastRefill).TotalSeconds > (24 * 60 * 60))
             {
                 // Has been more than 24 hours since their last refill
 
@@ -93,7 +93,11 @@ namespace VFatumbot
             get
             {
                 RefillCheck();
-                return HasInfinitePoints || OwlTokens <= 0;
+
+                if (HasInfinitePoints)
+                    return false;
+
+                return OwlTokens <= 0;
             }
         }
 

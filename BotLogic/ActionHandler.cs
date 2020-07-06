@@ -233,7 +233,13 @@ namespace VFatumbot.BotLogic
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
                                 return;
                             }
-                            if (inputtedRadius > Consts.RADIUS_MAX)
+                            if (userProfileTemporary.Has20kmRadius && inputtedRadius > 20000)
+                            {
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", 20000)), cancellationToken);
+                                await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
+                                return;
+                            }
+                            else if (!userProfileTemporary.Has20kmRadius && inputtedRadius > Consts.RADIUS_MAX)
                             {
                                 await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", Consts.RADIUS_MAX)), cancellationToken);
                                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, mainDialog, cancellationToken);
@@ -243,7 +249,7 @@ namespace VFatumbot.BotLogic
 
                         userProfileTemporary.Radius = inputtedRadius;
                         AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Radius", new Dictionary<string, object>() { { "Radius", inputtedRadius }, { "Command", "/setradius" } });
-                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("radius_changed", oldRadius, userProfileTemporary.Radius)), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("changed_radius", oldRadius, userProfileTemporary.Radius)), cancellationToken);
                     }
                     else
                     {

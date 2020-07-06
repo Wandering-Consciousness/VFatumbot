@@ -363,6 +363,8 @@ namespace VFatumbot
         protected async Task<bool> InterceptInappPurchaseAsync(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, CancellationToken cancellationToken)
         {
             var activity = turnContext.Activity;
+            var text = "";
+            if (!string.IsNullOrEmpty(activity.Text)) text = activity.Text;
 
             if (activity.Properties != null
 #if !RELEASE_PROD
@@ -373,7 +375,7 @@ namespace VFatumbot
                 var iapDataStr = (string)activity.Properties.GetValue("iapData");
                 if (!string.IsNullOrEmpty(iapDataStr)
 #if !RELEASE_PROD
-                    || turnContext.Activity.Text.StartsWith("x")
+                    || text.StartsWith("x")
 #endif
                     )
                 {
@@ -468,7 +470,7 @@ namespace VFatumbot
                     // everything
                     else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xallr")
+                        || turnContext.Activity.Text.StartsWith("xall")
 #endif
                         )
                     {

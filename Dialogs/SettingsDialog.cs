@@ -46,7 +46,7 @@ namespace VFatumbot
                       await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", 20000)), cancellationToken);
                       return false;
                   }
-                  else if (inputtedRadius > Consts.RADIUS_MAX)
+                  else if (!userProfileTemporary.Has20kmRadius && inputtedRadius > Consts.RADIUS_MAX)
                   {
                       await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", Consts.RADIUS_MAX)), cancellationToken);
                       return false;
