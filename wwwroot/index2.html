@@ -8,20 +8,20 @@
     <script src="jquery-3.4.1.slim.min.js"></script>
     <script src="sha256.min.js"></script> <!-- Thanks https://github.com/geraintluff/sha256 -->
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>//var OneSignal = window.OneSignal || [];
-//        OneSignal.push(function () {
-//            OneSignal.init({
-//                appId: "da21a078-babf-4e22-a032-0ea22de561a7",
-//            });
-//        });
+    <script>var OneSignal = window.OneSignal || [];
+        OneSignal.push(function () {
+            OneSignal.init({
+                appId: "da21a078-babf-4e22-a032-0ea22de561a7",
+            });
+        });
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150961256-1"></script>
-    <script>//window.dataLayer = window.dataLayer || [];
-//        function gtag() { dataLayer.push(arguments); }
-//        gtag('js', new Date());
+    <script>window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-//        gtag('config', 'UA-150961256-1');
+        gtag('config', 'UA-150961256-1');
     </script>
     <script type="text/javascript">(function (e, t) {
         var n = e.amplitude || { _q: [], _iq: {} }; var r = t.createElement("script")
@@ -180,18 +180,13 @@
         var sendGidToBot;
         var sendPushIdToBot;
         var sendIAPToBot;
-        (async function () {
+        var initWebBot = function (userId) {
             showSnackbar("Connecting to bot...");
 
-            // Re-use credentials if they exist in cookies
-            var userId = getCookie('userId');
-            if (!userId) {
-                userId = generateId();
-                setCookie('userId', userId, 1825);
-            }
             var sha256userId = sha256(userId);
 
-            amplitude.getInstance().init("ff37ac1848cacc399af560601253c125", sha256userId);
+            amplitude.getInstance().init("ff37ac1848cacc399af560601253c125", sha256userId); //dev
+            //amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166", sha256userId); //prod
 
             // Catch incoming events from bot
             const store = window.WebChat.createStore(
@@ -205,7 +200,7 @@
                     }
 
                     return next(action);
-                 }
+                }
             );
 
             // Catch event activities telling the app to load the camera RNG
@@ -228,7 +223,7 @@
             });
 
             // Callback from Flutter->Javascript to send locally generated entropy's gid to bot
-            sendGidToBot = function(gid) {
+            sendGidToBot = function (gid) {
                 showSnackbar("Sending your entropy's ID...");
                 var activity = {
                     from: {
@@ -243,7 +238,7 @@
             }
 
             // Callback from Flutter->Javascript to send the Flutter-side OneSignal Push Notification ID to the bot
-            sendPushIdToBot = function(id) {
+            sendPushIdToBot = function (id) {
                 var activity = {
                     from: {
                         id: userId,
@@ -292,15 +287,14 @@
                     'transactionDate': iapObj.transactionDate,
                     'status': iapObj.status,
                 };
-                //var revenue = new amplitude.Revenue().setProductId(iapObj.productID).setPrice(price).setRevenueType('purchase').setEventProperties(event_properties);
-                //amplitude.logRevenueV2(revenue);
+                var revenue = new amplitude.Revenue().setProductId(iapObj.productID).setPrice(price).setRevenueType('purchase').setEventProperties(event_properties);
+                amplitude.logRevenueV2(revenue);
             }
 
             let directLine = window.WebChat.createDirectLine({
                 secret: '',
-                token: '',
-                //domain: 'http://127.0.0.1:3000/directline',
-                domain: 'http://192.168.44.6:3000/directline',
+                //token: 'cP4LEl-TeNM.nm_VgyZm2X357_YpJKo88uqF29sa0Fniu_FDjmxEe-k'
+                domain: 'https://bot.randonauts.com/directline',
                 webSocket: false // defaults to true
             });
 
@@ -316,13 +310,11 @@
             document.querySelector('#webchat > *').focus();
 
             let urlSrc = getUrlParameter('src');
-            if (urlSrc)
-            {
+            if (urlSrc) {
                 // Bot is being accessed from the Randonautica app or not
                 src = urlSrc;
             }
-            else
-            {
+            else {
                 src = "web";
             }
 
@@ -497,7 +489,7 @@
                     ret = navigator.language;
                 return ret;
             }
-        })().catch(err => console.error(err));
+        };
     </script>
 </body>
 </html>

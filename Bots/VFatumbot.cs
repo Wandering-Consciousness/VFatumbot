@@ -368,7 +368,7 @@ namespace VFatumbot
 
             if (activity.Properties != null
 #if !RELEASE_PROD
-                || turnContext.Activity.Text.StartsWith("x")
+                || text.StartsWith("x")
 #endif
                 )
             {
@@ -386,7 +386,7 @@ namespace VFatumbot
                         iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
                     }
 #if !RELEASE_PROD
-                  if (!turnContext.Activity.Text.StartsWith("x"))
+                  if (!text.StartsWith("x"))
                   {
 #endif
                     var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
@@ -468,7 +468,8 @@ namespace VFatumbot
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_20km_radius_extended")), cancellationToken);
                     }
                     // everything
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs")) // old name for original everything pack
+                          || (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.everything_pack"))
 #if !RELEASE_PROD
                         || turnContext.Activity.Text.StartsWith("xall")
 #endif
