@@ -338,6 +338,7 @@ namespace VFatumbot
                 "* Always Randonaut with a charged phone.  \n" +
                 "* Use situational awareness.  \n" +
                 "* Be respectful of property owners. Never trespass.  \n" +
+                "* Obey all quarantine, curfew and social distancing regulations in your area.  \n" +
                 "* Do not go into dangerous areas.  \n\n\n" +
                 "Happy Randonauting!"
                ;
