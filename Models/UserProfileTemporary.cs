@@ -88,7 +88,10 @@ namespace VFatumbot
         {
             get
             {
-                return HasInfinitePoints || OwlTokens <= 0;
+                if (HasInfinitePoints)
+                    return false;
+
+                return OwlTokens <= 0;
             }
         }
 
