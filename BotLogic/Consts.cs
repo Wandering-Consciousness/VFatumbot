@@ -73,7 +73,7 @@
         public const string AMPLITUDE_HTTP_API_KEY = "ff37ac1848cacc399af560601253c125";
 #endif
 
-        public const int DAILY_MAX_FREE_OWL_TOKENS_REFILL = 2;
+        public const int DAILY_MAX_FREE_OWL_TOKENS_REFILL = 10;
 
         // Google Maps etc thumbnail sizes to use in reply cards
         public const string THUMBNAIL_SIZE = "320x320";
