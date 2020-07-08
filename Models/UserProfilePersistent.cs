@@ -62,7 +62,22 @@ namespace VFatumbot
         public bool HasInfinitePoints { get; set; } = false;
         public bool Has20kmRadius { get; set; } = false;
 
-        public int OwlTokens { get; set; } = Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL;
+        private int _owlTokens = Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL;
+        public int OwlTokens
+        {
+            get
+            {
+                return _owlTokens;
+            }
+            set
+            {
+                if (HasInfinitePoints)
+                {
+                    return;
+                }
+                _owlTokens = value;
+            }
+        } 
         public DateTime OwlTokens_LastRefill = DateTime.UnixEpoch;
 
         public void RefillCheck()
