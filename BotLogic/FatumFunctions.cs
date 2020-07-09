@@ -220,6 +220,12 @@ namespace VFatumbot.BotLogic
                 if (ida.X.rarity > 0) { resp += "Abnormality Rank: " + pl + "\n\n"; }
                 resp += Loc.g("ida_zscore", ida.X.z_score.ToString("#0.00", System.Globalization.CultureInfo.InvariantCulture))  + "\n\n";
             }
+
+            if (Loc.IsEnglishOrSpanish())
+            {
+                resp += "\n\n" + Loc.g("dont_tresspass") + "\n\n";
+            }
+
             return resp;
         }
 
