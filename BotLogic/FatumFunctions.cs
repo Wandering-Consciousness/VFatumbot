@@ -264,9 +264,33 @@ namespace VFatumbot.BotLogic
 
             int retries = 0;
             redo:
+                Random moneySaver = new Random();
+                var randomNumber = moneySaver.Next(6);
+                var randomHost = "";
+
+                if (randomNumber == 0) {
+                    randomHost = "https://gonewton.azurewebsites.net";
+                }
+                if (randomNumber == 1) {
+                    randomHost = "https://gonewtonlib-useast2.azurewebsites.net";
+                }
+                if (randomNumber == 2) {
+                    randomHost = "https://gonewtonlib-cus.azurewebsites.net";
+                }
+                if (randomNumber == 3) {
+                    randomHost = "https://gonewtonlib-scus.azurewebsites.net";
+                }
+                if (randomNumber == 4) {
+                    randomHost = "https://gonewtonlib-uswest.azurewebsites.net";
+                }
+                if (randomNumber == 5) {
+                    randomHost = "https://gonewtonlib-uswest2.azurewebsites.net";
+                }
+
                 var content = new ByteArrayContent(byteinput);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                var response = await new HttpClient().PostAsync($"https://gonewtonlib.azurefd.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
+                var response = await new HttpClient().PostAsync($"{randomHost}/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
+                //var response = await new HttpClient().PostAsync($"https://gonewtonlib.azurefd.net/api/attractors?radius={radius}&latitude={startcoord.latitude}&longitude={startcoord.longitude}&gid=23", content);
 
                 var jsonContent = response.Content.ReadAsStringAsync().Result;
                 AzureFunctionResponse result = null;
