@@ -247,6 +247,12 @@ namespace VFatumbot.BotLogic
             {
                 resp += Loc.g("suggested_time", ((int)rnd.Next(23)).ToString("#0") + ":" + ((int)rnd.Next(59)).ToString("00")) + "\n\n";
             }
+
+            if (Loc.IsEnglishOrSpanish())
+            {
+                resp += "\n\n" + Loc.g("dont_tresspass") + "\n\n";
+            }
+
             return resp;
         }
 
