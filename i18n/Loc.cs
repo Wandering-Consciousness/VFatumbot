@@ -88,5 +88,19 @@ namespace VFatumbot.BotLogic
 
             return "help2-en.txt";
         }
+
+        public static bool IsEnglishOrSpanish()
+        {
+            var clN = Thread.CurrentThread.CurrentUICulture.Name.ToLower();
+            var cl2 = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower();
+            if ("en".Equals(clN) || "en".Equals(cl2) || "es".Equals(clN) || "es".Equals(cl2))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
+
+
 }
