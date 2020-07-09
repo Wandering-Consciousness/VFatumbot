@@ -275,7 +275,7 @@ namespace VFatumbot.BotLogic
                 var randomHost = "";
 
                 if (randomNumber == 0) {
-                    randomHost = "https://gonewton.azurewebsites.net";
+                    randomHost = "https://gonewtonlib.azurewebsites.net";
                 }
                 if (randomNumber == 1) {
                     randomHost = "https://gonewtonlib-useast2.azurewebsites.net";
