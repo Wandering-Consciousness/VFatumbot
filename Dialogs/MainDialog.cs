@@ -239,7 +239,7 @@ namespace VFatumbot
                 {
                     Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
-                    Choices = GetActionChoices(stepContext.Context, userProfileTemporary.BotSrc == Enums.WebSrc.ios || userProfileTemporary.BotSrc == Enums.WebSrc.android),
+                    Choices = GetActionChoices(stepContext.Context, true),
                 };
             }
             else
@@ -248,7 +248,7 @@ namespace VFatumbot
                 {
                     Prompt = MessageFactory.Text(Loc.g("md_lets_search") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
-                    Choices = GetActionChoices(stepContext.Context, userProfileTemporary.BotSrc == Enums.WebSrc.ios || userProfileTemporary.BotSrc == Enums.WebSrc.android),
+                    Choices = GetActionChoices(stepContext.Context, false),
                 };
             }
             
