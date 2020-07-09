@@ -219,3 +219,19 @@ iap_thanks_enabling	谢谢。正在启用...
 sending_location	正在传送您的位置...
 connecting_bot	正在连接机器人...
 sending_entropy	正在发送熵...
+dl_x_remaining	当前有{0}点。 每个创建的位置花费1点。 每天打开应用程序时，您的余额最多可以免费恢复{1}点。
+dl_x_tokens	当前有{0}点。
+dl_no_tokens	没有积点了。 从附加组件中添加或等待24小时，然后等待免费恢复。
+iap_added_x_points	增加了{0}分。 当前，有{1}。
+iap_infinite_points_enabled	无限点被激活。
+iap_20km_radius_extended	最大搜索半径已扩展到20 km。
+iap_add_20_t	加20点
+iap_add_20_d	加20点
+iap_add_60_t	加60点
+iap_add_60_d	加60点
+iap_20km_r_t	搜索半径扩大了20 km
+iap_20km_r_d	将搜索范围扩大到20公里
+iap_everything_t	全部展开
+iap_everything_d	所有扩展和无限点
+iap_infinnypoints_t	无限积分
+iap_infinnypoints_d	无限检测点

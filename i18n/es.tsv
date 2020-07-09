@@ -219,4 +219,20 @@ iap_thanks_enabling	Gracias. Habilitando ahora ...
 sending_location	Enviando su ubicación ...
 connecting_bot	Conectando a bot ...
 sending_entropy	Enviando entropía ...
+dl_x_remaining	Actualmente tienes {0} puntos. Se consume 1 punto cada vez que genera una ubicación. Su saldo se recargará gratis hasta un máximo de {1} puntos cada día que abra la aplicación.
+dl_x_tokens	Actualmente tienes {0} puntos.
+dl_no_tokens	No te quedan más puntos. Recargue desde el menú Complementos (solo aplicación) o espere 24 horas para su recarga gratuita.
+iap_added_x_points	Se agregaron {0} puntos. Ahora tienes {1}.
+iap_infinite_points_enabled	Puntos infinitos habilitados.
+iap_20km_radius_extended	Radio de búsqueda máximo extendido a 20 km.
+iap_add_20_t	Agregar 20 puntos
+iap_add_20_d	Te da 20 puntos más
+iap_add_60_t	Añadir 60 puntos
+iap_add_60_d	Te da 60 puntos más
+iap_20km_r_t	Extender el radio a 20 km
+iap_20km_r_d	Extiende el radio de búsqueda a 20 km.
+iap_everything_t	El paquete de todo
+iap_everything_d	Todos los paquetes + puntos infinitos
+iap_infinnypoints_t	Puntos infinitos
+iap_infinnypoints_d	Encuentra un número ilimitado de ubicaciones
 dont_tresspass	Si este punto está en propiedad privada, ¡NO TRASLACE! Nunca ingrese a áreas peligrosas como trenes / ferrocarriles, zonas restringidas, etc. No ingrese a propiedades vacantes. Siga sus leyes y regulaciones locales y estatales. Sea respetuoso, responsable y de mente positiva en todo momento mientras hace Randonauting.

@@ -219,3 +219,19 @@ iap_thanks_enabling	Obrigado. Ativando agora ...
 sending_location	Enviando sua localização ...
 connecting_bot	A ligar ao bot ...
 sending_entropy	Enviando entropia ...
+dl_x_remaining	Você possui atualmente {0} pontos. Um ponto é consumido toda vez que você gera um local. Seu saldo será recarregado gratuitamente até um máximo de {1} pontos por dia em que você abrir o aplicativo.
+dl_x_tokens	Você possui atualmente {0} pontos.
+dl_no_tokens	Você não tem mais pontos restantes. Atualize a partir do menu Complementos ou aguarde 24 horas pela recarga gratuita.
+iap_added_x_points	Adicionados {0} pontos. Agora você tem {1}.
+iap_infinite_points_enabled	Pontos infinitos ativados.
+iap_20km_radius_extended	Raio máximo de busca estendido para 20 km.
+iap_add_20_t	Adicione 20 pontos
+iap_add_20_d	Dá mais 20 pontos
+iap_add_60_t	Adicione 60 pontos
+iap_add_60_d	Dá a você mais 60 pontos
+iap_20km_r_t	Estenda o raio para 20 km
+iap_20km_r_d	Estende o raio de pesquisa para 20 km
+iap_everything_t	Todos os pacotes
+iap_everything_d	Todos os Pacotes + Pontos Infinitos
+iap_infinnypoints_t	Pontos Infinitos
+iap_infinnypoints_d	Encontre um número ilimitado de locais

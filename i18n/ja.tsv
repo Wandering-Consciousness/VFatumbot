@@ -219,3 +219,19 @@ iap_thanks_enabling	ありがとうございます。拡張機能を有効中・
 sending_location	現在地を送信中・・・
 connecting_bot	ボットに接続中・・・
 sending_entropy	エントロピーを送信中・・・
+dl_x_remaining	現在、{0}ポイントがある。 ロケーションを生成するたびに1ポイントが消費される。 残高は、毎日アプリを開くと最大{1}ポイントまで無料で回復される。
+dl_x_tokens	現在、{0}ポイントがある。
+dl_no_tokens	ポイントが残っていない。 拡張機能ニュー(アプリのみ)から追加するか、24時間待って無料で回復されるのをお待ちください。
+iap_added_x_points	{0}ポイントを追加した。 現在、{1}がある。
+iap_infinite_points_enabled	無制限ポイントが有効になった。
+iap_20km_radius_extended	最大検索半径が20キロに拡大された。
+iap_add_20_t	20ポイントを追加
+iap_add_20_d	20ポイントを追加する
+iap_add_60_t	60ポイントを追加
+iap_add_60_d	60ポイントをするする
+iap_20km_r_t	検索半径20キロ拡張
+iap_20km_r_d	検索範囲を最大に20キロに拡張する
+iap_everything_t	ザ・全て拡張
+iap_everything_d	全ての拡張＆無制限ポイント
+iap_infinnypoints_t	無制限ポイント
+iap_infinnypoints_d	地点を無制限に検出できる

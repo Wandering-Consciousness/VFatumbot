@@ -219,3 +219,19 @@ iap_thanks_enabling	감사합니다. 확장 기능을 사용 중 ...
 sending_location	현재 위치를 전송 중 ...
 connecting_bot	봇에 접속 중 ...
 sending_entropy	엔트로피를 보내는 중 ...
+dl_x_remaining	현재 {0} 점이있다. 위치를 생성 할 때마다 1 포인트가 소모된다. 잔액은 매일 응용 프로그램을 열고 최대 {1} 포인트까지 무료로 회복된다.
+dl_x_tokens	현재 {0} 점이있다.
+dl_no_tokens	포인트가 남아 있지 않다. 확장 기능 메뉴에서 추가하거나 24 시간 후에 무료로 회복 될 때까지 기다립니다.
+iap_added_x_points	{0} 포인트를 추가했다. 현재 {1}이있다.
+iap_infinite_points_enabled	무제한 포인트가 사용되었다.
+iap_20km_radius_extended	최대 검색 반경 20 킬로미터로 확대되었다.
+iap_add_20_t	20 포인트를 추가
+iap_add_20_d	20 포인트를 추가
+iap_add_60_t	60 포인트를 추가
+iap_add_60_d	60 포인트를하려면
+iap_20km_r_t	검색 반경 20 킬로미터 확장
+iap_20km_r_d	검색 범위를 최대 20 킬로미터로 확장
+iap_everything_t	더 모든 확장
+iap_everything_d	모든 확장 및 무제한 포인트
+iap_infinnypoints_t	무제한 포인트
+iap_infinnypoints_d	지점을 무제한으로 검출 할 수있다

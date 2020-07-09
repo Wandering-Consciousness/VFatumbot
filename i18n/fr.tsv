@@ -219,3 +219,19 @@ iap_thanks_enabling	Je vous remercie. Activation maintenant...
 sending_location	Envoi de votre position...
 connecting_bot	Connexion au bot...
 sending_entropy	Envoi de l'entropie...
+dl_x_remaining	Vous avez actuellement {0} points. 1 point est consommé à chaque fois que vous générez un emplacement. Votre solde sera rechargé gratuitement jusqu'à un maximum de {1} points chaque jour où vous ouvrez l'application.
+dl_x_tokens	Vous avez actuellement {0} points.
+dl_no_tokens	Il ne vous reste plus de points. Veuillez recharger à partir du menu des modules complémentaires ou attendez 24 heures pour votre recharge gratuite.
+iap_added_x_points	Ajout de {0} points. Vous avez maintenant {1}.
+iap_infinite_points_enabled	Points infinis activé.
+iap_20km_radius_extended	Rayon de recherche maximal étendu à 20 km.
+iap_add_20_t	Ajouter 20 points
+iap_add_20_d	Vous donne 20 points de plus
+iap_add_60_t	Ajouter 60 points
+iap_add_60_d	Vous donne 60 points de plus
+iap_20km_r_t	Étendez le rayon à 20 km
+iap_20km_r_d	Étend le rayon de recherche à 20 km
+iap_everything_t	Le Pack Tout
+iap_everything_d	Tous les packs + points infinis
+iap_infinnypoints_t	Points infinis
+iap_infinnypoints_d	Trouvez un nombre illimité d'emplacements

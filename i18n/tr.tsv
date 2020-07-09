@@ -219,3 +219,19 @@ iap_thanks_enabling	Teşekkür ederim. Şimdi etkinleştiriliyor...
 sending_location	Konumunuz gönderiliyor...
 connecting_bot	Bot'a bağlanıyor...
 sending_entropy	Entropi gönderiliyor...
+dl_x_remaining	Şu anda {0} puanınız var. Her konum oluşturduğunuzda 1 puan tüketilir. Bakiyeniz, uygulamayı her açtığınızda en fazla {1} puana kadar ücretsiz olarak yeniden doldurulur.
+dl_x_tokens	Şu anda {0} puanınız var.
+dl_no_tokens	Başka puanınız kalmadı. Lütfen Eklentiler menüsünden doldurun veya ücretsiz doldurmanız için 24 saat bekleyin.
+iap_added_x_points	{0} Puan eklendi. Artık {1} var.
+iap_infinite_points_enabled	Sonsuz Noktalar etkinleştirildi.
+iap_20km_radius_extended	Maksimum arama yarıçapı 20 km'ye çıkarıldı.
+iap_add_20_t	20 Puan Ekle
+iap_add_20_d	Size 20 puan daha verir
+iap_add_60_t	60 Puan Ekle
+iap_add_60_d	Size 60 puan daha verir
+iap_20km_r_t	Yarıçapı 20km'ye Kadar Uzat
+iap_20km_r_d	Arama yarıçapını 20 km'ye çıkarır
+iap_everything_t	Her Şey Paketi
+iap_everything_d	Tüm Paketler + Sonsuz Puanlar
+iap_infinnypoints_t	Sonsuz Noktalar
+iap_infinnypoints_d	Sınırsız sayıda yer bulun
