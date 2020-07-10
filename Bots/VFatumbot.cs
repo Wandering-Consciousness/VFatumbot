@@ -176,13 +176,20 @@ namespace VFatumbot
             if (InterceptConversationStartWithLocale(turnContext, out startLocale))
             {
                 userProfilePersistent.SetLocale(startLocale);
-                await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
 
-                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_x_remaining", userProfilePersistent.OwlTokens, Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)), cancellationToken);
+                if (Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId) != ChannelPlatform.telegram &&
+                    Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId) != ChannelPlatform.slack &&
+                    Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId) != ChannelPlatform.line
+                    )
+                {
+                    await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
 
-                // Piggy back of the startup event here for Amplitude
-                userProfileTemporary.StartSessionTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                Amplitude.InstanceFor(userProfilePersistent.UserId, userProfileTemporary.UserProperties).Track("Start");
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_x_remaining", userProfilePersistent.OwlTokens, Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)), cancellationToken);
+
+                    // Piggy back of the startup event here for Amplitude
+                    userProfileTemporary.StartSessionTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                    Amplitude.InstanceFor(userProfilePersistent.UserId, userProfileTemporary.UserProperties).Track("Start");
+                }
             }
             else
             {
