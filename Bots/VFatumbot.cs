@@ -577,6 +577,7 @@ namespace VFatumbot
                 JObject channelData = JObject.Parse(activity.ChannelData.ToString());
                 JToken locale = channelData["message"]["from"]["language_code"];
                 startLocale = locale.ToString().ToLower();
+                return true;
             }
             catch (Exception e)
             {
