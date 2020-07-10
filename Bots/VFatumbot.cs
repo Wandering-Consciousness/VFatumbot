@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using AmplitudeService;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.Enums;
+using Newtonsoft.Json.Linq;
 
 namespace VFatumbot
 {
@@ -568,6 +569,18 @@ namespace VFatumbot
                     startLocale = localeFromClient;
                     return true;
                 }
+            }
+
+            try
+            {
+                // try and get users locale from bot app, like Telegram (and maybe others)
+                JObject channelData = JObject.Parse(activity.ChannelData.ToString());
+                JToken locale = channelData["message"]["from"]["language_code"];
+                startLocale = locale.ToString().ToLower();
+            }
+            catch (Exception e)
+            {
+                // do nothing
             }
 
             return false;
