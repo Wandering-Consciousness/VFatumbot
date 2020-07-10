@@ -26,5 +26,7 @@ namespace VFatumbot.BotLogic
         public string JumpToAskHowManyIDAs { get; set; }
 
         public int DeductOwlTokens = 0;
+
+        public bool JustPostedTripReport = false;
     }
 }

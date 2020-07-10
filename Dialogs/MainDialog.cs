@@ -144,6 +144,17 @@ namespace VFatumbot
                     await _userPersistentState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
                 }
 
+                if (callbackOptions.JustPostedTripReport)
+                {
+                    // give a bit for sending a trip report
+                    callbackOptions.JustPostedTripReport = false;
+                    if (userProfilePersistent.OwlTokens < Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)
+                    {
+                        userProfilePersistent.OwlTokens += 1;
+                    }
+                    await _userPersistentState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
+                }
+
                 if (callbackOptions.StartTripReportDialog)
                 {
                     return await stepContext.ReplaceDialogAsync(nameof(TripReportDialog), callbackOptions, cancellationToken);

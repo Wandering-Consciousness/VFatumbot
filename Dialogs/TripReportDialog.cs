@@ -510,7 +510,7 @@ namespace VFatumbot
             var callbackOptions = (CallbackOptions)stepContext.Options;
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
-            answers.Report = ""+stepContext.Result;
+            answers.Report = "" + stepContext.Result;
 
             await StoreReportInDB(stepContext.Context, callbackOptions, answers);
 
@@ -541,7 +541,7 @@ namespace VFatumbot
             {
                 for (int i = 0; i < callbackOptions.Messages.Length; i++)
                 {
-                    var pointMsg = $"No. {i+1} {callbackOptions.Messages[answers.PointNumberVisited]}";
+                    var pointMsg = $"No. {i + 1} {callbackOptions.Messages[answers.PointNumberVisited]}";
 
                     // Prefix Type: with Chain
                     pointMsg = pointMsg.Replace("Type: ", "Type: Chain");
@@ -599,7 +599,7 @@ namespace VFatumbot
                 shortMessage = shortMessage.Replace("\n\n\n", "\n\n");
 
                 await PostTripReportToRedditAsync(
-                    (!string.IsNullOrEmpty(answers.Intent) ? answers.Intent + " @" : "Trip report @") 
+                    (!string.IsNullOrEmpty(answers.Intent) ? answers.Intent + " @" : "Trip report @")
                         + ((callbackOptions.NearestPlaces != null && callbackOptions.NearestPlaces.Length >= 1) ? (" " + callbackOptions.NearestPlaces[answers.PointNumberVisited]).Substring(0, callbackOptions.NearestPlaces[answers.PointNumberVisited].LastIndexOf("(")) : " somewhere"),
                     answers.Report + "\n   \n" +
                     (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
@@ -619,7 +619,8 @@ namespace VFatumbot
             AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Trip Report Posted");
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
-            return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+            callbackOptions = new CallbackOptions() { JustPostedTripReport = true };
+            return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken, options: callbackOptions);
         }
 
         // Post a trip report to the /r/randonauts subreddit
