@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="main49.css">
     <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/4.9.0/webchat.js"></script>
     <script src="jquery-3.4.1.slim.min.js"></script>
+    <script src="sha256.min.js"></script> <!-- Thanks https://github.com/geraintluff/sha256 -->
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>//var OneSignal = window.OneSignal || [];
 //        OneSignal.push(function () {
@@ -179,17 +180,18 @@
         var sendGidToBot;
         var sendPushIdToBot;
         var sendIAPToBot;
-        (async function () {
+        var initWebBot = function (userIdArg) {
             showSnackbar("Connecting to bot...");
 
             // Re-use credentials if they exist in cookies
             var userId = getCookie('userId');
             if (!userId) {
-                userId = generateId();
+                userId = userIdArg;
                 setCookie('userId', userId, 1825);
             }
+            var sha256userId = sha256(userId);
 
-            amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166", userId);
+            amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166", sha256userId);
 
             // Catch incoming events from bot
             const store = window.WebChat.createStore(
@@ -203,7 +205,7 @@
                     }
 
                     return next(action);
-                 }
+                }
             );
 
             // Catch event activities telling the app to load the camera RNG
@@ -212,21 +214,21 @@
                     if (data.channelData.startsWith("camrng")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadCamRNGWithBytesNeeded.postMessage(splitted[1]);
-                        amplitude.getInstance().logEvent('CameraRNG');
+                        //amplitude.getInstance().logEvent('CameraRNG'); // passed to backend
                     } else if (data.channelData.startsWith("temporal")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadTemporalWithBytesNeeded.postMessage(splitted[1]);
-                        amplitude.getInstance().logEvent('TemporalRNG');
+                        //amplitude.getInstance().logEvent('TemporalRNG'); // passed to backend
                     } else if (data.channelData.startsWith("addons")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadNativeShop.postMessage(splitted[1]);
-                        amplitude.getInstance().logEvent('OpenShop');
+                        //amplitude.getInstance().logEvent('OpenShop'); // passed to backend
                     }
                 }
             });
 
             // Callback from Flutter->Javascript to send locally generated entropy's gid to bot
-            sendGidToBot = function(gid) {
+            sendGidToBot = function (gid) {
                 showSnackbar("Sending your entropy's ID...");
                 var activity = {
                     from: {
@@ -241,7 +243,7 @@
             }
 
             // Callback from Flutter->Javascript to send the Flutter-side OneSignal Push Notification ID to the bot
-            sendPushIdToBot = function(id) {
+            sendPushIdToBot = function (id) {
                 var activity = {
                     from: {
                         id: userId,
@@ -267,12 +269,20 @@
 
                 var iapObj = JSON.parse(iapData);
                 var price = 0.0;
-                if (iapObj.productID == 'fatumbot.addons.nc.maps_pack.v2') {
+                if (iapObj.productID == 'fatumbot.addons.c.add_20_points.v4') {
+                    price = 0.99;
+                } else if (iapObj.productID == 'fatumbot.addons.c.add_60_points.v4') {
+                    price = 1.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.infinite_points.v4') {
+                    price = 12.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.extend_radius_20km.v4') {
+                    price = 4.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.maps_pack.v2') {
                     price = 1.99;
                 } else if (iapObj.productID == 'fatumbot.addons.nc.skip_water_pack.v2') {
                     price = 2.99;
-                } else if (iapObj.productID == 'fatumbot.addons.nc.maps_skip_water_packs.v2') {
-                    price = 3.99;
+                } else if (iapObj.productID == 'fatumbot.addons.nc.everything_pack.v4') {
+                    price = 19.99
                 }
                 var event_properties = {
                     'purchaseID': iapObj.purchaseID,
@@ -289,7 +299,7 @@
             let directLine = window.WebChat.createDirectLine({
                 secret: '',
                 token: '',
-                //token: 'e6OgEB6jguI.CtgMUq0tc_BYVzuxzsRcDNnmmD49cMT07Z1Fm9eVKis',
+                //token: 'cP4LEl-TeNM.nm_VgyZm2X357_YpJKo88uqF29sa0Fniu_FDjmxEe-k'
                 domain: 'https://devbot.randonauts.com/directline',
                 webSocket: false // defaults to true
             });
@@ -299,20 +309,18 @@
                     directLine: directLine,
                     store: store,
                     userID: userId,
-                    locale: 'en', // TODO: get from browser or does framework automatically do that for us?
+                    locale: getLang()
                 },
                 document.getElementById('webchat')
             );
             document.querySelector('#webchat > *').focus();
 
             let urlSrc = getUrlParameter('src');
-            if (urlSrc)
-            {
+            if (urlSrc) {
                 // Bot is being accessed from the Randonautica app or not
                 src = urlSrc;
             }
-            else
-            {
+            else {
                 src = "web";
             }
 
@@ -390,6 +398,19 @@
                     });
                 }
             });
+
+            // Hijack the Retry button to force page reload coz, well, Retry Send doesn't work
+            var scanRepeater;
+            function scanForRetryBtn() {
+                var retryButton = jQuery('.css-17jhb11');
+                if (retryButton.length > 0) {
+                    retryButton.click(function () {
+                        location.reload();
+                    });
+                }
+                scanRepeater = setTimeout(scanForRetryBtn, 500);
+            }
+            scanForRetryBtn();
 
             //
             // Helper functions below
@@ -473,8 +494,8 @@
                 else
                     ret = navigator.language;
                 return ret;
-            };
-        })().catch(err => console.error(err));
+            }
+        };
     </script>
 </body>
 </html>
