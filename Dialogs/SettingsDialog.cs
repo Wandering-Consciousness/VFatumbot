@@ -258,8 +258,8 @@ namespace VFatumbot
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(
                 $"{Loc.g("anonymized_id_is", userProfileTemporary.UserId)}{Helpers.GetNewLine(stepContext.Context)}" +
-                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasSkipWaterPoints ? Loc.g("get_locsearch_skipwater_pack") : Loc.g("water_points_will_be", userProfileTemporary.IsIncludeWaterPoints ? Loc.g("included") : Loc.g("skipped"))) + Helpers.GetNewLine(stepContext.Context) : "") +
-                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasMapsPack ? Loc.g("get_maps_pack") : Loc.g("show_google_street_earth", userProfileTemporary.IsDisplayGoogleThumbnails ? Loc.g("displayed") : Loc.g("hidden"))) + Helpers.GetNewLine(stepContext.Context) : "") +
+                ((userProfileTemporary.BotSrc == WebSrc.ios || userProfileTemporary.BotSrc == WebSrc.android) ? (!userProfileTemporary.HasSkipWaterPoints ? Loc.g("get_locsearch_skipwater_pack") : Loc.g("water_points_will_be", userProfileTemporary.IsIncludeWaterPoints ? Loc.g("included") : Loc.g("skipped"))) + Helpers.GetNewLine(stepContext.Context) : "") +
+                ((userProfileTemporary.BotSrc == WebSrc.ios || userProfileTemporary.BotSrc == WebSrc.android) ? (!userProfileTemporary.HasMapsPack ? Loc.g("get_maps_pack") : Loc.g("show_google_street_earth", userProfileTemporary.IsDisplayGoogleThumbnails ? Loc.g("displayed") : Loc.g("hidden"))) + Helpers.GetNewLine(stepContext.Context) : "") +
                 $"{Loc.g("current_location", userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))}{Helpers.GetNewLine(stepContext.Context)}" +
                 $"{Loc.g("current_radius", userProfileTemporary.Radius)}{Helpers.GetNewLine(stepContext.Context)}"));
         }

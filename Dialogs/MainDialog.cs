@@ -244,11 +244,11 @@ namespace VFatumbot
 
             PromptOptions options;
 
-            if (userProfileTemporary.BotSrc == Enums.WebSrc.ios)
+            if (userProfileTemporary.BotSrc == Enums.WebSrc.ios || userProfileTemporary.BotSrc == Enums.WebSrc.android)
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
+                    Prompt = MessageFactory.Text(Loc.g("md_lets_search_paid") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.HasInfinitePoints ? "∞" : "" + userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
                     Choices = GetActionChoices(stepContext.Context, true),
                 };
@@ -257,7 +257,7 @@ namespace VFatumbot
             {
                 options = new PromptOptions()
                 {
-                    Prompt = MessageFactory.Text(Loc.g("md_lets_search") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.OwlTokens)),
+                    Prompt = MessageFactory.Text(Loc.g("md_lets_search") + "  \n\n\n" + Loc.g("dl_x_tokens", userProfilePersistent.HasInfinitePoints ? "∞" : "" + userProfilePersistent.OwlTokens)),
                     RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_action")),
                     Choices = GetActionChoices(stepContext.Context, false),
                 };

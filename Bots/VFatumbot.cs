@@ -152,7 +152,14 @@ namespace VFatumbot
             }
             else
             {
-                platform = "Web";
+                try
+                {
+                    platform = "" + Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId);
+                }
+                catch (Exception e)
+                {
+                    platform = "Web";
+                }
             }
             var userProperties = new Dictionary<string, object>()
             {
@@ -184,7 +191,7 @@ namespace VFatumbot
                 {
                     await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
 
-                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_x_remaining", userProfilePersistent.OwlTokens, Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_x_remaining", userProfilePersistent.HasInfinitePoints ? "∞" : ""+userProfilePersistent.OwlTokens, Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)), cancellationToken);
 
                     // Piggy back of the startup event here for Amplitude
                     userProfileTemporary.StartSessionTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
