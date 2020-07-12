@@ -393,9 +393,8 @@
                     directLine.postActivity(activity).subscribe(function (id) {
                         hideSnackbar();
                     });
-                });
-                flutterChannel_getCurrentLocation();
-
+                };
+                flutterChannel_getCurrentLocation.postMessage('');
 
                 //if (!navigator.geolocation) {
                 //    alert("This browser doesn't support getting your location.'")
