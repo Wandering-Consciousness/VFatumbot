@@ -8,20 +8,20 @@
     <script src="jquery-3.4.1.slim.min.js"></script>
     <script src="sha256.min.js"></script> <!-- Thanks https://github.com/geraintluff/sha256 -->
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>//var OneSignal = window.OneSignal || [];
-//        OneSignal.push(function () {
-//            OneSignal.init({
-//                appId: "da21a078-babf-4e22-a032-0ea22de561a7",
-//            });
-//        });
+    <script>var OneSignal = window.OneSignal || [];
+        OneSignal.push(function () {
+            OneSignal.init({
+                appId: "da21a078-babf-4e22-a032-0ea22de561a7",
+            });
+        });
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150961256-1"></script>
-    <script>//window.dataLayer = window.dataLayer || [];
-//        function gtag() { dataLayer.push(arguments); }
-//        gtag('js', new Date());
+    <script>window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-//        gtag('config', 'UA-150961256-1');
+        gtag('config', 'UA-150961256-1');
     </script>
     <script type="text/javascript">(function (e, t) {
         var n = e.amplitude || { _q: [], _iq: {} }; var r = t.createElement("script")
@@ -301,7 +301,7 @@
                 secret: '',
                 token: '',
                 //token: 'cP4LEl-TeNM.nm_VgyZm2X357_YpJKo88uqF29sa0Fniu_FDjmxEe-k'
-                domain: 'https://devbot.randonauts.com/directline',
+                domain: 'https://bot.randonauts.com/directline',
                 webSocket: false // defaults to true
             });
 

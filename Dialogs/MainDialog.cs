@@ -396,7 +396,7 @@ namespace VFatumbot
 
             AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("How many IDAs", new Dictionary<string, object>() { { "number", stepContext.Values["idacou"] } });
 
-            if (userProfileTemporary.BotSrc == Enums.WebSrc.ios || userProfileTemporary.BotSrc == Enums.WebSrc.android)
+            if (userProfileTemporary.BotSrc == Enums.WebSrc.ios)
             {
                 var options = new PromptOptions()
                 {
