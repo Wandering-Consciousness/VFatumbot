@@ -5,50 +5,50 @@ radius_gte	Le rayon doit être supérieur ou égal à {0} m
 radius_lte	Le rayon doit être inférieur ou égal à {0} m
 changed_radius	Rayon modifié de {0} m à {1} m
 invalid_radius	Rayon invalide
-current_radius	Votre rayon actuel est de {0} m
+current_radius	Votre rayon est actuellement {0} m
 cant_find_place	Lieu introuvable.
-current_location	Votre position actuelle est définie sur {0}, {1}. <br> Ce sera le centre des recherches.
+current_location	Votre position actuelle est définie par {0}, {1}. <br> Ce sera le centre des recherches.
 water_points_will_be	Les points d'eau seront {0}
 skipped	sauté
 ignored	ignoré
 classic_mode	Le mode classique est désormais {0}
-enabled	activée
+enabled	activé
 disabled	désactivé
 help	Aidez-moi
 invalid_num_points	Valeur incorrecte. Le paramètre doit être un chiffre de 1 à 10.
-scan_time_take	La génération peut prendre de 5 à 15 minutes.
-finding_location	Trouver un emplacement... concentrez-vous sur votre intention.
+scan_time_take	La génération pourrait prendre de 5 à 15 minutes.
+finding_location	Cherchant un emplacement... concentrez-vous sur votre intention.
 nothing_but_water_points	Impossible de trouver autre chose que des points d'eau. Réessayez plus tard.
-num_water_points_skipped_so_far	Nombre de points d'eau ignorés jusqu'à présent: {0}
+num_water_points_skipped_so_far	Nombre de points d'eau ignorés jusqu'au présent: {0}
 num_water_points_skipped	Nombre de points d'eau ignorés: {0}
 point_generated	Point généré
-no_points_detected_quantum	Aucun point actuellement détecté dans la zone, vous fournissant à la place un point quantique.
+no_points_detected_quantum	Aucun point actuellement détecté dans la zone, fournissant à sa place un point quantique.
 no_points_detected	Aucun point actuellement détecté dans la zone.
 address	adresse
 get_intent_suggestions	Randomisation quantique du dictionnaire anglais pour vous.
 define	définir
-spotify_search	Rechercher dans Spotify
+spotify_search	Rechercher sur Spotify
 intent_suggestions	Suggestions d'intention
-num_water_attractors_skipped	Nombre de points d'eau d'attracteur ignorés: {0}
-num_water_voids_skipped	Nombre de points d'eau vides ignorés: {0}
+num_water_attractors_skipped	Nombre de points d'attracteur d'eau ignorés: {0}
+num_water_voids_skipped	Nombre de points vides d'eau ignorés: {0}
 pair_points_detected	Paire de points générés
-generating_chain	Générer votre chaîne. Selon votre rayon et le nombre / type de points, cela peut prendre un certain temps.
-chain_nothing_found	Aucune anomalie trouvée à ce jour au point # {0}. Réessayer...
+generating_chain	Générant votre chaîne. Selon votre rayon et le nombre / type de points, cela peut prendre un certain temps.
+chain_nothing_found	Aucune anomalie trouvée à ce moment au point # {0}. Réessayant...
 chain_nothing_but_water_points	Impossible de trouver autre chose que des points d'eau au point {0}. Réessayez plus tard.
-chain_num_water_points_skipped_so_far	Nombre de points d'eau ignorés jusqu'à présent au point # {0}: {1}
+chain_num_water_points_skipped_so_far	Nombre de points d'eau ignorés jusqu'au présent au point # {0}: {1}
 chain_num_water_points_skipped	Nombre de points d'eau sautés au point # {0}: {1}
-chain_generated	Généré par la chaîne
+chain_generated	Chaîne générée
 mystery_point_generated	Point mystère généré
 exception_caught	Exception interceptée
 error_sorry	Désolé, on dirait que quelque chose s'est mal passé.
 open	Ouvert
-chain_map_open	Travel Chain sur Google Maps
+chain_map_open	Traverser la chaîne avec Google Maps
 view_on_google_maps	Afficher sur Google Maps
 street_view	Street View
 google_earth	Google Earth
 location	Emplacement
 open_map	Ouvrir la carte
-map	Plans
+map	Cartes
 earth	Terre
 view_with_google	Afficher avec Google
 google_maps	Google Maps
@@ -56,13 +56,13 @@ google_street_view	Google Street View
 download_app	Téléchargez l'appli
 md_anomaly	Anomalie
 md_attractor	Attracteur
-md_void	Néant
+md_void	Vide
 md_options	Options / Aide
-md_blindspotsmore	Taches aveugles&plus
+md_blindspotsmore	Points aveugles & plus
 md_mylocation	Ma position
-md_lets_search_paid	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des grappes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs et des vides. <br> <br> <br> Fonctionnalités Premium disponibles - Prévisualisations de cartes, saut de points d'eau et recherche d'emplacement personnalisée. <br> Allez dans Modules complémentaires
-md_invalid_action	Ce n'est pas une action valable. Qu'aimeriez-vous obtenir?
-md_lets_search	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des grappes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs et des vides.
+md_lets_search_paid	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des groupes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs ou des vides. <br> <br> <br> Fonctionnalités Premium disponibles - Recharge des points, points infinis, prévisualisations de cartes, saut de points d'eau, rallongement de rayon, et recherche d'emplacement personnalisée. <br> Allez dans Options / Aide → Modules complémentaires
+md_invalid_action	Ce n'est pas une action valide. Qu'aimeriez-vous obtenir?
+md_lets_search	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des groupes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs ou des vides.
 md_how_many_idas	Jusqu'à combien de points aimeriez-vous chercher?
 md_choose_qrng	Choisissez votre source d'entropie: (choisissez Australian National University - ANU en cas de doute)
 md_invalid_qrng	Ce n'est pas une source d'entropie valide.
@@ -73,8 +73,8 @@ md_temporal_server	Temporel (serveur)
 md_temporal_phone	Temporel (téléphone)
 md_anu_leftovers	Restes de l'ANU
 md_gcp_retro	GCP Retro
-md_collecting_camera_entropy	Collecte aléatoire de l'appareil photo de votre téléphone (aucune photo n'est prise)...
-md_collecting_temporalphone_entropy	Collecte aléatoire de la CPU de votre téléphone...
+md_collecting_camera_entropy	Collection des données aléatoires de l'appareil photo de votre téléphone (aucune photo n'est prise)...
+md_collecting_temporalphone_entropy	Collection des donées aléatoires de la CPU de votre téléphone...
 yes	Oui
 no	Non
 addons	Modules complémentaires
@@ -82,26 +82,26 @@ update_settings_q	Mettre à jour vos paramètres?
 select_radius	Sélectionnez votre rayon en mètres ou entrez directement les chiffres
 include_water_points_q	Inclure des points d'eau?
 show_google_street_earth_q	Afficher des aperçus Google Street View et Earth?
-invalid_answer	Ce n'est pas une réponse valable.
+invalid_answer	Ce n'est pas une réponse valide.
 anonymized_id_is	Votre identifiant anonyme est {0}.
 show_google_street_earth	Les aperçus Street View et Earth seront {0}.
-hidden	caché
-displayed	affiché
-get_locsearch_skipwater_pack	Obtenez le pack de recherche d'emplacement et de saut de points d'eau à partir du bouton Modules complémentaires.
-get_maps_pack	Obtenez le pack de cartes pour des aperçus de cartes et de rues dans l'application à partir du bouton Modules complémentaires.
+hidden	cachés
+displayed	affichés
+get_locsearch_skipwater_pack	Obtenez le pack Recherche d'emplacement et de Saut des points d'eau à partir du bouton Modules complémentaires.
+get_maps_pack	Obtenez le pack de Cartes pour des aperçus de cartes et de rues dans l'application à partir du bouton Modules complémentaires.
 bs_quantum	Quantum
-bs_quantum_time	Temps quantique
-bs_intent_suggestions	Idées d'intention
-bs_mystery_point	Mystery Point
+bs_quantum_time	Temps (heure) quantique
+bs_intent_suggestions	Idées pour intentions
+bs_mystery_point	Point mystère
 bs_pair	Paire de points
 bs_pseudo	Pseudo
-bs_scan	Analyse
+bs_scan	Scan
 bs_chains	Chaînes
 bs_dice	Dés quantiques
-bs_back	<Retour
+bs_back	< Retour
 welcome_randonautica	Bienvenue chez Randonautica!
-welcome_beginners	Vous débutez en Randonauting? [Regardez cette vidéo](https://www.youtube.com/watch?v=h148J7ym7Ww) pour découvrir de quoi il s'agit. <br> <br> <br> Vous pouvez également consulter les [Les 9 principes des Randonauts]({1})
-welcome_report_share	Une fois le voyage terminé, partagez la discussion avec les Randonauts sur [Reddit]({0}) et [Twitter]({1}).
+welcome_beginners	Débutant(e)? [Regardez cette vidéo](https://www.youtube.com/watch?v=h148J7ym7Ww) pour découvrir de quoi il s'agit. <br> <br> <br> Vous pouvez également consulter [Les 9 principes des Randonauts]({1})
+welcome_report_share	Une fois le voyage terminé, participez en discussion avec les Randonauts sur [Reddit]({0}) et [Twitter]({1}).
 first_send_location	Commencez par envoyer votre position en appuyant sur 🌍 / 📎 ou en envoyant une URL Google Maps.
 choose_chain_type	Quel type de points voulez-vous enchaîner?
 ch_invalid_point_type	Ce n'est pas un type de point valide.
@@ -118,25 +118,25 @@ ch_mte	Le nombre doit être supérieur ou égal à {0}. Entrer un nombre:
 ch_lte	Le nombre doit être inférieur ou égal à {0}. Entrer un nombre:
 no_loc_or_reset	Vous n'avez pas défini de lieu ou il a été réinitialisé. Envoyez-le en appuyant sur 🌍 / 📎 ou en envoyant une URL Google Maps. Vous pouvez également taper \ "help \" à tout moment.
 ida_found	Anomalie motivée par l'intention trouvée
-ida_type	Tapez: {0}
+ida_type	Type: {0}
 ida_radius	Rayon: {0}
 ida_power	Puissance: {0}
 ida_bearing	Relèvement: {0}
 ida_zscore	score z: {0}
 randpoint_generated	Point aléatoire généré
-suggested_time	Durée suggérée: {0}
-blind_spots_more_menu	Qu'aimeriez-vous obtenir? <br> Les points quantiques sont des points aléatoires uniques (points aveugles potentiels). Les points mystères sont un type de point aléatoire.
-invalid_action	Ce n'est pas une action valable.
-agree_to_terms_q	Êtes-vous d'accord avec les conditions d'utilisation et la politique de confidentialité, et d'être un Randonaut bien élevé?
+suggested_time	Heure suggérée: {0}
+blind_spots_more_menu	Qu'aimeriez-vous obtenir? <br> Les points quantiques sont des points aléatoires uniques (points aveugles potentiels). Les points mystères sont un type de point choisi au hasard.
+invalid_action	Ce n'est pas une action valide.
+agree_to_terms_q	Êtes-vous d'accord avec les conditions d'utilisation et la politique de confidentialité, et d'être un Randonaut bien comporté(e) ?
 toc_dontagree	Non
-toc_doagree	je suis d'accord
+toc_doagree	Je suis d'accord
 toc_shame	C'est une honte. Tant d'aventures aléatoires vous attendent.
-toc_invalid_answer	Ce n'est pas une réponse valable. {0}
-qd_min1	Entrez un nombre minimum inclus supérieur ou égal à 1. Pour un tirage au sort, entrez 1 et attribuez-lui des têtes
+toc_invalid_answer	Ce n'est pas une réponse valide. {0}
+qd_min1	Entrez un nombre minimum supérieur ou égal à 1. Pour un tirage au sort, entrez 1 et attribuez-lui au "face". 
 qd_min2	Minimum non valide. Entrez le minimum souhaité:
 qd_min3	Le minimum doit être supérieur ou égal à 1. Réessayez:
 qd_min4	Minimum non valide, doit être inférieur ou égal à 254. Réessayez:
-qd_max1	Entrez un nombre maximum inclus supérieur au minimum, jusqu'à 255. Pour un tirage au sort, entrez 2 et attribuez-lui la queue:
+qd_max1	Entrez un nombre maximum supérieur au minimum, jusqu'à 255. Pour un tirage au sort, entrez 2 et attribuez-lui au "pile" :
 qd_max2	Maximum non valide. Entrez le maximum souhaité:
 qd_max3	Le maximum doit être supérieur à 1. Réessayez:
 qd_max4	Maximum non valide, doit être inférieur ou égal à 255. Réessayez:
@@ -149,20 +149,20 @@ err_qrng_service_failed	Le service n'a pas renvoyé de données aléatoires.
 err_qrng_error	Désolé, il y avait une erreur de source d'entropie quantique nécessaire pour randomiser. Essayez un peu plus tard.
 scan_choose_kind	Choisissez le type de scan:
 scan_invalid_action	Ce n'est pas un scan valide.
-scan_attractor	Attracteur
-scan_void	Néant
-scan_anomaly	Anomalie
-scan_pair	Paire
-scan_sesson_inplace	Votre session de numérisation est déjà en cours.
+scan_attractor	Scan Attracteur
+scan_void	Scan Vide
+scan_anomaly	Scan Anomalie
+scan_pair	Scan Paire
+scan_sesson_inplace	Votre session de scan est déjà en cours.
 tr_did_you_visit	Avez-vous visité ou approché le point et souhaitez-vous faire un rapport de voyage?
 tr_yes_sans_report	Oui sans rapport
 tr_yes_report	Oui avec rapport!
-tr_invalid_choice	Ce n'est pas un choix valable.
+tr_invalid_choice	Ce n'est pas un choix valide.
 tr_set_intent_q	Avez-vous défini une intention?
 tr_enter_intent	Quelle était votre intention?
-tr_hope_had_fun	J'espère que vous avez passé un bon voyage!
-tr_collect_artifacts_q	Avez-vous collecté des artefacts?
-tr_wow_and_astounding_q	Votre voyage a-t-il été "incroyable et incroyable! \"?
+tr_hope_had_fun	On espère que vous avez passé un bon voyage!
+tr_collect_artifacts_q	Avez-vous collecté des objets trouvés?
+tr_wow_and_astounding_q	Votre voyage a-t-il été "impressionnant et incroyable! \"?
 tr_meaningfulness_q	Évaluez le sens de votre voyage (ou entrez votre propre mot):
 tr_enriching	Enrichissant
 tr_meaningful	Significatif
@@ -170,8 +170,8 @@ tr_casual	Décontractée
 tr_meaningless	Sans signification
 tr_emotional_q	Évaluez le facteur émotionnel (ou entrez votre propre mot):
 tr_dopamine_hit	Coup de dopamine
-tr_inspirational	Inspirational
-tr_plain	Plaine
+tr_inspirational	Inspirant
+tr_plain	Ordinaire 
 tr_anxious	Anxieux
 tr_despair	Désespoir
 tr_dread	Crainte
@@ -185,44 +185,44 @@ tr_woowooweird	Woo-woo bizarre
 tr_strange	Étrange
 tr_normal	Ordinaire
 tr_nothing	Rien
-tr_synchronicity_q	Évaluez le facteur de synchronisation (ou entrez votre propre mot):
-tr_dirk_gently	Dirk doucement
+tr_synchronicity_q	Évaluez le facteur de synchronisme (ou entrez votre propre mot):
+tr_dirk_gently	Dirk Gently
 tr_mind_blowing	Époustouflant
 tr_somewhat	Quelque peu
 tr_boredom	Ennui
 tr_wanna_upload_photos_q	Voulez-vous télécharger des photos?
-tr_upload_photos_now	Téléchargez toutes les photos que vous avez prises maintenant. Envoyez-les tous en même temps, car l'envoi est limité à un seul message.
+tr_upload_photos_now	Téléchargez toutes les photos que vous avez prises maintenant. Envoyez-les toutes en même temps, car l'envoi est limité à un seul message.
 tr_not_valid_upload	Ce n'est pas un téléchargement valide.
 tr_error_photo_upload	Désolé, une erreur s'est produite lors du téléchargement de votre photo.
-tr_photo_uploads_temp_disabled	Les téléchargements de photos sont temporairement désactivés pendant que nous changeons certaines choses désolé!
+tr_photo_uploads_temp_disabled	Les téléchargements de photos sont temporairement désactivés pendant que nous changeons certaines choses, désolé!
 tr_write_report	Enfin, rédigez votre rapport. La saisie de votre rapport se limite à l'envoi dans un seul message.
 tr_tweet	Tweetez votre rapport!
 tr_thanks	Merci pour le rapport!
 welcome_back	Bienvenue à Randonautica!
 dont_forgot_send_loc	N'oubliez pas d'envoyer votre position actuelle.
 iap_invalid_receipt	Reçu d'achat non valide: {0}. Vous serez signalé.
-iap_maps_pack_enabled	Module complémentaire Maps Pack activé.
-iap_search_water_points_enabled	Activer le module complémentaire Rechercher et ignorer le pack de points d'eau. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
-iap_everything_enabled	Le module complémentaire Everything Pack est activé. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
+iap_maps_pack_enabled	Module complémentaire Pack Cartes activé.
+iap_search_water_points_enabled	Les modules complémentaires Rechercher et Ignorer des points d'eau sont activés. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
+iap_everything_enabled	Le module complémentaire Pack Tout est activé. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
 iap_all_disabled	Tous les modules complémentaires sont désactivés.
 iap_no_purchases	Vous n'avez aucun historique d'achat.
 iap_buy	ACHETER
 iap_enable	ACTIVER
-iap_maps_pack	Pack de cartes
+iap_maps_pack	Pack Cartes
 iap_maps_pack_desc	Aperçu des cartes et des rues dans l'application
-iap_search_water_points	Recherche de lieu + Skip Water Pack
-iap_search_water_points_desc	Rechercher par noms de lieux et sauter les points d'eau
+iap_search_water_points	Recherche de lieu + Ignorer les points d'eau
+iap_search_water_points_desc	Rechercher par noms des lieux et sauter les points d'eau
 iap_everything_pack	Le Pack Tout
-iap_everything_pack_desc	Cartes + Recherche d'emplacement + Skip Water Packs
+iap_everything_pack_desc	Cartes + Recherche d'emplacement + Ignorer des points d'eau
 iap_enabling...	Activation de la fonction...
-iap_thanks_enabling	Je vous remercie. Activation maintenant...
+iap_thanks_enabling	Merci. Activation maintenant...
 sending_location	Envoi de votre position...
 connecting_bot	Connexion au bot...
 sending_entropy	Envoi de l'entropie...
-dl_x_remaining	Vous avez actuellement {0} points. 1 point est consommé à chaque fois que vous générez un emplacement. Votre solde sera rechargé gratuitement jusqu'à un maximum de {1} points chaque jour où vous ouvrez l'application.
+dl_x_remaining	Vous avez actuellement {0} points. 1 point est utilisé à chaque fois que vous générez un emplacement. Votre solde sera rechargé gratuitement jusqu'à un maximum de {1} points chaque jour où vous ouvrez l'application.
 dl_x_tokens	Vous avez actuellement {0} points.
 dl_no_tokens	Il ne vous reste plus de points. Veuillez recharger à partir du menu des modules complémentaires ou attendez 24 heures pour votre recharge gratuite.
-iap_added_x_points	Ajout de {0} points. Vous avez maintenant {1}.
+iap_added_x_points	Ajout de {0} points. Vous en avez maintenant {1}.
 iap_infinite_points_enabled	Points infinis activé.
 iap_20km_radius_extended	Rayon de recherche maximal étendu à 20 km.
 iap_add_20_t	Ajouter 20 points
@@ -235,3 +235,4 @@ iap_everything_t	Le Pack Tout
 iap_everything_d	Tous les packs + points infinis
 iap_infinnypoints_t	Points infinis
 iap_infinnypoints_d	Trouvez un nombre illimité d'emplacements
+dont_tresspass	Si ce point est sur de la propriété privée, NE PÉNÉTREZ PAS ILLÉGALEMENT! N'entrez jamais aux lieux dangereux comme des voies ferrées, des zones interdits, etc. N'entrez pas aux propriétés abandonnées. Suivez les lois et les régulations locaux et fédéraux. Soyez respectueux, responsable, et gardez une mentalité positive à tout moment lorsque vous Randonautez.
