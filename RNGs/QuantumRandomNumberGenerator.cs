@@ -242,9 +242,6 @@ namespace VFatumbot
 
     public abstract class BaseRandomProvider : Random
     {
-        [DllImport("libqwqng", CallingConvention = CallingConvention.Cdecl)]
-        public extern static void randbytes(byte[] buffer, int bytecount);
-
         protected virtual byte GetRandomByte()
         {
             return Convert.ToByte((new Random()).Next(256));
@@ -411,12 +408,7 @@ namespace VFatumbot
         {
             for (int i = 0; i < buffer.Length; i++)
             {
-                //buffer[i] = GetRandomByte();
-
-                // TODO: put this somewhere
-                var sb = new byte[1];
-                randbytes(sb, 1);
-                buffer[i] = sb[0];
+                buffer[i] = GetRandomByte();
             }
         }
 
