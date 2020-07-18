@@ -60,7 +60,7 @@ md_void	Void
 md_options	Optionen/Hilfe
 md_blindspotsmore	Blindeflecken & Mehr
 md_mylocation	Mein Standort
-md_lets_search_paid	Lass uns suchen! Was hättest Du denn gerne? <br>Attractor-Punkte sind dicht beieinander liegende Häufungen zufälliger Punkte. Void-Punkte sind das Gegenteil. <br>Anomalien sind die jeweils stärksten unter den gefundenen Attractor- und Void-Punkten.<br><br><br>Premium Features verfügbar - Kartenvorschau, Punkte im Wasser überspringen & individuell angepasste Standortsuche. <br>Öffne Optionen/Hilfe → Erweiterungen
+md_lets_search_paid	Lass uns suchen! Was hättest Du denn gerne? <br>Attractor-Punkte sind dicht beieinander liegende Häufungen zufälliger Punkte. Void-Punkte sind das Gegenteil. <br>Anomalien sind die jeweils stärksten unter den gefundenen Attractor- und Void-Punkten.<br><br><br>Premium Features verfügbar - Kartenvorschau, Punkte im Wasser überspringen & individuell angepasste Standortsuche. <br>Öffne Erweiterungen
 md_invalid_action	Das ist eine ungültiger Vorgang. Was hättest Du denn gerne?
 md_lets_search	Lass uns suchen! Was hättest Du denn gerne? <br>Attractor-Punkte sind dicht beieinander liegende Häufungen zufälliger Punkte. Void-Punkte sind das Gegenteil. <br>Anomalien sind die jeweils stärksten unter den gefundenen Attractor- und Void-Punkten.
 md_how_many_idas	Bis zu wie viele Punkte würdest Du gerne suchen?
@@ -219,3 +219,19 @@ iap_thanks_enabling	Vielen Dank. Es wird aktiviert...
 sending_location	Standortmitteilung...
 connecting_bot	Verbinde zum Bot...
 sending_entropy	Entropie wird gesendet...
+dl_x_remaining	Du hast derzeit {0} Punkte. Jedes Mal, wenn Du eine Koordinate generierst, wird 1 Punkt verbraucht. Dein Guthaben wird an jedem Tag, an dem Du die App öffnest, bis zu maximal {1} Punkte kostenlos aufgefüllt.
+dl_x_tokens	Du hast derzeit {0} Punkte.
+dl_no_tokens	Du hast keine Punkte mehr. Bitte lade sie über das Erweiterungen-Menü auf oder warte 24 Stunden auf Deine kostenlose Aufladung.
+iap_added_x_points	{0} Punkte hinzugefügt. Du hast jetzt {1}.
+iap_infinite_points_enabled	Unendlich viele Punkte aktiviert.
+iap_20km_radius_extended	Maximaler Suchradius auf 20 km erweitert.
+iap_add_20_t	Addiere 20 Punkte
+iap_add_20_d	Gibt dir 20 weitere Punkte
+iap_add_60_t	Addiere 60 Punkte
+iap_add_60_d	Gibt dir 60 weitere Punkte
+iap_20km_r_t	Radius auf 20 km vergrößern Paket
+iap_20km_r_d	Vergrößert den Suchradius auf 20 km
+iap_everything_t	Das Gesamtpaket
+iap_everything_d	Alle Pakete + Unendlich viele Punkte
+iap_infinnypoints_t	Unendlich viele Punkte
+iap_infinnypoints_d	Finde eine unbegrenzte Anzahl von Koordinaten

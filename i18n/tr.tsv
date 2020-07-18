@@ -1,0 +1,237 @@
+﻿all_kinds_steve	Ben her çeşit Steveim!
+let_steve_help	Steve sana yardım etsin!
+this_is_steve	Bu Steve
+radius_gte	Yarıçap {0} m veya daha büyük olmalıdır
+radius_lte	Yarıçap {0} m veya daha küçük olmalıdır
+changed_radius	Yarıçap {0} m'den {1} m'ye değiştirildi
+invalid_radius	Geçersiz yarıçap
+current_radius	Şu anki yarıçapınız {0} m
+cant_find_place	Yer bulunamadı.
+current_location	Geçerli konumunuz {0}, {1} olarak ayarlandı. <br> Burası aramaların merkezi olacak.
+water_points_will_be	Su noktaları {0}
+skipped	atlanan
+ignored	ihmal
+classic_mode	Klasik mod şimdi {0}
+enabled	etkin
+disabled	engelli
+help	Yardım
+invalid_num_points	Yanlış değer. Parametre 1 ile 10 arasında bir rakam olmalıdır.
+scan_time_take	Üretim 5 ila 15 dakika sürebilir.
+finding_location	Konum bulma... niyetinize odaklanın.
+nothing_but_water_points	Su noktaları dışında bir şey bulunamadı. Daha sonra tekrar deneyin.
+num_water_points_skipped_so_far	Şimdiye kadar atlanan su puanı sayısı: {0}
+num_water_points_skipped	Atlanan su puanı sayısı: {0}
+point_generated	Oluşturulan Nokta
+no_points_detected_quantum	Bölgede şu anda hiçbir nokta tespit edilmedi, bunun yerine sizin için bir kuantum noktası sağlandı.
+no_points_detected	Şu anda bölgede hiçbir nokta tespit edilmedi.
+address	adres
+get_intent_suggestions	İngilizce sözlüğü sizin için kuantumsal olarak rastgele.
+define	tanımlamak
+spotify_search	Spotify'da ara
+intent_suggestions	Amaç önerileri
+num_water_attractors_skipped	Atlanan çeken su noktalarının sayısı: {0}
+num_water_voids_skipped	Atlanan boş su noktalarının sayısı: {0}
+pair_points_detected	Oluşturulan Puan Çifti
+generating_chain	Zincirinizi oluşturma. Yarıçapınıza ve puan sayısına / türüne bağlı olarak biraz zaman alabilir.
+chain_nothing_found	# {0} noktasında şu ana kadar herhangi bir anomali bulunamadı. Tekrar deneniyor...
+chain_nothing_but_water_points	{0} noktasında su noktaları dışında hiçbir şey bulunamadı. Daha sonra tekrar deneyin.
+chain_num_water_points_skipped_so_far	# {0} noktasında atlanan su noktalarının sayısı: {1}
+chain_num_water_points_skipped	{{}. Noktada atlanan su noktalarının sayısı: {1}
+chain_generated	Zincir Üretildi
+mystery_point_generated	Oluşturulan Gizem Noktası
+exception_caught	İstisna yakalandı
+error_sorry	Üzgünüz, bir şeyler ters gitti.
+open	Açık
+chain_map_open	Google Haritalar'da Seyahat Zinciri
+view_on_google_maps	Google Haritalar'da görüntüle
+street_view	sokak Görünümü
+google_earth	Google Earth
+location	yer
+open_map	Haritayı Aç
+map	Haritalar
+earth	Dünya
+view_with_google	Google ile görüntüle
+google_maps	Google Haritalar
+google_street_view	Google Sokak Görünümü
+download_app	Uygulamayı indirin
+md_anomaly	Anomali
+md_attractor	Cazibe merkezi
+md_void	Geçersiz
+md_options	Seçenekler / Yardım
+md_blindspotsmore	Kör Noktalar ve Daha
+md_mylocation	Benim konumum
+md_lets_search_paid	Arayalım! Ne almak istersiniz? <br> Çekiciler yoğun rastgele nokta kümeleridir. Boşluklar tam tersidir. <br> Anomaliler Çekicilerin ve Boşlukların en güçlüsüdür. <br> <br> <br> Premium özellikler mevcut - Harita önizlemeleri, su noktalarını atla ve özel konum arama. <br>Eklentiler'e gidin
+md_invalid_action	Bu geçerli bir eylem değil. Ne almak istersiniz?
+md_lets_search	Arayalım! Ne almak istersiniz? <br> Çekiciler yoğun rastgele nokta kümeleridir. Boşluklar tam tersidir. <br> Anomaliler Çekiciler ve Boşluklardan en güçlüsüdür.
+md_how_many_idas	Kaç puan aramak istersiniz?
+md_choose_qrng	Entropi kaynağınızı seçin: (emin değilseniz Avustralya Ulusal Üniversitesi - ANU'yu seçin)
+md_invalid_qrng	Bu geçerli bir entropi kaynağı değil.
+md_camera	Kamera
+md_anu	ANU
+md_temporal	Geçici
+md_temporal_server	Geçici (Sunucu)
+md_temporal_phone	Geçici (Telefon)
+md_anu_leftovers	ANU Artıkları
+md_gcp_retro	GCP Retro
+md_collecting_camera_entropy	Telefonunuzun kamerasından rastgele toplama (fotoğraf çekilmiyor)...
+md_collecting_temporalphone_entropy	Telefonunuzun CPU'sundan rastgele toplanıyor...
+yes	Evet
+no	Hayır
+addons	Eklenti
+update_settings_q	Ayarlarınız güncellensin mi?
+select_radius	Yarıçapınızı metre cinsinden seçin veya sayıları doğrudan girin
+include_water_points_q	Su noktaları dahil mi?
+show_google_street_earth_q	Google Street View ve Earth önizlemeleri gösterilsin mi?
+invalid_answer	Bu geçerli bir cevap değil.
+anonymized_id_is	Anonim kimliğiniz {0}.
+show_google_street_earth	Sokak Görünümü ve Google Earth önizlemeleri {0} olacak.
+hidden	gizli
+displayed	görüntülenen
+get_locsearch_skipwater_pack	Eklentiler düğmesinden Konum Arama ve Skip Water Points Paketi'ni alın.
+get_maps_pack	Eklentiler düğmesinden uygulama içi harita ve sokak önizlemeleri için Haritalar Paketi'ni edinin.
+bs_quantum	Kuantum
+bs_quantum_time	Kuantum Zamanı
+bs_intent_suggestions	Niyet Fikirleri
+bs_mystery_point	Gizem Noktası
+bs_pair	Bir Çift Puan
+bs_pseudo	Sözde
+bs_scan	taramak
+bs_chains	Zincirler
+bs_dice	Kuantum Zarları
+bs_back	<Geri
+welcome_randonautica	Randonautica'ya Hoşgeldiniz!
+welcome_beginners	Randonauting'de yeni misiniz? [Bu videoyu izleyin](https://www.youtube.com/watch?v=h148J7ym7Ww) bunun ne hakkında olduğunu öğrenmek için. <br> <br> <br> Ayrıca [Randonauts'un 9 İlkesi]({1})
+welcome_report_share	Bir seyahati tamamladıktan sonra, tartışmayı [Reddit]({0}) ve [Twitter]({1}) Randonauts ile paylaşın.
+first_send_location	🌍 / 📎 öğesine dokunarak veya bir Google Haritalar URL'si göndererek konumunuzu gönderin.
+choose_chain_type	Ne tür noktaları zincirlemek istersiniz?
+ch_invalid_point_type	Bu geçerli bir nokta türü değil.
+ch_anomalies	anomaliler
+ch_voids	boşluklar
+ch_attractors	Atraktörler
+ch_current_or_sequential	Geçerli konumunuzdaki veya sıralı sırayla tüm noktaları mı oluşturuyorsunuz?
+ch_current	şimdiki
+ch_sequential	Ardışık
+ch_num_points	Zincirleme yapılacak nokta sayısını girin. Yaklaşık maksimum toplam mesafe, bu sayının mevcut yarıçapınızla çarpılması olacaktır.
+ch_invalid_number	Bu geçerli bir sayı değil.
+ch_reprompt_num_points	Geçersiz numara. Puan sayısını girin:
+ch_mte	Sayı, {0} değerine eşit veya daha büyük olmalıdır. Numarayı girin:
+ch_lte	Sayı, {0} değerine eşit veya daha küçük olmalıdır. Numarayı girin:
+no_loc_or_reset	Bir konum belirlemediniz veya sıfırlandı. 🌍 / 📎 öğesine dokunarak veya bir Google Haritalar URL'si göndererek gönderin. İstediğiniz zaman \ "yardım \" da yazabilirsiniz.
+ida_found	Niyet Odaklı Anomali bulundu
+ida_type	Tür: {0}
+ida_radius	Yarıçap: {0}
+ida_power	Güç: {0}
+ida_bearing	Rulman: {0}
+ida_zscore	z skoru: {0}
+randpoint_generated	Oluşturulan Rastgele Nokta
+suggested_time	Önerilen süre: {0}
+blind_spots_more_menu	Ne almak istersiniz? <br> Kuantum noktaları tek rastgele olanlardır (potansiyel Kör Noktalar). Gizem Noktaları rastgele bir nokta türüdür.
+invalid_action	Bu geçerli bir işlem değil.
+agree_to_terms_q	Kullanım koşullarını ve gizlilik politikasını kabul ediyor ve iyi davrandığınız bir Randonaut olmayı kabul ediyor musunuz?
+toc_dontagree	Hayır
+toc_doagree	Katılıyorum
+toc_shame	Bu utanç verici. Pek çok rastgele macera sizi bekliyor.
+toc_invalid_answer	Bu geçerli bir cevap değil. {0}
+qd_min1	1'den büyük veya 1'e eşit bir minimum sayı girin. Bozuk para için 1 girin ve kafaları atayın
+qd_min2	Geçersiz minimum. İstenen minimum değeri girin:
+qd_min3	Minimum değer 1'den büyük veya 1'e eşit olmalıdır. Tekrar deneyin:
+qd_min4	Geçersiz minimum, 254'ten küçük veya ona eşit olmalıdır. Tekrar deneyin:
+qd_max1	Minimum değerinden daha büyük, 255'e kadar bir kapsayıcı maksimum sayı girin. Bozuk para için 2 girin ve kuyrukları atayın:
+qd_max2	Geçersiz maksimum. İstediğiniz maksimum değeri girin:
+qd_max3	Maksimum 1'den büyük olmalıdır. Tekrar deneyin:
+qd_max4	Geçersiz maksimum, 255'ten küçük veya ona eşit olmalıdır. Tekrar deneyin:
+qd_minmax	Minimum ({0}) maksimumdan ({1}) küçük olmalıdır. {2} olarak ayarlanıyor.
+qd_rolling	Yuvarlanma...
+qd_results	Sonuç: {0} [{1}, {2}]. Yine mi yuvarlanıyorsun?
+qd_onlyyess	Evet veya Hayır, başka bir şey yok.
+err_no_entropy_fetch	Yeni rastgele veriler getirilemedi.
+err_qrng_service_failed	Hizmet rasgele veri döndürmedi.
+err_qrng_error	Maalesef, randomize etmek için gerekli kuantum entropisini sağlayan bir hata vardı. Biraz sonra deneyin.
+scan_choose_kind	Tarama türünü seçin:
+scan_invalid_action	Bu geçerli bir tarama değil.
+scan_attractor	Cazibe merkezi
+scan_void	Geçersiz
+scan_anomaly	Anomali
+scan_pair	Çift
+scan_sesson_inplace	Tarama oturumunuz zaten devam ediyor.
+tr_did_you_visit	Ziyaret ettiniz veya konuya yaklaştınız ve bir gezi raporu hazırlamak ister misiniz?
+tr_yes_sans_report	Evet raporlama sans
+tr_yes_report	Evet raporla!
+tr_invalid_choice	Bu geçerli bir seçim değil.
+tr_set_intent_q	Bir niyet belirledin mi?
+tr_enter_intent	Niyetin neydi?
+tr_hope_had_fun	Umarım eğlenceli bir yolculuk geçirmişsindir!
+tr_collect_artifacts_q	Herhangi bir eser topladın mı?
+tr_wow_and_astounding_q	Yolculuğunuz \ "vay ve şaşırtıcı! \" Mıydı?
+tr_meaningfulness_q	Seyahatinizin anlamlılığını değerlendirin (veya kendi kelimenizi girin):
+tr_enriching	zenginleştirici
+tr_meaningful	Anlamlı
+tr_casual	gündelik
+tr_meaningless	Anlamsız
+tr_emotional_q	Duygusal faktörü değerlendirin (veya kendi kelimenizi girin):
+tr_dopamine_hit	Dopamin Vuruşu
+tr_inspirational	İlham
+tr_plain	Sade
+tr_anxious	endişeli
+tr_despair	umutsuzluk
+tr_dread	Dread
+tr_importance_q	Önemini değerlendirin (veya kendi kelimenizi girin):
+tr_lifechanging	Hayat değiştiren
+tr_influential	Etkili
+tr_ordinary	Sıradan
+tr_waste_time	Zaman kaybı
+tr_strangeness_q	Tuhaflığı derecelendirin (veya kendi kelimenizi girin):
+tr_woowooweird	Woo-woo garip
+tr_strange	Garip
+tr_normal	Normal
+tr_nothing	Hiçbir şey değil
+tr_synchronicity_q	Eşitlik faktörünü değerlendirin (veya kendi kelimenizi girin):
+tr_dirk_gently	Dirk Yavaşça
+tr_mind_blowing	Sanrılama
+tr_somewhat	Biraz
+tr_boredom	Can sıkıntısı
+tr_wanna_upload_photos_q	Herhangi bir fotoğraf yüklemek ister misiniz?
+tr_upload_photos_now	Şimdi çektiğiniz fotoğrafları yükleyin. Gönderme tek bir mesajla sınırlı olduğundan hepsini birden gönderin.
+tr_not_valid_upload	Bu geçerli bir yükleme değil.
+tr_error_photo_upload	Maalesef, fotoğrafınız yüklenirken bir hata oluştu.
+tr_photo_uploads_temp_disabled	Üzgünüz bazı şeyleri değiştirirken fotoğraf yüklemeleri geçici olarak devre dışı bırakıldı!
+tr_write_report	Son olarak, raporunuzu yazın. Raporunuzu yazmak tek bir mesajla gönderilmekle sınırlıdır.
+tr_tweet	Raporunuzu tweetleyin!
+tr_thanks	Rapor için teşekkürler!
+welcome_back	Randonautica'ya tekrar hoş geldiniz!
+dont_forgot_send_loc	Mevcut konumunuzu göndermeyi unutmayın.
+iap_invalid_receipt	Geçersiz satın alma makbuzu: {0}. Size rapor verilecektir.
+iap_maps_pack_enabled	Haritalar Paketi eklentisi etkin.
+iap_search_water_points_enabled	Arama ve Skip Water Points Paketi eklentisini etkinleştirin. \ "Ara <yer adı veya adres> \" yazarak konumunuzu ayarlayın.
+iap_everything_enabled	Her Şey Paketi eklentisi etkinleştirildi. \ "Ara <yer adı veya adres> \" yazarak konumunuzu ayarlayın.
+iap_all_disabled	Tüm eklentiler devre dışı.
+iap_no_purchases	Satın alma geçmişiniz yok.
+iap_buy	AL
+iap_enable	ETKİNLEŞTİRME
+iap_maps_pack	Google Haritalar Paketi
+iap_maps_pack_desc	Haritaların ve sokakların uygulama içi önizlemesi
+iap_search_water_points	Yer Arama + Su Atlama Paketi
+iap_search_water_points_desc	Yer adlarına göre arayın ve su noktalarını atlayın
+iap_everything_pack	Her Şey Paketi
+iap_everything_pack_desc	Haritalar + Konum Arama + Su Paketlerini Atla
+iap_enabling...	Özellik etkinleştiriliyor...
+iap_thanks_enabling	Teşekkür ederim. Şimdi etkinleştiriliyor...
+sending_location	Konumunuz gönderiliyor...
+connecting_bot	Bot'a bağlanıyor...
+sending_entropy	Entropi gönderiliyor...
+dl_x_remaining	Şu anda {0} puanınız var. Her konum oluşturduğunuzda 1 puan tüketilir. Bakiyeniz, uygulamayı her açtığınızda en fazla {1} puana kadar ücretsiz olarak yeniden doldurulur.
+dl_x_tokens	Şu anda {0} puanınız var.
+dl_no_tokens	Başka puanınız kalmadı. Lütfen Eklentiler menüsünden doldurun veya ücretsiz doldurmanız için 24 saat bekleyin.
+iap_added_x_points	{0} Puan eklendi. Artık {1} var.
+iap_infinite_points_enabled	Sonsuz Noktalar etkinleştirildi.
+iap_20km_radius_extended	Maksimum arama yarıçapı 20 km'ye çıkarıldı.
+iap_add_20_t	20 Puan Ekle
+iap_add_20_d	Size 20 puan daha verir
+iap_add_60_t	60 Puan Ekle
+iap_add_60_d	Size 60 puan daha verir
+iap_20km_r_t	Yarıçapı 20km'ye Kadar Uzat
+iap_20km_r_d	Arama yarıçapını 20 km'ye çıkarır
+iap_everything_t	Her Şey Paketi
+iap_everything_d	Tüm Paketler + Sonsuz Puanlar
+iap_infinnypoints_t	Sonsuz Noktalar
+iap_infinnypoints_d	Sınırsız sayıda yer bulun

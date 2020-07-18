@@ -8,8 +8,10 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using AmplitudeService;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.Enums;
+using Newtonsoft.Json.Linq;
 
 namespace VFatumbot
 {
@@ -137,11 +139,64 @@ namespace VFatumbot
                 await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
             }
 
+            // Amplitude event tracking initializing
+            Amplitude.Initialize(Consts.AMPLITUDE_HTTP_API_KEY);
+            var platform = "";
+            if (userProfileTemporary.BotSrc == WebSrc.ios)
+            {
+                platform = "iOS";
+            }
+            else if (userProfileTemporary.BotSrc == WebSrc.android)
+            {
+                platform = "Android";
+            }
+            else
+            {
+                try
+                {
+                    platform = "" + Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId);
+                }
+                catch (Exception e)
+                {
+                    platform = "Web";
+                }
+            }
+            var userProperties = new Dictionary<string, object>()
+            {
+                {"Locale", userProfilePersistent.Locale?.ToString()},
+                {"BotSrc", userProfileTemporary.BotSrc.ToString() },
+                {"HasSkipWaterPoints", userProfilePersistent.HasSkipWaterPoints },
+                {"HasLocationSearch", userProfilePersistent.HasLocationSearch },
+                {"HasMapsPack", userProfilePersistent.HasMapsPack },
+                {"IsIncludeWaterPoints", userProfileTemporary.IsIncludeWaterPoints },
+                {"IsDisplayGoogleThumbnails", userProfileTemporary.IsDisplayGoogleThumbnails },
+                {"IsUseClassicMode", userProfileTemporary.IsUseClassicMode },
+                {"Platform", platform},
+            };
+            if (!string.IsNullOrEmpty(userProfileTemporary.Country))
+            {
+                userProperties.Add("Country", userProfileTemporary.Country);
+            }
+            userProfileTemporary.UserProperties = userProperties;
+
             string startLocale;
             if (InterceptConversationStartWithLocale(turnContext, out startLocale))
             {
                 userProfilePersistent.SetLocale(startLocale);
-                await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
+
+                if (Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId) != ChannelPlatform.telegram &&
+                    Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId) != ChannelPlatform.slack &&
+                    Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId) != ChannelPlatform.line
+                    )
+                {
+                    await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
+
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_x_remaining", userProfilePersistent.HasInfinitePoints ? "∞" : ""+userProfilePersistent.OwlTokens, Consts.DAILY_MAX_FREE_OWL_TOKENS_REFILL)), cancellationToken);
+
+                    // Piggy back of the startup event here for Amplitude
+                    userProfileTemporary.StartSessionTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                    Amplitude.InstanceFor(userProfilePersistent.UserId, userProfileTemporary.UserProperties).Track("Start");
+                }
             }
             else
             {
@@ -177,6 +232,7 @@ namespace VFatumbot
                     {
                         lat = result.Item1;
                         lon = result.Item2;
+                        AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Search Location");
                     }
                     else
                     {
@@ -201,6 +257,13 @@ namespace VFatumbot
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
                     await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
 
+                    userProfileTemporary.Country = Helpers.GetCountryFromW3W(w3wResult);
+                    if (!string.IsNullOrEmpty(userProfileTemporary.Country))
+                    {
+                        userProfileTemporary.Country = userProfileTemporary.Country.Replace("(", "").Replace(")", "");
+                    }
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Location Sent");
+
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                     await _userTemporaryState.SaveChangesAsync(turnContext, false, cancellationToken);
 
@@ -217,6 +280,7 @@ namespace VFatumbot
                      turnContext.Activity.Text.EndsWith(Loc.g("help"), StringComparison.InvariantCultureIgnoreCase) &&
                      !turnContext.Activity.Text.Contains(Loc.g("md_options"), StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
             {
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Help");
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, _mainDialog, cancellationToken);
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && (
@@ -247,6 +311,12 @@ namespace VFatumbot
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && turnContext.Activity.Text.StartsWith("/", StringComparison.InvariantCulture))
             {
+                if (userProfilePersistent.IsNoOwlTokens)
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("dl_no_tokens")));
+                    return;
+                }
+
                 await new ActionHandler().ParseSlashCommands(turnContext, userProfileTemporary, cancellationToken, _mainDialog);
 
                 await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
@@ -278,11 +348,12 @@ namespace VFatumbot
                 "   \n\n\n" +
                 "* Randonaut with a positive mindset!  \n" +
                 "* Bring a trash bag to help the environment.  \n" +
-                "* If you normally wouldn't adventure alone, go with a friend or small group.  \n" +
+                "* If you normally wouldn't adventure alone, go with a friend or group.  \n" +
                 "* Randonauting is best done as a daytime activity.  \n" +
                 "* Always Randonaut with a charged phone.  \n" +
                 "* Use situational awareness.  \n" +
                 "* Be respectful of property owners. Never trespass.  \n" +
+                "* Obey all quarantine, curfew and social distancing regulations in your area.  \n" +
                 "* Do not go into dangerous areas.  \n\n\n" +
                 "Happy Randonauting!"
                ;
@@ -293,6 +364,7 @@ namespace VFatumbot
             //    await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
             //}
             //await turnContext.SendActivityAsync(MessageFactory.Text("Start by sending your location by tapping 🌍/📎 or typing 'search' followed by a place name/address."), cancellationToken);
+
             await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("first_send_location")), cancellationToken);
         }
 
@@ -307,14 +379,32 @@ namespace VFatumbot
         protected async Task<bool> InterceptInappPurchaseAsync(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, CancellationToken cancellationToken)
         {
             var activity = turnContext.Activity;
+            var text = "";
+            if (!string.IsNullOrEmpty(activity.Text)) text = activity.Text;
 
-            if (activity.Properties != null)
+            if (activity.Properties != null
+#if !RELEASE_PROD
+                || text.StartsWith("x")
+#endif
+                )
             {
                 var iapDataStr = (string)activity.Properties.GetValue("iapData");
-                if (!string.IsNullOrEmpty(iapDataStr))
+                if (!string.IsNullOrEmpty(iapDataStr)
+#if !RELEASE_PROD
+                    || text.StartsWith("x")
+#endif
+                    )
                 {
                     // Do server verification with Apple on the receipt before enabling paid features
-                    var iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
+                    Purchases iapData = new Purchases();
+                    if (iapDataStr != null)
+                    {
+                        iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
+                    }
+#if !RELEASE_PROD
+                  if (!text.StartsWith("x"))
+                  {
+#endif
                     var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
                     if (verify == 21007)
                     {
@@ -326,15 +416,56 @@ namespace VFatumbot
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
                         return true;
                     }
+#if !RELEASE_PROD
+                    }
+#endif
 
-                    if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
+                    if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("x20")
+#endif
+                        )
+                    {
+                        userProfilePersistent.OwlTokens += 20;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 20, userProfilePersistent.OwlTokens)), cancellationToken);
+                    }
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("x60")
+#endif
+                        )
+                    {
+                        userProfilePersistent.OwlTokens += 60;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 60, userProfilePersistent.OwlTokens)), cancellationToken);
+                    }
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xinfp")
+#endif
+                        )
+                    {
+                        userProfilePersistent.HasInfinitePoints = true;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_infinite_points_enabled")), cancellationToken);
+                    }
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xmaps")
+#endif
+                        )
                     {
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_maps_pack_enabled")), cancellationToken);
                     }
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xwater")
+#endif
+                        )
                     {
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
@@ -342,7 +473,23 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
-                    else if (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs"))
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xrad")
+#endif
+                        )
+                    {
+                        userProfilePersistent.Has20kmRadius = true;
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_20km_radius_extended")), cancellationToken);
+                    }
+                    // everything
+                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs")) // old name for original everything pack
+                          || (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.everything_pack"))
+#if !RELEASE_PROD
+                        || turnContext.Activity.Text.StartsWith("xall")
+#endif
+                        )
                     {
                         userProfilePersistent.HasMapsPack = true;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
@@ -350,6 +497,10 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
+
+                        userProfilePersistent.HasInfinitePoints = true;
+                        userProfilePersistent.Has20kmRadius = true;
+
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_everything_enabled")), cancellationToken);
                     }
                     else
@@ -357,17 +508,24 @@ namespace VFatumbot
                         userProfilePersistent.HasMapsPack = userProfilePersistent.HasLocationSearch = userProfilePersistent.HasSkipWaterPoints = false;
                         userProfilePersistent.IsDisplayGoogleThumbnails = false;
                         userProfilePersistent.IsIncludeWaterPoints = true;
+
+                        userProfilePersistent.HasInfinitePoints = false;
+                        userProfilePersistent.Has20kmRadius = false;
+
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_all_disabled")), cancellationToken);
                     }
 
-                    if (userProfilePersistent.Purchases == null)
+                    if (iapData.productID != null)
                     {
-                        userProfilePersistent.Purchases = new Dictionary<string, Purchases>();
-                        userProfilePersistent.Purchases.Add(iapData.productID, iapData);
-                    }
-                    else
-                    {
-                        userProfilePersistent.Purchases[iapData.productID] = iapData;
+                        if (userProfilePersistent.Purchases == null)
+                        {
+                            userProfilePersistent.Purchases = new Dictionary<string, Purchases>();
+                            userProfilePersistent.Purchases.Add(iapData.productID, iapData);
+                        }
+                        else
+                        {
+                            userProfilePersistent.Purchases[iapData.productID] = iapData;
+                        }
                     }
 
                     return true;
@@ -382,6 +540,12 @@ namespace VFatumbot
                         userProfilePersistent.HasLocationSearch = true;
                         userProfilePersistent.HasSkipWaterPoints = true;
                         userProfilePersistent.IsIncludeWaterPoints = false;
+
+                        userProfilePersistent.HasInfinitePoints = true;
+                        userProfilePersistent.Has20kmRadius = true;
+
+                        userProfilePersistent.OwlTokens += 5;
+
                         await turnContext.SendActivityAsync(MessageFactory.Text("Steve.Steve.Steve!"), cancellationToken);
 
                         return true;
@@ -419,6 +583,19 @@ namespace VFatumbot
                     startLocale = localeFromClient;
                     return true;
                 }
+            }
+
+            try
+            {
+                // try and get users locale from bot app, like Telegram (and maybe others)
+                JObject channelData = JObject.Parse(activity.ChannelData.ToString());
+                JToken locale = channelData["message"]["from"]["language_code"];
+                startLocale = locale.ToString().ToLower();
+                return true;
+            }
+            catch (Exception e)
+            {
+                // do nothing
             }
 
             return false;

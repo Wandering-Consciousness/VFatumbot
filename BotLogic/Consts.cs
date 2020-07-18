@@ -2,10 +2,11 @@
 {
     public class Consts
     {
+        private const string _appVersion = "4.9.2";
 #if RELEASE_PROD
-        public const string APP_VERSION = "4.7.8";
+        public const string APP_VERSION = _appVersion;
 #else
-        public const string APP_VERSION = "4.8.0";
+        public const string APP_VERSION = _appVersion + "-dev";
 #endif
 
         // Azure App ID
@@ -65,6 +66,15 @@
         // For checking whether coordinates are water or not
         public const string ONWATER_IO_API_KEY = "43d-sA4uufiucpqGZczs";
 
+        // For tracking events with Amplitude
+#if RELEASE_PROD
+        public const string AMPLITUDE_HTTP_API_KEY = "0bd7e7711d1c3a30578d365260d2d166";
+#else
+        public const string AMPLITUDE_HTTP_API_KEY = "ff37ac1848cacc399af560601253c125";
+#endif
+
+        public const int DAILY_MAX_FREE_OWL_TOKENS_REFILL = 10;
+
         // Google Maps etc thumbnail sizes to use in reply cards
         public const string THUMBNAIL_SIZE = "320x320";
 
@@ -75,7 +85,7 @@
         public const int DEFAULT_RADIUS = 3000;
 
         // Max radius
-        public const int RADIUS_MAX = 100000;
+        public const int RADIUS_MAX = 10000;
 
         // Min radius
         public const int RADIUS_MIN = 1000;

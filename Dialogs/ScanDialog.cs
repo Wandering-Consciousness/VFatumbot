@@ -48,7 +48,7 @@ namespace VFatumbot
                 ChoiceActionStepAsync,
                 PerformActionStepAsync,
                 AskHowManyScanIDAsStepAsync,
-                GetHowManyScanIDAsStepAsync,
+                //GetHowManyScanIDAsStepAsync,
             })
             {
             });
@@ -84,6 +84,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Attractor";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Attractor");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -95,6 +96,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Void";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Void");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -108,6 +110,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Anomaly";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Anomaly");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -119,6 +122,7 @@ namespace VFatumbot
                 if (!userProfileTemporary.IsScanning)
                 {
                     stepContext.Values["PointType"] = "Pair";
+                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan Pair");
                     return await stepContext.NextAsync(cancellationToken: cancellationToken);
                 }
                 else
@@ -129,6 +133,7 @@ namespace VFatumbot
             }
             else if (val.Equals(Loc.g("bs_back")))
             {
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("< Back");
                 goBackMainMenuThisRound = true;
             }
 
@@ -145,40 +150,41 @@ namespace VFatumbot
 
         private async Task<DialogTurnResult> AskHowManyScanIDAsStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            //_logger.LogInformation($"ScanDialog.AskHowManyScanIDAsStepAsync");
+            //    //_logger.LogInformation($"ScanDialog.AskHowManyScanIDAsStepAsync");
 
-            var options = new PromptOptions()
-            {
-                Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
-                RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
-                Choices = new List<Choice>()
-                                {
-                                    new Choice() { Value = "1" },
-                                    new Choice() { Value = "2" },
-                                    new Choice() { Value = "5" },
-                                    new Choice() { Value = "10" },
-                                }
-            };
+            //    var options = new PromptOptions()
+            //    {
+            //        Prompt = MessageFactory.Text(Loc.g("md_how_many_idas")),
+            //        RetryPrompt = MessageFactory.Text(Loc.g("invalid_num_points")),
+            //        Choices = new List<Choice>()
+            //                        {
+            //                            new Choice() { Value = "1" },
+            //                            new Choice() { Value = "2" },
+            //                            new Choice() { Value = "5" },
+            //                            new Choice() { Value = "10" },
+            //                        }
+            //    };
 
-            return await stepContext.PromptAsync("AskHowManyScanIDAsChoicePrompt", options, cancellationToken);
-        }
+            //    return await stepContext.PromptAsync("AskHowManyScanIDAsChoicePrompt", options, cancellationToken);
+            //}
 
-        private async Task<DialogTurnResult> GetHowManyScanIDAsStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
-        {
-            //_logger.LogInformation($"ScanDialog.GetHowManyScanIDAsStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
+            //private async Task<DialogTurnResult> GetHowManyScanIDAsStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+            //{
+            //    //_logger.LogInformation($"ScanDialog.GetHowManyScanIDAsStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
+
+            //    int idacou;
+            //    if (stepContext.Result == null)
+            //    {
+            //        idacou = int.Parse(stepContext.Context.Activity.Text); // manually inputted a number
+            //    }
+            //    else
+            //    {
+            //        idacou = int.Parse(((FoundChoice)stepContext.Result)?.Value);
+            //    }
+            var idacou = 1; // Skip actual AskHowManyIDAsStep for now becuase we've introduce Owl Tokens which this question would confuse people about how many are consumed
 
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context, () => new UserProfileTemporary());
             var actionHandler = new ActionHandler();
-
-            int idacou;
-            if (stepContext.Result == null)
-            {
-                idacou = int.Parse(stepContext.Context.Activity.Text); // manually inputted a number
-            }
-            else
-            {
-                idacou = int.Parse(((FoundChoice)stepContext.Result)?.Value);
-            }
 
             switch (stepContext.Values["PointType"].ToString())
             {

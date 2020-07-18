@@ -60,7 +60,7 @@ md_void	Vacío
 md_options	Opciones / Ayuda
 md_blindspotsmore	Puntos ciegos y más
 md_mylocation	Mi ubicacion
-md_lets_search_paid	¡Busquemos! ¿Qué te gustaría conseguir?  <br>Los atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario.  <br>Las anomalías son las más fuertes de Atractores y vacíos.   <br>   <br><br><br>Características principales disponibles: vistas previas de mapas, saltos de puntos de agua y búsqueda de ubicaciones personalizadas.  <br>Vaya a Opciones / Ayuda → Complementos
+md_lets_search_paid	¡Busquemos! ¿Qué te gustaría conseguir?  <br>Los atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario.  <br>Las anomalías son las más fuertes de Atractores y vacíos.   <br>   <br><br><br>Características principales disponibles: vistas previas de mapas, saltos de puntos de agua y búsqueda de ubicaciones personalizadas.  <br>Vaya a Complementos
 md_invalid_action	Esa no es una acción válida. ¿Qué te gustaría conseguir?
 md_lets_search	¡Busquemos! ¿Qué te gustaría conseguir?  <br>Los atractores son grupos densos de puntos aleatorios. Los vacíos son lo contrario.  <br>Las anomalías son las más fuertes de atractores y vacíos.
 md_how_many_idas	¿Hasta cuántos puntos te gustaría buscar?
@@ -100,7 +100,7 @@ bs_chains	Cadenas
 bs_dice	Dados cuánticos
 bs_back	<Volver
 welcome_randonautica	¡Bienvenido a Randonautica!
-welcome_beginners	Principiantes: comience por revisar las [Preguntas frecuentes]({0}) y [Los 9 principios de los Randonauts]({1}).
+welcome_beginners	Principiantes: comience por revisar las [Preguntas frecuentes]({0}) y [Los 9 principios de los Randonauts]({1}).  <br><br>Los hablantes de español y portugués son bienvenidos en nuestro [Telegram](https://t.me/LosRandonauts).
 welcome_report_share	Una vez que haya completado un viaje, comparta la discusión con los Randonauts en [Reddit]({0}) y [Twitter]({1}).
 first_send_location	Comience enviando su ubicación tocando 🌍 / 📎 o enviando una URL de Google Maps.
 choose_chain_type	¿Qué tipo de puntos quieres encadenar?
@@ -219,3 +219,20 @@ iap_thanks_enabling	Gracias. Habilitando ahora ...
 sending_location	Enviando su ubicación ...
 connecting_bot	Conectando a bot ...
 sending_entropy	Enviando entropía ...
+dl_x_remaining	Actualmente tienes {0} puntos. Se consume 1 punto cada vez que genera una ubicación. Su saldo se recargará gratis hasta un máximo de {1} puntos cada día que abra la aplicación.
+dl_x_tokens	Actualmente tienes {0} puntos.
+dl_no_tokens	No te quedan más puntos. Recargue desde el menú Complementos (solo aplicación) o espere 24 horas para su recarga gratuita.
+iap_added_x_points	Se agregaron {0} puntos. Ahora tienes {1}.
+iap_infinite_points_enabled	Puntos infinitos habilitados.
+iap_20km_radius_extended	Radio de búsqueda máximo extendido a 20 km.
+iap_add_20_t	Agregar 20 puntos
+iap_add_20_d	Te da 20 puntos más
+iap_add_60_t	Añadir 60 puntos
+iap_add_60_d	Te da 60 puntos más
+iap_20km_r_t	Extender el radio a 20 km
+iap_20km_r_d	Extiende el radio de búsqueda a 20 km.
+iap_everything_t	El paquete de todo
+iap_everything_d	Todos los paquetes + puntos infinitos
+iap_infinnypoints_t	Puntos infinitos
+iap_infinnypoints_d	Encuentra un número ilimitado de ubicaciones
+dont_tresspass	Si este punto está en propiedad privada, ¡NO TRASLACE! Nunca ingrese a áreas peligrosas como trenes / ferrocarriles, zonas restringidas, etc. No ingrese a propiedades vacantes. Siga sus leyes y regulaciones locales y estatales. Sea respetuoso, responsable y de mente positiva en todo momento mientras hace Randonauting.

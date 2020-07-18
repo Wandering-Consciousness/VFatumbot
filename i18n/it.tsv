@@ -60,7 +60,7 @@ md_void	Vuoto
 md_options	Opzioni / Aiuto
 md_blindspotsmore	Spot ciechi e altro
 md_mylocation	La mia posizione
-md_lets_search_paid	Cerchiamo! Cosa vorresti ottenere?  <br>Gli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto.  <br>Le anomalie sono le più potenti tra attrattori e vuoti.   <br>   <br><br><br>Premium funzioni disponibili - Anteprime mappe, salta punti d'acqua e ricerca personalizzata della posizione.  <br>Vai su Opzioni / Guida → Componenti aggiuntivi
+md_lets_search_paid	Cerchiamo! Cosa vorresti ottenere?  <br>Gli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto.  <br>Le anomalie sono le più potenti tra attrattori e vuoti.   <br>   <br><br><br>Premium funzioni disponibili - Anteprime mappe, salta punti d'acqua e ricerca personalizzata della posizione.  <br>Vai su Componenti aggiuntivi
 md_invalid_action	Questa non è un'azione valida. Cosa vorresti ottenere?
 md_lets_search	Cerchiamo! Cosa vorresti ottenere?  <br>Gli attrattori sono gruppi densi di punti casuali. I vuoti sono l'opposto.  <br>Le anomalie sono le più forti tra attrattori e vuoti.
 md_how_many_idas	Fino a quanti punti vorresti cercare?
@@ -219,3 +219,19 @@ iap_thanks_enabling	Grazie. Abilitazione ora ...
 sending_location	Invio della tua posizione ...
 connecting_bot	Connessione al bot ...
 sending_entropy	Invio entropia ...
+dl_x_remaining	Al momento hai {0} punti. 1 punto viene consumato ogni volta che si genera una posizione. Il saldo verrà ricaricato gratuitamente fino a un massimo di {1} punti ogni giorno in cui apri l'app.
+dl_x_tokens	Al momento hai {0} punti.
+dl_no_tokens	Non hai più punti rimasti. Ricarica dal menu Componenti aggiuntivi o attendi 24 ore per la ricarica gratuita.
+iap_added_x_points	Aggiunti {0} punti. Ora hai {1}.
+iap_infinite_points_enabled	Punti infiniti abilitati.
+iap_20km_radius_extended	Raggio massimo di ricerca esteso a 20 km.
+iap_add_20_t	Aggiungi 20 punti
+iap_add_20_d	Ti dà altri 20 punti
+iap_add_60_t	Aggiungi 60 punti
+iap_add_60_d	Ti dà 60 punti in più
+iap_20km_r_t	Estendi il raggio a 20 km
+iap_20km_r_d	Estende il raggio di ricerca a 20 km
+iap_everything_t	Pack tutto
+iap_everything_d	Tutti i pacchetti + punti infiniti
+iap_infinnypoints_t	Punti infiniti
+iap_infinnypoints_d	Trova un numero illimitato di posizioni

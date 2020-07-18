@@ -140,6 +140,8 @@ namespace VFatumbot
         {
             //_logger.LogInformation($"TripReportDialog.StartReportStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
+            var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
+
             var callbackOptions = (CallbackOptions)stepContext.Options;
 
             var val = ((FoundChoice)stepContext.Result)?.Value;
@@ -180,6 +182,8 @@ namespace VFatumbot
                         return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
                 }
 
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Visited Point with Trip Report");
+
                 ((ReportAnswers)stepContext.Values[ReportAnswersKey]).SkipGetIntentStep = true;
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
             } else if (Loc.g("tr_yes_sans_report").Equals(val)) {
@@ -188,9 +192,12 @@ namespace VFatumbot
                 // At least mark the point as a visited one
                 await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers() { WasPointVisited = true });
 
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Visited Point sans Trip Report");
+
                 await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             } else {
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Didn't Visit Point");
                 await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers());
                 await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
@@ -503,7 +510,7 @@ namespace VFatumbot
             var callbackOptions = (CallbackOptions)stepContext.Options;
             var answers = (ReportAnswers)stepContext.Values[ReportAnswersKey];
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
-            answers.Report = ""+stepContext.Result;
+            answers.Report = "" + stepContext.Result;
 
             await StoreReportInDB(stepContext.Context, callbackOptions, answers);
 
@@ -534,7 +541,7 @@ namespace VFatumbot
             {
                 for (int i = 0; i < callbackOptions.Messages.Length; i++)
                 {
-                    var pointMsg = $"No. {i+1} {callbackOptions.Messages[answers.PointNumberVisited]}";
+                    var pointMsg = $"No. {i + 1} {callbackOptions.Messages[answers.PointNumberVisited]}";
 
                     // Prefix Type: with Chain
                     pointMsg = pointMsg.Replace("Type: ", "Type: Chain");
@@ -558,60 +565,65 @@ namespace VFatumbot
                 }
             }
 
-            var redditPost = await PostTripReportToRedditAsync("Randonaut Trip Report"
-                + ((callbackOptions.NearestPlaces != null && callbackOptions.NearestPlaces.Length >= 1) ? (" from " + callbackOptions.NearestPlaces[answers.PointNumberVisited]) : " from somewhere in the multiverse"), // TODO fuck I should stop trying to condense so much into one line in C#. I'm just drunk and lazy ATM.
-                message.Replace("\n\n", "  \n") + "\n\n" +
-                "Report: " + answers.Report + "\n   \n" +
-                (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
-                (!string.IsNullOrEmpty(callbackOptions.What3Words[answers.PointNumberVisited]) ? "First point what3words address: [" + callbackOptions.What3Words[answers.PointNumberVisited] + "](https://what3words.com/" + callbackOptions.What3Words[answers.PointNumberVisited] + ")  \n" : "  \n") +
-                "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
-                "[Google Earth](https://earth.google.com/web/search/" + incoords[0] + "," + incoords[1] + ")\n\n" +
-                (!string.IsNullOrEmpty(answers.Intent) ? "Intent set: " + answers.Intent + "  \n" : "") +
-                (!string.IsNullOrEmpty(intentSuggestions) ? "Intents suggested: " + intentSuggestions + "  \n" : "") +
-                "Artifact(s) collected? " + (answers.ArtifactCollected ? "Yes" : "No") + "  \n" +
-                "Was a 'wow and astounding' trip? " + (answers.WasFuckingAmazing ? "Yes" : "No") + "  \n" +
-                "## Trip Ratings  \n" +
-                "Meaningfulness: " + answers.Rating_Meaningfulness + "  \n" +
-                "Emotional: " + answers.Rating_Emotional + "  \n" +
-                "Importance: " + answers.Rating_Importance + "  \n" +
-                "Strangeness: " + answers.Rating_Strangeness + "  \n" +
-                "Synchronicity: " + answers.Rating_Synchronicty + "  \n" +
-                 "\n\n" +
-                userProfileTemporary.UserId + " " + callbackOptions.ShortCodes[answers.PointNumberVisited] + " " + callbackOptions.ShaGids?[answers.PointNumberVisited],
-                answers.PhotoURLs,
-                "randonaut_reports"
-                );
+            // 2020-07-10 therealfautmbot account was permanently banned on reddit for posting personal info - appealing.
+            //var redditPost = await PostTripReportToRedditAsync("Randonaut Trip Report"
+            //    + ((callbackOptions.NearestPlaces != null && callbackOptions.NearestPlaces.Length >= 1) ? (" from " + callbackOptions.NearestPlaces[answers.PointNumberVisited]) : " from somewhere in the multiverse"), // TODO fuck I should stop trying to condense so much into one line in C#. I'm just drunk and lazy ATM.
+            //    message.Replace("\n\n", "  \n") + "\n\n" +
+            //    "Report: " + answers.Report + "\n   \n" +
+            //    (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
+            //    (!string.IsNullOrEmpty(callbackOptions.What3Words[answers.PointNumberVisited]) ? "First point what3words address: [" + callbackOptions.What3Words[answers.PointNumberVisited] + "](https://what3words.com/" + callbackOptions.What3Words[answers.PointNumberVisited] + ")  \n" : "  \n") +
+            //    "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
+            //    "[Google Earth](https://earth.google.com/web/search/" + incoords[0] + "," + incoords[1] + ")\n\n" +
+            //    (!string.IsNullOrEmpty(answers.Intent) ? "Intent set: " + answers.Intent + "  \n" : "") +
+            //    (!string.IsNullOrEmpty(intentSuggestions) ? "Intents suggested: " + intentSuggestions + "  \n" : "") +
+            //    "Artifact(s) collected? " + (answers.ArtifactCollected ? "Yes" : "No") + "  \n" +
+            //    "Was a 'wow and astounding' trip? " + (answers.WasFuckingAmazing ? "Yes" : "No") + "  \n" +
+            //    "## Trip Ratings  \n" +
+            //    "Meaningfulness: " + answers.Rating_Meaningfulness + "  \n" +
+            //    "Emotional: " + answers.Rating_Emotional + "  \n" +
+            //    "Importance: " + answers.Rating_Importance + "  \n" +
+            //    "Strangeness: " + answers.Rating_Strangeness + "  \n" +
+            //    "Synchronicity: " + answers.Rating_Synchronicty + "  \n" +
+            //     "\n\n" +
+            //    userProfileTemporary.UserId + " " + callbackOptions.ShortCodes[answers.PointNumberVisited] + " " + callbackOptions.ShaGids?[answers.PointNumberVisited],
+            //    answers.PhotoURLs,
+            //    "randonaut_reports"
+            //    );
 
-            if (answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos)) // also post a short version to /r/randonauts if we deem it interesting)
-            {
-                var oldLines = message.Split("\n");
-                var newLines = oldLines.Where(line => !line.Contains(Loc.g("ida_found")));
-                newLines = newLines.Where(line => !line.Contains("(")); // A-8FF89AC5 (43.105433 -76.121310)
-                newLines = newLines.Where(line => !line.Contains("Radius")); // Radius
-                var shortMessage = string.Join("\n", newLines);
-                shortMessage = shortMessage.Replace("\n\n\n", "\n\n");
+            // 2020-07-10 therealfautmbot account was permanently banned on reddit for posting personal info - appealing.
+            //if (answers.Report.Length >= 150 || !string.IsNullOrEmpty(photos)) // also post a short version to /r/randonauts if we deem it interesting)
+            //{
+            //    var oldLines = message.Split("\n");
+            //    var newLines = oldLines.Where(line => !line.Contains(Loc.g("ida_found")));
+            //    newLines = newLines.Where(line => !line.Contains("(")); // A-8FF89AC5 (43.105433 -76.121310)
+            //    newLines = newLines.Where(line => !line.Contains("Radius")); // Radius
+            //    var shortMessage = string.Join("\n", newLines);
+            //    shortMessage = shortMessage.Replace("\n\n\n", "\n\n");
 
-                await PostTripReportToRedditAsync(
-                    (!string.IsNullOrEmpty(answers.Intent) ? answers.Intent + " @" : "Trip report @") 
-                        + ((callbackOptions.NearestPlaces != null && callbackOptions.NearestPlaces.Length >= 1) ? (" " + callbackOptions.NearestPlaces[answers.PointNumberVisited]).Substring(0, callbackOptions.NearestPlaces[answers.PointNumberVisited].LastIndexOf("(")) : " somewhere"),
-                    answers.Report + "\n   \n" +
-                    (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
-                    shortMessage.Replace("\n\n", "  \n") + "\n\n" +
-                    "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
-                    $"[Full Report](https://redd.it/{redditPost.Id})\n\n",
-                    answers.PhotoURLs,
-                    "randonauts"
-                );
-            }
+            //    await PostTripReportToRedditAsync(
+            //        (!string.IsNullOrEmpty(answers.Intent) ? answers.Intent + " @" : "Trip report @")
+            //            + ((callbackOptions.NearestPlaces != null && callbackOptions.NearestPlaces.Length >= 1) ? (" " + callbackOptions.NearestPlaces[answers.PointNumberVisited]).Substring(0, callbackOptions.NearestPlaces[answers.PointNumberVisited].LastIndexOf("(")) : " somewhere"),
+            //        answers.Report + "\n   \n" +
+            //        (!string.IsNullOrEmpty(photos) ? photos + "\n\n" : "\n\n") +
+            //        shortMessage.Replace("\n\n", "  \n") + "\n\n" +
+            //        "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
+            //        $"[Full Report](https://redd.it/{redditPost.Id})\n\n",
+            //        answers.PhotoURLs,
+            //        "randonauts"
+            //    );
+            //}
 
             var w3wHashes = $" #{callbackOptions.What3Words[answers.PointNumberVisited].Replace(".", " #")}";
 
             var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220 - w3wHashes.Length, answers.Report.Length)));
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
+            //await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_thanks")), cancellationToken);
+            AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Trip Report Posted");
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
-            return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
+            callbackOptions = new CallbackOptions() { JustPostedTripReport = true };
+            return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken, options: callbackOptions);
         }
 
         // Post a trip report to the /r/randonauts subreddit

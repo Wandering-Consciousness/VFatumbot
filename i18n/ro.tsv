@@ -1,0 +1,221 @@
+﻿all_kinds_steve	Sunt tot felul de Steve!
+let_steve_help	Lasă Steve să te ajute!
+this_is_steve	Acesta este Steve
+radius_gte	Raza trebuie să fie mai mare sau egală cu {0} m
+radius_lte	Raza trebuie să fie mai mică sau egală cu {0} m
+changed_radius	Raza schimbată de la {0} m la {1} m
+invalid_radius	Raza nevalidă
+current_radius	Raza dvs. curentă este de {0} m
+cant_find_place	Locul nu a fost găsit.
+current_location	Locația dvs. curentă este setată pe {0}, {1}. <br> Acesta va fi centrul căutărilor.
+water_points_will_be	Punctele de apă vor fi {0}
+skipped	omit
+ignored	ignorate
+classic_mode	Modul clasic este acum {0}
+enabled	activat
+disabled	dezactivat
+help	Ajutor
+invalid_num_points	Valoare incorectă. Parametrul trebuie să fie o cifră de la 1 la 10.
+scan_time_take	Generarea poate dura de la 5 la 15 minute.
+finding_location	Găsirea unei locații... concentrează-te asupra intenției tale.
+nothing_but_water_points	Nu am putut găsi altceva decât puncte de apă. Încercați mai târziu.
+num_water_points_skipped_so_far	Numărul de puncte de apă sărit până acum: {0}
+num_water_points_skipped	Număr de puncte de apă sărit: {0}
+point_generated	Punct generat
+no_points_detected_quantum	În prezent, în zonă nu s-au detectat puncte care să furnizeze un punct cuantic pentru dvs.
+no_points_detected	În prezent nu există puncte detectate în zonă.
+address	abordare
+get_intent_suggestions	Aleatorizarea cuantică a dicționarului englez pentru tine.
+define	defini
+spotify_search	Căutați în Spotify
+intent_suggestions	Sugestii intenționate
+num_water_attractors_skipped	Numărul punctelor de apă atrăgătoare a sărit: {0}
+num_water_voids_skipped	Numărul de puncte de apă anulate sărit: {0}
+pair_points_detected	Pereche de puncte generate
+generating_chain	Generarea lanțului tău. În funcție de raza și numărul / tipul de puncte, poate dura ceva.
+chain_nothing_found	Nu s-au găsit anomalii până acum la punctul # {0}. Încercați din nou...
+chain_nothing_but_water_points	Nu am putut găsi nimic altceva decât puncte de apă la punctul {0}. Încercați mai târziu.
+chain_num_water_points_skipped_so_far	Numărul de puncte de apă sărit până acum la punctul # {0}: {1}
+chain_num_water_points_skipped	Număr de puncte de apă sărit la punctul # {0}: {1}
+chain_generated	Lanț generat
+mystery_point_generated	Punctul de mister generat
+exception_caught	Excepție prinsă
+error_sorry	Ne pare rău, se pare că ceva a mers prost.
+open	Deschis
+chain_map_open	Lanț de călătorie pe Google Maps
+view_on_google_maps	Vizualizați pe Google Maps
+street_view	vedere de strada
+google_earth	Google Earth
+location	Locație
+open_map	Deschideți harta
+map	Hărți
+earth	Pământ
+view_with_google	Vizualizați cu Google
+google_maps	Hărți Google
+google_street_view	Google Street View
+download_app	Descărcați aplicația
+md_anomaly	Anomalie
+md_attractor	atractor
+md_void	neavenit
+md_options	Opțiuni / Ajutor
+md_blindspotsmore	Spots orbi și altele
+md_mylocation	Locatia mea
+md_lets_search_paid	Hai să căutăm! Ce ai vrea să obții? <br> Atractorii sunt grupuri dense de puncte aleatorii. Golurile sunt opuse. <br> Anomaliile sunt cele mai puternice dintre atracții și goluri. <br> <br> <br> Funcții premium disponibile - previzualizări ale hărții, săriți punctele de apă și căutarea locației personalizate. <br> Accesați Componente suplimentare
+md_invalid_action	Aceasta nu este o acțiune valabilă. Ce ai vrea să obții?
+md_lets_search	Hai să căutăm! Ce ai vrea să obții? <br> Atractorii sunt grupuri dense de puncte aleatorii. Golurile sunt opuse. <br> Anomaliile sunt cele mai puternice dintre atrăgători și goluri.
+md_how_many_idas	Până la câte puncte doriți să căutați?
+md_choose_qrng	Alegeți sursa de entropie: (alegeți Australian National University - ANU dacă nu sunteți sigur)
+md_invalid_qrng	Aceasta nu este o sursă de entropie valabilă.
+md_camera	aparat foto
+md_anu	ANU
+md_temporal	Temporal
+md_temporal_server	Temporal (server)
+md_temporal_phone	Temporal (telefon)
+md_anu_leftovers	ANU Resturi
+md_gcp_retro	GCP Retro
+md_collecting_camera_entropy	Colectarea aleatorie de pe camera telefonului telefonului (nu sunt făcute fotografii)...
+md_collecting_temporalphone_entropy	Colectarea aleatoriei de la procesorul telefonului dvs....
+yes	da
+no	Nu
+addons	Add-on-uri
+update_settings_q	Actualizați-vă setările?
+select_radius	Selectați raza în metri sau introduceți numerele direct
+include_water_points_q	Include puncte de apă?
+show_google_street_earth_q	Afișați previzualizările Google Street View și Earth?
+invalid_answer	Acesta nu este un răspuns valid.
+anonymized_id_is	ID-ul dvs. anonimizat este {0}.
+show_google_street_earth	Previzualizările Street View și Earth vor fi {0}.
+hidden	ascuns
+displayed	afișat
+get_locsearch_skipwater_pack	Obțineți pachetul Căutare locație și săriți puncte de apă din butonul Componente suplimentare.
+get_maps_pack	Obțineți pachetul de hărți pentru hărți în aplicație și previzualizări ale străzii din butonul Completare
+bs_quantum	Cuantic
+bs_quantum_time	Timpul cuantic
+bs_intent_suggestions	Idei de intenție
+bs_mystery_point	Punctul de mister
+bs_pair	Pereche de puncte
+bs_pseudo	pseudo
+bs_scan	scanda
+bs_chains	Lanţuri
+bs_dice	Zaruri cuantice
+bs_back	<Înapoi
+welcome_randonautica	Bine ați venit la Randonautica!
+welcome_beginners	Nou pentru Randonauting? [Urmărește acest videoclip](https://www.youtube.com/watch?v=h148J7ym7Ww) pentru a afla despre ce este vorba. <br> <br> <br> Puteți consulta și [Cele 9 puncte ale Randonauților]({1})
+welcome_report_share	După ce ai finalizat o călătorie, împărtășește-te la discuția cu Randonauții de pe [Reddit]({0}) și [Twitter]({1}).
+first_send_location	Începeți să trimiteți locația dvs. atingând 🌍 / 📎 sau trimitând o adresă URL Google Maps.
+choose_chain_type	Ce fel de puncte doriți să faceți lanț?
+ch_invalid_point_type	Acesta nu este un tip de punct valid.
+ch_anomalies	anomaliile
+ch_voids	golurile
+ch_attractors	atractori
+ch_current_or_sequential	Generați toate punctele din locația dvs. curentă sau în ordine secvențială?
+ch_current	Actual
+ch_sequential	secvențială
+ch_num_points	Introduceți numărul de puncte în lanț. Distanța totală aproximativă va fi acel număr înmulțit cu raza dvs. curentă.
+ch_invalid_number	Acesta nu este un număr valid.
+ch_reprompt_num_points	Numar invalid. Introduceți numărul de puncte:
+ch_mte	Numărul trebuie să fie mai mare sau egal cu {0}. Introdu numarul:
+ch_lte	Numărul trebuie să fie mai mic sau egal cu {0}. Introdu numarul:
+no_loc_or_reset	Nu ați setat o locație sau a fost resetată. Trimiteți-o atingând 🌍 / 📎 sau trimitând o adresă URL Google Maps. De asemenea, puteți tasta \ "ajutor \" oricând.
+ida_found	Anomalie condusă de intenție găsită
+ida_type	Tip: {0}
+ida_radius	Raza: {0}
+ida_power	Putere: {0}
+ida_bearing	Rulment: {0}
+ida_zscore	punctaj z: {0}
+randpoint_generated	Punct aleatoriu generat
+suggested_time	Ora recomandată: {0}
+blind_spots_more_menu	Ce ai vrea să obții? <br> Punctele cuantice sunt cele unice aleatorii (potențiali spoturi orb). Punctele de mister sunt un tip de punct aleatoriu.
+invalid_action	Aceasta nu este o acțiune valabilă.
+agree_to_terms_q	Sunteți de acord cu termenii de utilizare și politica de confidențialitate și să fiți un Randonaut comportat bine?
+toc_dontagree	Nu
+toc_doagree	sunt de acord
+toc_shame	Ce păcat. Atât de multe aventuri aleatorii te așteaptă.
+toc_invalid_answer	Acesta nu este un răspuns valid. {0}
+qd_min1	Introduceți un număr minim inclus mai mare sau egal cu 1. Pentru o monedă de monede, introduceți 1 și atribuiți capete
+qd_min2	Minimal nevalid. Introduceți minimul dorit:
+qd_min3	Minimul trebuie mai mare sau egal cu 1. Încercați din nou:
+qd_min4	Minimal nevalid, trebuie să fie mai mic sau egal cu 254. Încercați din nou:
+qd_max1	Introduceți un număr maxim inclus mai mare decât minimul, până la 255. Pentru o aruncare de monede, introduceți 2 și atribuiți cozi:
+qd_max2	Maxim nevalid. Introduceți maximul dorit:
+qd_max3	Maxim trebuie mai mare de 1. Încercați din nou:
+qd_max4	Maxim nevalid, trebuie să fie mai mic sau egal cu 255. Încercați din nou:
+qd_minmax	Minimul ({0}) trebuie să fie mai mic decât maximul ({1}). Setarea acesteia pe {2}.
+qd_rolling	Rulare...
+qd_results	Rezultat: {0} [{1}, {2}]. Rulează din nou?
+qd_onlyyess	Da sau Nu, nimic altceva.
+err_no_entropy_fetch	Nu s-a putut obține date noi aleatorii.
+err_qrng_service_failed	Serviciul nu a returnat date aleatorii.
+err_qrng_error	Ne pare rău, a existat o eroare de furnizare a entropiei cuantice necesare pentru a randomiza. Încercați puțin mai târziu.
+scan_choose_kind	Alegeți tipul de scanare:
+scan_invalid_action	Aceasta nu este o scanare validă.
+scan_attractor	atractor
+scan_void	neavenit
+scan_anomaly	Anomalie
+scan_pair	Pereche
+scan_sesson_inplace	Ședința dvs. de scanare este deja în curs.
+tr_did_you_visit	Ai vizitat sau te-ai apropiat de punct și ai vrea să faci un raport de călătorie?
+tr_yes_sans_report	Da, fără raportare
+tr_yes_report	Da cu raport!
+tr_invalid_choice	Aceasta nu este o alegere validă.
+tr_set_intent_q	Ai stabilit o intenție?
+tr_enter_intent	Care a fost intenția ta?
+tr_hope_had_fun	Sper că ai avut o excursie distractivă!
+tr_collect_artifacts_q	Ați colectat artefacte?
+tr_wow_and_astounding_q	A fost călătoria ta „uimitoare și uluitoare!”?
+tr_meaningfulness_q	Evaluează semnificația călătoriei tale (sau introdu-ți propriul cuvânt):
+tr_enriching	îmbogățire
+tr_meaningful	Plin de înțeles
+tr_casual	ocazional
+tr_meaningless	Fără înţeles
+tr_emotional_q	Evaluează factorul emoțional (sau introdu-ți propriul cuvânt):
+tr_dopamine_hit	Dopamina Hit
+tr_inspirational	Inspirational
+tr_plain	Simplu
+tr_anxious	Nerăbdător
+tr_despair	Disperare
+tr_dread	A II Fii frica
+tr_importance_q	Evaluează importanța (sau introdu-ți propriul cuvânt):
+tr_lifechanging	Schimbare de viață
+tr_influential	Influent
+tr_ordinary	Comun
+tr_waste_time	Pierdere de timp
+tr_strangeness_q	Evaluează ciudățenia (sau introdu-ți propriul cuvânt):
+tr_woowooweird	Woo-woo ciudat
+tr_strange	Ciudat
+tr_normal	Normal
+tr_nothing	Nimic
+tr_synchronicity_q	Evaluează factorul de sincronizare (sau introduceți propriul cuvânt):
+tr_dirk_gently	Dirk blând
+tr_mind_blowing	Care te lasă paf
+tr_somewhat	Oarecum
+tr_boredom	Plictiseală
+tr_wanna_upload_photos_q	Doriți să încărcați fotografii?
+tr_upload_photos_now	Încarcă toate fotografiile făcute acum. Trimite-le pe toate simultan, deoarece trimiterea este limitată la un singur mesaj.
+tr_not_valid_upload	Aceasta nu este o încărcare validă.
+tr_error_photo_upload	Ne pare rău, a fost o eroare la încărcarea fotografiei.
+tr_photo_uploads_temp_disabled	Încărcările fotografice sunt dezactivate temporar, în timp ce schimbăm unele lucruri rău
+tr_write_report	În cele din urmă, scrieți-vă raportul. Introducerea raportului dvs. se limitează la a fi trimis într-un singur mesaj.
+tr_tweet	Trimiteți-vă raportul!
+tr_thanks	Mulțumim pentru raport!
+welcome_back	Bun venit înapoi la Randonautica!
+dont_forgot_send_loc	Nu uitați să trimiteți locația dvs. actuală.
+iap_invalid_receipt	Primire de cumpărare nevalidă: {0}. Vei fi raportat.
+iap_maps_pack_enabled	Complexul Maps Pack este activat.
+iap_search_water_points_enabled	Adăugați pachetul de puncte de căutare și săriți pe apa apei activat. Setați-vă locația tastând \ "căutare <nume loc sau adresă> \".
+iap_everything_enabled	Componenta additivă All Pack este activată. Setați-vă locația tastând \ "căutare <nume loc sau adresă> \".
+iap_all_disabled	Toate complementele sunt dezactivate.
+iap_no_purchases	Nu aveți istoricul achizițiilor.
+iap_buy	CUMPĂRĂ
+iap_enable	PERMITE
+iap_maps_pack	Pachet Maps
+iap_maps_pack_desc	Previzualizare în aplicație a hărților și străzilor
+iap_search_water_points	Locați căutarea + săpați pachetul de apă
+iap_search_water_points_desc	Căutați după nume de loc și săriți punctele de apă
+iap_everything_pack	Pachetul Totul
+iap_everything_pack_desc	Hărți + Căutare locație + Salt pachete de apă
+iap_enabling...	Funcție de activare...
+iap_thanks_enabling	Mulțumesc. Se activează acum...
+sending_location	Trimiterea locației dvs....
+connecting_bot	Conectarea la bot...
+sending_entropy	Se trimite entropia...

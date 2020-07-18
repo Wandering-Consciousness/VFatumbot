@@ -1,0 +1,221 @@
+﻿all_kinds_steve	Mindenféle Steve vagyok!
+let_steve_help	Hadd segítsen Steve!
+this_is_steve	Ez Steve
+radius_gte	A sugárnak legalább {0} m-nek kell lennie
+radius_lte	A sugárnak legfeljebb {0} m lehet
+changed_radius	Megváltozott a sugara {0} m-ről {1} ​​m-re
+invalid_radius	Érvénytelen sugarat
+current_radius	Az Ön jelenlegi sugara {0} m
+cant_find_place	A hely nem található.
+current_location	A jelenlegi helyét {0}, {1} értékre állítja. <br> Ez lesz a keresések központja.
+water_points_will_be	A vízpontok {0} lesznek
+skipped	átugrott
+ignored	figyelmen kívül hagyja
+classic_mode	A klasszikus mód most {0}
+enabled	engedélyezve
+disabled	Tiltva
+help	Segítség
+invalid_num_points	Helytelen érték. A paraméternek 1 és 10 közötti számjegynek kell lennie.
+scan_time_take	A generálás 5-15 percet vehet igénybe.
+finding_location	Hely keresése... összpontosítson szándékára.
+nothing_but_water_points	Csak vízpontot találtam. Próbáld újra később.
+num_water_points_skipped_so_far	Az eddig kihagyott vízpontok száma: {0}
+num_water_points_skipped	Kihagyott vízpontok száma: {0}
+point_generated	Pont generált
+no_points_detected_quantum	Jelenleg nem észlelt egyetlen pont sem a környéken, ehelyett kvantumpontot ad neked.
+no_points_detected	Jelenleg nem észleltek pontot a környéken.
+address	cím
+get_intent_suggestions	Az angol szótár mennyiségi randomizálása az Ön számára.
+define	meghatározzák
+spotify_search	Keresés a Spotify-ban
+intent_suggestions	Szándékos javaslatok
+num_water_attractors_skipped	Kihagyott vonzó vízpontok száma: {0}
+num_water_voids_skipped	Kihagyott üres vízpontok száma: {0}
+pair_points_detected	Pár generált pont
+generating_chain	Lánc generálása A sugaratól és a pontok számától / típusától függően eltarthat egy ideig.
+chain_nothing_found	A (z) {0} ponton eddig nem találtak rendellenességeket. Próbálkozzon újra...
+chain_nothing_but_water_points	A (z) {0} ponton csak vízpontot találtam. Próbáld újra később.
+chain_num_water_points_skipped_so_far	A (z) {0} ponton eddig kihagyott vízpontok száma: {1}
+chain_num_water_points_skipped	A (z) {0} ponton kihagyott vízpontok száma: {1}
+chain_generated	Lánc generált
+mystery_point_generated	Rejtély pont generált
+exception_caught	Kivétel fogva
+error_sorry	Sajnálom, úgy tűnik, hogy valami rosszra ment.
+open	Nyisd ki
+chain_map_open	Utazási lánc a Google Maps-en
+view_on_google_maps	Megtekintés a Google Maps-en
+street_view	utcakép
+google_earth	Google Föld
+location	Elhelyezkedés
+open_map	Nyissa meg a Térképet
+map	Maps
+earth	föld
+view_with_google	Megtekintés a Google segítségével
+google_maps	Google térkép
+google_street_view	Google utca nézet
+download_app	Töltse le az alkalmazást
+md_anomaly	Rendellenesség
+md_attractor	attractor
+md_void	Üres
+md_options	Options / Segítség
+md_blindspotsmore	Vak foltok és tovább
+md_mylocation	Saját hely
+md_lets_search_paid	Keressük meg! Mit szeretne kapni? <br> Az attraktorok véletlenszerű pontok sűrű csoportjai. Az ürességek ellentétesek. <br> A rendellenességek a legalacsonyabbak a vonzókat és az ürességeket illetően. <br> <br> <br> Rendelkezésre álló prémium szolgáltatások - Térkép-előnézetek, vízpontok kihagyása és az egyedi helykeresés. <br> Válassza az Kiegészítők menüpontot
+md_invalid_action	Ez nem érvényes akció. Mit szeretne kapni?
+md_lets_search	Keressük meg! Mit szeretne kapni? <br> Az attraktorok véletlenszerű pontok sűrű csoportjai. Az ürességek ellentétesek. <br> Az anomáliák a legaktívabbak az Csábítók és az Ürességek körében.
+md_how_many_idas	Hány pontot szeretne keresni?
+md_choose_qrng	Válassza ki az entrópia forrását: (ha nem biztos benne, válassza az Australian National University - ANU-t)
+md_invalid_qrng	Ez nem érvényes entrópiaforrás.
+md_camera	Kamera
+md_anu	ANU
+md_temporal	Időbeli
+md_temporal_server	Időbeli (szerver)
+md_temporal_phone	Időbeli (telefon)
+md_anu_leftovers	ANU maradék
+md_gcp_retro	GCP Retro
+md_collecting_camera_entropy	Véletlenszerűség gyűjtése a telefon kamerájából (nem készül fotó)
+md_collecting_temporalphone_entropy	Véletlenszerűség gyűjtése a telefon processzoráról...
+yes	Igen
+no	Nem
+addons	Kiegészítői
+update_settings_q	Frissíti a beállításait?
+select_radius	Válassza ki a sugarat méterben, vagy írja be közvetlenül a számokat
+include_water_points_q	Tartalmazza a vízpontokat?
+show_google_street_earth_q	Megjeleníti a Google Street View és a Earth előnézeteit?
+invalid_answer	Ez nem érvényes válasz.
+anonymized_id_is	Anonimizált azonosítója: {0}.
+show_google_street_earth	Az Street View és a Earth előnézete {0} lesz.
+hidden	rejtett
+displayed	Megjelenik
+get_locsearch_skipwater_pack	A Tartózkodási hely keresése és a Vízpontok kihagyása csomag beolvasása a Kiegészítők gombból.
+get_maps_pack	Töltse le az Maps alkalmazáscsomagját az alkalmazáson belüli térképhez és az utcai előnézethez a Kiegészítők gombból.
+bs_quantum	Kvantum
+bs_quantum_time	Quantum Time
+bs_intent_suggestions	Szándékos ötletek
+bs_mystery_point	Rejtély pont
+bs_pair	Pontok párja
+bs_pseudo	Ál
+bs_scan	Letapogatás
+bs_chains	láncok
+bs_dice	Quantum Dice
+bs_back	<Vissza
+welcome_randonautica	Üdvözöljük a Randonautica-ban!
+welcome_beginners	Új a Randonauting-ban? [Nézze meg ezt a videót](https://www.youtube.com/watch?v=h148J7ym7Ww), hogy megtudja, miről szól. <br> <br> <br> Nézze meg a [A Randonautok 9 darabját is]({1})
+welcome_report_share	Miután befejezte az utazását, vegyen részt a Randonautokkal folytatott beszélgetésben a [Reddit]({0}) és a [Twitter]({1}) témákban.
+first_send_location	Először küldje el tartózkodási helyét a 🌍 / 📎 megérintésével vagy a Google Maps URL küldésével.
+choose_chain_type	Milyen pontokat akar láncolni?
+ch_invalid_point_type	Ez nem érvényes pont típus.
+ch_anomalies	Rendellenességek
+ch_voids	üregek
+ch_attractors	attraktorokat
+ch_current_or_sequential	Generáljon minden pontot az aktuális tartózkodási helyétől vagy sorrendben?
+ch_current	Jelenlegi
+ch_sequential	Egymás utáni
+ch_num_points	Írja be a láncolni kívánt pontok számát. A becsült maximális teljes távolság az a szám, amelyet megszorozzunk az aktuális sugárral.
+ch_invalid_number	Ez nem érvényes szám.
+ch_reprompt_num_points	Érvénytelen szám. Írja be a pontok számát:
+ch_mte	A számnak legalább {0} -nak kell lennie. Írja be a számot:
+ch_lte	A számnak legalább {0} -nak kell lennie. Írja be a számot:
+no_loc_or_reset	Nem állított be helyet, vagy vissza lett állítva. Küldje el a 🌍 / 📎 megérintésével vagy a Google Maps URL küldésével. A "súgó" betűt bármikor beírhatja.
+ida_found	A szándék által vezérelt rendellenességet találták
+ida_type	Típus: {0}
+ida_radius	Sugár: {0}
+ida_power	Teljesítmény: {0}
+ida_bearing	Csapágy: {0}
+ida_zscore	z-pontszám: {0}
+randpoint_generated	Véletlenszerű pont generált
+suggested_time	Javasolt idő: {0}
+blind_spots_more_menu	Mit szeretne kapni? <br> A kvantumpontok egyszeres véletlenszerűek (potenciális vak pontok). A rejtélyes pontok véletlenszerű típusú pontok.
+invalid_action	Ez nem érvényes intézkedés.
+agree_to_terms_q	Egyetért-e a használati feltételekkel és a magánélet védelmével kapcsolatos politikával, és hogy viselkedéses viselkedésű vérszegény?
+toc_dontagree	Nem
+toc_doagree	Egyetértek
+toc_shame	Ez szégyen. Oly sok véletlenszerű kaland vár rád.
+toc_invalid_answer	Ez nem érvényes válasz. {0}
+qd_min1	Írja be az 1-nél nagyobb vagy annál magasabb minimális számot. Az érmedobáshoz írja be az 1-et, és rendeljen hozzá fejeket
+qd_min2	Érvénytelen minimum. Adja meg a kívánt minimumot:
+qd_min3	A minimumnak legalább 1-nél nagyobbnak kell lennie. Próbálkozzon újra:
+qd_min4	Érvénytelen minimum, legfeljebb 254 lehet. Próbálkozzon újra:
+qd_max1	Írja be a minimálisnál nagyobb, legfeljebb 255 befogadó maximális számot. Egy érmedobáshoz írjon be 2-et, és rendeljen hozzá farok:
+qd_max2	Érvénytelen maximum. Adja meg a kívánt maximumot:
+qd_max3	A maximális értéknek 1-nél nagyobbnak kell lennie. Próbálkozzon újra:
+qd_max4	Érvénytelen maximum, legfeljebb 255 lehet. Próbálkozzon újra:
+qd_minmax	A minimumnak ({0}) kevesebbnek kell lennie, mint a maximálisnak ({0}). Állítsa {2} -re.
+qd_rolling	Gördülő...
+qd_results	Eredmény: {0} [{1}, {2}]. Tekercselj újra?
+qd_onlyyess	Igen vagy nem, semmi más.
+err_no_entropy_fetch	Nem sikerült új véletlenszerű adatok beolvasása.
+err_qrng_service_failed	A szolgáltatás nem adott vissza véletlenszerű adatokat.
+err_qrng_error	Sajnos hiba történt a véletlenszerűsítéshez szükséges kvantum-entrópia forrásával. Próbáld meg egy kicsit később.
+scan_choose_kind	Válassza ki a szkennelés típusát:
+scan_invalid_action	Ez nem érvényes vizsgálat.
+scan_attractor	attractor
+scan_void	Üres
+scan_anomaly	Rendellenesség
+scan_pair	Pár
+scan_sesson_inplace	A szkennelési munkamenet már folyamatban van.
+tr_did_you_visit	Látogatott vagy közel került a ponthoz, és szeretne jelentést készíteni az utazásról?
+tr_yes_sans_report	Igen, sans jelentést tesz
+tr_yes_report	Igen jelentéssel!
+tr_invalid_choice	Ez nem érvényes választás.
+tr_set_intent_q	Meghatározta a szándékát?
+tr_enter_intent	Mi volt a szándékod?
+tr_hope_had_fun	Remélem, volt egy jó utazása!
+tr_collect_artifacts_q	Összegyűjtött tárgyakat?
+tr_wow_and_astounding_q	Volt az utazása: "wow és elképesztő!"
+tr_meaningfulness_q	Értékeld az utazás értelmességét (vagy írja be a saját szavát):
+tr_enriching	Enriching
+tr_meaningful	Jelentőségteljes
+tr_casual	Alkalmi
+tr_meaningless	Értelmetlen
+tr_emotional_q	Értékelje az érzelmi tényezőt (vagy írja be a saját szavát):
+tr_dopamine_hit	Dopamine Hit
+tr_inspirational	inspiráló
+tr_plain	Egyszerű
+tr_anxious	Aggódó
+tr_despair	Kétségbeesés
+tr_dread	Retteg
+tr_importance_q	Értékeld a fontosságot (vagy írj be saját szót):
+tr_lifechanging	Megváltoztatja az életet
+tr_influential	Befolyásos
+tr_ordinary	Rendes
+tr_waste_time	Időpazarlás
+tr_strangeness_q	Értékeld a furcsaságot (vagy írj be saját szót):
+tr_woowooweird	Woo-woo furcsa
+tr_strange	Furcsa
+tr_normal	Normál
+tr_nothing	Semmi
+tr_synchronicity_q	Értékeld a szinkronitási tényezőt (vagy írj be saját szót):
+tr_dirk_gently	Dirk gyengéden
+tr_mind_blowing	Észbontó
+tr_somewhat	Némileg
+tr_boredom	Unalom
+tr_wanna_upload_photos_q	Szeretne fotókat feltölteni?
+tr_upload_photos_now	Töltsön fel minden fényképet, amelyet most készített. Küldje el őket egyszerre, mivel a küldés csak egy üzenetre korlátozódik.
+tr_not_valid_upload	Ez nem érvényes feltöltés.
+tr_error_photo_upload	Sajnos hiba történt a fotó feltöltésekor.
+tr_photo_uploads_temp_disabled	A fotófeltöltések ideiglenesen le vannak tiltva, míg néhány dolgot megváltoztatunk.
+tr_write_report	Végül írja le jelentését. A jelentés beírása egy üzenettel történő küldésre korlátozódik.
+tr_tweet	Küldje el a jelentését!
+tr_thanks	Köszönöm a jelentést!
+welcome_back	Üdvözöljük újra a Randonautica-ban!
+dont_forgot_send_loc	Ne felejtsd el elküldeni az aktuális tartózkodási helyét.
+iap_invalid_receipt	Érvénytelen vásárlási igazolás: {0}. Jelenteni fogják.
+iap_maps_pack_enabled	A Maps Pack kiegészítő engedélyezve van.
+iap_search_water_points_enabled	A Helykeresés és a Kihagyás a Water Points Pack kiegészítő engedélyezve van. A "keresés <helynév vagy cím>" gépelésével állítsa be a helyét.
+iap_everything_enabled	A Minden csomag kiegészítő engedélyezve van. A "keresés <helynév vagy cím>" gépelésével állítsa be a helyét.
+iap_all_disabled	Az összes kiegészítő letiltva.
+iap_no_purchases	Nincsen vásárlási előzményei.
+iap_buy	MEGVESZ
+iap_enable	ENGEDÉLYEZZE
+iap_maps_pack	Maps Pack
+iap_maps_pack_desc	Alkalmazáson belüli előnézet a térképekről és az utcákról
+iap_search_water_points	Helykeresés + Átugorja a vízcsomagot
+iap_search_water_points_desc	Keressen helynevek alapján és hagyja ki a vízpontokat
+iap_everything_pack	A Minden csomag
+iap_everything_pack_desc	Térképek + Helykeresés + Átugrani a vízcsomagokat
+iap_enabling...	Funkció engedélyezése...
+iap_thanks_enabling	Köszönöm. Most engedélyezése...
+sending_location	Tartózkodási hely küldése...
+connecting_bot	Csatlakozás a bothoz...
+sending_entropy	Entrópia küldése...

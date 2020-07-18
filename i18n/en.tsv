@@ -60,14 +60,14 @@ md_void	Void
 md_options	Options/Help
 md_blindspotsmore	Blind Spots & More
 md_mylocation	My Location
-md_lets_search_paid	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.<br>  <br><br>Premium features available - Map previews, skip water points & custom location searching.  <br>Go to Options/Help → Add-ons
+md_lets_search_paid	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.<br>  <br><br>Premium features available - Point top-ups, infinite points, map previews, skip water points, extended radius and custom location searching.  <br>Go to Add-ons
 md_invalid_action	That is not a valid action. What would you like to get?
 md_lets_search	Let's search! What would you like to get?  <br>Attractors are dense clusters of random points. Voids are the opposite.  <br>Anomalies are the strongest out of Attractors and Voids.
 md_how_many_idas	Up to how many points would you like to look for?
 md_choose_qrng	Choose your entropy source: (choose Australian National University - ANU if unsure)
 md_invalid_qrng	That is not a valid entropy source.
 md_camera	Camera
-md_anu	ANU
+md_anu	Comscire Mind Engine
 md_temporal	Temporal
 md_temporal_server	Temporal (Server)
 md_temporal_phone	Temporal (Phone)
@@ -219,6 +219,23 @@ iap_thanks_enabling	Thank you. Enabling now...
 sending_location	Sending your location...
 connecting_bot	Connecting to bot...
 sending_entropy	Sending entropy...
+dl_x_remaining	You currently have {0} point(s). 1 point is consumed everytime you generate a location. Your balance will be refilled for free up to a maximum of {1} points each day you open the app.
+dl_x_tokens	You currently have {0} point(s).
+dl_no_tokens	You have no more points left. Please top-up from the Add-ons menu or wait 24 hours for your free refill.
+iap_added_x_points	Added {0} Points. You now have {1}.
+iap_infinite_points_enabled	Infinite Points enabled.
+iap_20km_radius_extended	Maximum search radius extended to 20 km.
+iap_add_20_t	Add 20 Points
+iap_add_20_d	Gives you 20 more points
+iap_add_60_t	Add 60 Points
+iap_add_60_d	Gives you 60 more points
+iap_20km_r_t	Extend Radius to 20km Pack
+iap_20km_r_d	Extends the search radius to 20 km
+iap_everything_t	The Everything Pack
+iap_everything_d	All Packs + Infinite Points
+iap_infinnypoints_t	Infinite Points
+iap_infinnypoints_d	Find an unlimited number of locations
+dont_tresspass	If this point is on private property, DO NOT TRESPASS! Never enter dangerous areas like train/railways, restricted zones, etc. Do not enter vacant properties. Follow your local and state laws and regulations. Be respectful, responsible and positive minded at all times while Randonauting.
 bs_talkwithsteve	Talk with Steve
 ts_talkwithsteve	Say something mentally to Steve.
 ts_talk	Ask for a reply

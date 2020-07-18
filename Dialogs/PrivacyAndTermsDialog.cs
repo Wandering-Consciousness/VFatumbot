@@ -47,15 +47,18 @@ namespace VFatumbot
         {
             //_logger.LogInformation($"PrivacyAndTermsDialog.AgreeYesOrNoStepAsync[{((FoundChoice)stepContext.Result)?.Value}]");
 
+            var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(stepContext.Context);
+
             var val = ((FoundChoice)stepContext.Result)?.Value;
             if (val.Equals(Loc.g("toc_doagree")))
             {
-                var userProfilePersistent = await _userProfilePersistentAccessor.GetAsync(stepContext.Context);
                 userProfilePersistent.HasAgreedToToS = true;
+                AmplitudeService.Amplitude.InstanceFor(userProfilePersistent.UserId).Track("TOS Agree");
                 await _userProfilePersistentAccessor.SetAsync(stepContext.Context, userProfilePersistent);
                 return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
 
+            AmplitudeService.Amplitude.InstanceFor(userProfilePersistent.UserId).Track("TOS Don't Agree");
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("toc_shame")), cancellationToken);
             return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
         }

@@ -40,7 +40,13 @@ namespace VFatumbot
                       return false;
                   }
 
-                  if (inputtedRadius > Consts.RADIUS_MAX)
+                  var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(promptContext.Context);
+                  if (userProfileTemporary.Has20kmRadius && inputtedRadius > 20000)
+                  {
+                      await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", 20000)), cancellationToken);
+                      return false;
+                  }
+                  else if (!userProfileTemporary.Has20kmRadius && inputtedRadius > Consts.RADIUS_MAX)
                   {
                       await promptContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("radius_lte", Consts.RADIUS_MAX)), cancellationToken);
                       return false;
@@ -91,20 +97,15 @@ namespace VFatumbot
             if (Loc.g("yes").Equals(val)) {
                 // TODO: a quick hack to reset IsScanning in case it gets stuck in that state
                 userProfileTemporary.IsScanning = false;
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Update Settings");
                 await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
                 // << EOF TODO. Will figure out whether this needs handling properly later on.
 
                 return await stepContext.NextAsync();
-            } else if (Loc.g("addons").Equals(val)) {
-                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                // and then pass onto the app layer to load the native add-ons shop screen
-                var requestEntropyActivity = Activity.CreateEventActivity();
-                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
-                return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             //} else if (Loc.g("help").Equals(val)) {
                 // case "Help" is picked up elsewhere
             } else {
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Don't Update Settings");
                 return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
             }
         }
@@ -112,6 +113,38 @@ namespace VFatumbot
         private async Task<DialogTurnResult> RadiusStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             //_logger.LogInformation("SettingsDialog.RadiusStepAsync");
+
+            var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
+
+            if (userProfileTemporary.Has20kmRadius)
+            {
+                var promptOptionsExt = new PromptOptions
+                {
+                    Prompt = MessageFactory.Text(Loc.g("select_radius")),
+                    Choices = new List<Choice>()
+                    {
+                        new Choice() {
+                            Value = "1000",
+                        },
+                        new Choice() {
+                            Value = "3000",
+                        },
+                        new Choice() {
+                            Value = "5000",
+                        },
+                        new Choice() {
+                            Value = "10000",
+                        },
+                        new Choice() {
+                            Value = "15000",
+                        },
+                        new Choice() {
+                            Value = "20000",
+                        },
+                    }
+                };
+                return await stepContext.PromptAsync("RadiusChoicePrompt", promptOptionsExt, cancellationToken);
+            }
 
             var promptOptions = new PromptOptions {
                 Prompt = MessageFactory.Text(Loc.g("select_radius")),
@@ -141,6 +174,7 @@ namespace VFatumbot
             var inputtedRadius = int.Parse(stepContext.Context.Activity.Text);
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
             userProfileTemporary.Radius = inputtedRadius;
+            AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Radius", new Dictionary<string, object>() { {"Radius", inputtedRadius } });
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
             if (userProfileTemporary.HasSkipWaterPoints)
@@ -163,18 +197,12 @@ namespace VFatumbot
             if (Loc.g("yes").Equals(val))
             {
                 userProfileTemporary.IsIncludeWaterPoints = true;
-            }
-            else if (Loc.g("addons").Equals(val))
-            {
-                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                // and then pass onto the app layer to load the native add-ons shop screen
-                var requestEntropyActivity = Activity.CreateEventActivity();
-                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Skip Water Points", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsIncludeWaterPoints } });
             }
             else
             {
                 userProfileTemporary.IsIncludeWaterPoints = false;
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Skip Water Points", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsIncludeWaterPoints } });
             }
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
@@ -196,18 +224,12 @@ namespace VFatumbot
             if (Loc.g("yes").Equals(val))
             {
                 userProfileTemporary.IsDisplayGoogleThumbnails = true;
-            }
-            else if (Loc.g("addons").Equals(val))
-            {
-                // Send an EventActivity to for the webbot's JavaScript callback handler to pickup
-                // and then pass onto the app layer to load the native add-ons shop screen
-                var requestEntropyActivity = Activity.CreateEventActivity();
-                requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                await stepContext.Context.SendActivityAsync(requestEntropyActivity);
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Display Google Thumbnails", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsDisplayGoogleThumbnails } });
             }
             else
             {
                 userProfileTemporary.IsDisplayGoogleThumbnails = false;
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Display Google Thumbnails", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsDisplayGoogleThumbnails } });
             }
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
@@ -236,8 +258,8 @@ namespace VFatumbot
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(
                 $"{Loc.g("anonymized_id_is", userProfileTemporary.UserId)}{Helpers.GetNewLine(stepContext.Context)}" +
-                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasSkipWaterPoints ? Loc.g("get_locsearch_skipwater_pack") : Loc.g("water_points_will_be", userProfileTemporary.IsIncludeWaterPoints ? Loc.g("included") : Loc.g("skipped"))) + Helpers.GetNewLine(stepContext.Context) : "") +
-                (userProfileTemporary.BotSrc == WebSrc.ios ? (!userProfileTemporary.HasMapsPack ? Loc.g("get_maps_pack") : Loc.g("show_google_street_earth", userProfileTemporary.IsDisplayGoogleThumbnails ? Loc.g("displayed") : Loc.g("hidden"))) + Helpers.GetNewLine(stepContext.Context) : "") +
+                ((userProfileTemporary.BotSrc == WebSrc.ios || userProfileTemporary.BotSrc == WebSrc.android) ? (!userProfileTemporary.HasSkipWaterPoints ? Loc.g("get_locsearch_skipwater_pack") : Loc.g("water_points_will_be", userProfileTemporary.IsIncludeWaterPoints ? Loc.g("included") : Loc.g("skipped"))) + Helpers.GetNewLine(stepContext.Context) : "") +
+                ((userProfileTemporary.BotSrc == WebSrc.ios || userProfileTemporary.BotSrc == WebSrc.android) ? (!userProfileTemporary.HasMapsPack ? Loc.g("get_maps_pack") : Loc.g("show_google_street_earth", userProfileTemporary.IsDisplayGoogleThumbnails ? Loc.g("displayed") : Loc.g("hidden"))) + Helpers.GetNewLine(stepContext.Context) : "") +
                 $"{Loc.g("current_location", userProfileTemporary.Latitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture), userProfileTemporary.Longitude.ToString("#0.000000", System.Globalization.CultureInfo.InvariantCulture))}{Helpers.GetNewLine(stepContext.Context)}" +
                 $"{Loc.g("current_radius", userProfileTemporary.Radius)}{Helpers.GetNewLine(stepContext.Context)}"));
         }
@@ -264,15 +286,6 @@ namespace VFatumbot
                                         Synonyms = new List<string>()
                                                         {
                                                             "no",
-                                                        }
-                                    },
-                                    new Choice() {
-                                        Value = Loc.g("addons"),
-                                          Synonyms = new List<string>()
-                                                        {
-                                                            "Addons",
-                                                            "add-ons",
-                                                            "addons"
                                                         }
                                     },
                                     new Choice() {

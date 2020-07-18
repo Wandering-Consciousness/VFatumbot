@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Bot.Builder;
 using VFatumbot.BotLogic;
 using static VFatumbot.BotLogic.Enums;
@@ -79,5 +80,25 @@ namespace VFatumbot
         public bool HasMapsPack { get; set; } = false;
         public bool HasLocationSearch { get; set; } = false;
         public bool HasSkipWaterPoints { get; set; } = false;
+        public bool HasInfinitePoints { get; set; } = false;
+        public bool Has20kmRadius { get; set; } = false;
+        public int OwlTokens { get; set; }
+
+        public bool IsNoOwlTokens
+        {
+            get
+            {
+                if (HasInfinitePoints)
+                    return false;
+
+                return OwlTokens <= 0;
+            }
+        }
+
+
+        // For Amplitude event tracking
+        public long StartSessionTime = -1;
+        public string Country { get; set; }
+        public Dictionary<string, object> UserProperties { get; set; }
     }
 }

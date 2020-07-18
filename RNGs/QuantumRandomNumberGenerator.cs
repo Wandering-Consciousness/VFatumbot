@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using VFatumbot.BotLogic;
@@ -13,6 +15,9 @@ namespace VFatumbot
         // If this property is != null, then we use this to determine what kind of entropy we get from the API (libwrapper server).
         // E.g. gid=<GID> to specify the entropy's ID for entropy uploaded from camera, shared etc.
         public string EntropySrcQueryString { get; set; } = null;
+
+        [DllImport("libqwqng", CallingConvention = CallingConvention.Cdecl)]
+        public extern static void randbytes(byte[] buffer, int bytecount);
 
         ~QuantumRandomNumberGenerator()
         {
@@ -132,45 +137,69 @@ namespace VFatumbot
 
         public override byte[] NextHexBytes(int len, int meta, out string shaGid)
         {
-            if (meta == 0
-                && !string.IsNullOrEmpty(EntropySrcQueryString) // quick revert back to directly calling ANU as libwrapper Azure Functions are timing out
-                )
+            var buffer = new List<byte>();
+
+            var slen = 8192;
+            while (buffer.Count < len)
             {
-                // switching to David's libwrapper API
-                var queryStr = $"raw=true&size={len * 2}";
-                if (!string.IsNullOrEmpty(EntropySrcQueryString))
-                {
-                    queryStr = EntropySrcQueryString;
-                }
-#if RELEASE_PROD
-                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
-#else
-                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
-                //var connStr = $"http://127.0.0.1:3000/entropy?{queryStr}";
-#endif
-                var jsonStr = Client.DownloadString(connStr);
-                dynamic response = null;
-                try
-                {
-                    response = JsonConvert.DeserializeObject<dynamic>(jsonStr);
-                }
-                catch (JsonReaderException jre)
-                {
-                    throw new JsonReaderException("Bug #2 caught! Please post a screenshot of this onto reddit.com/r/randonauts: " + jsonStr);
-                }
-                var hex = response.Entropy?.ToString();
-
-                // convert to bytes
-                int NumberChars = hex.Length;
-                byte[] bytes = new byte[NumberChars / 2];
-                for (int i = 0; i < NumberChars - 1; i += 2)
-                    bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-
-                shaGid = response.Gid;
-                return bytes;
+                var smallBuff = new byte[slen];
+                randbytes(smallBuff, slen);
+                buffer.AddRange(smallBuff);
             }
 
-            return base.NextHexBytes(len, meta, out shaGid);
+            // TODO: figure out real sha hash
+            shaGid = "61BE55A8E2F6B4E172338BDDF184D6DBEE29C98853E0A0485ECEE7F27B9AF0B4";
+
+            return buffer.ToArray();
+
+//            if (meta == 0
+//                && !string.IsNullOrEmpty(EntropySrcQueryString) // quick revert back to directly calling ANU as libwrapper Azure Functions are timing out
+//                )
+//            {
+//                var buffer = new byte[len];
+//                randbytes(buffer, len);
+
+//                shaGid = "61BE55A8E2F6B4E172338BDDF184D6DBEE29C98853E0A0485ECEE7F27B9AF0B4";
+
+//                System.Console.WriteLine("SIMON'S here:" + buffer[2]);
+
+//                return buffer;
+
+//                // switching to David's libwrapper API
+//                var queryStr = $"raw=true&size={len * 2}";
+//                if (!string.IsNullOrEmpty(EntropySrcQueryString))
+//                {
+//                    queryStr = EntropySrcQueryString;
+//                }
+//#if RELEASE_PROD
+//                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
+//#else
+//                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
+//                //var connStr = $"http://127.0.0.1:3000/entropy?{queryStr}";
+//#endif
+//                var jsonStr = Client.DownloadString(connStr);
+//                dynamic response = null;
+//                try
+//                {
+//                    response = JsonConvert.DeserializeObject<dynamic>(jsonStr);
+//                }
+//                catch (JsonReaderException jre)
+//                {
+//                    throw new JsonReaderException("Bug #2 caught! Please post a screenshot of this onto reddit.com/r/randonauts: " + jsonStr);
+//                }
+//                var hex = response.Entropy?.ToString();
+
+//                // convert to bytes
+//                int NumberChars = hex.Length;
+//                byte[] bytes = new byte[NumberChars / 2];
+//                for (int i = 0; i < NumberChars - 1; i += 2)
+//                    bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+
+//                shaGid = response.Gid;
+//                return bytes;
+//            }
+
+//            return base.NextHexBytes(len, meta, out shaGid);
         }
 
         protected WebClient Client

@@ -20,7 +20,7 @@ namespace VFatumbot
         protected readonly QuantumRandomNumberGenerator qRNG;
 #endif
 
-#if EMULATORDEBUG
+#if EMULATORDEBUG || DEBUG
         bool barfExceptionsHere = true;
 #else
         bool barfExceptionsHere = false;
