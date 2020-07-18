@@ -67,7 +67,7 @@ md_how_many_idas	Up to how many points would you like to look for?
 md_choose_qrng	Choose your entropy source: (choose Australian National University - ANU if unsure)
 md_invalid_qrng	That is not a valid entropy source.
 md_camera	Camera
-md_anu	ANU
+md_anu	Comscire Mind Engine
 md_temporal	Temporal
 md_temporal_server	Temporal (Server)
 md_temporal_phone	Temporal (Phone)
