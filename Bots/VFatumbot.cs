@@ -216,7 +216,7 @@ namespace VFatumbot
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                 }
             }
-            else if (await InterceptInappPurchaseAsync(turnContext, userProfilePersistent, cancellationToken))
+            else if (await InterceptInappPurchaseAsync(turnContext, userProfilePersistent, botSrc, cancellationToken))
             {
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, _mainDialog, cancellationToken);
             }
@@ -376,7 +376,7 @@ namespace VFatumbot
             await _mainDialog.Run(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
-        protected async Task<bool> InterceptInappPurchaseAsync(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, CancellationToken cancellationToken)
+        protected async Task<bool> InterceptInappPurchaseAsync(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, WebSrc botSrc, CancellationToken cancellationToken)
         {
             var activity = turnContext.Activity;
             var text = "";
@@ -402,22 +402,33 @@ namespace VFatumbot
                         iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
                     }
 #if !RELEASE_PROD
-                  if (!text.StartsWith("x"))
-                  {
+                    if (!text.StartsWith("x"))
+                    {
 #endif
-                    var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
-                    if (verify == 21007)
-                    {
-                        // Retry on the sandbox environment
-                        verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData, true);
-                    }
-                    if (verify != 0)
-                    {
-                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
-                        return true;
-                    }
+                        if (botSrc == WebSrc.android)
+                        {
+                            if (!await Helpers.VerifyGooglePlayIAPReceptAsync(iapData.productID, iapData.serverVerificationData))
+                            {
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt")), cancellationToken);
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
+                            if (verify == 21007)
+                            {
+                                // Retry on the sandbox environment
+                                verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData, true);
+                            }
+                            if (verify != 0)
+                            {
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
+                                return true;
+                            }
+                        }
 #if !RELEASE_PROD
-                    }
+                  }
 #endif
 
                     if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points"))
