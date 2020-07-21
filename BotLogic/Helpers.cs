@@ -376,7 +376,7 @@ namespace VFatumbot.BotLogic
             return result.status;
         }
 
-        public static async Task<bool> VerifyGooglePlayIAPReceptAsync(string productId, string token)
+        public static async Task<int> VerifyGooglePlayIAPReceptAsync(string productId, string token)
         {
             var aps = new AndroidPublisherService(new BaseClientService.Initializer
             {
@@ -388,13 +388,10 @@ namespace VFatumbot.BotLogic
             var res = await req.ExecuteAsync();
             if (res.PurchaseState != null)
             {
-                if (res.PurchaseState == 1)
-                {
-                    return true;
-                }
+                return (int)res.PurchaseState;
             }
 
-            return false;
+            return 0;
         }
     }
 }

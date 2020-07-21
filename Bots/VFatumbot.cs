@@ -407,9 +407,10 @@ namespace VFatumbot
 #endif
                         if (botSrc == WebSrc.android)
                         {
-                            if (!await Helpers.VerifyGooglePlayIAPReceptAsync(iapData.productID, iapData.serverVerificationData))
+                            var verify = await Helpers.VerifyGooglePlayIAPReceptAsync(iapData.productID, iapData.serverVerificationData);
+                            if (verify != 1)
                             {
-                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt")), cancellationToken);
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
                                 return true;
                             }
                         }
