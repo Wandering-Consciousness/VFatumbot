@@ -344,17 +344,17 @@ namespace VFatumbot
             var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
                 $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
                 $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/RandonauticaApp")}  \n\n\n" +
-                "##### Pro Tips  \n" +
-                "   \n\n\n" +
-                "* Randonaut with a positive mindset!  \n" +
-                "* Bring a trash bag to help the environment.  \n" +
-                "* If you normally wouldn't adventure alone, go with a friend or group.  \n" +
-                "* Randonauting is best done as a daytime activity.  \n" +
-                "* Always Randonaut with a charged phone.  \n" +
-                "* Use situational awareness.  \n" +
-                "* Be respectful of property owners. Never trespass.  \n" +
-                "* Obey all quarantine, curfew and social distancing regulations in your area.  \n" +
-                "* Do not go into dangerous areas.  \n\n\n" +
+                $"##### {Loc.g("pro_tips_1")}  \n" +
+                $"   \n\n\n" +
+                $"* {Loc.g("pro_tips_2")}  \n" +
+                $"* {Loc.g("pro_tips_3")}  \n" +
+                $"* {Loc.g("pro_tips_4")}  \n" +
+                $"* {Loc.g("pro_tips_5")}  \n" +
+                $"* {Loc.g("pro_tips_6")}  \n" +
+                $"* {Loc.g("pro_tips_7")}  \n" +
+                $"* {Loc.g("pro_tips_8")}  \n" +
+                $"* {Loc.g("pro_tips_9")}  \n" +
+                $"* {Loc.g("pro_tips_10")}  \n\n\n" +
                 "Happy Randonauting!"
                ;
             await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
