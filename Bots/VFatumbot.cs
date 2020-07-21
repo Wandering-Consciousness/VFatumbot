@@ -408,7 +408,7 @@ namespace VFatumbot
                         if (botSrc == WebSrc.android)
                         {
                             var verify = await Helpers.VerifyGooglePlayIAPReceptAsync(iapData.productID, iapData.serverVerificationData);
-                            if (verify != 1)
+                            if (verify != 0) // 0 == "Purchased" status
                             {
                                 await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
                                 return true;

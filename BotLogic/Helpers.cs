@@ -395,7 +395,7 @@ namespace VFatumbot.BotLogic
                 return (int)res.PurchaseState;
             }
 
-            return 0;
+            return -1;
         }
     }
 }
