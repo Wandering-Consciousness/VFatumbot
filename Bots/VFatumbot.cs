@@ -216,7 +216,7 @@ namespace VFatumbot
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                 }
             }
-            else if (await InterceptInappPurchaseAsync(turnContext, userProfilePersistent, botSrc, cancellationToken))
+            else if (await InterceptInappPurchaseAsync(turnContext, userProfilePersistent, userProfileTemporary.BotSrc, cancellationToken))
             {
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, _mainDialog, cancellationToken);
             }
