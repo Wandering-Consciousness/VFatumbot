@@ -2,7 +2,7 @@
 {
     public class Consts
     {
-        private const string _appVersion = "4.9.4";
+        private const string _appVersion = "4.9.5";
 #if RELEASE_PROD
         public const string APP_VERSION = _appVersion;
 #else
@@ -101,7 +101,5 @@
 
         // TODO: move later when localization is implemented
         public static string NO_LOCATION_SET_MSG = Loc.g("no_loc_or_reset"); //"You haven't set a location, or it was reset. Send it by tapping 🌍/📎 or sending a Google Maps URL. You can also type \"help\" anytime.";
-
-        public static string GOOGLE_PLAY_DEVELOPER_API_KEY = "AIzaSyB8JF1dkwSwM7aG2cd9yhNC3mdUazWBUR8";
     }
 }
