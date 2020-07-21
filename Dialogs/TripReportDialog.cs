@@ -552,6 +552,9 @@ namespace VFatumbot
                     // Concat
                     pointMsg += "  \n\n\n";
                     message += pointMsg;
+
+                    // Remove trespass warning
+                    message = message.Replace(Loc.g("dont_tresspass"), "");
                 }
             }
             else
@@ -563,6 +566,9 @@ namespace VFatumbot
                     // Remove bearing info from reports
                     message = message.Substring(0, message.IndexOf("Bearing:", StringComparison.InvariantCulture)) + message.Substring(message.IndexOf("°", StringComparison.InvariantCulture) + 1).Replace("\n", "");
                 }
+
+                // Remove trespass warning
+                message = message.Replace(Loc.g("dont_tresspass"), "");
             }
 
             var redditPost = await PostTripReportToRedditAsync("Randonaut Trip Report"
