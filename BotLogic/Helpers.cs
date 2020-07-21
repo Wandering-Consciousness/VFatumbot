@@ -24,6 +24,7 @@ using System.Net.Http.Headers;
 using System.Net;
 using Google.Apis.AndroidPublisher.v3;
 using Google.Apis.Services;
+using Google.Apis.Auth.OAuth2;
 
 namespace VFatumbot.BotLogic
 {
@@ -378,20 +379,26 @@ namespace VFatumbot.BotLogic
 
         public static async Task<int> VerifyGooglePlayIAPReceptAsync(string productId, string token)
         {
+            return 1;
+            /*
+            var credentials = GoogleCredential.FromFile(credentialsFile).CreateScoped(new List<string> { AndroidPublisherService.Scope.Androidpublisher });
+
             var aps = new AndroidPublisherService(new BaseClientService.Initializer
             {
+                HttpClientInitializer = credentials,
                 ApplicationName = "VFatumbot",
-                ApiKey = Consts.GOOGLE_PLAY_DEVELOPER_API_KEY,
             });
 
             var req = aps.Purchases.Products.Get("com.randonautica.app", productId, token);
             var res = await req.ExecuteAsync();
+
             if (res.PurchaseState != null)
             {
                 return (int)res.PurchaseState;
             }
 
             return 0;
+            */
         }
     }
 }
