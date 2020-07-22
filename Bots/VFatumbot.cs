@@ -432,7 +432,7 @@ namespace VFatumbot
                   }
 #endif
 
-                    if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points"))
+                    if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points") || iapData.productID.ToString().StartsWith("get_points")))
 #if !RELEASE_PROD
                         || turnContext.Activity.Text.StartsWith("x20")
 #endif
@@ -442,7 +442,7 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 20, userProfilePersistent.OwlTokens)), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points") || iapData.productID.ToString().StartsWith("get_more_points")))
 #if !RELEASE_PROD
                         || turnContext.Activity.Text.StartsWith("x60")
 #endif
@@ -452,7 +452,7 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 60, userProfilePersistent.OwlTokens)), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points") || iapData.productID.ToString().StartsWith("infinte_points")))
 #if !RELEASE_PROD
                         || turnContext.Activity.Text.StartsWith("xinfp")
 #endif
@@ -473,7 +473,7 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_maps_pack_enabled")), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack") || iapData.productID.ToString().StartsWith("skip_water_points")))
 #if !RELEASE_PROD
                         || turnContext.Activity.Text.StartsWith("xwater")
 #endif
@@ -485,7 +485,7 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km") || iapData.productID.ToString().StartsWith("radius_extend")))
 #if !RELEASE_PROD
                         || turnContext.Activity.Text.StartsWith("xrad")
 #endif
