@@ -720,7 +720,7 @@ namespace VFatumbot
                             isb.Append("time_intent_suggestions_set,");
                         }
                         isb.Append("what_3_words,");
-                        if (!string.IsNullOrEmpty(options.NearestPlaces[i]))
+                        if (!string.IsNullOrEmpty(options.NearestPlaces[i]) && options.NearestPlaces[i].Contains("("))
                         {
                             isb.Append("nearest_place,");
                             isb.Append("country,");
@@ -783,7 +783,7 @@ namespace VFatumbot
                             isb.Append($"'{userProfileTemporary.TimeIntentSuggestionsSet}',");
                         }
                         isb.Append($"'{(!string.IsNullOrEmpty(options.What3Words[i]) ? options.What3Words[i] : "")}',");
-                        if (!string.IsNullOrEmpty(options.NearestPlaces[i]))
+                        if (!string.IsNullOrEmpty(options.NearestPlaces[i]) && options.NearestPlaces[i].Contains("("))
                         {
                             isb.Append($"'{options.NearestPlaces[i].Substring(0, options.NearestPlaces[i].IndexOf("(") - 1)}',");
                             isb.Append($"'{options.NearestPlaces[i].Substring(options.NearestPlaces[i].IndexOf("(") + 1).Replace(")", "")}',");
