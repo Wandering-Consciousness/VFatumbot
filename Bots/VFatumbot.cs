@@ -434,7 +434,7 @@ namespace VFatumbot
 
                     if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points") || iapData.productID.ToString().StartsWith("get_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("x20")
+                        || text.StartsWith("x20")
 #endif
                         )
                     {
@@ -444,7 +444,7 @@ namespace VFatumbot
                     }
                     else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points") || iapData.productID.ToString().StartsWith("get_more_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("x60")
+                        || text.StartsWith("x60")
 #endif
                         )
                     {
@@ -454,7 +454,7 @@ namespace VFatumbot
                     }
                     else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points") || iapData.productID.ToString().StartsWith("infinte_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xinfp")
+                        || text.StartsWith("xinfp")
 #endif
                         )
                     {
@@ -464,7 +464,7 @@ namespace VFatumbot
                     }
                     else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xmaps")
+                        || text.StartsWith("xmaps")
 #endif
                         )
                     {
@@ -475,7 +475,7 @@ namespace VFatumbot
                     }
                     else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack") || iapData.productID.ToString().StartsWith("skip_water_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xwater")
+                        || text.StartsWith("xwater")
 #endif
                         )
                     {
@@ -487,7 +487,7 @@ namespace VFatumbot
                     }
                     else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km") || iapData.productID.ToString().StartsWith("radius_extend")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xrad")
+                        || text.StartsWith("xrad")
 #endif
                         )
                     {
@@ -499,7 +499,7 @@ namespace VFatumbot
                     else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs")) // old name for original everything pack
                           || (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.everything_pack"))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xall")
+                        || text.StartsWith("xall")
 #endif
                         )
                     {
