@@ -415,6 +415,22 @@ namespace VFatumbot
 
                 return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
             }
+            else if (userProfileTemporary.BotSrc == Enums.WebSrc.android)
+            {
+                var options = new PromptOptions()
+                {
+                    Prompt = MessageFactory.Text($"{Loc.g("md_choose_qrng")}:"),
+                    RetryPrompt = MessageFactory.Text(Loc.g("md_invalid_qrng")),
+                    Choices = new List<Choice>()
+                                {
+                                    new Choice() { Value = Loc.g("md_camera") },
+                                    new Choice() { Value = Loc.g("md_anu") },
+                                    new Choice() { Value = Loc.g("md_temporal_server") },
+                                }
+                };
+
+                return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
+            }
             else
             {
                 var options = new PromptOptions()
