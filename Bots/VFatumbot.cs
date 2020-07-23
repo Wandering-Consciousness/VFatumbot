@@ -485,7 +485,7 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
-                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km") || iapData.productID.ToString().StartsWith("radius_extend")))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km") || iapData.productID.ToString().StartsWith("extend_radius")))
 #if !RELEASE_PROD
                         || text.StartsWith("xrad")
 #endif
