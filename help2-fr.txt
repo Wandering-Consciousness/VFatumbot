@@ -4,9 +4,9 @@ En utilisant Randonautica, vous acceptez les conditions d'utilisation et la poli
   
 Randonautica utilise des coordonnées vraiment aléatoires. Il est de la responsabilité de l'utilisateur et à ses risques et périls s'il décide de se déplacer physiquement vers des coordonnées dans le monde réel.  
   
-En utilisant Randonautica, vous le faites à vos propres risques. Randonautica / Randonauts LLC n'est pas responsable des effets ou conséquences positifs ou négatifs de l'utilisation de cette plateforme.  
+En utilisant Randonautica, vous le faites à vos propres risques. Randonautica / Randonauts LLC n'est pas responsable des effets ou des conséquences, qu'ils soient positifs ou négatifs, de l'utilisation de cette plateforme.  
   
-Faites preuve de bon sens, ne mettez pas vous-même ou les autres en danger. Ne pas empiéter. Respectez toutes les réglementations de quarantaine, de couvre-feu et de distanciation sociale dans votre région.  
+Faites preuve de bon sens, ne mettez pas vous-même ou les autres en danger. Ne pénétrer pas illégalement dans une propriété privée. Respectez toutes les réglementations de quarantaine, de couvre-feu et de distanciation sociale dans votre région.  
   
 Ne volez pas, n'endommagez pas les biens, ne jetez pas de détritus, ne faites rien d'illégal ou quoi que ce soit qui pourrait autrement vous mettre en danger ou blesser les autres.  
   
@@ -16,6 +16,6 @@ Rien n'est partagé avec des services tiers, point final.
   
 Toutes les données de localisation que vous envoyez sont automatiquement supprimées après 24 heures. Les données anonymisées des points générés sont stockées.  
   
-Si vous avez choisi de rédiger un rapport de voyage, le rapport sera publié de manière anonyme sur le subreddit /r/randonaut_reports. Ne vous inquiétez pas, nous ne publierons jamais votre position, juste le point généré.  
+Si vous avez choisi de rédiger un rapport de voyage, le rapport sera publié de manière anonyme sur le subreddit /r/randonaut_reports. Ne vous inquiétez pas, nous ne publierons jamais votre position initiale, seulement le point généré.  
   
-Lisez les [conditions complètes ici](https://bot.randonauts.com/privacy-and-terms.html) avant d'accepter.
+Lisez les [conditions complètes ici](https://bot.randonauts.com/privacy-and-terms.html) avant d'accepter.  

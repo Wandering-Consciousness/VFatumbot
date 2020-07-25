@@ -18,6 +18,7 @@ namespace VFatumbot
         protected readonly PseudoRandomNumberGenerator qRNG;
 #else
         protected readonly QuantumRandomNumberGenerator qRNG;
+        //protected readonly PseudoRandomNumberGenerator qRNG;
 #endif
 
 #if EMULATORDEBUG || DEBUG
@@ -38,6 +39,7 @@ namespace VFatumbot
             qRNG = new PseudoRandomNumberGenerator();
 #else
             qRNG = new QuantumRandomNumberGenerator();
+            //qRNG = new PseudoRandomNumberGenerator();
             qRNG.EntropySrcQueryString = entropyQueryString;
 #endif
         }

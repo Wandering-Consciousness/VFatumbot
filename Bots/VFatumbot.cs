@@ -216,7 +216,7 @@ namespace VFatumbot
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                 }
             }
-            else if (await InterceptInappPurchaseAsync(turnContext, userProfilePersistent, cancellationToken))
+            else if (await InterceptInappPurchaseAsync(turnContext, userProfilePersistent, userProfileTemporary.BotSrc, cancellationToken))
             {
                 await ((AdapterWithErrorHandler)turnContext.Adapter).RepromptMainDialog(turnContext, _mainDialog, cancellationToken);
             }
@@ -344,17 +344,17 @@ namespace VFatumbot
             var welcome = $"#### {Loc.g("welcome_randonautica")}\n" +
                 $"{Loc.g("welcome_beginners", "https://www.randonautica.com/got-questions", "https://i.redd.it/x97vcpvtd9p41.jpg")}  \n\n\n" +
                 $"{Loc.g("welcome_report_share", "https://www.reddit.com/r/randonauts/", "https://twitter.com/RandonauticaApp")}  \n\n\n" +
-                "##### Pro Tips  \n" +
-                "   \n\n\n" +
-                "* Randonaut with a positive mindset!  \n" +
-                "* Bring a trash bag to help the environment.  \n" +
-                "* If you normally wouldn't adventure alone, go with a friend or group.  \n" +
-                "* Randonauting is best done as a daytime activity.  \n" +
-                "* Always Randonaut with a charged phone.  \n" +
-                "* Use situational awareness.  \n" +
-                "* Be respectful of property owners. Never trespass.  \n" +
-                "* Obey all quarantine, curfew and social distancing regulations in your area.  \n" +
-                "* Do not go into dangerous areas.  \n\n\n" +
+                $"##### {Loc.g("pro_tips_1")}  \n" +
+                $"   \n\n\n" +
+                $"* {Loc.g("pro_tips_2")}  \n" +
+                $"* {Loc.g("pro_tips_3")}  \n" +
+                $"* {Loc.g("pro_tips_4")}  \n" +
+                $"* {Loc.g("pro_tips_5")}  \n" +
+                $"* {Loc.g("pro_tips_6")}  \n" +
+                $"* {Loc.g("pro_tips_7")}  \n" +
+                $"* {Loc.g("pro_tips_8")}  \n" +
+                $"* {Loc.g("pro_tips_9")}  \n" +
+                $"* {Loc.g("pro_tips_10")}  \n\n\n" +
                 "Happy Randonauting!"
                ;
             await turnContext.SendActivityAsync(MessageFactory.Text(welcome), cancellationToken);
@@ -376,7 +376,7 @@ namespace VFatumbot
             await _mainDialog.Run(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
-        protected async Task<bool> InterceptInappPurchaseAsync(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, CancellationToken cancellationToken)
+        protected async Task<bool> InterceptInappPurchaseAsync(ITurnContext turnContext, UserProfilePersistent userProfilePersistent, WebSrc botSrc, CancellationToken cancellationToken)
         {
             var activity = turnContext.Activity;
             var text = "";
@@ -402,27 +402,39 @@ namespace VFatumbot
                         iapData = JsonConvert.DeserializeObject<Purchases>(iapDataStr);
                     }
 #if !RELEASE_PROD
-                  if (!text.StartsWith("x"))
-                  {
+                    if (!text.StartsWith("x"))
+                    {
 #endif
-                    var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
-                    if (verify == 21007)
-                    {
-                        // Retry on the sandbox environment
-                        verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData, true);
-                    }
-                    if (verify != 0)
-                    {
-                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
-                        return true;
-                    }
+                        if (botSrc == WebSrc.android)
+                        {
+                            var verify = await Helpers.VerifyGooglePlayIAPReceptAsync(iapData.productID, iapData.serverVerificationData);
+                            if (verify != 0) // 0 == "Purchased" status
+                            {
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
+                            if (verify == 21007)
+                            {
+                                // Retry on the sandbox environment
+                                verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData, true);
+                            }
+                            if (verify != 0)
+                            {
+                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
+                                return true;
+                            }
+                        }
 #if !RELEASE_PROD
-                    }
+                  }
 #endif
 
-                    if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points"))
+                    if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_20_points") || iapData.productID.ToString().StartsWith("get_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("x20")
+                        || text.StartsWith("x20")
 #endif
                         )
                     {
@@ -430,9 +442,9 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 20, userProfilePersistent.OwlTokens)), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.c.add_60_points") || iapData.productID.ToString().StartsWith("get_more_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("x60")
+                        || text.StartsWith("x60")
 #endif
                         )
                     {
@@ -440,9 +452,9 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_added_x_points", 60, userProfilePersistent.OwlTokens)), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.infinite_points") || iapData.productID.ToString().StartsWith("infinte_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xinfp")
+                        || text.StartsWith("xinfp")
 #endif
                         )
                     {
@@ -452,7 +464,7 @@ namespace VFatumbot
                     }
                     else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_pack"))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xmaps")
+                        || text.StartsWith("xmaps")
 #endif
                         )
                     {
@@ -461,9 +473,9 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_maps_pack_enabled")), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.skip_water_pack") || iapData.productID.ToString().StartsWith("skip_water_points")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xwater")
+                        || text.StartsWith("xwater")
 #endif
                         )
                     {
@@ -473,9 +485,9 @@ namespace VFatumbot
 
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_search_water_points_enabled")), cancellationToken);
                     }
-                    else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km"))
+                    else if ((iapData.productID != null && (iapData.productID.ToString().StartsWith("fatumbot.addons.nc.extend_radius_20km") || iapData.productID.ToString().StartsWith("extend_radius")))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xrad")
+                        || text.StartsWith("xrad")
 #endif
                         )
                     {
@@ -487,7 +499,7 @@ namespace VFatumbot
                     else if ((iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.maps_skip_water_packs")) // old name for original everything pack
                           || (iapData.productID != null && iapData.productID.ToString().StartsWith("fatumbot.addons.nc.everything_pack"))
 #if !RELEASE_PROD
-                        || turnContext.Activity.Text.StartsWith("xall")
+                        || text.StartsWith("xall")
 #endif
                         )
                     {
