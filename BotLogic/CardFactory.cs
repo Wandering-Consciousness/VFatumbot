@@ -225,7 +225,7 @@ namespace VFatumbot
 
         public static string CreateGoogleMapsUrl(double[] incoords)
         {
-            return "https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",14z";
+            return "https://www.google.com/maps/search/?api=1&query=" + incoords[0] + "," + incoords[1] + "&zoom=14";
         }
 
         public static string CreateGoogleMapsRouteUrl(double[][] incoords)
