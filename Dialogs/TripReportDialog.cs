@@ -625,8 +625,7 @@ namespace VFatumbot
             var w3wHashes = $" #{callbackOptions.What3Words[answers.PointNumberVisited].Replace(".", " #")}";
 
             var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220 - w3wHashes.Length, answers.Report.Length)));
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
-            //await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_thanks")), cancellationToken);
             AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Trip Report Posted");
 
