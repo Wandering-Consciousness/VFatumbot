@@ -235,10 +235,47 @@ namespace VFatumbot.BotLogic
             int numSuggestions = 5;
             string[] result = new string[numSuggestions];
             string[] words = await System.IO.File.ReadAllLinesAsync("words.txt");
+
+            string outShaGid;
+            int entropyAmountNeeded = 933102/* *10 */;
+
             for (int i = 0; i < numSuggestions; i++)
             {
-                result[i] = words[rnd.Next(words.Length)];
+                var randbytes = rnd.NextHexBytes(entropyAmountNeeded, 0, out outShaGid);
+                int j = 0;
+
+                // 1d random walk
+                int min = 233276, max = 233276;
+                int y = 233276; // words.Length/2; // origin
+                int totalBits = 0;
+                for (int walks = 0; walks < entropyAmountNeeded; walks++)
+                {
+                    var bite = randbytes[j++];
+
+                    for (int k = 0; k < 8; k++)
+                    {
+                        totalBits++;
+                        var currentBit = bite & 0x0001;
+                        if (currentBit == 1 && y < words.Length - 2) // total number in words.txt: 466551
+                        {
+                            y++;
+                            if (y < min)
+                                min = y;
+                        }
+                        else if (currentBit == 0 && y > 0)
+                        {
+                            y--;
+                            if (y > max)
+                                max = y;
+                        }
+                        bite >>= 1;
+                    }
+
+                }
+                //result[i] = $"y:{y}, min:{min}, max:{max}, totalBits:{totalBits} " + words[y];
+                result[i] = words[y];
             }
+
             return result;
         }
 
