@@ -425,7 +425,7 @@ namespace VFatumbot
                                 {
                                     new Choice() { Value = Loc.g("md_camera") },
                                     new Choice() { Value = Loc.g("md_anu") },
-                                    new Choice() { Value = Loc.g("md_temporal_server") },
+                                    new Choice() { Value = Loc.g("md_temporal") },
                                 }
                 };
 
