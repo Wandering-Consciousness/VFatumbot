@@ -116,7 +116,7 @@ ch_invalid_number	잘못된 숫자
 ch_reprompt_num_points	잘못된 숫자. 지점 수를 입력하고.
 ch_mte	{0} 이상 필요
 ch_lte	{0} 다음 필요
-no_loc_or_reset	현재 위치가 설정되어 있지 않거나 재설정되었다. 🌍 / 📎 현재 위치를 전송하거나 Google지도의 URL을 입력하거나. \ "help \"를 입력하면 도움말 화면이 나온다.
+no_loc_or_reset	현재 위치가 설정되어 있지 않거나 재설정되었다. 🌍 / 📎 현재 위치를 전송하거나 Google지도의 URL을 입력하거나. \"help\"를 입력하면 도움말 화면이 나온다.
 ida_found	의도 구동 지점이 발견
 ida_type	유형 : {0}
 ida_radius	반경 : {0}

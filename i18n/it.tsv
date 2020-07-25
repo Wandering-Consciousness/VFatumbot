@@ -116,7 +116,7 @@ ch_invalid_number	Questo non è un numero valido.
 ch_reprompt_num_points	Numero non valido. Inserisci il numero di punti:
 ch_mte	Il numero deve essere maggiore o uguale a {0}. Inserisci numero:
 ch_lte	Il numero deve essere inferiore o uguale a {0}. Inserisci numero:
-no_loc_or_reset	Non hai impostato un percorso o è stato ripristinato. Invialo toccando 🌍 / 📎 o inviando un URL di Google Maps. Puoi anche digitare \ "help \" in qualsiasi momento.
+no_loc_or_reset	Non hai impostato un percorso o è stato ripristinato. Invialo toccando 🌍 / 📎 o inviando un URL di Google Maps. Puoi anche digitare \"help\" in qualsiasi momento.
 ida_found	Rilevata anomalia guidata dall'intenzione
 ida_type	Tipo: {0}
 ida_radius	Raggio: {0}
@@ -162,7 +162,7 @@ tr_set_intent_q	Hai fissato un intento?
 tr_enter_intent	Qual era il tuo intento?
 tr_hope_had_fun	Spero che tu abbia fatto un viaggio divertente!
 tr_collect_artifacts_q	Hai collezionato artefatti?
-tr_wow_and_astounding_q	Il tuo viaggio è stato \ "strabiliante e sorprendente! \"?
+tr_wow_and_astounding_q	Il tuo viaggio è stato \"strabiliante e sorprendente! \"?
 tr_meaningfulness_q	Valuta la significatività del tuo viaggio (o inserisci la tua parola):
 tr_enriching	Arricchimento
 tr_meaningful	Significativo
@@ -202,8 +202,8 @@ welcome_back	Bentornato a Randonautica!
 dont_forgot_send_loc	Non dimenticare di inviare la posizione corrente.
 iap_invalid_receipt	Ricevuta di acquisto non valida: {0}. Ti verrà segnalato.
 iap_maps_pack_enabled	Componente aggiuntivo Maps Pack abilitato.
-iap_search_water_points_enabled	Posiziona il componente aggiuntivo Cerca e salta Water Points Pack abilitato. Imposta la tua posizione digitando \ "cerca <nome o indirizzo luogo> \".
-iap_everything_enabled	Il componente aggiuntivo Everything Pack abilitato. Imposta la tua posizione digitando \ "cerca <nome o indirizzo luogo> \".
+iap_search_water_points_enabled	Posiziona il componente aggiuntivo Cerca e salta Water Points Pack abilitato. Imposta la tua posizione digitando \"search <nome o indirizzo luogo>\".
+iap_everything_enabled	Il componente aggiuntivo Everything Pack abilitato. Imposta la tua posizione digitando \"search <nome o indirizzo luogo>\".
 iap_all_disabled	Tutti i componenti aggiuntivi disabilitati.
 iap_no_purchases	Non hai cronologia acquisti.
 iap_buy	ACQUISTARE

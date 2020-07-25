@@ -116,7 +116,7 @@ ch_invalid_number	Esse não é um número válido.
 ch_reprompt_num_points	Número inválido. Digite o número de pontos:
 ch_mte	O número deve ser maior ou igual a {0}. Insira numeros:
 ch_lte	O número deve ser menor ou igual a {0}. Insira numeros:
-no_loc_or_reset	Você não definiu um local ou foi redefinido. Envie-o tocando em 🌍 / 📎 ou enviando um URL do Google Maps. Você também pode digitar \ "help \" a qualquer momento.
+no_loc_or_reset	Você não definiu um local ou foi redefinido. Envie-o tocando em 🌍 / 📎 ou enviando um URL do Google Maps. Você também pode digitar \"help\" a qualquer momento.
 ida_found	Anomalia dirigida à intenção encontrada
 ida_type	Tipo: {0}
 ida_radius	Raio: {0}
@@ -202,8 +202,8 @@ welcome_back	Bem-vindo de volta à Randonautica!
 dont_forgot_send_loc	Não esqueça de enviar sua localização atual.
 iap_invalid_receipt	Recibo de compra inválido: {0}. Você será denunciado.
 iap_maps_pack_enabled	Complemento do Maps Pack ativado.
-iap_search_water_points_enabled	Coloque o complemento Search Pack e Skip Water Points Pack ativado. Defina sua localização digitando \ "pesquisar <nome ou endereço do local> \".
-iap_everything_enabled	O complemento Everything Pack ativado. Defina sua localização digitando \ "pesquisar <nome ou endereço do local> \".
+iap_search_water_points_enabled	Coloque o complemento Search Pack e Skip Water Points Pack ativado. Defina sua localização digitando \"search <nome ou endereço do local>\".
+iap_everything_enabled	O complemento Everything Pack ativado. Defina sua localização digitando \"search <nome ou endereço do local>\".
 iap_all_disabled	Todos os complementos desativados.
 iap_no_purchases	Você não tem histórico de compras.
 iap_buy	COMPRAR

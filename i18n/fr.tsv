@@ -116,7 +116,7 @@ ch_invalid_number	Ce n'est pas un nombre valide.
 ch_reprompt_num_points	Numéro invalide. Entrez le nombre de points:
 ch_mte	Le nombre doit être supérieur ou égal à {0}. Entrer un nombre:
 ch_lte	Le nombre doit être inférieur ou égal à {0}. Entrer un nombre:
-no_loc_or_reset	Vous n'avez pas défini de lieu ou il a été réinitialisé. Envoyez-le en appuyant sur 🌍 / 📎 ou en envoyant une URL Google Maps. Vous pouvez également taper \ "help \" à tout moment.
+no_loc_or_reset	Vous n'avez pas défini de lieu ou il a été réinitialisé. Envoyez-le en appuyant sur 🌍 / 📎 ou en envoyant une URL Google Maps. Vous pouvez également taper \"help\" à tout moment.
 ida_found	Anomalie motivée par l'intention trouvée
 ida_type	Type: {0}
 ida_radius	Rayon: {0}
@@ -202,8 +202,8 @@ welcome_back	Bienvenue à Randonautica!
 dont_forgot_send_loc	N'oubliez pas d'envoyer votre position actuelle.
 iap_invalid_receipt	Reçu d'achat non valide: {0}. Vous serez signalé.
 iap_maps_pack_enabled	Module complémentaire Pack Cartes activé.
-iap_search_water_points_enabled	Les Add-ons Rechercher et Ignorer des points d'eau sont activés. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
-iap_everything_enabled	Le module complémentaire Pack Tout est activé. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
+iap_search_water_points_enabled	Les Add-ons Rechercher et Ignorer des points d'eau sont activés. Définissez votre emplacement en tapant \"search <nom ou adresse du lieu>\".
+iap_everything_enabled	Le module complémentaire Pack Tout est activé. Définissez votre emplacement en tapant \"search <nom ou adresse du lieu>\".
 iap_all_disabled	Tous les Add-ons sont désactivés.
 iap_no_purchases	Vous n'avez aucun historique d'achat.
 iap_buy	ACHETER
