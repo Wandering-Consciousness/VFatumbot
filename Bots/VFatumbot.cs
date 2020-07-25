@@ -255,7 +255,7 @@ namespace VFatumbot
 
                     var incoords = new double[] { lat, lon };
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
-                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
+                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, isIOS: userProfileTemporary.BotSrc == WebSrc.ios), cancellationToken);
 
                     userProfileTemporary.Country = Helpers.GetCountryFromW3W(w3wResult);
                     if (!string.IsNullOrEmpty(userProfileTemporary.Country))

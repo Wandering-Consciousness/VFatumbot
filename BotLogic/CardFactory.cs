@@ -77,7 +77,7 @@ namespace VFatumbot
             return replies;
         }
 
-        public static IMessageActivity[] CreateLocationCardsReply(ChannelPlatform platform, double[] incoords, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false, bool paying = false)
+        public static IMessageActivity[] CreateLocationCardsReply(ChannelPlatform platform, double[] incoords, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false, bool paying = false, bool isIOS = false)
         {
             if (platform == ChannelPlatform.discord)
             {
@@ -88,7 +88,7 @@ namespace VFatumbot
                 embed.Color = DiscordColor.Azure;
 
                 embed.Title = Loc.g("view_on_google_maps");
-                embed.Url = CreateGoogleMapsUrl(incoords);
+                embed.Url = CreateGoogleMapsUrl(incoords, false);
 
                 embed.Description = $"{Loc.g("street_view")}:\n{CreateGoogleStreetViewUrl(incoords)}\n\n{Loc.g("google_earth")}:\n{CreateGoogleEarthUrl(incoords)}";
                 embed.ImageUrl = (!paying ? BIT_PNG : CreateGoogleMapsStaticThumbnail(incoords));
@@ -128,7 +128,7 @@ namespace VFatumbot
             replies[0] = attachmentReply;
 
             attachmentReply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            attachmentReply.Attachments.Add(CreateGoogleMapCard(incoords, !useNativeLocationWidget || showStreetAndEarthThumbnails, showStreetAndEarthThumbnails, w3wResult, forRemoteViewing: forRemoteViewing, paying: paying));
+            attachmentReply.Attachments.Add(CreateGoogleMapCard(incoords, !useNativeLocationWidget || showStreetAndEarthThumbnails, showStreetAndEarthThumbnails, w3wResult, forRemoteViewing: forRemoteViewing, paying: paying, isIOS: isIOS));
 
             if (showStreetAndEarthThumbnails && paying)
             {
@@ -139,7 +139,7 @@ namespace VFatumbot
             return replies;
         }
 
-        public static Attachment CreateGoogleMapCard(double[] incoords, bool showMapsThumbnail, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false, bool paying = false)
+        public static Attachment CreateGoogleMapCard(double[] incoords, bool showMapsThumbnail, bool showStreetAndEarthThumbnails = false, dynamic w3wResult = null, bool forRemoteViewing = false, bool paying = false, bool isIOS = false)
         {
             var images = new List<CardImage>();
             if (showMapsThumbnail && paying)
@@ -148,7 +148,7 @@ namespace VFatumbot
             }
 
             var w3wAction = new CardAction(ActionTypes.OpenUrl, (forRemoteViewing ? $"{w3wResult.words} - {w3wResult?.nearestPlace}{Helpers.GetCountryFromW3W(w3wResult)}" : "what3words"), value: $"https://what3words.com/{w3wResult.words}");
-            var cardAction = new CardAction(ActionTypes.OpenUrl, showStreetAndEarthThumbnails ? Loc.g("open_map") : Loc.g("map"), value: CreateGoogleMapsUrl(incoords));
+            var cardAction = new CardAction(ActionTypes.OpenUrl, showStreetAndEarthThumbnails ? Loc.g("open_map") : Loc.g("map"), value: CreateGoogleMapsUrl(incoords, isIOS));
 
             var buttons = new List<CardAction> {
                 w3wAction,
@@ -223,8 +223,17 @@ namespace VFatumbot
             return "https://maps.googleapis.com/maps/api/staticmap?&markers=color:red%7Clabel:C%7C" + incoords[0] + "+" + incoords[1] + $"&zoom={(forRemoteViewing ? 4 : 15)}&size=" + Consts.THUMBNAIL_SIZE + "&maptype=roadmap&key=" + Consts.GOOGLE_MAPS_API_KEY;
         }
 
-        public static string CreateGoogleMapsUrl(double[] incoords)
+        public static string CreateGoogleMapsUrl(double[] incoords, bool isIOS)
         {
+            if (isIOS)
+            {
+                // On 2020/07/25 we switched the the /maps/search/ type URL to stop the Android bot app defaulting to showing the
+                // directions to the point in Google Maps but then that broke iOS. iOS <= v1.0.7 didn't have the logic for
+                // google.com URLs with "/maps/search" in them to load them externally from the app so the "Maps" button started
+                // loading everything an in internal inapp browser (uh icky I hate those).
+                return "https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",14z";
+            }
+
             return "https://www.google.com/maps/search/?api=1&query=" + incoords[0] + "," + incoords[1] + "&zoom=14";
         }
 
