@@ -98,8 +98,5 @@
 
         // Maximum number of tries to search for non-water points before giving up
         public const int WATER_POINTS_SEARCH_MAX = 10;
-
-        // TODO: move later when localization is implemented
-        public static string NO_LOCATION_SET_MSG = Loc.g("no_loc_or_reset"); //"You haven't set a location, or it was reset. Send it by tapping 🌍/📎 or sending a Google Maps URL. You can also type \"help\" anytime.";
     }
 }
