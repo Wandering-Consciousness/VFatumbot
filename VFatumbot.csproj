@@ -51,6 +51,8 @@
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.14.0" />
     <PackageReference Include="Microsoft.Bot.Builder.ApplicationInsights" Version="4.9.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
+    <PackageReference Include="Google.Apis" Version="1.48.0" />
+    <PackageReference Include="Google.Apis.AndroidPublisher.v3" Version="1.48.0.2023" />
   </ItemGroup>
 
   <ItemGroup>

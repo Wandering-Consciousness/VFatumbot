@@ -22,6 +22,9 @@ using CoordinateSharp; //See CoordinateSharp EULA. (Must be removed if used outs
 using System.Threading;
 using System.Net.Http.Headers;
 using System.Net;
+using Google.Apis.AndroidPublisher.v3;
+using Google.Apis.Services;
+using Google.Apis.Auth.OAuth2;
 
 namespace VFatumbot.BotLogic
 {
@@ -372,6 +375,27 @@ namespace VFatumbot.BotLogic
             var result = JsonConvert.DeserializeObject<dynamic>(jsonContent);
 
             return result.status;
+        }
+
+        public static async Task<int> VerifyGooglePlayIAPReceptAsync(string productId, string token)
+        {
+            var credentials = GoogleCredential.FromFile("google_play_developer_api_credentials.json").CreateScoped(new List<string> { AndroidPublisherService.Scope.Androidpublisher });
+
+            var aps = new AndroidPublisherService(new BaseClientService.Initializer
+            {
+                HttpClientInitializer = credentials,
+                ApplicationName = "VFatumbot",
+            });
+
+            var req = aps.Purchases.Products.Get("com.randonautica.app", productId, token);
+            var res = await req.ExecuteAsync();
+
+            if (res.PurchaseState != null)
+            {
+                return (int)res.PurchaseState;
+            }
+
+            return -1;
         }
     }
 }

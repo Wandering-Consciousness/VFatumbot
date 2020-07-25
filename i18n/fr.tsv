@@ -58,9 +58,9 @@ md_anomaly	Anomalie
 md_attractor	Attracteur
 md_void	Vide
 md_options	Options / Aide
-md_blindspotsmore	Points aveugles & plus
+md_blindspotsmore	Points aveugles et +
 md_mylocation	Ma position
-md_lets_search_paid	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des groupes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs ou des vides. <br> <br> <br> Fonctionnalités Premium disponibles - Recharge des points, points infinis, prévisualisations de cartes, saut de points d'eau, rallongement de rayon, et recherche d'emplacement personnalisée. <br> Allez dans Options / Aide → Modules complémentaires
+md_lets_search_paid	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des groupes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs ou des vides. <br> <br> <br> Fonctionnalités Premium disponibles - Recharge des points, points infinis, prévisualisations de cartes, saut de points d'eau, rallongement de rayon, et recherche d'emplacement personnalisée. <br> Allez dans Options / Aide → Add-ons
 md_invalid_action	Ce n'est pas une action valide. Qu'aimeriez-vous obtenir?
 md_lets_search	Cherchons! Qu'aimeriez-vous obtenir? <br> Les attracteurs sont des groupes denses de points aléatoires. Les vides sont le contraire. <br> Les anomalies sont les plus fortes des attracteurs ou des vides.
 md_how_many_idas	Jusqu'à combien de points aimeriez-vous chercher?
@@ -77,7 +77,7 @@ md_collecting_camera_entropy	Collection des données aléatoires de l'appareil p
 md_collecting_temporalphone_entropy	Collection des donées aléatoires de la CPU de votre téléphone...
 yes	Oui
 no	Non
-addons	Modules complémentaires
+addons	Add-ons
 update_settings_q	Mettre à jour vos paramètres?
 select_radius	Sélectionnez votre rayon en mètres ou entrez directement les chiffres
 include_water_points_q	Inclure des points d'eau?
@@ -87,11 +87,11 @@ anonymized_id_is	Votre identifiant anonyme est {0}.
 show_google_street_earth	Les aperçus Street View et Earth seront {0}.
 hidden	cachés
 displayed	affichés
-get_locsearch_skipwater_pack	Obtenez le pack Recherche d'emplacement et de Saut des points d'eau à partir du bouton Modules complémentaires.
-get_maps_pack	Obtenez le pack de Cartes pour des aperçus de cartes et de rues dans l'application à partir du bouton Modules complémentaires.
+get_locsearch_skipwater_pack	Obtenez le pack Recherche d'emplacement et de Saut des points d'eau à partir du bouton Add-ons.
+get_maps_pack	Obtenez le pack de Cartes pour des aperçus de cartes et de rues dans l'application à partir du bouton Add-ons.
 bs_quantum	Quantum
-bs_quantum_time	Temps (heure) quantique
-bs_intent_suggestions	Idées pour intentions
+bs_quantum_time	Heure quantique
+bs_intent_suggestions	Idées d'intention
 bs_mystery_point	Point mystère
 bs_pair	Paire de points
 bs_pseudo	Pseudo
@@ -202,16 +202,16 @@ welcome_back	Bienvenue à Randonautica!
 dont_forgot_send_loc	N'oubliez pas d'envoyer votre position actuelle.
 iap_invalid_receipt	Reçu d'achat non valide: {0}. Vous serez signalé.
 iap_maps_pack_enabled	Module complémentaire Pack Cartes activé.
-iap_search_water_points_enabled	Les modules complémentaires Rechercher et Ignorer des points d'eau sont activés. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
+iap_search_water_points_enabled	Les Add-ons Rechercher et Ignorer des points d'eau sont activés. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
 iap_everything_enabled	Le module complémentaire Pack Tout est activé. Définissez votre emplacement en tapant \ "rechercher <nom ou adresse du lieu> \".
-iap_all_disabled	Tous les modules complémentaires sont désactivés.
+iap_all_disabled	Tous les Add-ons sont désactivés.
 iap_no_purchases	Vous n'avez aucun historique d'achat.
 iap_buy	ACHETER
 iap_enable	ACTIVER
 iap_maps_pack	Pack Cartes
 iap_maps_pack_desc	Aperçu des cartes et des rues dans l'application
-iap_search_water_points	Recherche de lieu + Ignorer les points d'eau
-iap_search_water_points_desc	Rechercher par noms des lieux et sauter les points d'eau
+iap_search_water_points	Cherche lieu + Saute de l'eau
+iap_search_water_points_desc	Chercher par nom de lieu, sauter points d'eau
 iap_everything_pack	Le Pack Tout
 iap_everything_pack_desc	Cartes + Recherche d'emplacement + Ignorer des points d'eau
 iap_enabling...	Activation de la fonction...
@@ -221,7 +221,7 @@ connecting_bot	Connexion au bot...
 sending_entropy	Envoi de l'entropie...
 dl_x_remaining	Vous avez actuellement {0} points. 1 point est utilisé à chaque fois que vous générez un emplacement. Votre solde sera rechargé gratuitement jusqu'à un maximum de {1} points chaque jour où vous ouvrez l'application.
 dl_x_tokens	Vous avez actuellement {0} points.
-dl_no_tokens	Il ne vous reste plus de points. Veuillez recharger à partir du menu des modules complémentaires ou attendez 24 heures pour votre recharge gratuite.
+dl_no_tokens	Il ne vous reste plus de points. Veuillez recharger à partir du menu des Add-ons ou attendez 24 heures pour votre recharge gratuite.
 iap_added_x_points	Ajout de {0} points. Vous en avez maintenant {1}.
 iap_infinite_points_enabled	Points infinis activé.
 iap_20km_radius_extended	Rayon de recherche maximal étendu à 20 km.
@@ -236,3 +236,13 @@ iap_everything_d	Tous les packs + points infinis
 iap_infinnypoints_t	Points infinis
 iap_infinnypoints_d	Trouvez un nombre illimité d'emplacements
 dont_tresspass	Si ce point est sur de la propriété privée, NE PÉNÉTREZ PAS ILLÉGALEMENT! N'entrez jamais aux lieux dangereux comme des voies ferrées, des zones interdits, etc. N'entrez pas aux propriétés abandonnées. Suivez les lois et les régulations locaux et fédéraux. Soyez respectueux, responsable, et gardez une mentalité positive à tout moment lorsque vous Randonautez.
+pro_tips_1	Pro Tips
+pro_tips_2	Randonaut with a positive mindset!
+pro_tips_3	Bring a trash bag to help the environment.
+pro_tips_4	If you normally wouldn’t adventure alone, go with a friend or group.
+pro_tips_5	Randonauting is best done as a daytime activity.
+pro_tips_6	Always Randonaut with a charged phone.
+pro_tips_7	Use situational awareness.
+pro_tips_8	Be respectful of property owners. Never trespass.
+pro_tips_9	Obey all quarantine, curfew and social distancing regulations in your area.
+pro_tips_10	Do not go into dangerous areas.

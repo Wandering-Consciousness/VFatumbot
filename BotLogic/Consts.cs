@@ -2,7 +2,7 @@
 {
     public class Consts
     {
-        private const string _appVersion = "4.9.2";
+        private const string _appVersion = "4.9.10";
 #if RELEASE_PROD
         public const string APP_VERSION = _appVersion;
 #else
