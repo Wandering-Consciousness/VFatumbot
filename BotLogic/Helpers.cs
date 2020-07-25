@@ -379,7 +379,7 @@ namespace VFatumbot.BotLogic
 
         public static async Task<int> VerifyGooglePlayIAPReceptAsync(string productId, string token)
         {
-            var credentials = GoogleCredential.FromFile("Properties/google_play_developer_api_credentials.json").CreateScoped(new List<string> { AndroidPublisherService.Scope.Androidpublisher });
+            var credentials = GoogleCredential.FromFile("google_play_developer_api_credentials.json").CreateScoped(new List<string> { AndroidPublisherService.Scope.Androidpublisher });
 
             var aps = new AndroidPublisherService(new BaseClientService.Initializer
             {
