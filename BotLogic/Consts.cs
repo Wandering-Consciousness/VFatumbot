@@ -2,7 +2,7 @@
 {
     public class Consts
     {
-        private const string _appVersion = "4.9.15";
+        private const string _appVersion = "4.9.16";
 #if RELEASE_PROD
         public const string APP_VERSION = _appVersion;
 #else
@@ -97,6 +97,6 @@
         public const float CHAIN_DISTANCE_MIN = 2;
 
         // Maximum number of tries to search for non-water points before giving up
-        public const int WATER_POINTS_SEARCH_MAX = 10;
+        public const int WATER_POINTS_SEARCH_MAX = 3;
     }
 }
