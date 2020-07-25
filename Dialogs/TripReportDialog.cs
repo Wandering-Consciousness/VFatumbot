@@ -580,6 +580,7 @@ namespace VFatumbot
                 "[Google Maps](https://www.google.com/maps/place/" + incoords[0] + "+" + incoords[1] + "/@" + incoords[0] + "+" + incoords[1] + ",18z)  |  " +
                 "[Google Earth](https://earth.google.com/web/search/" + incoords[0] + "," + incoords[1] + ")\n\n" +
                 (!string.IsNullOrEmpty(answers.Intent) ? "Intent set: " + answers.Intent + "  \n" : "") +
+                (!string.IsNullOrEmpty(userProfileTemporary.LastRNGType) ? "RNG: " + userProfileTemporary.LastRNGType + "  \n" : "") +
                 (!string.IsNullOrEmpty(intentSuggestions) ? "Intents suggested: " + intentSuggestions + "  \n" : "") +
                 "Artifact(s) collected? " + (answers.ArtifactCollected ? "Yes" : "No") + "  \n" +
                 "Was a 'wow and astounding' trip? " + (answers.WasFuckingAmazing ? "Yes" : "No") + "  \n" +
@@ -603,6 +604,10 @@ namespace VFatumbot
                 newLines = newLines.Where(line => !line.Contains("Radius")); // Radius
                 var shortMessage = string.Join("\n", newLines);
                 shortMessage = shortMessage.Replace("\n\n\n", "\n\n");
+                if (!string.IsNullOrEmpty(userProfileTemporary.LastRNGType))
+                {
+                    shortMessage += "  \nRNG: " + userProfileTemporary.LastRNGType + "  \n";
+                }
 
                 await PostTripReportToRedditAsync(
                     (!string.IsNullOrEmpty(answers.Intent) ? answers.Intent + " @" : "Trip report @")
