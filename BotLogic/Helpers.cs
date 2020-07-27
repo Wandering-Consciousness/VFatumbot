@@ -46,7 +46,7 @@ namespace VFatumbot.BotLogic
 
             if (!string.IsNullOrEmpty(turnContext.Activity.Text) && !userProfileTemporary.IsLocationSet)
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text(Consts.NO_LOCATION_SET_MSG), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("no_loc_or_reset")), cancellationToken);
 
                 // Hack coz Facebook Messenge stopped showing "Send Location" button
                 if (turnContext.Activity.ChannelId.Equals("facebook"))

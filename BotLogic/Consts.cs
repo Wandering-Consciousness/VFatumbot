@@ -2,7 +2,7 @@
 {
     public class Consts
     {
-        private const string _appVersion = "4.9.10";
+        private const string _appVersion = "4.9.16";
 #if RELEASE_PROD
         public const string APP_VERSION = _appVersion;
 #else
@@ -73,7 +73,7 @@
         public const string AMPLITUDE_HTTP_API_KEY = "ff37ac1848cacc399af560601253c125";
 #endif
 
-        public const int DAILY_MAX_FREE_OWL_TOKENS_REFILL = 10;
+        public const int DAILY_MAX_FREE_OWL_TOKENS_REFILL = 15;
 
         // Google Maps etc thumbnail sizes to use in reply cards
         public const string THUMBNAIL_SIZE = "320x320";
@@ -97,9 +97,6 @@
         public const float CHAIN_DISTANCE_MIN = 2;
 
         // Maximum number of tries to search for non-water points before giving up
-        public const int WATER_POINTS_SEARCH_MAX = 10;
-
-        // TODO: move later when localization is implemented
-        public static string NO_LOCATION_SET_MSG = Loc.g("no_loc_or_reset"); //"You haven't set a location, or it was reset. Send it by tapping 🌍/📎 or sending a Google Maps URL. You can also type \"help\" anytime.";
+        public const int WATER_POINTS_SEARCH_MAX = 3;
     }
 }

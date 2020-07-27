@@ -86,7 +86,7 @@ namespace VFatumbot
                         {
                             await turnContext.SendActivityAsync(CardFactory.CreateAppStoreDownloadCard());
                         }
-                        await turnContext.SendActivityAsync(MessageFactory.Text(Consts.NO_LOCATION_SET_MSG), cancellationToken);
+                        await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("no_loc_or_reset")), cancellationToken);
                     } else if (InterceptConversationStartWithLocale(turnContext, out startLocale)) {
                         userProfilePersistent.SetLocale(startLocale);
                         await DoWelcomeAsync(turnContext, userProfilePersistent.Locale, cancellationToken);
@@ -255,7 +255,7 @@ namespace VFatumbot
 
                     var incoords = new double[] { lat, lon };
                     var w3wResult = await Helpers.GetWhat3WordsAddressAsync(incoords);
-                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack), cancellationToken);
+                    await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, isIOS: userProfileTemporary.BotSrc == WebSrc.ios), cancellationToken);
 
                     userProfileTemporary.Country = Helpers.GetCountryFromW3W(w3wResult);
                     if (!string.IsNullOrEmpty(userProfileTemporary.Country))
@@ -299,7 +299,7 @@ namespace VFatumbot
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && !userProfileTemporary.IsLocationSet)
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text(Consts.NO_LOCATION_SET_MSG), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("no_loc_or_reset")), cancellationToken);
 
                 // Hack coz Facebook Messenge stopped showing "Send Location" button
                 if (turnContext.Activity.ChannelId.Equals("facebook"))
