@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using Azure.Storage.Queues;
 using Newtonsoft.Json;
 using VFatumbot.BotLogic;
 
@@ -138,12 +139,18 @@ namespace VFatumbot
         public override byte[] NextHexBytes(int len, int meta, out string shaGid)
         {
             var buffer = new List<byte>();
-
-            var slen = 8192;
+            QueueClient queue = new QueueClient("DefaultEndpointsProtocol=https;AccountName=medentropyqueue;AccountKey=YsLKNOquLXl/f5dMS6aL0RjVIC0BrOvuOsKsc5FgbNVIyi9GCKF9Wjzl+SoNgd8sPiBKN9ZfnGmbf9W52f+4Nw==;EndpointSuffix=core.windows.net", "entropy-queue");
             while (buffer.Count < len)
             {
-                var smallBuff = new byte[slen];
-                randbytes(smallBuff, slen);
+                byte[] smallBuff = null;
+                var response = queue.ReceiveMessages(3);
+                var msgs = response.Value;
+                foreach (var msg in msgs)
+                {
+                    var b64 = msg.MessageText.Replace("<entropy>", "").Replace("</entropy>", "");
+                    smallBuff = Convert.FromBase64String(b64);
+
+                }
                 buffer.AddRange(smallBuff);
             }
 
@@ -152,54 +159,74 @@ namespace VFatumbot
 
             return buffer.ToArray();
 
-//            if (meta == 0
-//                && !string.IsNullOrEmpty(EntropySrcQueryString) // quick revert back to directly calling ANU as libwrapper Azure Functions are timing out
-//                )
-//            {
-//                var buffer = new byte[len];
-//                randbytes(buffer, len);
+            //var buffer = new List<byte>();
 
-//                shaGid = "61BE55A8E2F6B4E172338BDDF184D6DBEE29C98853E0A0485ECEE7F27B9AF0B4";
+            //var slen = 8192;
+            //while (buffer.Count < len)
+            //{
+            //    var smallBuff = new byte[slen];
+            //    randbytes(smallBuff, slen);
+            //    buffer.AddRange(smallBuff);
+            //}
 
-//                System.Console.WriteLine("SIMON'S here:" + buffer[2]);
+            //// TODO: figure out real sha hash
+            //shaGid = "61BE55A8E2F6B4E172338BDDF184D6DBEE29C98853E0A0485ECEE7F27B9AF0B4";
 
-//                return buffer;
+            //return buffer.ToArray();
 
-//                // switching to David's libwrapper API
-//                var queryStr = $"raw=true&size={len * 2}";
-//                if (!string.IsNullOrEmpty(EntropySrcQueryString))
-//                {
-//                    queryStr = EntropySrcQueryString;
-//                }
-//#if RELEASE_PROD
-//                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
-//#else
-//                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
-//                //var connStr = $"http://127.0.0.1:3000/entropy?{queryStr}";
-//#endif
-//                var jsonStr = Client.DownloadString(connStr);
-//                dynamic response = null;
-//                try
-//                {
-//                    response = JsonConvert.DeserializeObject<dynamic>(jsonStr);
-//                }
-//                catch (JsonReaderException jre)
-//                {
-//                    throw new JsonReaderException("Bug #2 caught! Please post a screenshot of this onto reddit.com/r/randonauts: " + jsonStr);
-//                }
-//                var hex = response.Entropy?.ToString();
 
-//                // convert to bytes
-//                int NumberChars = hex.Length;
-//                byte[] bytes = new byte[NumberChars / 2];
-//                for (int i = 0; i < NumberChars - 1; i += 2)
-//                    bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
 
-//                shaGid = response.Gid;
-//                return bytes;
-//            }
 
-//            return base.NextHexBytes(len, meta, out shaGid);
+
+
+            //            if (meta == 0
+            //                && !string.IsNullOrEmpty(EntropySrcQueryString) // quick revert back to directly calling ANU as libwrapper Azure Functions are timing out
+            //                )
+            //            {
+            //                var buffer = new byte[len];
+            //                randbytes(buffer, len);
+
+            //                shaGid = "61BE55A8E2F6B4E172338BDDF184D6DBEE29C98853E0A0485ECEE7F27B9AF0B4";
+
+            //                System.Console.WriteLine("SIMON'S here:" + buffer[2]);
+
+            //                return buffer;
+
+            //                // switching to David's libwrapper API
+            //                var queryStr = $"raw=true&size={len * 2}";
+            //                if (!string.IsNullOrEmpty(EntropySrcQueryString))
+            //                {
+            //                    queryStr = EntropySrcQueryString;
+            //                }
+            //#if RELEASE_PROD
+            //                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
+            //#else
+            //                var connStr = $"https://api.randonauts.com/entropy?{queryStr}";
+            //                //var connStr = $"http://127.0.0.1:3000/entropy?{queryStr}";
+            //#endif
+            //                var jsonStr = Client.DownloadString(connStr);
+            //                dynamic response = null;
+            //                try
+            //                {
+            //                    response = JsonConvert.DeserializeObject<dynamic>(jsonStr);
+            //                }
+            //                catch (JsonReaderException jre)
+            //                {
+            //                    throw new JsonReaderException("Bug #2 caught! Please post a screenshot of this onto reddit.com/r/randonauts: " + jsonStr);
+            //                }
+            //                var hex = response.Entropy?.ToString();
+
+            //                // convert to bytes
+            //                int NumberChars = hex.Length;
+            //                byte[] bytes = new byte[NumberChars / 2];
+            //                for (int i = 0; i < NumberChars - 1; i += 2)
+            //                    bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+
+            //                shaGid = response.Gid;
+            //                return bytes;
+            //            }
+
+            //            return base.NextHexBytes(len, meta, out shaGid);
         }
 
         protected WebClient Client
