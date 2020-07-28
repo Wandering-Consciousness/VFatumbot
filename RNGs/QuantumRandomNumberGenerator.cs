@@ -154,8 +154,7 @@ namespace VFatumbot
                 buffer.AddRange(smallBuff);
             }
 
-            // TODO: figure out real sha hash
-            shaGid = "61BE55A8E2F6B4E172338BDDF184D6DBEE29C98853E0A0485ECEE7F27B9AF0B4";
+            shaGid = Helpers.Sha256Hash(buffer.ToArray());
 
             return buffer.ToArray();
 
@@ -169,8 +168,7 @@ namespace VFatumbot
             //    buffer.AddRange(smallBuff);
             //}
 
-            //// TODO: figure out real sha hash
-            //shaGid = "61BE55A8E2F6B4E172338BDDF184D6DBEE29C98853E0A0485ECEE7F27B9AF0B4";
+            //shaGid = Helpers.Sha256Hash(buffer.ToArray());
 
             //return buffer.ToArray();
 
