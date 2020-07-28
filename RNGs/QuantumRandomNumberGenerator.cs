@@ -144,9 +144,13 @@ namespace VFatumbot
             {
                 byte[] smallBuff = null;
                 var response = queue.ReceiveMessages(3);
+                if (response == null || response.Value == null)
+                    continue;
                 var msgs = response.Value;
                 foreach (var msg in msgs)
                 {
+                    if (msg == null)
+                        continue;
                     var b64 = msg.MessageText.Replace("<entropy>", "").Replace("</entropy>", "");
                     smallBuff = Convert.FromBase64String(b64);
 
