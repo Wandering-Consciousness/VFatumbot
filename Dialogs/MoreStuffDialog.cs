@@ -70,12 +70,12 @@ namespace VFatumbot
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
                 }
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum");
                 await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
             }
             else if (Loc.g("bs_intent_suggestions").Equals(val))
             {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Intent Suggestions");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Intent Suggestions");
                 await actionHandler.IntentSuggestionActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
             }
             else if (Loc.g("bs_mystery_point").Equals(val))
@@ -86,7 +86,7 @@ namespace VFatumbot
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
                 }
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Mystery Point");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Mystery Point");
                 await actionHandler.MysteryPointActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
             }
             else if (Loc.g("bs_pair").Equals(val))
@@ -97,7 +97,7 @@ namespace VFatumbot
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
                 }
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Pair");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Pair");
                 // Pairs was originally in the MainDialog so we fudge a way to here to go back to the MainDialog and skip to the GetNumIdas prompt
                 // to avoid having to copy/paste half the MainDialog's code here (too lazy for proper refactoring)
                 callbackOptions.JumpToAskHowManyIDAs = "Pair";
@@ -111,12 +111,12 @@ namespace VFatumbot
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
                 }
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum Time");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum Time");
                 await actionHandler.QuantumActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog, true);
             }
             else if (Loc.g("bs_pseudo").Equals(val))
             {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Pseudo");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Pseudo");
                 await actionHandler.PseudoActionAsync(stepContext.Context, userProfileTemporary, cancellationToken, _mainDialog);
             }
             else if (Loc.g("bs_scan").Equals(val))
@@ -127,7 +127,7 @@ namespace VFatumbot
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
                 }
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Scan");
                 await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(ScanDialog), this, cancellationToken);
             }
@@ -139,12 +139,12 @@ namespace VFatumbot
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
                 }
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Chains");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Chains");
                 return await stepContext.BeginDialogAsync(nameof(ChainsDialog), this, cancellationToken);
             }
             else if (Loc.g("bs_dice").Equals(val))
             {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum Dice");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Quantum Dice");
                 return await stepContext.BeginDialogAsync(nameof(QuantumDiceDialog), this, cancellationToken);
             }
             //else if (Loc.g("bs_randotrips").Equals(val))
@@ -158,7 +158,7 @@ namespace VFatumbot
             //}
             else if (Loc.g("bs_back").Equals(val))
             {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("< Back");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("< Back");
                 return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             }
 

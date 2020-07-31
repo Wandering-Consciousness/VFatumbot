@@ -97,7 +97,7 @@ namespace VFatumbot
             if (Loc.g("yes").Equals(val)) {
                 // TODO: a quick hack to reset IsScanning in case it gets stuck in that state
                 userProfileTemporary.IsScanning = false;
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Update Settings");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Update Settings");
                 await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
                 // << EOF TODO. Will figure out whether this needs handling properly later on.
 
@@ -105,7 +105,7 @@ namespace VFatumbot
             //} else if (Loc.g("help").Equals(val)) {
                 // case "Help" is picked up elsewhere
             } else {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Don't Update Settings");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Don't Update Settings");
                 return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken:cancellationToken);
             }
         }
@@ -174,7 +174,7 @@ namespace VFatumbot
             var inputtedRadius = int.Parse(stepContext.Context.Activity.Text);
             var userProfileTemporary = await _userProfileTemporaryAccessor.GetAsync(stepContext.Context);
             userProfileTemporary.Radius = inputtedRadius;
-            AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Radius", new Dictionary<string, object>() { {"Radius", inputtedRadius } });
+            //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Radius", new Dictionary<string, object>() { {"Radius", inputtedRadius } });
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
 
             if (userProfileTemporary.HasSkipWaterPoints)
@@ -197,12 +197,12 @@ namespace VFatumbot
             if (Loc.g("yes").Equals(val))
             {
                 userProfileTemporary.IsIncludeWaterPoints = true;
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Skip Water Points", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsIncludeWaterPoints } });
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Skip Water Points", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsIncludeWaterPoints } });
             }
             else
             {
                 userProfileTemporary.IsIncludeWaterPoints = false;
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Skip Water Points", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsIncludeWaterPoints } });
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Skip Water Points", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsIncludeWaterPoints } });
             }
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
@@ -224,12 +224,12 @@ namespace VFatumbot
             if (Loc.g("yes").Equals(val))
             {
                 userProfileTemporary.IsDisplayGoogleThumbnails = true;
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Display Google Thumbnails", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsDisplayGoogleThumbnails } });
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Display Google Thumbnails", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsDisplayGoogleThumbnails } });
             }
             else
             {
                 userProfileTemporary.IsDisplayGoogleThumbnails = false;
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Display Google Thumbnails", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsDisplayGoogleThumbnails } });
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Display Google Thumbnails", new Dictionary<string, object>() { { "IsSkip", userProfileTemporary.IsDisplayGoogleThumbnails } });
             }
 
             await _userProfileTemporaryAccessor.SetAsync(stepContext.Context, userProfileTemporary);
