@@ -171,6 +171,7 @@ namespace VFatumbot
                 {"IsIncludeWaterPoints", userProfileTemporary.IsIncludeWaterPoints },
                 {"IsDisplayGoogleThumbnails", userProfileTemporary.IsDisplayGoogleThumbnails },
                 {"IsUseClassicMode", userProfileTemporary.IsUseClassicMode },
+                {"Points", userProfilePersistent.OwlTokens },
                 {"Platform", platform},
             };
             if (!string.IsNullOrEmpty(userProfileTemporary.Country))
@@ -539,6 +540,24 @@ namespace VFatumbot
                             userProfilePersistent.Purchases[iapData.productID] = iapData;
                         }
                     }
+
+                    try
+                    {
+                        var userProperties = new Dictionary<string, object>()
+                        {
+                            {"ProductID", iapData.productID},
+                            {"ServerVerificationData", iapData.serverVerificationData },
+                            {"HasSkipWaterPoints", userProfilePersistent.HasSkipWaterPoints },
+                            {"HasLocationSearch", userProfilePersistent.HasLocationSearch },
+                            {"HasMapsPack", userProfilePersistent.HasMapsPack },
+                            {"IsIncludeWaterPoints", userProfilePersistent.IsIncludeWaterPoints },
+                            {"IsDisplayGoogleThumbnails", userProfilePersistent.IsDisplayGoogleThumbnails },
+                            {"IsUseClassicMode", userProfilePersistent.IsUseClassicMode },
+                            {"Points", userProfilePersistent.OwlTokens },
+                        };
+                        AmplitudeService.Amplitude.InstanceFor(userProfilePersistent.UserId, userProperties).Track("Purchase");
+                    }
+                    catch (Exception e) { }
 
                     return true;
                 }

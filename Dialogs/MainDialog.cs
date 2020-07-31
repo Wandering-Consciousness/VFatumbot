@@ -324,7 +324,13 @@ namespace VFatumbot
                 // and then pass onto the app layer to load the native add-ons shop screen
                 var requestEntropyActivity = Activity.CreateEventActivity();
                 requestEntropyActivity.ChannelData = $"addons,{userProfileTemporary.UserId}";
-                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Add-ons");
+
+                if (userProfileTemporary.UserProperties != null && userProfileTemporary.UserProperties.ContainsKey("Points"))
+                {
+                    userProfileTemporary.UserProperties["Points"] = userProfileTemporary.OwlTokens;
+                }
+                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Add-ons");
+
                 await stepContext.Context.SendActivityAsync(requestEntropyActivity);
                 return await stepContext.ReplaceDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             } else if (Loc.g("md_options").Equals(val)) {
