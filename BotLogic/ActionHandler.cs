@@ -248,7 +248,7 @@ namespace VFatumbot.BotLogic
                         }
 
                         userProfileTemporary.Radius = inputtedRadius;
-                        AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Radius", new Dictionary<string, object>() { { "Radius", inputtedRadius }, { "Command", "/setradius" } });
+                        //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Set Radius", new Dictionary<string, object>() { { "Radius", inputtedRadius }, { "Command", "/setradius" } });
                         await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("changed_radius", oldRadius, userProfileTemporary.Radius)), cancellationToken);
                     }
                     else
@@ -335,7 +335,7 @@ namespace VFatumbot.BotLogic
             else if (command.StartsWith("/help", StringComparison.InvariantCulture) ||
                      command.StartsWith("/morehelp", StringComparison.InvariantCulture))
             {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Help", new Dictionary<string, object>() { { "Command", "/help" } });
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Help", new Dictionary<string, object>() { { "Command", "/help" } });
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, mainDialog, cancellationToken);
             }
             else if (command.Equals("/stats"))
@@ -558,7 +558,7 @@ namespace VFatumbot.BotLogic
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, isIOS: userProfileTemporary.BotSrc == WebSrc.ios), cancellationToken);
                                 await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
-                                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Attractor" }, {"IsScan", doScan } , { "Radius", userProfileTemporary.Radius }, {"RNG", userProfileTemporary.LastRNGType }, { "IDA Count", idacou } });
+                                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Attractor" }, {"IsScan", doScan } , { "Radius", userProfileTemporary.Radius }, {"RNG", userProfileTemporary.LastRNGType }, { "IDA Count", idacou } });
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -690,7 +690,7 @@ namespace VFatumbot.BotLogic
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, isIOS: userProfileTemporary.BotSrc == WebSrc.ios), cancellationToken);
                                 await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
-                                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Void" }, {"IsScan", doScan } , { "Radius", userProfileTemporary.Radius }, {"RNG", userProfileTemporary.LastRNGType }, { "IDA Count", idacou } });
+                                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Void" }, {"IsScan", doScan } , { "Radius", userProfileTemporary.Radius }, {"RNG", userProfileTemporary.LastRNGType }, { "IDA Count", idacou } });
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -836,7 +836,7 @@ namespace VFatumbot.BotLogic
 
                                 await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, isIOS: userProfileTemporary.BotSrc == WebSrc.ios), cancellationToken);
                                 await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
-                                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Anomaly" }, { "IsScan", doScan }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
+                                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Anomaly" }, { "IsScan", doScan }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
                             }
 
                             CallbackOptions callbackOptions = new CallbackOptions()
@@ -958,7 +958,7 @@ namespace VFatumbot.BotLogic
                         if (!string.IsNullOrEmpty(mesg))
                         {
                             await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
-                            AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Quantum" + (suggestTime ? " Time" : "") }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
+                            //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Quantum" + (suggestTime ? " Time" : "") }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
                         }
 
                         CallbackOptions callbackOptions = new CallbackOptions()
@@ -1029,7 +1029,7 @@ namespace VFatumbot.BotLogic
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, isIOS: userProfileTemporary.BotSrc == WebSrc.ios), cancellationToken);
                         await Helpers.SendPushNotification(userProfileTemporary, Loc.g("point_generated"), mesg);
-                        AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Pseudo" }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
+                        //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Pseudo" }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -1175,7 +1175,7 @@ namespace VFatumbot.BotLogic
                                 await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("num_water_voids_skipped", numVoiWaterPointsSkipped)), cancellationToken);
 
                             await Helpers.SendPushNotification(userProfileTemporary, Loc.g("pair_points_detected"), attMessagesArray[0]); // just send one notification
-                            AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Pair" }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
+                            //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Pair" }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
 
                             CallbackOptions callbackOptions = new CallbackOptions()
                             {
@@ -1328,7 +1328,7 @@ namespace VFatumbot.BotLogic
                         var chain = origin.Concat(generatedPoints).ToArray();
                         await turnContext.SendActivitiesAsync(CardFactory.CreateChainCardReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), chain), cancellationToken);
                         await Helpers.SendPushNotification(userProfileTemporary, Loc.g("chain_generated"), mesg);
-                        AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Chain Generated", new Dictionary<string, object>() { { "Type", pointType }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType }, { "Ordering", isCentered ? "Centered" : "Sequential" }, { "MaxDistance", maxDistance } });
+                        //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Chain Generated", new Dictionary<string, object>() { { "Type", pointType }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType }, { "Ordering", isCentered ? "Centered" : "Sequential" }, { "MaxDistance", maxDistance } });
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {
@@ -1516,7 +1516,7 @@ namespace VFatumbot.BotLogic
 
                         await turnContext.SendActivitiesAsync(CardFactory.CreateLocationCardsReply(Enum.Parse<ChannelPlatform>(turnContext.Activity.ChannelId), incoords, userProfileTemporary.IsDisplayGoogleThumbnails, w3wResult: w3wResult, paying: userProfileTemporary.HasMapsPack, isIOS: userProfileTemporary.BotSrc == WebSrc.ios), cancellationToken);
                         await Helpers.SendPushNotification(userProfileTemporary, Loc.g("mystery_point_generated"), mesg);
-                        AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Mystery" }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
+                        //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Point Generated", new Dictionary<string, object>() { { "Type", "Mystery" }, { "Radius", userProfileTemporary.Radius }, { "RNG", userProfileTemporary.LastRNGType } });
 
                         CallbackOptions callbackOptions = new CallbackOptions()
                         {

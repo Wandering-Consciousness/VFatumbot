@@ -171,6 +171,7 @@ namespace VFatumbot
                 {"IsIncludeWaterPoints", userProfileTemporary.IsIncludeWaterPoints },
                 {"IsDisplayGoogleThumbnails", userProfileTemporary.IsDisplayGoogleThumbnails },
                 {"IsUseClassicMode", userProfileTemporary.IsUseClassicMode },
+                {"Points", userProfilePersistent.OwlTokens },
                 {"Platform", platform},
             };
             if (!string.IsNullOrEmpty(userProfileTemporary.Country))
@@ -195,7 +196,7 @@ namespace VFatumbot
 
                     // Piggy back of the startup event here for Amplitude
                     userProfileTemporary.StartSessionTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                    Amplitude.InstanceFor(userProfilePersistent.UserId, userProfileTemporary.UserProperties).Track("Start");
+                    //AmplitudeService.Amplitude.InstanceFor(userProfilePersistent.UserId, userProfileTemporary.UserProperties).Track("Start");
                 }
             }
             else
@@ -232,7 +233,7 @@ namespace VFatumbot
                     {
                         lat = result.Item1;
                         lon = result.Item2;
-                        AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Search Location");
+                        //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Search Location");
                     }
                     else
                     {
@@ -262,7 +263,7 @@ namespace VFatumbot
                     {
                         userProfileTemporary.Country = userProfileTemporary.Country.Replace("(", "").Replace(")", "");
                     }
-                    AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Location Sent");
+                    //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Location Sent");
 
                     await _userProfileTemporaryAccessor.SetAsync(turnContext, userProfileTemporary);
                     await _userTemporaryState.SaveChangesAsync(turnContext, false, cancellationToken);
@@ -280,7 +281,7 @@ namespace VFatumbot
                      turnContext.Activity.Text.EndsWith(Loc.g("help"), StringComparison.InvariantCultureIgnoreCase) &&
                      !turnContext.Activity.Text.Contains(Loc.g("md_options"), StringComparison.InvariantCultureIgnoreCase)) // Menu was changed to "Options/Help" so avoid be caught here
             {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Help");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Help");
                 await Helpers.HelpAsync(turnContext, userProfileTemporary, _mainDialog, cancellationToken);
             }
             else if (!string.IsNullOrEmpty(turnContext.Activity.Text) && (
@@ -539,6 +540,24 @@ namespace VFatumbot
                             userProfilePersistent.Purchases[iapData.productID] = iapData;
                         }
                     }
+
+                    try
+                    {
+                        var userProperties = new Dictionary<string, object>()
+                        {
+                            {"ProductID", iapData.productID},
+                            {"ServerVerificationData", iapData.serverVerificationData },
+                            {"HasSkipWaterPoints", userProfilePersistent.HasSkipWaterPoints },
+                            {"HasLocationSearch", userProfilePersistent.HasLocationSearch },
+                            {"HasMapsPack", userProfilePersistent.HasMapsPack },
+                            {"IsIncludeWaterPoints", userProfilePersistent.IsIncludeWaterPoints },
+                            {"IsDisplayGoogleThumbnails", userProfilePersistent.IsDisplayGoogleThumbnails },
+                            {"IsUseClassicMode", userProfilePersistent.IsUseClassicMode },
+                            {"Points", userProfilePersistent.OwlTokens },
+                        };
+                        AmplitudeService.Amplitude.InstanceFor(userProfilePersistent.UserId, userProperties).Track("Purchase");
+                    }
+                    catch (Exception e) { }
 
                     return true;
                 }

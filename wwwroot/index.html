@@ -23,46 +23,7 @@
 
         gtag('config', 'UA-150961256-1');
     </script>
-    <script type="text/javascript">(function (e, t) {
-        var n = e.amplitude || { _q: [], _iq: {} }; var r = t.createElement("script")
-            ; r.type = "text/javascript"
-            ; r.integrity = "sha384-RsEu4WZflrqYcEacpfoGSib3qaSvdYwT4D+DrWqeBuDarSzjwUQR1jO8gDiXZd0E"
-            ; r.crossOrigin = "anonymous"; r.async = true
-            ; r.src = "https://cdn.amplitude.com/libs/amplitude-6.2.0-min.gz.js"
-            ; r.onload = function () {
-                if (!e.amplitude.runQueuedFunctions) {
-                    console.log("[Amplitude] Error: could not load SDK")
-                }
-            }
-            ; var i = t.getElementsByTagName("script")[0]; i.parentNode.insertBefore(r, i)
-            ; function s(e, t) {
-            e.prototype[t] = function () {
-                this._q.push([t].concat(Array.prototype.slice.call(arguments, 0))); return this
-            }
-            }
-        var o = function () { this._q = []; return this }
-            ; var a = ["add", "append", "clearAll", "prepend", "set", "setOnce", "unset"]
-            ; for (var u = 0; u < a.length; u++) { s(o, a[u]) } n.Identify = o; var c = function () {
-            this._q = []
-                ; return this
-            }
-            ; var l = ["setProductId", "setQuantity", "setPrice", "setRevenueType", "setEventProperties"]
-            ; for (var p = 0; p < l.length; p++) { s(c, l[p]) } n.Revenue = c
-            ; var d = ["init", "logEvent", "logRevenue", "setUserId", "setUserProperties", "setOptOut", "setVersionName", "setDomain", "setDeviceId", "enableTracking", "setGlobalUserProperties", "identify", "clearUserProperties", "setGroup", "logRevenueV2", "regenerateDeviceId", "groupIdentify", "onInit", "logEventWithTimestamp", "logEventWithGroups", "setSessionId", "resetSessionId"]
-            ; function v(e) {
-                function t(t) {
-                e[t] = function () {
-                    e._q.push([t].concat(Array.prototype.slice.call(arguments, 0)))
-                }
-                }
-                for (var n = 0; n < d.length; n++) { t(d[n]) }
-            } v(n); n.getInstance = function (e) {
-                e = (!e || e.length === 0 ? "$default_instance" : e).toLowerCase()
-                    ; if (!n._iq.hasOwnProperty(e)) { n._iq[e] = { _q: [] }; v(n._iq[e]) } return n._iq[e]
-            }
-            ; e.amplitude = n
-        })(window, document);
-    </script>
+    
     <style>
 
         @import "main49.css";
@@ -191,8 +152,6 @@
             }
             var sha256userId = sha256(userId);
 
-            amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166", userId);
-
             // Catch incoming events from bot
             const store = window.WebChat.createStore(
                 {},
@@ -214,15 +173,12 @@
                     if (data.channelData.startsWith("camrng")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadCamRNGWithBytesNeeded.postMessage(splitted[1]);
-                        //amplitude.getInstance().logEvent('CameraRNG');
                     } else if (data.channelData.startsWith("temporal")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadTemporalWithBytesNeeded.postMessage(splitted[1]);
-                        //amplitude.getInstance().logEvent('TemporalRNG');
                     } else if (data.channelData.startsWith("addons")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadNativeShop.postMessage(splitted[1]);
-                        //amplitude.getInstance().logEvent('OpenShop');
                     }
                 }
             });
@@ -266,26 +222,6 @@
                 };
                 directLine.postActivity(activity).subscribe(function (id) {
                 });
-
-                var iapObj = JSON.parse(iapData);
-                var price = 0.0;
-                if (iapObj.productID == 'fatumbot.addons.nc.maps_pack.v2') {
-                    price = 1.99;
-                } else if (iapObj.productID == 'fatumbot.addons.nc.skip_water_pack.v2') {
-                    price = 2.99;
-                } else if (iapObj.productID == 'fatumbot.addons.nc.maps_skip_water_packs.v2') {
-                    price = 3.99;
-                }
-                var event_properties = {
-                    'purchaseID': iapObj.purchaseID,
-                    'localVerificationData': iapObj.localVerificationData,
-                    'serverVerificationData': iapObj.serverVerificationData,
-                    'source': iapObj.source,
-                    'transactionDate': iapObj.transactionDate,
-                    'status': iapObj.status,
-                };
-                var revenue = new amplitude.Revenue().setProductId(iapObj.productID).setPrice(price).setRevenueType('purchase').setEventProperties(event_properties);
-                amplitude.logRevenueV2(revenue);
             }
 
             let directLine = window.WebChat.createDirectLine({

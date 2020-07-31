@@ -182,7 +182,7 @@ namespace VFatumbot
                         return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
                 }
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Visited Point with Trip Report");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Visited Point with Trip Report");
 
                 ((ReportAnswers)stepContext.Values[ReportAnswersKey]).SkipGetIntentStep = true;
                 return await stepContext.NextAsync(cancellationToken: cancellationToken);
@@ -192,12 +192,12 @@ namespace VFatumbot
                 // At least mark the point as a visited one
                 await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers() { WasPointVisited = true });
 
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Visited Point sans Trip Report");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Visited Point sans Trip Report");
 
                 await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
             } else {
-                AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Didn't Visit Point");
+                //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Didn't Visit Point");
                 await StoreReportInDB(stepContext.Context, callbackOptions, new ReportAnswers());
                 await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
                 return await stepContext.BeginDialogAsync(nameof(MainDialog), cancellationToken: cancellationToken);
@@ -627,7 +627,7 @@ namespace VFatumbot
             var tweetReport = Uri.EscapeDataString(answers.Report.Substring(0, Math.Min(220 - w3wHashes.Length, answers.Report.Length)));
             await stepContext.Context.SendActivityAsync(MessageFactory.Text($"[{Loc.g("tr_tweet")}](https://twitter.com/intent/tweet?text={tweetReport}%20https://redd.it/{redditPost.Id}%20%23randonauts%20%23randonaut_reports{w3wHashes.Replace(" #", "%20%23")})"), cancellationToken);
             await stepContext.Context.SendActivityAsync(MessageFactory.Text(Loc.g("tr_thanks")), cancellationToken);
-            AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Trip Report Posted");
+            //AmplitudeService.Amplitude.InstanceFor(userProfileTemporary.UserId, userProfileTemporary.UserProperties).Track("Trip Report Posted");
 
             //await ((AdapterWithErrorHandler)stepContext.Context.Adapter).RepromptMainDialog(stepContext.Context, _mainDialog, cancellationToken, callbackOptions);
             callbackOptions = new CallbackOptions() { JustPostedTripReport = true };
