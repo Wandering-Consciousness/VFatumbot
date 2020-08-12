@@ -10,26 +10,26 @@ cant_find_place	找不到地方。
 current_location	您當前的位置設置為{0}，{1}。  <br>這將是搜索的中心。
 water_points_will_be	水位將為{0}
 skipped	跳過
-ignored	被忽略
+ignored	忽略
 classic_mode	經典模式現在為{0}
 enabled	已啟用
-disabled	殘障人士
-help	幫幫我
+disabled	未啓用
+help	幫助
 invalid_num_points	值不正確。參數應為1到10的數字。
 scan_time_take	生成可能需要5到15分鐘。
-finding_location	尋找位置...專注於您的意圖。
-nothing_but_water_points	除了水位，什麼都找不到。稍後再試。
-num_water_points_skipped_so_far	到目前為止跳過的水位數量：{0}
-num_water_points_skipped	跳過的飲水點數量：{0}
-point_generated	點生成
+finding_location	正在尋找位置...專注於您的意向。
+nothing_but_water_points	除了在水中的位置，什麼都找不到。稍後再試。
+num_water_points_skipped_so_far	到目前為止跳過的有水的位置的數量：{0}
+num_water_points_skipped	跳過的有水的位置的數量：{0}
+point_generated	已生成位置
 no_points_detected_quantum	該區域當前未檢測到任何點，而是為您提供了一個量子點。
 no_points_detected	該區域當前未檢測到任何點。
 address	地址
 get_intent_suggestions	為您量化英語詞典的數量。
-define	限定
+define	定义
 spotify_search	在Spotify中搜索
-intent_suggestions	意向建議
-num_water_attractors_skipped	跳過的吸引水點數：{0}
+intent_suggestions	關於意向的一些建議
+num_water_attractors_skipped	跳過的在水中的坐標的數量：{0}
 num_water_voids_skipped	跳過的無效水位數量：{0}
 pair_points_detected	成對的點
 generating_chain	生成您的鏈。根據您的半徑和點的數量/類型，可能需要一段時間。
@@ -60,18 +60,18 @@ md_void	空洞
 md_options	選項/幫助
 md_blindspotsmore	盲點及更多
 md_mylocation	我的位置
-md_lets_search_paid	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。  <br>   <br><br><br>可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。  <br>轉到附加組件
+md_lets_search_paid	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。  <br>   <br><br><br>可用的高級功能-地圖預覽，跳過水位和自定義位置搜索。  <br>轉到選項/幫助→附加組件
 md_invalid_action	這不是有效的措施。您想得到什麼？
 md_lets_search	讓我們搜索！您想得到什麼？  <br>吸引點是密集的隨機點簇。空洞則相反。  <br>異常是吸引點和虛空中最強的。
-md_how_many_idas	您最多要尋找幾分？
-md_choose_qrng	選擇您的熵源：（如果不確定，請選擇澳大利亞國立大學-澳大利亞國立大學）
+md_how_many_idas	您最多要尋找幾个坐標？
+md_choose_qrng	選擇您的熵源：（如果不確定，請選擇澳大利亞國立大學-ANU）
 md_invalid_qrng	那不是有效的熵源。
 md_camera	相機
 md_anu	澳大利亞國立大學
 md_temporal	顳
 md_temporal_server	臨時的(服務器)
 md_temporal_phone	臨時的(電話)
-md_anu_leftovers	ANU剩菜剩飯
+md_anu_leftovers	ANU剩余的
 md_gcp_retro	GCP復古
 md_collecting_camera_entropy	從手機的攝像頭收集隨機性(不拍攝照片)...
 md_collecting_temporalphone_entropy	從手機的CPU收集隨機性...
@@ -80,12 +80,12 @@ no	沒有
 addons	附加組件
 update_settings_q	更新設置？
 select_radius	以米為單位選擇半徑，或直接輸入數字
-include_water_points_q	包括水位？
+include_water_points_q	包括在水中的坐標？
 show_google_street_earth_q	顯示Google街景和地球預覽？
 invalid_answer	那不是一個有效的答案。
 anonymized_id_is	您的匿名ID為{0}。
 show_google_street_earth	街景和地球預覽將為{0}。
-hidden	隱
+hidden	隱藏
 displayed	顯示
 get_locsearch_skipwater_pack	從附加組件按鈕獲取位置搜索和跳過水點包。
 get_maps_pack	從“附加組件”按鈕獲取適用於應用內地圖和街道預覽的Maps Pack。
@@ -93,7 +93,7 @@ bs_quantum	量子
 bs_quantum_time	量子時間
 bs_intent_suggestions	意向建議
 bs_mystery_point	神秘點
-bs_pair	對點
+bs_pair	一對坐標
 bs_pseudo	偽
 bs_scan	掃瞄
 bs_chains	鏈條
@@ -196,8 +196,8 @@ tr_not_valid_upload	那不是有效的上傳。
 tr_error_photo_upload	抱歉，上傳您的照片時出錯。
 tr_photo_uploads_temp_disabled	抱歉，我們暫時更改了照片上傳功能！
 tr_write_report	最後，編寫您的報告。鍵入報告僅限於發送一封郵件。
-tr_tweet	鳴叫您的報告！
-tr_thanks	感謝您的舉報！
+tr_tweet	Tweet您的報告！
+tr_thanks	感謝您的報告！
 welcome_back	歡迎回到Randonautica！
 dont_forgot_send_loc	不要忘記發送您的當前位置。
 iap_invalid_receipt	無效的購買收據：{0}。您將被舉報。
@@ -229,19 +229,20 @@ iap_add_20_t	加20點
 iap_add_20_d	加20點
 iap_add_60_t	加60點
 iap_add_60_d	加60點
-iap_20km_r_t	搜索半徑擴大了20 km
+iap_20km_r_t	搜索半徑擴大了20公里
 iap_20km_r_d	將搜索範圍擴大到20公里
 iap_everything_t	全部展開
 iap_everything_d	所有擴展和無限點
 iap_infinnypoints_t	無限積分
 iap_infinnypoints_d	無限檢測點
-pro_tips_1	Pro Tips
-pro_tips_2	Randonaut with a positive mindset!
-pro_tips_3	Bring a trash bag to help the environment.
-pro_tips_4	If you normally wouldn’t adventure alone, go with a friend or group.
-pro_tips_5	Randonauting is best done as a daytime activity.
-pro_tips_6	Always Randonaut with a charged phone.
-pro_tips_7	Use situational awareness.
-pro_tips_8	Be respectful of property owners. Never trespass.
-pro_tips_9	Obey all quarantine, curfew and social distancing regulations in your area.
-pro_tips_10	Do not go into dangerous areas.
+dont_tresspass	如果這個坐標在私人區域，請不要嘗試進入！不要進入危險區域，例如火車軌道/地鐵軌道，被限制的區域等等。不要進入空曠無人的地方。請遵守當地法律法規，在任何時候保持敬畏之心，責任感和好奇心
+pro_tips_1	更多提示
+pro_tips_2	兰多诺蒂一个你心中的可行意向
+pro_tips_3	帶一個垃圾袋以保護環境
+pro_tips_4	不要獨自冒險，和你的朋友以及小組一起
+pro_tips_5	盡量在白天進行冒險
+pro_tips_6	請用一個充滿電的手機進行冒險
+pro_tips_7	保持方向感
+pro_tips_8	尊重財產的主人，不要擅自進入
+pro_tips_9	遵守你當地的隔離、宵禁政策
+pro_tips_10	不要去危險區域

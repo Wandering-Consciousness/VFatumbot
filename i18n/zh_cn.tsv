@@ -6,43 +6,43 @@ radius_lte	半径必须小于或等于{0}m
 changed_radius	半径从{0}m 更改为{1}m 
 invalid_radius	无效的半径
 current_radius	您当前的半径为{0}m 
-cant_find_place	找不到地方。
+cant_find_place	找不到位置。
 current_location	您当前的位置设置为{0}，{1}。  <br>这将是搜索的中心。
-water_points_will_be	水位将为{0}
+water_points_will_be	在水中的坐标将为{0}
 skipped	跳过
-ignored	被忽略
-classic_mode	经典模式现在为{0}
+ignored	忽略
+classic_mode	现在为经典模式{0}
 enabled	已启用
-disabled	残障人士
-help	帮帮我
+disabled	未启用
+help	帮助
 invalid_num_points	值不正确。参数应为1到10的数字。
-scan_time_take	生成可能需要5到15分钟。
-finding_location	寻找位置...专注于您的意图。
-nothing_but_water_points	除了水位，什么都找不到。稍后再试。
-num_water_points_skipped_so_far	到目前为止跳过的水位数量：{0}
-num_water_points_skipped	跳过的饮水点数量：{0}
-point_generated	点生成
-no_points_detected_quantum	该区域当前未检测到任何点，而是为您提供了一个量子点。
-no_points_detected	该区域当前未检测到任何点。
+scan_time_take	生成结果可能需要5到15分钟。
+finding_location	正在寻找位置...请集中精力于您的意向。
+nothing_but_water_points	除了水中的坐标，什么都找不到。请稍后再试。
+num_water_points_skipped_so_far	到目前为止跳过的在水中的坐标的数量：{0}
+num_water_points_skipped	跳过的在水中的坐标的数量：{0}
+point_generated	已生成位置
+no_points_detected_quantum	该区域当前未检测到任何位置坐标，为您提供了一个量子坐标已替代。
+no_points_detected	该区域当前未检测到任何坐标。
 address	地址
 get_intent_suggestions	为您量化英语词典的数量。
-define	限定
+define	定义
 spotify_search	在Spotify中搜索
-intent_suggestions	意向建议
-num_water_attractors_skipped	跳过的吸引水点数：{0}
-num_water_voids_skipped	跳过的无效水位数量：{0}
-pair_points_detected	成对的点
-generating_chain	生成您的链。根据您的半径和点的数量/类型，可能需要一段时间。
-chain_nothing_found	到目前为止，在点＃{0}上未发现异常。再试一次...
-chain_nothing_but_water_points	除了点{0}的水位以外，找不到任何东西。稍后再试。
-chain_num_water_points_skipped_so_far	到目前为止，在点{{0}：{1}处跳过的水位数量
-chain_num_water_points_skipped	在点{{0}：{1}处跳过的水位数量
-chain_generated	链产生
-mystery_point_generated	产生的神秘点
+intent_suggestions	关于意向的一些建议
+num_water_attractors_skipped	跳过的在水中的坐标的数量：{0}
+num_water_voids_skipped	跳过的不在水中的坐标的数量：{0}
+pair_points_detected	生成一对坐标
+generating_chain	生成您的链。根据您的范围和坐标的数量/类型，可能需要一段时间。
+chain_nothing_found	到目前为止，在坐标＃{0}上未发现异常。再试一次...
+chain_nothing_but_water_points	除了在水中的坐标{0}以外，找不到任何东西。稍后再试。
+chain_num_water_points_skipped_so_far	到目前为止，在点{{0}：{1}处跳过的水中的坐标的数量
+chain_num_water_points_skipped	在点{{0}：{1}处跳过的水中的坐标的数量
+chain_generated	生成链
+mystery_point_generated	生成的神秘坐标
 exception_caught	捕获到异常
 error_sorry	抱歉，好像出了点问题。
 open	打开
-chain_map_open	Google地图上的旅行链
+chain_map_open	Google地图上的旅行轨迹
 view_on_google_maps	在Google地图上查看
 street_view	街景
 google_earth	谷歌地球
@@ -53,69 +53,69 @@ earth	地球
 view_with_google	用Google查看
 google_maps	谷歌地图
 google_street_view	Google街景
-download_app	下载应用程式
+download_app	下载应用程序
 md_anomaly	异常现象
-md_attractor	吸引点
-md_void	空洞
+md_attractor	吸引子
+md_void	空虚
 md_options	选项/帮助
 md_blindspotsmore	盲点及更多
 md_mylocation	我的位置
-md_lets_search_paid	让我们搜索！您想得到什么？  <br>吸引点是密集的随机点簇。空洞则相反。  <br>异常是吸引点和虚空中最强的。  <br>   <br><br><br>可用的高级功能-地图预览，跳过水位和自定义位置搜索。  <br>转到附加组件
-md_invalid_action	这不是有效的措施。您想得到什么？
+md_lets_search_paid	让我们搜索！您想得到什么？  <br>吸引点是密集的随机点簇。空洞则相反。  <br>异常是吸引点和虚空中最强的。  <br>   <br><br><br>可用的高级功能-地图预览，跳过在水中的坐标和自定义位置搜索。  <br>转到选项/帮助→附加组件
+md_invalid_action	这不是有效的行动。您想得到什么？
 md_lets_search	让我们搜索！您想得到什么？  <br>吸引点是密集的随机点簇。空洞则相反。  <br>异常是吸引点和虚空中最强的。
-md_how_many_idas	您最多要寻找几分？
-md_choose_qrng	选择您的熵源：（如果不确定，请选择澳大利亚国立大学-澳大利亚国立大学）
+md_how_many_idas	您最多要寻找几个坐标？
+md_choose_qrng	选择您的熵源：（如果不确定，请选择澳大利亚国立大学-ANU）
 md_invalid_qrng	那不是有效的熵源。
 md_camera	相机
 md_anu	澳大利亚国立大学
 md_temporal	颞
-md_temporal_server	临时的(服务器)
-md_temporal_phone	临时的(电话)
-md_anu_leftovers	ANU剩菜剩饭
+md_temporal_server	本地的(服务器)
+md_temporal_phone	本地的(电话)
+md_anu_leftovers	ANU剩余的
 md_gcp_retro	GCP复古
-md_collecting_camera_entropy	从手机的摄像头收集随机性(不拍摄照片)...
-md_collecting_temporalphone_entropy	从手机的CPU收集随机性...
+md_collecting_camera_entropy	从手机的摄像头收集随机点位(不拍摄照片)...
+md_collecting_temporalphone_entropy	从手机的CPU收集随机点位...
 yes	是
-no	没有
-addons	附加组件
+no	否
+addons	附加功能
 update_settings_q	更新设置？
 select_radius	以米为单位选择半径，或直接输入数字
-include_water_points_q	包括水位？
+include_water_points_q	包括在水中的坐标？
 show_google_street_earth_q	显示Google街景和地球预览？
 invalid_answer	那不是一个有效的答案。
 anonymized_id_is	您的匿名ID为{0}。
 show_google_street_earth	街景和地球预览将为{0}。
-hidden	隐
+hidden	隐藏
 displayed	显示
-get_locsearch_skipwater_pack	从附加组件按钮获取位置搜索和跳过水点包。
+get_locsearch_skipwater_pack	从附加功能按钮中获取位置搜索和跳过水中的坐标的功能。
 get_maps_pack	从“附加组件”按钮获取适用于应用内地图和街道预览的Maps Pack。
 bs_quantum	量子
 bs_quantum_time	量子时间
 bs_intent_suggestions	意向建议
 bs_mystery_point	神秘点
-bs_pair	对点
+bs_pair	一对坐标
 bs_pseudo	伪
 bs_scan	扫瞄
-bs_chains	链条
+bs_chains	链
 bs_dice	量子骰子
 bs_back	<返回
 welcome_randonautica	欢迎来到Randonautica！
-welcome_beginners	初学者：请先阅读[FAQ]({0})和[Randonauts的9条原则]({1})。
+welcome_beginners	新用户？：请先阅读[FAQ]({0})和[Randonauts的9条原则]({1})。
 welcome_report_share	完成旅行后，在[Reddit]({0})和[Twitter]({1})上与Randonauts共享讨论。
 first_send_location	首先通过点击🌍/📎发送位置信息或发送Google Maps URL。
-choose_chain_type	您想链接什么样的积分？
-ch_invalid_point_type	这不是有效的点类型。
+choose_chain_type	您想链接什么样的坐标？
+ch_invalid_point_type	这不是有效的坐标类型。
 ch_anomalies	异常现象
-ch_voids	空洞
+ch_voids	空虚
 ch_attractors	吸引点
-ch_current_or_sequential	从您当前的位置或按顺序生成所有点？
+ch_current_or_sequential	从您当前的位置或按顺序生成所有坐标？
 ch_current	当前
 ch_sequential	顺序的
-ch_num_points	输入要链接的点数。大约最大总距离就是该数字乘以您当前的半径。
+ch_num_points	输入要链接的点数。最大总距离大概就是该数字乘以您当前的半径。
 ch_invalid_number	这不是有效数字。
-ch_reprompt_num_points	无效号码。输入分数：
-ch_mte	数字必须大于或等于{0}。输入号码：
-ch_lte	数字必须小于或等于{0}。输入号码：
+ch_reprompt_num_points	无效的数字。输入坐标的数字：
+ch_mte	数字必须大于或等于{0}。输入数字：
+ch_lte	数字必须小于或等于{0}。输入数字：
 no_loc_or_reset	您尚未设置位置，或者它已被重置。通过点击🌍/📎或发送Google Maps URL进行发送。您也可以随时键入\"help\"。
 ida_found	发现意图驱动异常
 ida_type	类型：{0}
@@ -128,7 +128,7 @@ suggested_time	建议时间：{0}
 blind_spots_more_menu	您想得到什么？  <br>量子点是单个随机的点(潜在的盲点)。神秘点是随机类型的点。
 invalid_action	那是无效的动作。
 agree_to_terms_q	您是否同意使用条款和隐私政策，并成为行为良好的Randonaut？
-toc_dontagree	没有
+toc_dontagree	不
 toc_doagree	我同意
 toc_shame	真可惜如此众多的随机冒险正在等待着您。
 toc_invalid_answer	那不是一个有效的答案。 {0}
@@ -145,7 +145,7 @@ qd_rolling	正在滚动...
 qd_results	结果：{0} [{1}，{2}]。再次滚动？
 qd_onlyyess	是或否，仅此而已。
 err_no_entropy_fetch	无法获取新的随机数据。
-err_qrng_service_failed	服务未返回随机数据。
+err_qrng_service_failed	服务器未返回随机数据。
 err_qrng_error	抱歉，随机化需要错误的量子熵。请稍后再试。
 scan_choose_kind	选择扫描类型：
 scan_invalid_action	那不是有效的扫描。
@@ -158,8 +158,8 @@ tr_did_you_visit	您是否访问过或接近要去的地方，想报告旅行吗
 tr_yes_sans_report	是，无报告
 tr_yes_report	是的，报告！
 tr_invalid_choice	那不是一个有效的选择。
-tr_set_intent_q	你有打算吗
-tr_enter_intent	你的意图是什么？
+tr_set_intent_q	你有什么意向吗
+tr_enter_intent	你的意向是什么？
 tr_hope_had_fun	希望您旅途愉快！
 tr_collect_artifacts_q	您收集了任何文物吗？
 tr_wow_and_astounding_q	您的旅行是否“令人惊叹！”？
@@ -169,26 +169,26 @@ tr_meaningful	有意义的
 tr_casual	休闲装
 tr_meaningless	无意义的
 tr_emotional_q	评价情感因素(或输入您自己的词)：
-tr_dopamine_hit	多巴胺命中
+tr_dopamine_hit	令人兴奋的
 tr_inspirational	励志的
-tr_plain	平原
-tr_anxious	急
-tr_despair	绝望
-tr_dread	恐惧
+tr_plain	平静的
+tr_anxious	焦虑的
+tr_despair	绝望的
+tr_dread	恐惧的
 tr_importance_q	评价重要性(或输入您自己的词)：
 tr_lifechanging	改变生活
 tr_influential	有影响
-tr_ordinary	普通
-tr_waste_time	浪费时间
+tr_ordinary	还行
+tr_waste_time	完全浪费时间
 tr_strangeness_q	评价陌生感(或输入您自己的词)：
 tr_woowooweird	呜呜怪
-tr_strange	奇怪
+tr_strange	陌生
 tr_normal	正常
 tr_nothing	没有
 tr_synchronicity_q	评价同步因子(或输入您自己的词)：
 tr_dirk_gently	德克·温特利
 tr_mind_blowing	吹牛
-tr_somewhat	有些
+tr_somewhat	还行
 tr_boredom	无聊
 tr_wanna_upload_photos_q	您要上传任何照片吗？
 tr_upload_photos_now	上传您现在拍摄的所有照片。一次发送所有消息，因为发送仅限于一条消息。
@@ -196,13 +196,13 @@ tr_not_valid_upload	那不是有效的上传。
 tr_error_photo_upload	抱歉，上传您的照片时出错。
 tr_photo_uploads_temp_disabled	抱歉，我们暂时更改了照片上传功能！
 tr_write_report	最后，编写您的报告。键入报告仅限于发送一封邮件。
-tr_tweet	鸣叫您的报告！
-tr_thanks	感谢您的举报！
+tr_tweet	Tweet您的报告！
+tr_thanks	感谢您的报告！
 welcome_back	欢迎回到Randonautica！
 dont_forgot_send_loc	不要忘记发送您的当前位置。
 iap_invalid_receipt	无效的购买收据：{0}。您将被举报。
 iap_maps_pack_enabled	启用了Maps Pack加载项。
-iap_search_water_points_enabled	启用了“地点搜索”和“跳过水位包”附加组件。通过键入\"search <地名或地址>\"来设置您的位置。
+iap_search_water_points_enabled	启用了“地点搜索”和“跳过水中坐标”附加功能。通过键入\“搜索<地名或地址> \”来设置您的位置。
 iap_everything_enabled	Everything Pack附加组件已启用。通过键入\"search <地名或地址>\"来设置您的位置。
 iap_all_disabled	禁用所有加载项。
 iap_no_purchases	您没有购买记录。
@@ -210,10 +210,10 @@ iap_buy	购买
 iap_enable	启用
 iap_maps_pack	地图包
 iap_maps_pack_desc	应用内预览地图和街道
-iap_search_water_points	地点搜索+跳过水袋
-iap_search_water_points_desc	按地名搜索并跳过水位
-iap_everything_pack	一切包
-iap_everything_pack_desc	地图+位置搜索+跳过水袋
+iap_search_water_points	地点搜索+跳过水中坐标
+iap_search_water_points_desc	按地名搜索并跳过水中的坐标
+iap_everything_pack	所有功能组合
+iap_everything_pack_desc	地图+位置搜索+跳过水中的坐标
 iap_enabling...	正在启用功能...
 iap_thanks_enabling	谢谢。正在启用...
 sending_location	正在传送您的位置...
@@ -221,7 +221,7 @@ connecting_bot	正在连接机器人...
 sending_entropy	正在发送熵...
 dl_x_remaining	当前有{0}点。 每个创建的位置花费1点。 每天打开应用程序时，您的余额最多可以免费恢复{1}点。
 dl_x_tokens	当前有{0}点。
-dl_no_tokens	没有积点了。 从附加组件中添加或等待24小时，然后等待免费恢复。
+dl_no_tokens	没有点数了。 从附加组件中添加或等待24小时，然后等待免费恢复。
 iap_added_x_points	增加了{0}分。 当前，有{1}。
 iap_infinite_points_enabled	无限点被激活。
 iap_20km_radius_extended	最大搜索半径已扩展到20 km。
@@ -231,17 +231,18 @@ iap_add_60_t	加60点
 iap_add_60_d	加60点
 iap_20km_r_t	搜索半径扩大了20 km
 iap_20km_r_d	将搜索范围扩大到20公里
-iap_everything_t	全部展开
-iap_everything_d	所有扩展和无限点
+iap_everything_t	全部功能组合
+iap_everything_d	所有扩展功能 + 无限点位
 iap_infinnypoints_t	无限积分
 iap_infinnypoints_d	无限检测点
-pro_tips_1	Pro Tips
-pro_tips_2	Randonaut with a positive mindset!
-pro_tips_3	Bring a trash bag to help the environment.
-pro_tips_4	If you normally wouldn’t adventure alone, go with a friend or group.
-pro_tips_5	Randonauting is best done as a daytime activity.
-pro_tips_6	Always Randonaut with a charged phone.
-pro_tips_7	Use situational awareness.
-pro_tips_8	Be respectful of property owners. Never trespass.
-pro_tips_9	Obey all quarantine, curfew and social distancing regulations in your area.
-pro_tips_10	Do not go into dangerous areas.
+dont_tresspass	如果这个坐标在私人区域，请不要尝试进入！不要进入危险区域，例如火车轨道/地铁轨道，被限制的区域等等。不要进入空旷无人的地方。请遵守当地法律法规，在任何时候保持敬畏之心，责任感和好奇心
+pro_tips_1	更多提示
+pro_tips_2	兰多诺蒂一个你心中的可行意向
+pro_tips_3	带一个垃圾袋以保护环境
+pro_tips_4	不要独自冒险，和你的朋友以及小组一起
+pro_tips_5	尽量在白天进行冒险
+pro_tips_6	请用一个充满电的手机进行冒险
+pro_tips_7	保持方向感
+pro_tips_8	尊重财产的主人，不要擅自进入
+pro_tips_9	遵守你当地的隔离、宵禁政策
+pro_tips_10	不要去危险区域
