@@ -235,13 +235,14 @@ iap_everything_t	ザ・全て拡張
 iap_everything_d	全ての拡張＆無制限ポイント
 iap_infinnypoints_t	無制限ポイント
 iap_infinnypoints_d	地点を無制限に検出できる
-pro_tips_1	Pro Tips
-pro_tips_2	Randonaut with a positive mindset!
-pro_tips_3	Bring a trash bag to help the environment.
-pro_tips_4	If you normally wouldn’t adventure alone, go with a friend or group.
-pro_tips_5	Randonauting is best done as a daytime activity.
-pro_tips_6	Always Randonaut with a charged phone.
-pro_tips_7	Use situational awareness.
-pro_tips_8	Be respectful of property owners. Never trespass.
-pro_tips_9	Obey all quarantine, curfew and social distancing regulations in your area.
-pro_tips_10	Do not go into dangerous areas.
+dont_tresspass	このポイントが私有地や、立入禁止区域や危険なエリアの場合は、絶対に侵入しないでください！  地域の法律および規制に従ってください。 ランドノーティング中は、常に敬意を払い、責任を持ち、前向きな態度で臨んでください。
+pro_tips_1	冒険の仕方
+pro_tips_2	ポジティブな意図を設定して出かけよう
+pro_tips_3	ゴミ袋を持参して、きれいな環境を作ろう
+pro_tips_4	普段一人で出かけることが少ないのであれば、ぜひ友達やグループと一緒に行ってみよう
+pro_tips_5	安全のため、なるべく明るい時間に冒険しよう
+pro_tips_6	出かける前にスマートフォンを充電しよう
+pro_tips_7	周囲に集中しながら冒険を進めよう。
+pro_tips_8	私有地の所有者のプラバシーを守り、絶対に不法侵入しないで！
+pro_tips_9	お住まいの地域の検疫、門限、ソーシャル・ディスタンスのルールに従うこと
+pro_tips_10	危険な場所に立ち入らないこと
