@@ -4,7 +4,7 @@ Prin utilizarea Randonautica, sunteți de acord cu Termenii de utilizare și pol
   
 Randonautica folosește coordonate cu adevărat randomizate. Este responsabilitatea utilizatorului și, în totalitate, pe propriul risc în cazul în care decid să călătorească fizic în coordonatele din lumea reală.  
   
-Folosind Randonautica, faceți acest lucru pe propriul dvs. risc. Randonautica / Randonauts LLC nu este responsabilă pentru niciun fel de efecte sau consecințe pozitive sau adverse sau consecințele generate de utilizarea acestei platforme.  
+Folosind Randonautica, faceți acest lucru pe propriul dvs. risc. Randonautica nu este responsabilă pentru niciun fel de efecte sau consecințe pozitive sau adverse sau consecințele generate de utilizarea acestei platforme.  
   
 Folosește bunul simț, nu te pune pe tine sau pe alții în calea păgubirii. Nu păcăli. Respectați toate reglementările de carantină, resturi de carte și distanță socială din zona dvs.  
   
@@ -17,5 +17,3 @@ Nimic nu este împărtășit cu orice servicii terțe, perioadă.
 Orice date de locație pe care le trimiteți sunt șterse automat după 24 de ore. Sunt stocate date anonimizate ale punctelor generate.  
   
 Dacă ați ales să scrieți un raport de călătorie, raportul va fi postat anonim pe subredditul /r/randonaut_reports. Nu vă faceți griji, nu vom posta niciodată locația dvs., ci doar punctul generat.  
-  
-Citiți [termenii complete aici](https://bot.randonauts.com/privacy-and-terms.html) înainte de a fi de acord.

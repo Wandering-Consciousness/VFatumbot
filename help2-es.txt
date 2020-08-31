@@ -4,7 +4,7 @@ Al usar Randonautica, acepta los Términos de uso y la Política de privacidad.
   
 Randonautica utiliza coordenadas verdaderamente aleatorias. Es responsabilidad del usuario y bajo su propio riesgo si deciden viajar físicamente a coordenadas en el mundo real.  
   
-Al usar Randonautica, lo hace bajo su propio riesgo. Randonautica / Randonauts LLC no se hace responsable de los efectos o consecuencias positivas o adversas del uso de esta plataforma.  
+Al usar Randonautica, lo hace bajo su propio riesgo. Randonautica no se hace responsable de los efectos o consecuencias positivas o adversas del uso de esta plataforma.  
   
 Use el sentido común, no se ponga a sí mismo ni a otros en peligro. No traspases. Obedezca todas las regulaciones de cuarentena, toque de queda y distanciamiento social en su área.  
   
@@ -17,5 +17,3 @@ Nada se comparte con ningún servicio de terceros, punto.
 Cualquier información de ubicación que envíe se elimina automáticamente después de 24 horas. Los datos anónimos de los puntos generados se almacenan.  
   
 Si elige escribir un informe de viaje, el informe se publicará de forma anónima en el subreddit /r/randonaut_reports. No se preocupe, nunca publicaremos su ubicación, solo el punto generado.  
-  
-Lea los [términos completos aquí](https://bot.randonauts.com/privacy-and-terms.html) antes de aceptar.

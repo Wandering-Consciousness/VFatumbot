@@ -4,7 +4,7 @@ A Randonautica használatával elfogadja a használati feltételeket és az adat
   
 A Randonautica valóban véletlenszerű koordinátákat használ. A felhasználó felelőssége és teljes mértékben a saját felelőssége, ha úgy döntenek, hogy fizikailag koordinátákba utazik a való világban.  
   
-A Randonautica használatával ezt a saját felelősségére teheti meg. A Randonautica / Randonauts LLC nem vállal felelősséget a platform használatából eredő pozitív vagy káros hatásokért vagy következményekért.  
+A Randonautica használatával ezt a saját felelősségére teheti meg. A Randonautica nem vállal felelősséget a platform használatából eredő pozitív vagy káros hatásokért vagy következményekért.  
   
 Használj józan észt, ne tedd magad vagy mások veszélybe. Ne tegye át. Tartsa be az összes karantén-, kijárási tilalmat és társadalmi távolodási előírást az Ön területén.  
   
@@ -17,5 +17,3 @@ Semmi megosztás semmilyen harmadik fél szolgáltatásával, időszak.
 A küldött helyadatok automatikusan törlődnek 24 óra elteltével. A generált pontok névtelenített adatai tárolódnak.  
   
 Ha úgy döntött, hogy utazási jelentést készít, akkor a jelentést névtelenül közzéteszi a /r/randonaut_reports alhirdetésben. Ne aggódjon, soha nem tesszük közzé a helyét, csak a létrehozott pontot.  
-  
-Olvassa el a [teljes feltételeket itt](https://bot.randonauts.com/privacy-and-terms.html), mielőtt elfogadja.
