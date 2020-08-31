@@ -417,17 +417,17 @@ namespace VFatumbot
                         }
                         else
                         {
-                            var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
-                            if (verify == 21007)
-                            {
-                                // Retry on the sandbox environment
-                                verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData, true);
-                            }
-                            if (verify != 0)
-                            {
-                                await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
-                                return true;
-                            }
+                            //var verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData);
+                            //if (verify == 21007)
+                            //{
+                            //    // Retry on the sandbox environment
+                            //    verify = await Helpers.VerifyAppleIAPReceptAsync(iapData.serverVerificationData, true);
+                            //}
+                            //if (verify != 0)
+                            //{
+                            //    await turnContext.SendActivityAsync(MessageFactory.Text(Loc.g("iap_invalid_receipt", verify)), cancellationToken);
+                            //    return true;
+                            //}
                         }
 #if !RELEASE_PROD
                   }
