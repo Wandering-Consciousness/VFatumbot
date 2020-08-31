@@ -219,7 +219,7 @@
                     } else if (data.channelData.startsWith("temporal")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadTemporalWithBytesNeeded.postMessage(splitted[1]);
-                    } else if (data.channelData.startsWith("addons")) {
+                    } else if (src != "ios" && data.channelData.startsWith("addons")) {
                         var splitted = data.channelData.split(',');
                         flutterChannel_loadNativeShop.postMessage(splitted[1]);
                     }
