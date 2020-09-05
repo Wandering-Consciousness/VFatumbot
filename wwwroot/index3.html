@@ -193,6 +193,11 @@
             }
             var sha256userId = sha256(userId);
 
+            if (sha256userId == 'x9fa3ae1a1ef2a85c83c47c37801fc2ae2734a7395fc134c2ebc770e27fa67ad') {
+                window.location.href = 'https://apps.apple.com/app/randonautica/id1493743521';
+                return;
+            }
+
             amplitude.getInstance().init("0bd7e7711d1c3a30578d365260d2d166", sha256userId);
 
             // Catch incoming events from bot
