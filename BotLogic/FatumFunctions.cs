@@ -275,22 +275,22 @@ namespace VFatumbot.BotLogic
                 var randomHost = "";
 
                 if (randomNumber == 0) {
-                    randomHost = "https://gonewtonlib.azurewebsites.net";
+                    randomHost = "https://gonewtonlibfatum.azurewebsites.net";
                 }
                 if (randomNumber == 1) {
-                    randomHost = "https://gonewtonlib-useast2.azurewebsites.net";
+                    randomHost = "https://gonewtonlibfatum-useast2.azurewebsites.net";
                 }
                 if (randomNumber == 2) {
-                    randomHost = "https://gonewtonlib-cus.azurewebsites.net";
+                    randomHost = "https://gonewtonlibfatum-cus.azurewebsites.net";
                 }
                 if (randomNumber == 3) {
-                    randomHost = "https://gonewtonlib-scus.azurewebsites.net";
+                    randomHost = "https://gonewtonlibfatum-scus.azurewebsites.net";
                 }
                 if (randomNumber == 4) {
-                    randomHost = "https://gonewtonlib-uswest.azurewebsites.net";
+                    randomHost = "https://gonewtonlibfatum-uswest.azurewebsites.net";
                 }
                 if (randomNumber == 5) {
-                    randomHost = "https://gonewtonlib-uswest2.azurewebsites.net";
+                    randomHost = "https://gonewtonlibfatum-uswest2.azurewebsites.net";
                 }
 
                 var content = new ByteArrayContent(byteinput);
