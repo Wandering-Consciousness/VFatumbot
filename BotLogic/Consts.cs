@@ -2,7 +2,7 @@
 {
     public class Consts
     {
-        private const string _appVersion = "4.9.26";
+        private const string _appVersion = "4.10.1";
 #if RELEASE_PROD
         public const string APP_VERSION = _appVersion;
 #else
@@ -18,8 +18,8 @@
 
         // Azure Cosmos DB credentials
         public const string COSMOS_DB_NAME = "fatumbot";
-        public const string COSMOS_DB_URI = "https://ratumbott.documents.azure.com:443/";
-        public const string COSMOS_DB_KEY = "rLLUR12cJq1SCxeeQ6Zs6TRrXCM3yMaSifodWDgSYPfMtYM9os9JGgym0N8FA2nTf3s0c9k6KbeMisHndmKv5w==";
+        public const string COSMOS_DB_URI = "https://fatumbot.documents.azure.com:443/";
+        public const string COSMOS_DB_KEY = "knsrdrB8sUXt8mvWh2x4e13I2bPuTX4vSTTn0KWuOHsTOPSJcW7uAs1foiID1NvVnS4IJzT2JVNafppqAD2Z0A==";
 #if RELEASE_PROD
         public const string COSMOS_CONTAINER_NAME_PERSISTENT = "prod_persistent";
         public const string COSMOS_CONTAINER_NAME_TEMPORARY = "prod_temporary";
@@ -48,10 +48,10 @@
         public const string REDDIT_ACCESS_TOKEN = "382783126207-XgtjL7R5qY-lsw_sCXS4Ix0xklw";
 
         // SQL server for posting trip reports/generated points
-        public const string DB_SERVER = "ratumbot.database.windows.net";
+        public const string DB_SERVER = "fatumbot.database.windows.net";
         public const string DB_USER = "fatumbot";
-        public const string DB_PASSWORD = "AehGSRvJ#DeBs!02Fun12";
-        public const string DB_NAME = "ratumbot";
+        public const string DB_PASSWORD = "aEhGSRvJ#DEbs!02Fux15";
+        public const string DB_NAME = "fatumbot";
 
         // https://what3words.com API key
         public const string W3W_API_KEY = "Y8GUOC45";
