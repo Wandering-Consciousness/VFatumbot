@@ -2,7 +2,7 @@
 {
     public class Consts
     {
-        private const string _appVersion = "4.10.1";
+        private const string _appVersion = "5.0.0";
 #if RELEASE_PROD
         public const string APP_VERSION = _appVersion;
 #else
@@ -18,8 +18,8 @@
 
         // Azure Cosmos DB credentials
         public const string COSMOS_DB_NAME = "fatumbot";
-        public const string COSMOS_DB_URI = "https://fatumbot.documents.azure.com:443/";
-        public const string COSMOS_DB_KEY = "knsrdrB8sUXt8mvWh2x4e13I2bPuTX4vSTTn0KWuOHsTOPSJcW7uAs1foiID1NvVnS4IJzT2JVNafppqAD2Z0A==";
+        public const string COSMOS_DB_URI = "https://fatumbotcdb.documents.azure.com:443/";
+        public const string COSMOS_DB_KEY = "9kyCKaDDehvk9zjitNArvmXVmhF0Yd49kzmzQHSf6zY4Lbqxiy2U7E3YBkwIALjjgEtw4ziHJhb0gMafB2XIEQ==";
 #if RELEASE_PROD
         public const string COSMOS_CONTAINER_NAME_PERSISTENT = "prod_persistent";
         public const string COSMOS_CONTAINER_NAME_TEMPORARY = "prod_temporary";
