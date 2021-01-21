@@ -36,6 +36,7 @@ namespace VFatumbot
             // For the bot running in the Azure cloud, we need to use Cosmos DB (or Azure's Blob Storage service)
             // to keep data persistent, otherwise the stateless nature of the bot would be useless in keeping
             // track of users's locations, radius settings etc.
+            /*　
             var persistentStorage = new CosmosDbStorage(new CosmosDbStorageOptions
             {
                 AuthKey = Consts.COSMOS_DB_KEY,
@@ -60,8 +61,11 @@ namespace VFatumbot
             services.AddSingleton(conversationState);
             services.AddSingleton(userPersistentState);
             services.AddSingleton(userTemporaryState);
+            //
+            //
+            //
+            */
 
-/*
             //
             // In-mem only way
             //
@@ -74,7 +78,9 @@ namespace VFatumbot
 
             // Create the Conversation state.
             services.AddSingleton<ConversationState>();
-*/
+            //
+            //
+            //
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
